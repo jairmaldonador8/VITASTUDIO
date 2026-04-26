@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visibilidad Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:#080808; margin:0; padding:0; overflow:hidden; }
+.card { background:#080808; width:100%; height:100%; overflow:hidden; }
+.visual { height:100vh; position:relative; overflow:hidden; background:#080808; }
+.visual canvas { position:absolute; inset:0; }
+.copy { padding:20px; }
+.copy h3 { font-size:0.95rem; font-weight:700; color:#f5f0e8; margin-bottom:8px; }
+.copy p { font-size:0.74rem; color:rgba(245,240,232,0.4); line-height:1.6; font-weight:300; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="visual">
+    <canvas id="cv"></canvas>
+  </div>
+  </div>
+
+<script>
+var canvas = document.getElementById('cv');
+var ctx    = canvas.getContext('2d');
+var p      = canvas.parentElement;
+var dpr    = window.devicePixelRatio || 1;
+var W      = p.offsetWidth;
+var H      = p.offsetHeight;
+canvas.width  = W * dpr;
+canvas.height = H * dpr;
+canvas.style.width  = W + 'px';
+canvas.style.height = H + 'px';
+ctx.scale(dpr, dpr);
+
+var COLS = 8, ROWS = 6;
+var SPACING_X = W / (COLS + 1);
+var SPACING_Y = H / (ROWS + 1);
+var R = Math.min(SPACING_X, SPACING_Y) * 0.28;
+
+// Build circles
+var circles = [];
+for (var row = 0; row < ROWS; row++) {
+  for (var col = 0; col < COLS; col++) {
+    circles.push({
+      // Base grid position
+      bx: SPACING_X * (col + 1),
+      by: SPACING_Y * (row + 1),
+      // Current position
+      x: SPACING_X * (col + 1),
+      y: SPACING_Y * (row + 1),
+      // Slow drift
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      offset: Math.random() * Math.PI * 2,
+      r: R,
+      alpha: 0.06 + Math.random() * 0.06,
+      // State
+      hero: false,
+      heroT: 0,
+    });
+  }
+}
+
+// Pick hero circle — middle-ish
+var HERO_IDX = Math.floor(ROWS / 2) * COLS + Math.floor(COLS / 2);
+circles[HERO_IDX].hero = false; // starts normal
+
+// Dollar signs floating
+var dollars = [];
+
+// Animation state
+var t = 0;
+var phase = 0;      // 0 = all grey, 1 = hero lights up, 2 = dollars, 3 = fade back
+var phaseT = 0;
+var PHASE_GREY   = 180;  // 3s grey
+var PHASE_LIGHT  = 40;   // light up
+var PHASE_DOLLAR = 180;  // dollars flying
+var PHASE_FADE   = 60;   // fade back
+
+function spawnDollar() {
+  var hero = circles[HERO_IDX];
+  dollars.push({
+    x: hero.x + (Math.random() - 0.5) * 10,
+    y: hero.y,
+    vx: (Math.random() - 0.5) * 1.8,
+    vy: -1.5 - Math.random() * 2,
+    alpha: 1,
+    size: 11 + Math.random() * 8,
+    rot: (Math.random() - 0.5) * 0.1,
+    text: Math.random() > 0.4 ? '$' : '💰',
+    isEmoji: Math.random() > 0.5,
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  t += 0.018;
+  phaseT++;
+
+  // Phase machine
+  if (phase === 0 && phaseT > PHASE_GREY)  { phase = 1; phaseT = 0; }
+  if (phase === 1 && phaseT > PHASE_LIGHT) { phase = 2; phaseT = 0; }
+  if (phase === 2 && phaseT > PHASE_DOLLAR){ phase = 3; phaseT = 0; }
+  if (phase === 3 && phaseT > PHASE_FADE)  {
+    phase = 0; phaseT = 0;
+    dollars = [];
+    circles[HERO_IDX].heroT = 0;
+  }
+
+  // Spawn dollars during phase 2
+  if (phase === 2 && phaseT % 10 === 0) spawnDollar();
+
+  // ── Draw circles ──
+  circles.forEach(function(c, i) {
+    var isHero = (i === HERO_IDX);
+
+    // Slow organic drift
+    c.x = c.bx + Math.sin(t * 0.6 + c.offset) * 6;
+    c.y = c.by + Math.cos(t * 0.5 + c.offset * 1.3) * 4;
+
+    // Hero state
+    if (isHero) {
+      if (phase === 1) c.heroT = Math.min(1, c.heroT + 0.05);
+      if (phase === 3) c.heroT = Math.max(0, c.heroT - 0.03);
+    }
+
+    var heroProgress = isHero ? c.heroT : 0;
+
+    // Colors
+    var baseAlpha = c.alpha;
+    var fillR = 255, fillG = 255, fillB = 255;
+    var strokeR = 255, strokeG = 255, strokeB = 255;
+    var strokeAlpha = 0.1;
+    var fillAlpha = baseAlpha;
+    var radius = c.r;
+
+    if (heroProgress > 0) {
+      // Lerp to green
+      fillR   = Math.round(255 + (74  - 255) * heroProgress);
+      fillG   = Math.round(255 + (222 - 255) * heroProgress);
+      fillB   = Math.round(255 + (128 - 255) * heroProgress);
+      fillAlpha = baseAlpha + (0.95 - baseAlpha) * heroProgress;
+      strokeR = 74; strokeG = 222; strokeB = 128;
+      strokeAlpha = 0.1 + 0.9 * heroProgress;
+      // Grows 2.5x bigger than rest + subtle pulse
+      var pulse = 1 + Math.sin(t * 4) * 0.06;
+      radius  = c.r * (1 + 1.5 * heroProgress) * pulse;
+      // Also dim surrounding circles to make hero pop more
+      if (!isHero) fillAlpha = baseAlpha * (1 - heroProgress * 0.6);
+    }
+
+    // Glow for hero
+    if (heroProgress > 0) {
+      // Outer glow
+      var glowSize = radius * (3.5 + Math.sin(t * 3) * 0.5);
+      var grd = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, glowSize);
+      grd.addColorStop(0, 'rgba(74,222,128,' + (0.45 * heroProgress) + ')');
+      grd.addColorStop(0.4, 'rgba(74,222,128,' + (0.15 * heroProgress) + ')');
+      grd.addColorStop(1, 'rgba(74,222,128,0)');
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, glowSize, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+      // Inner bright core glow
+      var coreGlow = radius * 1.4;
+      var crd = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, coreGlow);
+      crd.addColorStop(0, 'rgba(200,255,220,' + (0.5 * heroProgress) + ')');
+      crd.addColorStop(1, 'rgba(74,222,128,0)');
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, coreGlow, 0, Math.PI * 2);
+      ctx.fillStyle = crd;
+      ctx.fill();
+    }
+
+    // Circle body
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, radius, 0, Math.PI * 2);
+    ctx.fillStyle   = 'rgba(' + fillR + ',' + fillG + ',' + fillB + ',' + fillAlpha + ')';
+    ctx.strokeStyle = 'rgba(' + strokeR + ',' + strokeG + ',' + strokeB + ',' + strokeAlpha + ')';
+    ctx.lineWidth = isHero && circles[HERO_IDX].heroT > 0 ? 2 : 1;
+    ctx.fill();
+    ctx.stroke();
+
+    // "Tú" label on hero when lit
+    if (isHero && heroProgress > 0.5) {
+      ctx.globalAlpha = (heroProgress - 0.5) * 2;
+      ctx.fillStyle   = 'rgba(74,222,128,0.9)';
+      ctx.font        = 'bold ' + (W * 0.036) + 'px Poppins,sans-serif';
+      ctx.textAlign   = 'center';
+      ctx.textBaseline= 'middle';
+      ctx.fillText('Tú', c.x, c.y - radius - 12);
+
+      // Small line pointing down
+      ctx.beginPath();
+      ctx.moveTo(c.x, c.y - radius - 5);
+      ctx.lineTo(c.x, c.y - radius - 1);
+      ctx.strokeStyle = 'rgba(74,222,128,0.5)';
+      ctx.lineWidth   = 1;
+      ctx.stroke();
+
+      ctx.globalAlpha = 1;
+    }
+  });
+
+  // ── Draw dollar signs ──
+  for (var i = dollars.length - 1; i >= 0; i--) {
+    var d = dollars[i];
+    d.x  += d.vx;
+    d.y  += d.vy;
+    d.vy += 0.04;  // gravity
+    d.alpha -= 0.016;
+    d.vx *= 0.99;
+
+    if (d.alpha <= 0) { dollars.splice(i, 1); continue; }
+
+    ctx.globalAlpha = d.alpha;
+
+    if (d.isEmoji) {
+      ctx.font = d.size + 'px sans-serif';
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(d.text, d.x, d.y);
+    } else {
+      // Styled $ text with shadow
+      ctx.shadowColor = 'rgba(74,222,128,0.8)';
+      ctx.shadowBlur  = 10;
+      ctx.fillStyle   = 'rgba(74,222,128,' + d.alpha + ')';
+      ctx.font        = 'bold ' + d.size + 'px Poppins,sans-serif';
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('$', d.x, d.y);
+      ctx.shadowBlur   = 0;
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.textBaseline = 'alphabetic';
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
