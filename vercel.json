@@ -1,0 +1,28 @@
+{
+  "rewrites": [
+    {
+      "source": "/apply",
+      "destination": "/apply.html"
+    },
+    {
+      "source": "/apply/",
+      "destination": "/apply.html"
+    },
+    {
+      "source": "/medicos",
+      "destination": "/medicos.html"
+    },
+    {
+      "source": "/medicos/",
+      "destination": "/medicos.html"
+    },
+    {
+      "source": "/privacidad",
+      "destination": "/privacidad.html"
+    },
+    {
+      "source": "/privacidad/",
+      "destination": "/privacidad.html"
+    }
+  ]
+}
