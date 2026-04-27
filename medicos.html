@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VITA Studio · Para médicos especialistas</title>
+<meta name="description" content="Estrategia de marca, sitio web premium y marca personal para médicos especialistas. Solo 4 consultorios este trimestre.">
+<meta name="author" content="VITA Studio">
+
+<meta property="og:title" content="VITA Studio · Para médicos especialistas">
+<meta property="og:description" content="Estrategia de marca, sitio web y marca personal para médicos.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vitastudio.site/medicos">
+<meta property="og:image" content="https://vitastudio.site/assets/og-image.jpg">
+<meta property="og:locale" content="es_MX">
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "VITA Studio - Servicios para médicos",
+  "url": "https://vitastudio.site/medicos",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Monterrey",
+    "addressRegion": "Nuevo León",
+    "addressCountry": "MX"
+  }
+}
+</script>
+
+<style>
+  :root {
+    --bg: #000000;
+    --gold: #c9a974;
+    --gold-bright: #e8c989;
+    --gold-dim: rgba(201,169,116,0.15);
+    --text: #f5f0e8;
+    --text-muted: rgba(245,240,232,0.6);
+    --text-dim: rgba(245,240,232,0.35);
+    --border: rgba(245,240,232,0.08);
+    --border-soft: rgba(245,240,232,0.04);
+    --font: 'Poppins', system-ui, -apple-system, sans-serif;
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+  }
+
+  /* Background gradient sutil que se mueve al scroll */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(201,169,116,0.03) 0%, transparent 40%),
+      radial-gradient(circle at 80% 100%, rgba(201,169,116,0.025) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+    transition: transform 0.3s ease-out;
+  }
+
+  body > * { position: relative; z-index: 1; }
+
+  /* Scroll progress bar */
+  #scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--gold);
+    z-index: 1000;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 8px rgba(201,169,116,0.5);
+  }
+
+  /* NAVBAR */
+  #top-nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 32px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: padding 0.3s ease, background 0.3s ease;
+  }
+
+  #top-nav.scrolled {
+    padding: 14px 32px;
+    background: rgba(0,0,0,0.95);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo svg { height: 22px; width: auto; }
+
+  .nav-back {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+  .nav-back:hover { color: var(--gold); }
+
+  /* SECCIONES BASE */
+  section {
+    padding: 140px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--bg);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    font-family: var(--font);
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin: 0 auto 32px;
+    max-width: 880px;
+  }
+
+  .section-title-light {
+    font-weight: 200;
+    color: var(--gold);
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0 auto 80px;
+    line-height: 1.7;
+    font-weight: 200;
+  }
+
+  /* HERO con split letters */
+  #hero {
+    padding-top: 200px;
+    padding-bottom: 140px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    border: 1px solid rgba(201,169,116,0.3);
+    border-radius: 999px;
+    font-size: 0.7rem;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulseDot 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-h1 {
+    font-family: var(--font);
+    font-size: clamp(3rem, 8vw, 6.4rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    color: var(--text);
+    margin: 0 auto 32px;
+    max-width: 1000px;
+  }
+
+  .hero-h1-light {
+    font-weight: 200;
+    color: var(--gold);
+  }
+
+  /* Split letters animation */
+  .hero-h1 .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: letterReveal 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+  }
+
+  @keyframes letterReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    font-weight: 200;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 1.4s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 999px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 24px rgba(201,169,116,0.2);
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 1.7s forwards;
+  }
+
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    background: var(--gold-bright);
+    box-shadow: 0 8px 40px rgba(201,169,116,0.3);
+  }
+
+  .hero-cta-arrow {
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .hero-cta:hover .hero-cta-arrow { transform: translateX(6px); }
+
+  .hero-clientes {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-soft);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 2s forwards;
+  }
+
+  .hero-clientes-label {
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .hero-clientes-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+
+  .cliente-item {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .cliente-item.dim {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  /* PROCESO · Jerarquía 3+1 */
+  .proceso-timeline {
+    margin-top: 80px;
+    position: relative;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* TOP: 3 fases iniciales (one-shot) */
+  .proceso-top {
+    position: relative;
+    margin-bottom: 64px;
+  }
+
+  /* Línea horizontal conectora entre las 3 primeras */
+  /* Los dots están centrados en cada columna del grid de 3 columnas:
+     centros en 16.67%, 50%, 83.33%. La línea va del borde derecho
+     del dot 01 al borde izquierdo del dot 03 — sin cruzarlos. */
+  .proceso-line-bg {
+    position: absolute;
+    top: 30px;
+    left: calc(16.67% + 30px);
+    right: calc(16.67% + 30px);
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+  }
+
+  .proceso-line-progress {
+    position: absolute;
+    top: 30px;
+    left: calc(16.67% + 30px);
+    right: calc(16.67% + 30px);
+    height: 2px;
+    background: var(--gold);
+    width: 0;
+    z-index: 1;
+    transition: transform 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: scaleX(0);
+    transform-origin: left center;
+    box-shadow: 0 0 12px rgba(201,169,116,0.5);
+    /* Ocupa 100% del espacio entre dots (que ya respeta los márgenes) */
+    width: auto;
+  }
+
+  .proceso-line-progress.active {
+    transform: scaleX(1);
+  }
+
+  .proceso-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .proceso-step {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    padding: 0 8px;
+  }
+
+  .proceso-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .proceso-dot {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.5s ease;
+  }
+
+  .proceso-dot::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,116,0.15), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: -1;
+  }
+
+  .proceso-step.active .proceso-dot {
+    border-color: var(--gold);
+    background: rgba(201,169,116,0.06);
+  }
+
+  .proceso-step.active .proceso-dot::before {
+    opacity: 1;
+  }
+
+  .proceso-num {
+    font-family: var(--font);
+    font-size: 1.05rem;
+    color: var(--gold);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    transition: font-weight 0.3s ease;
+  }
+
+  .proceso-step.active .proceso-num {
+    font-weight: 600;
+  }
+
+  .proceso-step-label {
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .proceso-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin-bottom: 12px;
+  }
+
+  .proceso-title-light {
+    font-weight: 200;
+    color: var(--gold);
+  }
+
+  .proceso-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-weight: 300;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  /* BOTTOM: Card recurrente protagonista */
+  .proceso-recurring {
+    background: linear-gradient(180deg, rgba(201,169,116,0.04) 0%, rgba(201,169,116,0.02) 100%);
+    border: 1px solid rgba(201,169,116,0.25);
+    border-radius: var(--radius);
+    padding: 48px 48px 44px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  .proceso-recurring.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .proceso-recurring::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+    opacity: 0;
+    transition: opacity 1s ease 0.3s;
+  }
+
+  .proceso-recurring.visible::before {
+    opacity: 1;
+  }
+
+  .proceso-recurring-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .proceso-recurring-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .proceso-recurring-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.65rem;
+    color: var(--gold);
+    background: rgba(201,169,116,0.12);
+    border: 1px solid rgba(201,169,116,0.35);
+    padding: 6px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+
+  .proceso-recurring-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulseDot 2.5s ease-in-out infinite;
+  }
+
+  .proceso-recurring-num {
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .proceso-recurring-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+
+  .proceso-recurring-title-light {
+    font-weight: 200;
+    color: var(--gold);
+  }
+
+  .proceso-recurring-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .proceso-recurring-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    list-style: none;
+  }
+
+  .proceso-recurring-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.92rem;
+    color: var(--text);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+
+  .proceso-recurring-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* TIEMPO · bullets simples */
+  .tiempo-bullets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 64px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .tiempo-bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 0;
+    border-top: 1px solid var(--border-soft);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .tiempo-bullet.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .tiempo-bullet-num {
+    font-size: 1.4rem;
+    color: var(--gold);
+    font-weight: 200;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 40px;
+    letter-spacing: -0.02em;
+  }
+
+  .tiempo-bullet-text {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .tiempo-bullet-text strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* CASO VANNIA · reveal lateral */
+  .caso-card {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: center;
+    margin-top: 64px;
+    text-align: left;
+  }
+
+  .caso-img-wrapper {
+    overflow: hidden;
+    border-radius: var(--radius);
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  .caso-img-wrapper.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .caso-img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    transition: transform 0.1s linear;
+  }
+
+  .caso-meta {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
+  }
+
+  .caso-meta.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .caso-num {
+    font-size: 0.78rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+  }
+
+  .caso-title {
+    font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+    color: var(--text);
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .caso-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .caso-quote {
+    font-size: 1.25rem;
+    color: var(--text);
+    line-height: 1.5;
+    margin-bottom: 36px;
+    font-weight: 200;
+    letter-spacing: -0.01em;
+  }
+
+  .caso-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid rgba(201,169,116,0.3);
+    padding-bottom: 6px;
+    transition: border-color 0.3s ease, gap 0.3s ease;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .caso-link:hover {
+    border-color: var(--gold);
+    gap: 14px;
+  }
+
+  /* CTA FINAL */
+  #cta-final {
+    padding: 160px 32px;
+    text-align: center;
+  }
+
+  .cta-final-inner { max-width: 720px; margin: 0 auto; }
+
+  #cta-final h2 {
+    font-size: clamp(2.6rem, 7vw, 5.4rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  #cta-final h2 .light {
+    font-weight: 200;
+    color: var(--gold);
+  }
+
+  #cta-final p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    font-weight: 200;
+  }
+
+  .cta-final-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 44px;
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 999px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 24px rgba(201,169,116,0.2);
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .cta-final-btn:hover {
+    transform: translateY(-2px);
+    background: var(--gold-bright);
+    box-shadow: 0 8px 40px rgba(201,169,116,0.3);
+  }
+
+  .cta-final-note {
+    margin-top: 24px;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border-soft);
+    padding: 48px 32px;
+    text-align: center;
+    background: var(--bg);
+  }
+
+  footer p {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  footer a:hover { color: var(--gold); }
+
+  /* RESPONSIVE */
+  @media (max-width: 800px) {
+    section { padding: 100px 24px; }
+    #hero { padding-top: 160px; padding-bottom: 100px; }
+    .proceso-grid { grid-template-columns: 1fr; gap: 40px; }
+    .proceso-line-bg, .proceso-line-progress { display: none; }
+    .proceso-dot { width: 56px; height: 56px; margin-bottom: 18px; }
+    .proceso-recurring { padding: 36px 28px; }
+    .proceso-recurring-grid { grid-template-columns: 1fr; gap: 32px; }
+    .proceso-recurring-list { grid-template-columns: 1fr; gap: 12px; }
+    .tiempo-bullets { grid-template-columns: 1fr; gap: 16px; }
+    .caso-card { grid-template-columns: 1fr; gap: 40px; }
+    .caso-img { aspect-ratio: 4/3; }
+    .hero-clientes-list { gap: 28px; }
+  }
+
+  @media (max-width: 600px) {
+    #top-nav { padding: 16px 20px; }
+    #top-nav.scrolled { padding: 12px 20px; }
+    .nav-back { font-size: 0.65rem; }
+  }
+
+  /* Reveal generic */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+
+<!-- NAVBAR -->
+<nav id="top-nav">
+  <a href="index.html" class="nav-logo" aria-label="VITA Studio">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="72 430 936 220" style="fill:currentColor;">
+      <g><path d="M76,434.71h14.58l49.52,210.55h-14.58l-49.52-210.55ZM191.76,434.71l-50.74,210.55h-4.25l50.74-210.55h4.25Z"/>
+      <path d="M202.38,645.26h-14.28v-210.55h14.28v210.55Z"/>
+      <path d="M301.44,438.66h-113.93v-3.95h113.93v3.95ZM237.33,645.26v-210.55h14.28v210.55h-14.28Z"/>
+      <path d="M304.67,434.71h-14.58l1.64,7,29.61,126.67.92,3.95,17.04,72.92h14.58l-49.22-210.54ZM321.34,568.39l.92,3.95h2.76v-3.95h-3.68ZM259.4,568.39l-.91,3.95h1.57l.97-3.95h-1.63ZM289.18,434.71l-51.05,210.54h4.25l17.67-72.92.97-3.95,30.7-126.67,1.69-7h-4.24Z"/></g>
+      <g><path d="M365.34,639.11c-9.78-4.74-17.33-11.01-22.67-18.82-5.33-7.8-8.5-16.25-9.48-25.33h5.93c.99,6.92,3.5,13.83,7.55,20.74,4.05,6.91,10.47,12.84,19.26,17.78,8.79,4.94,20.1,7.4,33.93,7.4,11.06,0,20.84-2.12,29.33-6.37,8.49-4.25,15.01-9.92,19.55-17.04,4.54-7.11,6.81-15.01,6.81-23.7,0-11.26-2.57-20.19-7.7-26.81-5.14-6.62-11.51-11.51-19.11-14.67-7.61-3.15-17.83-6.42-30.67-9.77-13.43-3.56-24.2-7.11-32.3-10.67-8.1-3.56-14.96-9.04-20.59-16.44-5.63-7.4-8.44-17.43-8.44-30.07,0-9.08,2.52-17.63,7.55-25.63,5.04-8,12.24-14.37,21.63-19.11,9.38-4.74,20.1-7.11,32.15-7.11s22.81,2.17,31.7,6.51c8.89,4.35,15.85,9.83,20.89,16.45,5.04,6.62,8.34,13.58,9.93,20.89h-5.92c-1.38-5.73-4.25-11.55-8.59-17.48-4.35-5.92-10.57-10.91-18.67-14.96-8.1-4.05-17.88-6.07-29.33-6.07-10.08,0-19.31,1.93-27.71,5.78-8.4,3.85-15.11,9.29-20.15,16.29-5.04,7.02-7.56,15.16-7.56,24.44,0,11.46,2.62,20.59,7.85,27.4,5.23,6.82,11.7,11.85,19.41,15.11,7.7,3.26,17.97,6.57,30.82,9.93,13.43,3.56,24.15,7.06,32.15,10.52,8,3.46,14.76,8.79,20.3,16,5.53,7.21,8.3,17.04,8.3,29.48,0,8.69-2.32,17.09-6.96,25.18-4.64,8.1-11.61,14.67-20.89,19.7-9.29,5.04-20.55,7.55-33.78,7.55s-24.74-2.37-34.52-7.11Z"/>
+      <path d="M416.42,435.57v5.32h60.75v203.27h5.94v-203.27h38.78v-5.32h-105.47Z"/>
+      <path d="M649.02,435.57v129.46c0,10.51-.87,19.88-2.68,28.12-2.68,12.5-7.4,22.4-14.18,29.64-11.26,12.04-26.6,18.07-45.94,18.07s-35.43-6.03-46.97-18.07c-11.54-12.04-17.36-31.29-17.36-57.76v-129.46h-5.88v129.46c0,27.47,6.31,47.84,18.94,61.19,12.66,13.31,29.71,20,51.26,20s38.38-6.59,50.48-19.85c3.8-4.14,7.03-8.99,9.64-14.53,2.55-5.44,4.54-11.54,5.94-18.32v-152.64h2.68v-5.32h-5.94Z"/>
+      <path d="M811.27,533.71v-.06c-.03-1-.06-1.96-.16-2.92-.37-7.4-1.31-14.4-2.74-20.97-.87-4.04-1.93-7.93-3.2-11.66-4.67-13.87-11.98-25.63-21.93-35.27-18.76-18.17-46.13-27.28-82.06-27.28h-54.84v208.6h54.84c35.93,0,63.3-9.08,82.06-27.25,9.95-9.64,17.29-21.43,21.93-35.31,1.24-3.64,2.3-7.4,3.11-11.32,1.49-6.69,2.46-13.78,2.83-21.31.09-.87.12-1.77.16-2.68.09-2.12.12-4.26.12-6.44s-.03-4.11-.12-6.13ZM805.17,549.55c-1.65,26.6-10.36,47.65-26.07,63.21-17.57,17.36-43.55,26.07-77.92,26.07h-48.9v-197.93h48.9c34.37,0,60.35,8.68,77.92,26.07,15.71,15.55,24.42,36.61,26.07,63.21.03.19.03.34.03.53.19,2.99.28,6.03.28,9.15s-.09,6.41-.31,9.49v.22Z"/>
+      <path d="M811.11,435.55v208.59h-5.93v-208.59h5.93Z"/>
+      <path d="M853.04,633.03c-15.11-8.99-26.92-21.58-35.41-37.78-8.5-16.19-12.74-34.56-12.74-55.11s4.25-38.91,12.74-55.11c8.49-16.19,20.3-28.78,35.41-37.77,15.11-8.99,32.24-13.48,51.41-13.48s36.3,4.5,51.41,13.48c15.11,8.99,26.91,21.58,35.41,37.77,8.49,16.2,12.74,34.57,12.74,55.11s-4.25,38.92-12.74,55.11c-8.5,16.2-20.3,28.79-35.41,37.78-15.11,8.99-32.25,13.48-51.41,13.48s-36.3-4.49-51.41-13.48ZM951.85,628.89c14.22-8.2,25.43-19.95,33.63-35.26,8.19-15.3,12.3-33.13,12.3-53.48s-4.1-38.17-12.3-53.48c-8.2-15.3-19.41-27.06-33.63-35.26-14.22-8.2-30.03-12.3-47.41-12.3s-33.19,4.1-47.41,12.3c-14.22,8.2-25.43,19.95-33.63,35.26-8.2,15.31-12.3,33.14-12.3,53.48s4.1,38.18,12.3,53.48c8.2,15.31,19.41,27.06,33.63,35.26,14.22,8.2,30.02,12.3,47.41,12.3s33.19-4.1,47.41-12.3Z"/></g>
+    </svg>
+  </a>
+  <a href="index.html" class="nav-back">Sitio principal</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Solo 4 consultorios este trimestre
+  </div>
+
+  <h1 class="hero-h1" id="hero-h1">
+    <span class="hero-h1-line">Construimos el</span><br>
+    <span class="hero-h1-line hero-h1-light">activo digital</span><br>
+    <span class="hero-h1-line">que tu consultorio</span><br>
+    <span class="hero-h1-line hero-h1-light">merece.</span>
+  </h1>
+
+  <p class="hero-subtitle">
+    Marca, sitio web premium y producción audiovisual para médicos especialistas. Yo me encargo de todo. Tú solo apruebas.
+  </p>
+
+  <a href="apply.html" class="hero-cta">
+    Agendar llamada
+    <span class="hero-cta-arrow">→</span>
+  </a>
+
+  <div class="hero-clientes">
+    <p class="hero-clientes-label">Médicos que han confiado en VITA</p>
+    <div class="hero-clientes-list">
+      <span class="cliente-item">Dra. Vannia Maldonado</span>
+      <span class="cliente-item">Dr. José Luis</span>
+      <span class="cliente-item dim">+ próximamente</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO 4 FASES · Jerarquía 3+1 -->
+<section id="proceso">
+  <span class="section-label reveal">El proceso</span>
+  <h2 class="section-title reveal">
+    Cuatro fases. <span class="section-title-light">Un proceso.</span>
+  </h2>
+  <p class="section-subtitle reveal">
+    Tres fases iniciales que entregamos como setup. Después, te acompañamos cada mes para que tu marca siga creciendo.
+  </p>
+
+  <div class="proceso-timeline">
+
+    <!-- TOP: 3 fases iniciales -->
+    <div class="proceso-top">
+      <div class="proceso-line-bg"></div>
+      <div class="proceso-line-progress" id="proceso-line-progress"></div>
+
+      <div class="proceso-grid">
+        <div class="proceso-step" data-step="1">
+          <div class="proceso-dot">
+            <span class="proceso-num">01</span>
+          </div>
+          <div class="proceso-step-label">Diagnóstico</div>
+          <h3 class="proceso-title">
+            Empezamos por <span class="proceso-title-light">entender.</span>
+          </h3>
+          <p class="proceso-desc">
+            Consultoría profunda para mapear áreas de oportunidad y cuellos de botella reales.
+          </p>
+        </div>
+
+        <div class="proceso-step" data-step="2">
+          <div class="proceso-dot">
+            <span class="proceso-num">02</span>
+          </div>
+          <div class="proceso-step-label">Branding</div>
+          <h3 class="proceso-title">
+            Tu marca, <span class="proceso-title-light">formalizada.</span>
+          </h3>
+          <p class="proceso-desc">
+            Identidad completa que vive desde tu sitio hasta tus tarjetas de presentación.
+          </p>
+        </div>
+
+        <div class="proceso-step" data-step="3">
+          <div class="proceso-dot">
+            <span class="proceso-num">03</span>
+          </div>
+          <div class="proceso-step-label">Plataforma</div>
+          <h3 class="proceso-title">
+            Donde tu marca <span class="proceso-title-light">vive.</span>
+          </h3>
+          <p class="proceso-desc">
+            Sitio elegante, profesional y efectivo para captar más pacientes.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM: Card recurrente protagonista -->
+    <div class="proceso-recurring" id="proceso-recurring">
+      <div class="proceso-recurring-grid">
+        <div class="proceso-recurring-left">
+          <div class="proceso-recurring-badge">
+            Recurrente · Mensual
+          </div>
+          <div class="proceso-recurring-num">— Fase 04</div>
+          <h3 class="proceso-recurring-title">
+            Y después, te <span class="proceso-recurring-title-light">acompañamos.</span>
+          </h3>
+          <p class="proceso-recurring-desc">
+            La diferencia entre lanzar y crecer. Cuidamos tu plataforma cada mes para que tú sigas enfocado en lo que sabes hacer mejor — atender pacientes.
+          </p>
+        </div>
+
+        <ul class="proceso-recurring-list">
+          <li>Hosting</li>
+          <li>Dominio</li>
+          <li>Mantenimiento</li>
+          <li>Posicionamiento SEO</li>
+          <li>Soporte continuo</li>
+          <li>Reportes mensuales</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TIEMPO -->
+<section id="tiempo">
+  <span class="section-label reveal">Cómo trabajo</span>
+  <h2 class="section-title reveal">
+    Tu tiempo es <span class="section-title-light">sagrado.</span>
+  </h2>
+  <p class="section-subtitle reveal">
+    Yo me encargo de todo lo operativo. Tú solo apareces en momentos donde tu criterio sí cambia algo.
+  </p>
+
+  <div class="tiempo-bullets">
+    <div class="tiempo-bullet">
+      <span class="tiempo-bullet-num">01</span>
+      <span class="tiempo-bullet-text"><strong>Máximo 3 reuniones</strong> en todo el proyecto.</span>
+    </div>
+    <div class="tiempo-bullet">
+      <span class="tiempo-bullet-num">02</span>
+      <span class="tiempo-bullet-text"><strong>Todo asíncrono</strong> — videos cortos, docs, notas.</span>
+    </div>
+    <div class="tiempo-bullet">
+      <span class="tiempo-bullet-num">03</span>
+      <span class="tiempo-bullet-text"><strong>Decisiones en bloque</strong> — 3 opciones, eliges una.</span>
+    </div>
+    <div class="tiempo-bullet">
+      <span class="tiempo-bullet-num">04</span>
+      <span class="tiempo-bullet-text"><strong>Reportes en 2 minutos</strong> de lectura, no más.</span>
+    </div>
+  </div>
+</section>
+
+<!-- CASO VANNIA -->
+<section id="caso">
+  <span class="section-label reveal">Caso destacado</span>
+  <h2 class="section-title reveal">
+    Lo que <span class="section-title-light">construimos</span><br>
+    con la Dra. Vannia.
+  </h2>
+
+  <div class="caso-card">
+    <div class="caso-img-wrapper">
+      <div class="caso-img" id="caso-img" style="background-image:url('assets/proyectos/vannia.webp');"></div>
+    </div>
+    <div class="caso-meta">
+      <div class="caso-num">— Otorrinolaringología</div>
+      <h3 class="caso-title">Dra. Vannia Maldonado</h3>
+      <p class="caso-subtitle">Mérida, Yucatán · Cliente desde 2024</p>
+      <p class="caso-quote">"Siempre me guiaron en el proceso, fueron muy transparentes. Tener mi propia plataforma cambió cómo se siente recibir pacientes."</p>
+      <a href="https://drvanniamaldonado.com" target="_blank" rel="noopener" class="caso-link">
+        Ver el sitio
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-final-inner">
+    <h2 class="reveal">
+      Hablemos.<br>
+      <span class="light">Quince minutos.</span>
+    </h2>
+    <p class="reveal">
+      Una llamada corta. Si VITA es para ti, lo sabremos. Si no, te diré qué considero el siguiente paso real.
+    </p>
+    <a href="apply.html" class="cta-final-btn reveal">
+      Agendar llamada
+      <span>→</span>
+    </a>
+    <p class="cta-final-note reveal">
+      Te respondo personalmente · Respuesta en 24 horas
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    © 2026 VITA Studio · Monterrey, México<br>
+    <a href="index.html">Sitio principal</a> · <a href="privacidad.html">Aviso de privacidad</a>
+  </p>
+</footer>
+
+<script>
+  // ===========================================
+  // 1. SPLIT LETTERS en hero H1
+  // ===========================================
+  (function() {
+    var lines = document.querySelectorAll('.hero-h1-line');
+    var totalDelay = 0;
+
+    lines.forEach(function(line, lineIdx) {
+      var text = line.textContent;
+      line.innerHTML = '';
+
+      for (var i = 0; i < text.length; i++) {
+        var span = document.createElement('span');
+        span.className = 'letter';
+        span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+        span.style.animationDelay = (totalDelay + (i * 0.025)) + 's';
+        line.appendChild(span);
+      }
+      totalDelay += text.length * 0.025 + 0.15;
+    });
+  })();
+
+  // ===========================================
+  // 2. SCROLL PROGRESS BAR
+  // ===========================================
+  (function() {
+    var bar = document.getElementById('scroll-progress');
+    function update() {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = (scrollTop / docHeight) * 100;
+      bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // ===========================================
+  // 3. NAVBAR SHRINK
+  // ===========================================
+  (function() {
+    var nav = document.getElementById('top-nav');
+    function update() {
+      if (window.scrollY > 80) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // ===========================================
+  // 4. REVEAL ON SCROLL
+  // ===========================================
+  (function() {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+  })();
+
+  // ===========================================
+  // 5. TIEMPO BULLETS · stagger reveal
+  // ===========================================
+  (function() {
+    var bullets = document.querySelectorAll('.tiempo-bullet');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var idx = Array.prototype.indexOf.call(bullets, entry.target);
+          setTimeout(function() {
+            entry.target.classList.add('visible');
+          }, idx * 120);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    bullets.forEach(function(el) { observer.observe(el); });
+  })();
+
+  // ===========================================
+  // 6. CASO REVEAL LATERAL
+  // ===========================================
+  (function() {
+    var img = document.querySelector('.caso-img-wrapper');
+    var meta = document.querySelector('.caso-meta');
+    if (!img || !meta) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(img);
+    observer.observe(meta);
+  })();
+
+  // ===========================================
+  // 7. PARALLAX en imagen Vannia
+  // ===========================================
+  (function() {
+    var caseImg = document.getElementById('caso-img');
+    if (!caseImg) return;
+    function update() {
+      var rect = caseImg.getBoundingClientRect();
+      var winH = window.innerHeight;
+      if (rect.bottom < 0 || rect.top > winH) return;
+      var scrollPos = (winH / 2) - (rect.top + rect.height / 2);
+      var parallaxOffset = scrollPos * 0.06;
+      caseImg.style.transform = 'translateY(' + parallaxOffset + 'px)';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // ===========================================
+  // 8. PROCESO TIMELINE PROGRESIVO + RECURRING REVEAL
+  // ===========================================
+  (function() {
+    var steps = document.querySelectorAll('.proceso-step');
+    var line = document.getElementById('proceso-line-progress');
+    var recurring = document.getElementById('proceso-recurring');
+
+    // Observer para los 3 steps superiores
+    if (steps.length && line) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var idx = Array.prototype.indexOf.call(steps, entry.target);
+            // Aparece la step
+            setTimeout(function() {
+              entry.target.classList.add('visible');
+            }, idx * 180);
+            // Activa el dot
+            setTimeout(function() {
+              entry.target.classList.add('active');
+            }, idx * 180 + 400);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      steps.forEach(function(el) { observer.observe(el); });
+
+      // Línea progresiva
+      var lineObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            setTimeout(function() {
+              line.classList.add('active');
+            }, 600);
+            lineObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      var topEl = document.querySelector('.proceso-top');
+      if (topEl) lineObserver.observe(topEl);
+    }
+
+    // Observer separado para card recurrente
+    if (recurring) {
+      var recObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            recObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      recObserver.observe(recurring);
+    }
+  })();
+
+  // ===========================================
+  // 9. BACKGROUND GRADIENT que se mueve al scroll
+  // ===========================================
+  (function() {
+    function update() {
+      var scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      var translateY = scrollPct * 100;
+      document.body.style.setProperty('--bg-shift', translateY + 'px');
+      document.body.style.background = 'var(--bg)';
+      // El gradient ya está en body::before — solo actualizamos sutilmente con transform
+      var pseudo = document.body;
+      pseudo.style.transform = 'translateY(0)'; // placeholder, el efecto real es subtle
+    }
+    // Por simplicidad: el efecto del gradient ya está activo de manera estática (radial gradients fixed)
+    // No necesita JS para "moverse" porque el efecto fixed ya da la sensación ambient
+  })();
+</script>
+
+</body>
+</html>
