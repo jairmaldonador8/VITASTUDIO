@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VITA Studio — Hacemos crecer tu negocio. Sin adivinar.</title>
-  <meta name="description" content="Consultoría personalizada, branding profesional y sitios web que convierten. Monterrey, México.">
+  <meta name="description" content="Consultoría personalizada, branding profesional y sitios web que convierten.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -87,7 +87,6 @@
       background: rgba(8,8,8,0.88);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
@@ -96,6 +95,9 @@
       color: var(--gold);
       letter-spacing: -0.02em;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .nav-links {
@@ -482,11 +484,6 @@
       position: relative;
       z-index: 2;
     }
-    /* Track-wrapper encima de partículas */
-    .clientes-track-wrapper {
-      position: relative;
-      z-index: 2;
-    }
 
     .clientes-header {
       text-align: center;
@@ -512,6 +509,25 @@
     }
 
     .clientes-track-wrapper:active { cursor: grabbing; }
+
+    .fade-left, .fade-right {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 400px;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .fade-left {
+      left: 0;
+      background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.4) 70%, transparent 100%);
+    }
+
+    .fade-right {
+      right: 0;
+      background: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.4) 70%, transparent 100%);
+    }
 
     .clientes-track {
       display: flex;
@@ -547,6 +563,10 @@
       object-position: center top;
       display: block;
       transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
     }
 
     .caso-card:hover img { transform: scale(1.03); }
@@ -2873,7 +2893,7 @@
 
 <!-- TOP NAV -->
 <nav id="top-nav">
-  <a href="#inicio" class="nav-logo">VITA Studio</a>
+  <a href="#inicio" class="nav-logo"><img src="./assets/logo.png" alt="VITA Studio" style="height: 140px; width: auto; object-fit: contain; display: flex; align-items: center;"></a>
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#problemas">Problemas</a></li>
@@ -2890,7 +2910,7 @@
 <section id="inicio">
   <div class="hero-badge">
     <span class="hero-badge-dot"></span>
-    Monterrey, México · Disponibles ahora
+    <span>solo aceptamos 3 proyectos nuevos por mes</span>
   </div>
   <h1 class="hero-h1">
     El mundo necesita<br>
@@ -2914,7 +2934,7 @@
 ============================================ -->
 <section id="antesdespues">
   <div class="slider-label">
-    <div class="tag">Transformación VITA Studio</div>
+    <div class="tag">Transformación <img src="./assets/logo.png" alt="VITA Studio" style="height: 20px; width: auto; object-fit: contain; display: inline-block; vertical-align: middle;"></div>
     <h2>El antes y el después</h2>
     <p>Antes · Después</p>
   </div>
@@ -3145,7 +3165,7 @@
 
 <!-- Gap título -->
 <div style="background:transparent;padding:20px 24px 0;text-align:center;">
-  <span style="font-size:0.65rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);font-family:'Poppins',sans-serif;">Negocios que confían en VITA Studio</span>
+  <span style="font-size:0.65rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);font-family:'Poppins',sans-serif;">Negocios que confían en <img src="./assets/logo.png" alt="VITA Studio" style="height: 40px; width: auto; object-fit: contain; display: inline-block; vertical-align: middle; margin: 0 6px;"></span>
 </div>
 
 <!-- ============================================
@@ -3153,7 +3173,7 @@
 ============================================ -->
 <section id="clientes"><div class="clientes-particles" id="clientesParticles"></div>
   <div class="clientes-header reveal">
-    <span class="section-label">Negocios que confían en VITA Studio</span>
+    <span class="section-label">Negocios que confían en <img src="./assets/logo.png" alt="VITA Studio" style="height: 40px; width: auto; object-fit: contain; display: inline-block; vertical-align: middle; margin: 0 6px;"></span>
     <p class="clientes-heading-text">Marcas reales. Resultados reales.</p>
   </div>
   <div class="clientes-track-wrapper">
@@ -3892,7 +3912,7 @@
 
   <div class="faq-item reveal">
     <div class="faq-question">
-      <span class="faq-q-text">¿Cuánto cuesta trabajar con VITA Studio?</span>
+      <span class="faq-q-text">¿Cuánto cuesta trabajar con <img src="./assets/logo.png" alt="VITA Studio" style="height: 20px; width: auto; object-fit: contain; display: inline-block; vertical-align: middle; margin: 0 6px;">?</span>
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
@@ -4088,6 +4108,9 @@
 ============================================ -->
 <section id="contacto">
   <div class="cta-box reveal">
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="./assets/logo.png" alt="VITA Studio" style="height: 180px; width: auto; object-fit: contain;">
+    </div>
     <h2>Tu negocio tiene más<br>potencial del que crees.</h2>
     <p>Déjanos mostrarte exactamente dónde está y cómo desbloquearlo.</p>
     <a href="https://wa.me/525543708757?text=Hola%20VITA%20Studio%2C%20quiero%20una%20consultor%C3%ADa%20gratuita" target="_blank" class="btn-primary">
@@ -4103,8 +4126,8 @@
 <footer>
   <p class="footer-copy">© 2026 VITA Studio — Todos los derechos reservados</p>
   <div>
-    <div class="footer-logo">VITA Studio</div>
-    <span class="footer-location">Monterrey, México</span>
+    <div class="footer-logo"><img src="./assets/logo.png" alt="VITA Studio" style="height: 250px; width: auto; object-fit: contain;"></div>
+    <span class="footer-location">México</span>
   </div>
   <div class="footer-social">
     <a href="#" class="social-btn" aria-label="LinkedIn">
@@ -4338,133 +4361,97 @@
   // ---- CLIENTS INFINITE SCROLL (JS) ----
   // --- CARRUSEL CLIENTES ---
   function initCarrusel() {
-    const wrapper = document.querySelector('.clientes-track-wrapper');
     const track = document.getElementById('clientesTrack');
+    const wrapper = document.querySelector('.clientes-track-wrapper');
     if (!track || !wrapper) return;
 
-    // Forzar tamaño uniforme en cards originales
-    const cards = Array.from(track.children);
-    cards.forEach(card => {
-      card.style.flexShrink = '0';
-      card.style.width = '360px';
-    });
+    // Crear overlays fade
+    const fadeLeft = document.createElement('div');
+    fadeLeft.className = 'fade-left';
+    wrapper.appendChild(fadeLeft);
 
-    // Clonar para loop infinito
-    cards.forEach(card => {
+    const fadeRight = document.createElement('div');
+    fadeRight.className = 'fade-right';
+    wrapper.appendChild(fadeRight);
+
+    const originalCards = Array.from(track.querySelectorAll('.caso-card'));
+    const originalWidth = originalCards.reduce((sum, card) => sum + card.offsetWidth + 16, 0);
+
+    originalCards.forEach(card => {
       const clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      clone.style.flexShrink = '0';
-      clone.style.width = '360px';
       track.appendChild(clone);
     });
 
+    const allImages = track.querySelectorAll('img');
+    allImages.forEach(img => {
+      img.draggable = false;
+      img.addEventListener('dragstart', (e) => e.preventDefault());
+    });
+
     let pos = 0;
-    let halfWidth = 0;
-    let autoPlay = true;
-    const speed = 0.6;
-
-    // Drag state
     let isDragging = false;
-    let dragStartX = 0;
-    let dragStartPos = 0;
-    let lastX = 0;
-    let velocity = 0;
-    let momentumRAF = null;
+    let startX = 0;
+    let startPos = 0;
+    const autoScrollSpeed = 0.5;
+    const halfWidth = originalWidth;
 
-    function calcHalf() {
-      halfWidth = track.scrollWidth / 2;
-    }
-    setTimeout(calcHalf, 300);
-    window.addEventListener('resize', calcHalf);
-
-    function clamp(p) {
-      if (halfWidth <= 0) return p;
-      p = p % halfWidth;
-      if (p < 0) p += halfWidth;
-      return p;
-    }
-
-    function applyPos() {
-      track.style.transform = 'translateX(-' + pos + 'px)';
-    }
-
-    // ── Auto-scroll loop ──
-    function autoLoop() {
-      if (autoPlay && !isDragging && halfWidth > 0) {
-        pos = clamp(pos + speed);
-        applyPos();
+    function scrollCarrusel() {
+      if (!isDragging) {
+        pos += autoScrollSpeed;
+        if (pos >= halfWidth) {
+          pos = 0;
+          track.style.transition = 'none';
+        }
       }
-      requestAnimationFrame(autoLoop);
-    }
-    requestAnimationFrame(autoLoop);
-
-    // ── Momentum after drag ──
-    function momentumScroll() {
-      if (Math.abs(velocity) < 0.3) { autoPlay = true; return; }
-      pos = clamp(pos + velocity);
-      velocity *= 0.93;
-      applyPos();
-      momentumRAF = requestAnimationFrame(momentumScroll);
+      track.style.transform = `translateX(-${pos}px)`;
+      requestAnimationFrame(scrollCarrusel);
     }
 
-    // ── MOUSE events ──
-    wrapper.addEventListener('mousedown', e => {
+    // Mouse drag
+    wrapper.addEventListener('mousedown', (e) => {
       isDragging = true;
-      autoPlay = false;
-      dragStartX = e.clientX;
-      dragStartPos = pos;
-      lastX = e.clientX;
-      velocity = 0;
-      cancelAnimationFrame(momentumRAF);
+      startX = e.clientX;
+      startPos = pos;
+      track.style.transition = 'none';
       wrapper.style.cursor = 'grabbing';
-      e.preventDefault();
     });
 
-    window.addEventListener('mousemove', e => {
+    document.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
-      velocity = lastX - e.clientX;
-      lastX = e.clientX;
-      const delta = dragStartX - e.clientX;
-      pos = clamp(dragStartPos + delta);
-      applyPos();
+      const currentX = e.clientX;
+      const diff = currentX - startX;
+      pos = startPos - diff;
+      track.style.transform = `translateX(-${pos}px)`;
     });
 
-    window.addEventListener('mouseup', () => {
+    document.addEventListener('mouseup', () => {
       if (!isDragging) return;
       isDragging = false;
       wrapper.style.cursor = 'grab';
-      momentumScroll();
     });
 
-    // ── TOUCH events ──
-    wrapper.addEventListener('touchstart', e => {
+    // Touch drag
+    wrapper.addEventListener('touchstart', (e) => {
       isDragging = true;
-      autoPlay = false;
-      dragStartX = e.touches[0].clientX;
-      dragStartPos = pos;
-      lastX = e.touches[0].clientX;
-      velocity = 0;
-      cancelAnimationFrame(momentumRAF);
-    }, { passive: true });
+      startX = e.touches[0].clientX;
+      startPos = pos;
+      track.style.transition = 'none';
+    });
 
-    wrapper.addEventListener('touchmove', e => {
+    wrapper.addEventListener('touchmove', (e) => {
       if (!isDragging) return;
-      const x = e.touches[0].clientX;
-      velocity = lastX - x;
-      lastX = x;
-      const delta = dragStartX - x;
-      pos = clamp(dragStartPos + delta);
-      applyPos();
-    }, { passive: true });
+      const currentX = e.touches[0].clientX;
+      const diff = currentX - startX;
+      pos = startPos - diff;
+      track.style.transform = `translateX(-${pos}px)`;
+    });
 
     wrapper.addEventListener('touchend', () => {
+      if (!isDragging) return;
       isDragging = false;
-      momentumScroll();
     });
 
-    // Hover pausa auto-scroll pero no drag
-    wrapper.addEventListener('mouseenter', () => { if (!isDragging) autoPlay = false; });
-    wrapper.addEventListener('mouseleave', () => { if (!isDragging) autoPlay = true; });
+    scrollCarrusel();
   }
 
   // Esperar a que todas las imágenes carguen antes de iniciar
@@ -4960,7 +4947,7 @@
     var searched = document.getElementById('prob5-searched');
     if (!typed) return;
 
-    var phrases = ['"Mi Negocio Monterrey"', '"Rosa de Oro restaurant"', '"Dr. Garcia clinica"', '"Servicios XYZ Mty"'];
+    var phrases = ['"Mi Negocio Online"', '"Rosa de Oro restaurant"', '"Dr. Garcia clinica"', '"Servicios XYZ"'];
     var idx = 0;
     var running = false;
 
