@@ -5,6 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VITA Studio — Hacemos crecer tu negocio. Sin adivinar.</title>
   <meta name="description" content="Consultoría personalizada, branding profesional y sitios web que convierten. Monterrey, México.">
+
+  <!-- ============================================
+       SEO + REDES SOCIALES
+  ============================================ -->
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jairmaldonador8.github.io/VITASTUDIO/">
+  <meta name="theme-color" content="#FF8C42">
+
+  <!-- Favicon (genera tus assets en https://realfavicongenerator.net y ponlos en /assets/favicon/) -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+  <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jairmaldonador8.github.io/VITASTUDIO/">
+  <meta property="og:title" content="VITA Studio — Hacemos crecer tu negocio. Sin adivinar.">
+  <meta property="og:description" content="Consultoría personalizada, branding profesional y sitios web que convierten. Monterrey, México.">
+  <meta property="og:image" content="https://jairmaldonador8.github.io/VITASTUDIO/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_MX">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VITA Studio — Hacemos crecer tu negocio. Sin adivinar.">
+  <meta name="twitter:description" content="Consultoría personalizada, branding profesional y sitios web que convierten. Monterrey, México.">
+  <meta name="twitter:image" content="https://jairmaldonador8.github.io/VITASTUDIO/assets/og-image.jpg">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "VITA Studio",
+    "description": "Consultoría personalizada, branding profesional y sitios web que convierten.",
+    "url": "https://jairmaldonador8.github.io/VITASTUDIO/",
+    "telephone": "+525543708757",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Monterrey",
+      "addressRegion": "Nuevo León",
+      "addressCountry": "MX"
+    },
+    "areaServed": ["Monterrey", "México", "Latinoamérica"],
+    "sameAs": []
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,9 +67,9 @@
       --gold: #FF8C42;
       --gold-dim: rgba(255,140,66,0.15);
       --gold-glow: rgba(255,140,66,0.08);
-      --bg: #080808;
-      --bg-card: #080808;
-      --bg-card2: #080808;
+      --bg: #000;
+      --bg-card: #000;
+      --bg-card2: #000;
       --border: rgba(255,255,255,0.07);
       --text: #FFFFFF;
       --text-muted: rgba(255,255,255,0.45);
@@ -32,9 +81,19 @@
 
     html { scroll-behavior: smooth; }
 
+    /* Respetar preferencia de menos movimiento (accesibilidad + ahorro de batería) */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     body {
       font-family: var(--font);
-      background: #080808;
+      background: #000;
       color: var(--text);
       overflow-x: hidden;
       padding-bottom: 110px;
@@ -47,7 +106,7 @@
 
     /* Keep cards and inner elements with their own bg */
     .caso-card, .servicio-card, .faq-item,
-    .calc-card, .oferta-card, .problema-card,
+    .problema-card,
     .nav-card, form, .form-card {
       position: relative;
       z-index: 3;
@@ -91,11 +150,20 @@
     }
 
     .nav-logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: -0.02em;
+      display: inline-flex;
+      align-items: center;
+      color: #FFFFFF;
       text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    .nav-logo:hover { opacity: 0.75; }
+    .nav-logo svg {
+      height: 26px;
+      width: auto;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .nav-logo svg { height: 22px; }
     }
 
     .nav-links {
@@ -152,38 +220,13 @@
       padding: calc(var(--nav-h) + 40px) 24px 100px;
       position: relative;
       overflow: hidden;
-      background: #080808;
+      background: #000;
       isolation: isolate;
-    }
-
-    /* Animated glow */
-    #inicio::before {
-      content: '';
-      position: absolute;
-      width: 700px; height: 700px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,140,66,0.1) 0%, transparent 65%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      animation: heroGlow 7s ease-in-out infinite;
-      -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-      mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     }
 
     @keyframes heroGlow {
       0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
       50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-    }
-
-    /* Grain overlay */
-    #inicio::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      opacity: 0.4;
-      pointer-events: none;
     }
 
     .hero-badge {
@@ -416,66 +459,11 @@
       padding: 20px 0 60px;
       overflow: visible;
       position: relative;
-      background: #080808;
+      background: #000;
       isolation: isolate;
     }
 
-    /* Animated background for clientes section */
-    #clientes::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 15% 50%, rgba(255,140,66,0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 60% at 85% 30%, rgba(255,140,66,0.05) 0%, transparent 65%);
-      animation: clientesBgPulse 6s ease-in-out infinite alternate;
-      pointer-events: none;
-      z-index: 0;
-    }
 
-    #clientes::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(255,140,66,0.04) 0%, transparent 60%);
-      animation: clientesBgPulse 8s ease-in-out infinite alternate-reverse;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @keyframes clientesBgPulse {
-      0%   { opacity: 0.6; transform: scale(1); }
-      100% { opacity: 1;   transform: scale(1.08); }
-    }
-
-    /* Floating particles */
-    #clientes .clientes-particles {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      overflow: visible;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    #clientes .clientes-particles span {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      border-radius: 50%;
-      background: rgba(255,140,66,0.5);
-      animation: floatParticle ease-in-out infinite;
-    }
-
-    @keyframes floatParticle {
-      0%   { transform: translateY(0px) translateX(0px); opacity: 0; }
-      15%  { opacity: 1; }
-      85%  { opacity: 0.5; }
-      100% { transform: translateY(-80px) translateX(var(--drift)); opacity: 0; }
-    }
 
     /* Ensure children sit above the bg */
     .clientes-header {
@@ -615,7 +603,7 @@
     ============================================ */
     #problemas {
       padding: 100px 0;
-      background: #080808 !important;
+      background: #000 !important;
       width: 100%;
     }
     #problemas > * {
@@ -699,11 +687,11 @@
     .chart-svg { width: 100%; height: 110px; }
 
     /* ============================================
-       METODOLOGÍA / SERVICIOS
+       SERVICIOS — MEZCLA (Express + Integral)
     ============================================ */
     #servicios {
       padding: 100px 0;
-      background: #080808 !important;
+      background: #000 !important;
       width: 100%;
     }
     #servicios > * {
@@ -721,303 +709,377 @@
 
     .servicios-header {
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 56px;
     }
 
-    .servicios-layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 24px;
-      align-items: start;
+    .section-title-em {
+      font-style: italic;
+      color: var(--gold);
+      font-weight: 700;
     }
 
-    .servicios-tabs {
+    /* ------ DIAGNÓSTICO CARD (Paso 0) ------ */
+    .diagnostico-card {
+      background: rgba(255,140,66,0.04);
+      border: 1px solid rgba(255,140,66,0.25);
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .diagnostico-content {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .diagnostico-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .diagnostico-step {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .diagnostico-divider {
+      width: 30px;
+      height: 1px;
+      background: rgba(255,140,66,0.5);
+    }
+
+    .diagnostico-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+    }
+
+    .diagnostico-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin: 0 0 12px;
+    }
+
+    .diagnostico-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      line-height: 1.55;
+      margin: 0 0 16px;
+    }
+
+    .diagnostico-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .servicio-tab {
+    .diagnostico-list li {
       display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 20px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      background: transparent;
-      color: rgba(255,255,255,0.45);
-      font-family: var(--font);
-      font-size: 0.9rem;
-      font-weight: 400;
-      text-align: left;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 300;
+      line-height: 1.5;
     }
 
-    .servicio-tab:hover {
-      color: rgba(255,255,255,0.8);
-      background: rgba(255,255,255,0.03);
-    }
-
-    .servicio-tab.active {
-      background: rgba(245,200,66,0.08);
-      border-color: rgba(255,140,66,0.2);
-      color: #fff;
-    }
-
-    .servicio-tab.active .tab-icon { color: var(--gold); }
-
-    .tab-icon {
-      font-size: 1.1rem;
-      width: 20px;
-      text-align: center;
+    .diag-arrow {
+      color: var(--gold);
+      font-weight: 600;
       flex-shrink: 0;
     }
 
-    .servicios-panel {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 40px;
-      min-height: 380px;
+    .diagnostico-cta {
+      flex-shrink: 0;
     }
 
-    .panel-content { display: none; }
-    .panel-content.active {
-      display: block;
-      animation: panelIn 0.3s ease;
-    }
-
-    @keyframes panelIn {
-      from { opacity: 0; transform: translateX(10px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    .panel-week {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+    .btn-diagnostico {
+      background: var(--gold);
+      color: #0a0a0a;
+      border: none;
+      padding: 15px 28px;
+      font-family: var(--font);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
-    .panel-title {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
+    .btn-diagnostico:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
     }
 
-    .panel-desc {
-      font-size: 0.9rem;
-      font-weight: 300;
-      color: var(--text-muted);
-      line-height: 1.7;
+    .btn-arrow {
+      font-size: 0.95rem;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-diagnostico:hover .btn-arrow {
+      transform: translateX(3px);
+    }
+
+    /* ------ INTRO PAQUETES ------ */
+    .paquetes-intro {
+      text-align: center;
       margin-bottom: 28px;
     }
 
-    .panel-steps {
+    .paquetes-intro-text {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    /* ------ GRID DE PAQUETES ------ */
+    .paquetes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .paquete-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .paquete-card--featured {
+      background: rgba(255,140,66,0.04);
+      border: 1.5px solid rgba(255,140,66,0.5);
+    }
+
+    .paquete-badge {
+      position: absolute;
+      top: -12px;
+      left: 32px;
+      background: var(--gold);
+      color: #0a0a0a;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .paquete-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .paquete-num {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+    }
+
+    .paquete-num--featured { color: rgba(255,140,66,0.85); }
+
+    .paquete-time {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+    }
+
+    .paquete-time--featured { color: rgba(255,140,66,0.65); }
+
+    .paquete-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin: 0 0 14px;
+    }
+
+    .paquete-for {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.55;
+      margin: 0 0 24px;
+    }
+
+    .paquete-for--featured { color: rgba(255,255,255,0.78); }
+
+    .paquete-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 0 0 22px;
+    }
+
+    .paquete-divider--featured {
+      background: rgba(255,140,66,0.18);
+    }
+
+    .paquete-includes {
+      flex: 1;
+    }
+
+    .includes-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .includes-label--featured { color: rgba(255,140,66,0.65); }
+
+    .includes-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .panel-step {
+    .include-item {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 20px;
-    }
-
-    .step-num {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: var(--gold-dim);
-      border: 1px solid rgba(255,140,66,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--gold);
-      flex-shrink: 0;
-    }
-
-    .step-content h4 {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 3px;
-    }
-
-    .step-content p {
-      font-size: 0.8rem;
+      gap: 12px;
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.85);
       font-weight: 300;
-      color: var(--text-muted);
-    }
-
-    /* ============================================
-       CALCULADORA
-    ============================================ */
-    #calculadora {
-      padding: 100px 0;
-      background: #080808 !important;
-      width: 100%;
-    }
-    #calculadora > * {
-      max-width: 960px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 24px;
-      padding-right: 24px;
-    }
-
-    .calc-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-
-    .calc-box {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-    }
-
-    .calc-sliders { display: flex; flex-direction: column; gap: 32px; }
-
-    .slider-row label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .slider-label-text {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .slider-label-icon {
-      width: 28px; height: 28px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.04);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-    }
-
-    .slider-value {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--gold);
-    }
-
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 4px;
-      border-radius: 4px;
-      background: rgba(255,255,255,0.1);
-      outline: none;
-      cursor: pointer;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: var(--gold);
-      cursor: pointer;
-      box-shadow: 0 0 0 3px rgba(255,140,66,0.2);
-      transition: box-shadow 0.2s;
-    }
-
-    input[type="range"]::-webkit-slider-thumb:hover {
-      box-shadow: 0 0 0 6px rgba(255,140,66,0.2);
-    }
-
-    input[type="range"]::-moz-range-thumb {
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: var(--gold);
-      border: none;
-      cursor: pointer;
-    }
-
-    .calc-results { display: flex; flex-direction: column; gap: 16px; }
-
-    .result-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 28px;
-      transition: border-color 0.3s ease;
-    }
-
-    .result-card.highlight {
-      background: rgba(245,200,66,0.06);
-      border-color: rgba(255,140,66,0.2);
-    }
-
-    .result-card-label {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .result-number {
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: -0.04em;
-      line-height: 1;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .result-desc {
-      font-size: 0.8rem;
-      font-weight: 300;
-      color: var(--text-muted);
       line-height: 1.5;
     }
 
-    @keyframes cardFlash {
-      0%   { box-shadow: 0 0 0 1px rgba(255,140,66,0.5), 0 0 24px rgba(255,140,66,0.1); }
-      100% { box-shadow: none; }
+    .include-item strong {
+      font-weight: 500;
+      color: #fff;
     }
 
-    .result-flash { animation: cardFlash 0.7s ease-out; }
+    .include-bullet {
+      color: var(--gold);
+      font-size: 0.7rem;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
 
-    /* ============================================
+    .paquete-footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 22px;
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .paquete-footer--featured {
+      border-top-color: rgba(255,140,66,0.18);
+    }
+
+    .paquete-price {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+    }
+
+    .btn-paquete {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 11px 22px;
+      font-family: var(--font);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-paquete:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .btn-paquete--featured {
+      background: var(--gold);
+      color: #0a0a0a;
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .btn-paquete--featured:hover {
+      background: var(--gold);
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-paquete span {
+      transition: transform 0.2s ease;
+    }
+
+    .btn-paquete:hover span {
+      transform: translateX(3px);
+    }
+
+    .paquetes-note {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+        /* ============================================
        FAQs
     ============================================ */
     #faqs {
       padding: 100px 0;
-      background: #080808 !important;
+      background: #000 !important;
       width: 100%;
     }
     #faqs > * {
@@ -1095,361 +1157,12 @@
       line-height: 1.75;
     }
 
-    /* ============================================
-       OFERTA / PRECIOS
-    ============================================ */
-    #oferta {
-      padding: 100px 0;
-      background: #080808 !important;
-      width: 100%;
-    }
-    #oferta > * {
-      max-width: 1140px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 24px;
-      padding-right: 24px;
-    }
-
-    .oferta-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .oferta-urgency {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(239,68,68,0.08);
-      border: 1px solid rgba(239,68,68,0.2);
-      border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      color: #f87171;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .oferta-urgency-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #f87171;
-      box-shadow: 0 0 6px #f87171;
-      animation: pulse 1.5s ease infinite;
-    }
-
-    .oferta-subtitle {
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--text-muted);
-      max-width: 560px;
-      margin: 16px auto 56px;
-      line-height: 1.7;
-    }
-
-    .oferta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.15fr 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .oferta-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 28px;
-      position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-
-    .oferta-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-      border-color: rgba(255,255,255,0.12);
-    }
-
-    .oferta-card.featured {
-      background: rgba(255,140,66,0.04);
-      border-color: rgba(255,140,66,0.3);
-      box-shadow: 0 0 0 1px rgba(255,140,66,0.1), 0 24px 60px rgba(0,0,0,0.5);
-    }
-
-    .oferta-card.featured:hover {
-      border-color: rgba(255,140,66,0.5);
-      box-shadow: 0 0 0 1px rgba(255,140,66,0.2), 0 28px 72px rgba(0,0,0,0.5);
-    }
-
-    .oferta-badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--gold);
-      color: #3D1A00;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 5px 16px;
-      border-radius: 100px;
-      white-space: nowrap;
-    }
-
-    .oferta-tier {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-
-    .oferta-name {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .oferta-desc {
-      font-size: 0.82rem;
-      font-weight: 300;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 24px;
-      min-height: 52px;
-    }
-
-    .oferta-price {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-
-    .oferta-price-num {
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.04em;
-    }
-
-    .oferta-price-currency {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-
-    .oferta-price-original {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      text-decoration: line-through;
-      margin-bottom: 24px;
-    }
-
-    .oferta-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 24px 0;
-    }
-
-    .oferta-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .oferta-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.82rem;
-      font-weight: 300;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.4;
-    }
-
-    .oferta-features li .check {
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      background: rgba(74,222,128,0.12);
-      border: 1px solid rgba(74,222,128,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .oferta-features li .check svg { stroke: #4ade80; }
-
-    .oferta-features li.bonus {
-      color: rgba(255,140,66,0.8);
-    }
-
-    .oferta-features li.bonus .check {
-      background: var(--gold-dim);
-      border-color: rgba(255,140,66,0.25);
-    }
-
-    .oferta-features li.bonus .check svg { stroke: var(--gold); }
-
-    .oferta-stack {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin-bottom: 20px;
-    }
-
-    .oferta-stack-label {
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 8px;
-    }
-
-    .oferta-stack-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.76rem;
-      font-weight: 300;
-      color: var(--text-muted);
-      padding: 3px 0;
-    }
-
-    .oferta-stack-row span:last-child {
-      color: rgba(255,255,255,0.35);
-      text-decoration: line-through;
-    }
-
-    .oferta-stack-total {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border);
-      margin-top: 8px;
-      padding-top: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .oferta-stack-total span:last-child {
-      color: var(--gold);
-    }
-
-    .oferta-guarantee {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: rgba(74,222,128,0.05);
-      border: 1px solid rgba(74,222,128,0.12);
-      border-radius: 10px;
-      padding: 14px;
-      margin-bottom: 24px;
-    }
-
-    .oferta-guarantee-icon {
-      font-size: 1.2rem;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .oferta-guarantee p {
-      font-size: 0.78rem;
-      font-weight: 300;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.5;
-    }
-
-    .oferta-guarantee strong {
-      color: #4ade80;
-      font-weight: 600;
-    }
-
-    .btn-oferta-primary {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      background: var(--gold);
-      color: #3D1A00;
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 16px 24px;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.25s ease;
-      letter-spacing: 0.01em;
-    }
-
-    .btn-oferta-primary:hover {
-      background: #FFB07A;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(255,140,66,0.4);
-    }
-
-    .btn-oferta-secondary {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      background: transparent;
-      color: rgba(255,255,255,0.6);
-      font-weight: 400;
-      font-size: 0.88rem;
-      padding: 14px 24px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      text-decoration: none;
-      transition: all 0.25s ease;
-    }
-
-    .btn-oferta-secondary:hover {
-      border-color: rgba(255,255,255,0.2);
-      color: #fff;
-      background: rgba(255,255,255,0.03);
-    }
-
-    .oferta-note {
-      text-align: center;
-      margin-top: 32px;
-      font-size: 0.78rem;
-      font-weight: 300;
-      color: var(--text-dim);
-    }
-
-    .oferta-note a {
-      color: var(--gold);
-      text-decoration: none;
-    }
-
-    @media (max-width: 900px) {
-      .oferta-grid {
-        grid-template-columns: 1fr;
-        max-width: 480px;
-        margin: 0 auto;
-      }
-    }
-
-    /* ============================================
+        /* ============================================
        CTA FINAL
     ============================================ */
     #contacto {
       padding: 80px 0 60px;
-      background: #080808 !important;
+      background: #000 !important;
       width: 100%;
     }
     #contacto > * {
@@ -1472,17 +1185,7 @@
       overflow: hidden;
     }
 
-    .cta-box::before {
-      content: '';
-      position: absolute;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,140,66,0.1) 0%, transparent 65%);
-      bottom: -200px; left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-      animation: heroGlow 6s ease-in-out infinite;
-    }
+    
 
     .cta-box h2 {
       font-size: clamp(2rem, 5vw, 3.2rem);
@@ -1516,7 +1219,7 @@
     footer {
       border-top: 1px solid var(--border);
       padding: 40px 48px;
-      background: #080808 !important;
+      background: #000 !important;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
@@ -1530,10 +1233,16 @@
     }
 
     .footer-logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--gold);
+      color: #FFFFFF;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-logo svg {
+      height: 22px;
+      width: auto;
+      display: block;
     }
 
     .footer-location {
@@ -1685,27 +1394,28 @@
         grid-template-columns: 1fr;
       }
 
-      .servicios-layout {
+      .paquetes-grid {
         grid-template-columns: 1fr;
+        gap: 36px;
       }
 
-      .servicios-tabs {
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 4px;
-        gap: 8px;
+      .diagnostico-card {
+        padding: 28px 24px;
       }
 
-      .servicio-tab {
-        white-space: nowrap;
-        flex-shrink: 0;
+      .diagnostico-cta {
+        width: 100%;
       }
 
-      .calc-box {
-        grid-template-columns: 1fr;
-        padding: 28px;
-        gap: 32px;
+      .btn-diagnostico {
+        width: 100%;
+        justify-content: center;
       }
+
+      .paquete-card {
+        padding: 28px 24px;
+      }
+
 
       footer {
         grid-template-columns: 1fr;
@@ -1735,7 +1445,7 @@
     ============================================ */
     #antesdespues {
       padding: 80px 0 40px;
-      background: #080808;
+      background: #000;
       width: 100%;
     }
     #antesdespues > * {
@@ -1752,7 +1462,7 @@
 
   :root {
     --gold: #FF8C42;
-    --dark: #080808;
+    --dark: #000;
     --border: rgba(255,255,255,0.08);
   }
 
@@ -1902,7 +1612,7 @@
   .badge-after {
     left: 20px;
     background: var(--gold);
-    color: #080808;
+    color: #000;
     box-shadow: 0 4px 24px rgba(255,140,66,0.5);
   }
   .badge-after::before {
@@ -1910,7 +1620,7 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #080808;
+    background: #000;
     flex-shrink: 0;
     opacity: 0.5;
   }
@@ -2154,7 +1864,7 @@
   .after-page {
     width: 100%;
     height: 100%;
-    background: #080808;
+    background: #000;
     display: flex;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
@@ -2188,7 +1898,7 @@
   }
   .a-btn-nav {
     background: var(--gold);
-    color: #080808;
+    color: #000;
     font-size: 0.6rem;
     font-weight: 700;
     padding: 6px 14px;
@@ -2209,17 +1919,7 @@
   }
 
   /* Glow de fondo */
-  .a-glow {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 65%);
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
+  
 
   .a-badge {
     display: flex;
@@ -2281,7 +1981,7 @@
   }
   .a-btn-primary {
     background: var(--gold);
-    color: #080808;
+    color: #000;
     font-size: 0.6rem;
     font-weight: 700;
     padding: 8px 18px;
@@ -2560,68 +2260,14 @@
 
 
     /* ── Sticky CTA ── */
-    #sticky-cta {
-      position: fixed;
-      bottom: 32px;
-      right: 28px;
-      z-index: 999;
-      opacity: 0;
-      transform: translateY(20px) scale(0.9);
-      transition: opacity 0.4s cubic-bezier(0.34,1.56,0.64,1),
-                  transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
-      pointer-events: none;
-    }
-    #sticky-cta.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: all;
-    }
-    #sticky-cta a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--gold);
-      color: #3D1A00;
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 14px 24px;
-      border-radius: 100px;
-      text-decoration: none;
-      box-shadow: 0 8px 32px rgba(255,140,66,0.45), 0 2px 8px rgba(0,0,0,0.3);
-      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
-                  box-shadow 0.3s ease;
-      white-space: nowrap;
-    }
-    #sticky-cta a:hover {
-      transform: scale(1.06) translateY(-2px);
-      box-shadow: 0 14px 40px rgba(255,140,66,0.55), 0 4px 12px rgba(0,0,0,0.3);
-    }
-    #sticky-cta a:active {
-      transform: scale(0.97);
-      transition: transform 0.1s ease;
-    }
-    #sticky-cta .sticky-icon {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
     @media (max-width: 768px) {
-      #sticky-cta {
-        bottom: 90px;
-        right: 16px;
-      }
-      #sticky-cta a {
-        font-size: 0.82rem;
-        padding: 12px 20px;
-        gap: 8px;
-      }
     }
 
 
     /* ── Barra de logos ── */
     #logos-bar {
       padding: 32px 0;
-      background: #080808;
+      background: #000;
       border-top: 1px solid rgba(255,255,255,0.05);
       border-bottom: 1px solid rgba(255,255,255,0.05);
       overflow: hidden;
@@ -2640,11 +2286,11 @@
     }
     #logos-bar::before {
       left: 0;
-      background: linear-gradient(to right, #080808, transparent);
+      background: linear-gradient(to right, #000, transparent);
     }
     #logos-bar::after {
       right: 0;
-      background: linear-gradient(to left, #080808, transparent);
+      background: linear-gradient(to left, #000, transparent);
     }
 
     .logos-label {
@@ -2738,7 +2384,7 @@
     /* ── Logos strip ── */
     #logos-strip {
       padding: 28px 0 32px;
-      background: #080808;
+      background: #000;
       overflow: hidden;
       position: relative;
     }
@@ -2751,8 +2397,8 @@
       z-index: 2;
       pointer-events: none;
     }
-    #logos-strip::before { left: 0;  background: linear-gradient(to right, #080808, transparent); }
-    #logos-strip::after  { right: 0; background: linear-gradient(to left,  #080808, transparent); }
+    #logos-strip::before { left: 0;  background: linear-gradient(to right, #000, transparent); }
+    #logos-strip::after  { right: 0; background: linear-gradient(to left, #000, transparent); }
 
     .logos-strip-label {
       text-align: center;
@@ -2818,43 +2464,32 @@
     }
 
 
-    /* ── Stardust canvas ── */
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.55;
-    }
-
-
-    /* Ensure all content is above canvas */
+    /* Asegurar contenido en stacking context */
     nav, section, header, footer,
-    #sticky-cta, .bnav, .form-section,
+    .bnav, .form-section,
     .hero-content, .clientes-header {
       position: relative;
       z-index: 2;
     }
 
-    /* ── Stardust: make all sections transparent ── */
+    /* ── Sections transparent (heredan negro del body) ── */
     #inicio, #antesdespues, #clientes, #problemas,
-    #servicios, #calculadora, #faqs, #oferta,
+    #servicios, #faqs,
     #contacto, #logos-strip {
       background: transparent !important;
     }
 
 
-    /* ── Contenido siempre encima del canvas ── */
+    /* ── Contenido siempre encima ── */
     #navbar, section > *, .hero-content,
     .problema-card, .servicio-card, .caso-card,
-    .faq-item, .calc-card, .oferta-card,
+    .faq-item,
     .clientes-header, .problemas-header,
     .clientes-track-wrapper, .bnav,
-    #sticky-cta, #logos-strip > *,
+    #logos-strip > *,
     .antesdespues > *, .vs-wrapper,
     #contacto > *, #faqs > *,
-    #servicios > *, #calculadora > *,
-    #oferta > *, #problemas > * {
+    #servicios > *, #problemas > * {
       position: relative;
       z-index: 2;
     }
@@ -2863,22 +2498,311 @@
       z-index: 100 !important;
     }
 
-  </style>
+
+    /* ============================================
+       STICKY CTA FLOTANTE (aparece después de hacer scroll)
+    ============================================ */
+
+    /* En móvil, ajustar posición para no chocar con el bottom nav */
+    @media (max-width: 900px) {
+    }
+
+    /* Si el usuario prefiere reduce motion, sin animaciones */
+    @media (prefers-reduced-motion: reduce) {
+    }
+
+  
+    /* ============================================
+       PROYECTOS — Casos destacados
+    ============================================ */
+    #proyectos {
+      padding: 100px 0;
+      background: #000 !important;
+      width: 100%;
+    }
+    #proyectos > * {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .proyectos-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .proyecto-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-bottom: 96px;
+    }
+
+    .proyecto-card:last-child { margin-bottom: 0; }
+
+    .proyecto-card--reverse {
+      direction: rtl;
+    }
+    .proyecto-card--reverse > * {
+      direction: ltr;
+    }
+
+    .proyecto-image-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      max-height: 560px;
+    }
+
+    .proyecto-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .proyecto-card:hover .proyecto-image-wrap img {
+      transform: scale(1.02);
+    }
+
+    .proyecto-info {
+      padding: 0 8px;
+    }
+
+    .proyecto-num {
+      font-size: 0.7rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .proyecto-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 0 0 8px;
+    }
+
+    .proyecto-subtitle {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 28px;
+    }
+
+    .proyecto-desc {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.6;
+      margin: 0 0 28px;
+    }
+
+    .proyecto-meta {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .proyecto-meta-row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+
+    .proyecto-meta-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 600;
+      flex-shrink: 0;
+      min-width: 80px;
+    }
+
+    .proyecto-meta-value {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* ============================================
+       TESTIMONIOS
+    ============================================ */
+    #testimonios {
+      padding: 100px 0;
+      background: #000 !important;
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    #testimonios > * {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .testimonios-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .testimonio-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .testimonio-mark {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 3rem;
+      color: var(--gold);
+      line-height: 0.6;
+      opacity: 0.4;
+      margin-bottom: -8px;
+    }
+
+    .testimonio-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.92);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.55;
+      margin: 0;
+      flex: 1;
+    }
+
+    .testimonio-author {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .testimonio-name {
+      font-size: 0.92rem;
+      color: #fff;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .testimonio-role {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      #proyectos {
+        padding: 72px 0;
+      }
+      .proyecto-card {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 72px;
+      }
+      .proyecto-card--reverse {
+        direction: ltr;
+      }
+      .proyecto-title { font-size: 1.7rem; }
+      .proyecto-desc { font-size: 0.95rem; }
+
+      #testimonios { padding: 72px 0; }
+      .testimonios-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .testimonio-card { padding: 28px 24px; }
+      .testimonio-quote { font-size: 1rem; }
+    }
+
+      
+    /* Botón CTA al final de Frenos */
+    .frenos-cta-wrap {
+      max-width: 760px;
+      margin: 48px auto 0;
+    }
+    .frenos-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 36px;
+      background: linear-gradient(135deg, #FF8C42 0%, #f47625 100%);
+      color: #0a0608;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(255, 140, 66, 0.25);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .frenos-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(255, 140, 66, 0.35);
+    }
+    .frenos-cta-btn:hover .frenos-cta-arrow {
+      transform: translateX(4px);
+    }
+    .frenos-cta-arrow {
+      transition: transform 0.3s ease;
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      .frenos-cta-btn {
+        font-size: 0.85rem;
+        padding: 16px 28px;
+        gap: 10px;
+      }
+    }
+</style>
 </head>
 <body>
-<canvas id="bg-canvas"></canvas>
 
 <!-- Scroll progress -->
 <div id="scroll-progress"></div>
 
 <!-- TOP NAV -->
 <nav id="top-nav">
-  <a href="#inicio" class="nav-logo">VITA Studio</a>
+  <a href="#inicio" class="nav-logo" aria-label="VITA Studio - Inicio"><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="72 430 936 220"><defs><style> .cls-1 { fill: currentColor; } </style></defs><g><path class="cls-1" d="M76,434.71h14.58l49.52,210.55h-14.58l-49.52-210.55ZM191.76,434.71l-50.74,210.55h-4.25l50.74-210.55h4.25Z"/><path class="cls-1" d="M202.38,645.26h-14.28v-210.55h14.28v210.55Z"/><path class="cls-1" d="M301.44,438.66h-113.93v-3.95h113.93v3.95ZM237.33,645.26v-210.55h14.28v210.55h-14.28Z"/><path class="cls-1" d="M304.67,434.71h-14.58l1.64,7,29.61,126.67.92,3.95,17.04,72.92h14.58l-49.22-210.54ZM321.34,568.39l.92,3.95h2.76v-3.95h-3.68ZM259.4,568.39l-.91,3.95h1.57l.97-3.95h-1.63ZM289.18,434.71l-51.05,210.54h4.25l17.67-72.92.97-3.95,30.7-126.67,1.69-7h-4.24Z"/></g><g><path class="cls-1" d="M365.34,639.11c-9.78-4.74-17.33-11.01-22.67-18.82-5.33-7.8-8.5-16.25-9.48-25.33h5.93c.99,6.92,3.5,13.83,7.55,20.74,4.05,6.91,10.47,12.84,19.26,17.78,8.79,4.94,20.1,7.4,33.93,7.4,11.06,0,20.84-2.12,29.33-6.37,8.49-4.25,15.01-9.92,19.55-17.04,4.54-7.11,6.81-15.01,6.81-23.7,0-11.26-2.57-20.19-7.7-26.81-5.14-6.62-11.51-11.51-19.11-14.67-7.61-3.15-17.83-6.42-30.67-9.77-13.43-3.56-24.2-7.11-32.3-10.67-8.1-3.56-14.96-9.04-20.59-16.44-5.63-7.4-8.44-17.43-8.44-30.07,0-9.08,2.52-17.63,7.55-25.63,5.04-8,12.24-14.37,21.63-19.11,9.38-4.74,20.1-7.11,32.15-7.11s22.81,2.17,31.7,6.51c8.89,4.35,15.85,9.83,20.89,16.45,5.04,6.62,8.34,13.58,9.93,20.89h-5.92c-1.38-5.73-4.25-11.55-8.59-17.48-4.35-5.92-10.57-10.91-18.67-14.96-8.1-4.05-17.88-6.07-29.33-6.07-10.08,0-19.31,1.93-27.71,5.78-8.4,3.85-15.11,9.29-20.15,16.29-5.04,7.02-7.56,15.16-7.56,24.44,0,11.46,2.62,20.59,7.85,27.4,5.23,6.82,11.7,11.85,19.41,15.11,7.7,3.26,17.97,6.57,30.82,9.93,13.43,3.56,24.15,7.06,32.15,10.52,8,3.46,14.76,8.79,20.3,16,5.53,7.21,8.3,17.04,8.3,29.48,0,8.69-2.32,17.09-6.96,25.18-4.64,8.1-11.61,14.67-20.89,19.7-9.29,5.04-20.55,7.55-33.78,7.55s-24.74-2.37-34.52-7.11Z"/><path class="cls-1" d="M416.42,435.57v5.32h60.75v203.27h5.94v-203.27h38.78v-5.32h-105.47Z"/><path class="cls-1" d="M649.02,435.57v129.46c0,10.51-.87,19.88-2.68,28.12-2.68,12.5-7.4,22.4-14.18,29.64-11.26,12.04-26.6,18.07-45.94,18.07s-35.43-6.03-46.97-18.07c-11.54-12.04-17.36-31.29-17.36-57.76v-129.46h-5.88v129.46c0,27.47,6.31,47.84,18.94,61.19,12.66,13.31,29.71,20,51.26,20s38.38-6.59,50.48-19.85c3.8-4.14,7.03-8.99,9.64-14.53,2.55-5.44,4.54-11.54,5.94-18.32v-152.64h2.68v-5.32h-5.94Z"/><path class="cls-1" d="M811.27,533.71v-.06c-.03-1-.06-1.96-.16-2.92-.37-7.4-1.31-14.4-2.74-20.97-.87-4.04-1.93-7.93-3.2-11.66-4.67-13.87-11.98-25.63-21.93-35.27-18.76-18.17-46.13-27.28-82.06-27.28h-54.84v208.6h54.84c35.93,0,63.3-9.08,82.06-27.25,9.95-9.64,17.29-21.43,21.93-35.31,1.24-3.64,2.3-7.4,3.11-11.32,1.49-6.69,2.46-13.78,2.83-21.31.09-.87.12-1.77.16-2.68.09-2.12.12-4.26.12-6.44s-.03-4.11-.12-6.13ZM805.17,549.55c-1.65,26.6-10.36,47.65-26.07,63.21-17.57,17.36-43.55,26.07-77.92,26.07h-48.9v-197.93h48.9c34.37,0,60.35,8.68,77.92,26.07,15.71,15.55,24.42,36.61,26.07,63.21.03.19.03.34.03.53.19,2.99.28,6.03.28,9.15s-.09,6.41-.31,9.49v.22Z"/><path class="cls-1" d="M811.11,435.55v208.59h-5.93v-208.59h5.93Z"/><path class="cls-1" d="M853.04,633.03c-15.11-8.99-26.92-21.58-35.41-37.78-8.5-16.19-12.74-34.56-12.74-55.11s4.25-38.91,12.74-55.11c8.49-16.19,20.3-28.78,35.41-37.77,15.11-8.99,32.24-13.48,51.41-13.48s36.3,4.5,51.41,13.48c15.11,8.99,26.91,21.58,35.41,37.77,8.49,16.2,12.74,34.57,12.74,55.11s-4.25,38.92-12.74,55.11c-8.5,16.2-20.3,28.79-35.41,37.78-15.11,8.99-32.25,13.48-51.41,13.48s-36.3-4.49-51.41-13.48ZM951.85,628.89c14.22-8.2,25.43-19.95,33.63-35.26,8.19-15.3,12.3-33.13,12.3-53.48s-4.1-38.17-12.3-53.48c-8.2-15.3-19.41-27.06-33.63-35.26-14.22-8.2-30.03-12.3-47.41-12.3s-33.19,4.1-47.41,12.3c-14.22,8.2-25.43,19.95-33.63,35.26-8.2,15.31-12.3,33.14-12.3,53.48s4.1,38.18,12.3,53.48c8.2,15.31,19.41,27.06,33.63,35.26,14.22,8.2,30.02,12.3,47.41,12.3s33.19-4.1,47.41-12.3Z"/></g></svg></a>
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#problemas">Problemas</a></li>
     <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#calculadora">Calculadora</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
     <li><a href="#faqs">FAQ's</a></li>
   </ul>
   <a href="apply.html" class="nav-cta">Hablemos</a>
@@ -2908,6 +2832,7 @@
   <div class="hero-scroll">
     <div class="hero-scroll-line"></div>
   </div>
+</section>
 
 <!-- ============================================
      ANTES & DESPUÉS
@@ -2924,9 +2849,8 @@
     <!-- BEFORE -->
     <div class="side-before">
       <div class="before-page">
-        <div class="b-marquee">⭐ BIENVENIDOS ⭐ OFERTA ESPECIAL HOY ⭐ LLAMA AHORA ⭐ VISÍTANOS ⭐ SOMOS LOS MEJORES ⭐</div>
         <nav class="b-nav">
-          <div class="b-logo">🍽 RESTAURANTE EL RINCÓN</div>
+          <div class="b-logo">Restaurante El Rincón</div>
           <div class="b-nav-links">
             <span>INICIO</span>
             <span>MENÚ</span>
@@ -2937,49 +2861,45 @@
         </nav>
         <div class="b-hero">
           <div class="b-hero-left">
-            <div class="b-tag">🌟 Bienvenidos a nuestro restaurante</div>
-            <h1 class="b-h1">Restaurante Familiar<br>El Rincón</h1>
+            <div class="b-tag">Bienvenidos a nuestro restaurante familiar</div>
+            <div class="b-h1" role="presentation">Restaurante Familiar<br>El Rincón</div>
             <div class="b-stars">
               <span class="b-star">★</span><span class="b-star">★</span><span class="b-star">★</span><span class="b-star">★</span><span class="b-star">★</span>
-              <span class="b-star-text">Calificación: EXCELENTE!!!</span>
+              <span class="b-star-text">5/5 en Google</span>
             </div>
-            <p class="b-sub">Ofrecemos los mejores y más deliciosos platillos de la región, preparados con ingredientes 100% frescos y mucho amor. ¡Ven a visitarnos hoy mismo!</p>
+            <p class="b-sub">Somos un restaurante familiar con más de 15 años de experiencia ofreciendo los mejores platillos típicos de la región. Ven y disfruta con nosotros una experiencia inolvidable.</p>
             <div class="b-btns">
-              <button class="b-btn">👉 VER MENÚ COMPLETO</button>
-              <button class="b-btn2">CONTÁCTANOS AQUÍ</button>
+              <button type="button" class="b-btn">VER MENU</button>
+              <button type="button" class="b-btn2">Contáctanos</button>
             </div>
           </div>
           <div class="b-stock-img" style="overflow:hidden;">
-            <img src="assets/comparador/restaurant-kitsch.webp" alt="foto" style="width:100%;height:100%;object-fit:cover;object-position:center;filter:blur(2px) saturate(0.6) brightness(0.7);image-rendering:pixelated;transform:scale(1.05);"/>
+            <img src="assets/comparador/restaurant-kitsch.webp" alt="foto" width="400" height="280" style="width:100%;height:100%;object-fit:cover;object-position:center;filter:blur(2px) saturate(0.6) brightness(0.7);image-rendering:pixelated;transform:scale(1.05);"/>
             <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2);"></div>
             <div class="b-watermark">© 2019 El Rincón</div>
           </div>
         </div>
         <div class="b-bottom">
-          <div class="b-section-title">📋 Información importante</div>
+          <div class="b-section-title">Información de contacto</div>
           <div class="b-cards">
             <div class="b-card">
-              <div class="b-card-icon">🕐</div>
               <div class="b-card-title">Horarios</div>
-              <div class="b-card-text">Lunes a Domingo<br>9:00am - 10:00pm<br><i>¡Todos los días!</i></div>
+              <div class="b-card-text">Lunes a Domingo<br>9:00 am - 10:00 pm</div>
             </div>
             <div class="b-card">
-              <div class="b-card-icon">📍</div>
               <div class="b-card-title">Ubicación</div>
-              <div class="b-card-text">Calle Principal #123<br>Col. Centro<br><u>Ver en mapa</u></div>
+              <div class="b-card-text">Calle Principal #123<br>Col. Centro, Monterrey<br><u>Ver en Google Maps</u></div>
             </div>
             <div class="b-card">
-              <div class="b-card-icon">📞</div>
               <div class="b-card-title">Teléfono</div>
-              <div class="b-card-text">81-XXXX-XXXX<br>WhatsApp: click aquí<br><b>¡Llámanos ya!</b></div>
+              <div class="b-card-text">(81) 8123-4567<br>WhatsApp disponible</div>
             </div>
             <div class="b-card">
-              <div class="b-card-icon">🅿</div>
               <div class="b-card-title">Estacionamiento</div>
-              <div class="b-card-text">Estacionamiento<br>gratuito disponible<br>para clientes</div>
+              <div class="b-card-text">Estacionamiento gratuito<br>para clientes</div>
             </div>
           </div>
-          <div class="b-counter">Visitas al sitio: <b>001,847</b> | Última actualización: 14/03/2021</div>
+          <div class="b-counter">Visitas al sitio: 001,847 &nbsp;|&nbsp; Última actualización: marzo 2021</div>
         </div>
       </div>
     </div>
@@ -3004,7 +2924,7 @@
 
         <!-- HERO FOTO -->
         <div style="flex:1.2;position:relative;overflow:hidden;">
-          <img src="assets/comparador/restaurant-pasta.webp" alt="Pasta" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;"/>
+          <img src="assets/comparador/restaurant-pasta.webp" alt="Pasta" width="700" height="480" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;"/>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(250,248,244,0) 55%,rgba(250,248,244,0.85) 100%);"></div>
           <!-- Quote editorial sobre la foto -->
           <div style="position:absolute;bottom:18px;left:24px;right:24px;text-align:center;">
@@ -3062,7 +2982,7 @@
           <div style="width:42%;display:flex;flex-direction:column;gap:0;">
 
             <div style="flex:1;position:relative;overflow:hidden;border-bottom:1px solid rgba(0,0,0,0.06);min-height:120px;">
-              <img src="assets/comparador/restaurant-interior.webp" alt="Interior" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:sepia(0.06) brightness(0.96);"/>
+              <img src="assets/comparador/restaurant-interior.webp" alt="Interior" width="600" height="320" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:sepia(0.06) brightness(0.96);"/>
               <div style="position:absolute;bottom:8px;left:10px;">
                 <span style="font-size:0.5rem;color:rgba(255,255,255,0.95);font-family:'Poppins',sans-serif;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,0.6);">Centro · Monterrey</span>
               </div>
@@ -3133,7 +3053,7 @@
 <!-- ============================================
      CASOS DE ÉXITO
 ============================================ -->
-<section id="clientes"><div class="clientes-particles" id="clientesParticles"></div>
+<section id="clientes">
   <div class="clientes-header reveal">
     <span class="section-label">Negocios que confían en VITA Studio</span>
     <p class="clientes-heading-text">Marcas reales. Resultados reales.</p>
@@ -3141,56 +3061,56 @@
   <div class="clientes-track-wrapper">
     <div class="clientes-track" id="clientesTrack">
       <div class="caso-card">
-        <img src="assets/clientes/rosa-de-oro.webp" alt="Rosa de Oro" loading="lazy">
+        <img src="assets/clientes/rosa-de-oro.webp" alt="Rosa de Oro" loading="lazy" width="700" height="509">
         <div class="caso-overlay">
           <span class="caso-brand-name">Rosa de Oro</span>
           <span class="caso-brand-sub">Flower Bar</span>
         </div>
       </div>
       <div class="caso-card">
-        <img src="assets/clientes/hinaiti.webp" alt="Hinaiti" loading="lazy">
+        <img src="assets/clientes/hinaiti.webp" alt="Hinaiti" loading="lazy" width="700" height="509">
         <div class="caso-overlay">
           <span class="caso-brand-name">Hinaiti</span>
           <span class="caso-brand-sub">Escuela de Danza</span>
         </div>
       </div>
       <div class="caso-card">
-        <img src="assets/clientes/dr-pinon.webp" alt="Dr. Piñón" loading="lazy">
+        <img src="assets/clientes/dr-pinon.webp" alt="Dr. Piñón" loading="lazy" width="700" height="509">
         <div class="caso-overlay">
           <span class="caso-brand-name">Dr. Piñón</span>
           <span class="caso-brand-sub">Facial Plastic Surgery</span>
         </div>
       </div>
       <div class="caso-card">
-        <img src="assets/clientes/gella.webp" alt="Gella" loading="lazy">
+        <img src="assets/clientes/gella.webp" alt="Gella" loading="lazy" width="700" height="509">
         <div class="caso-overlay">
           <span class="caso-brand-name">Gella</span>
           <span class="caso-brand-sub">Gelatos & Ice Creams</span>
         </div>
       </div>
       <div class="caso-card">
-        <img src="assets/clientes/petalia.webp" alt="Petalia" loading="lazy">
+        <img src="assets/clientes/petalia.webp" alt="Petalia" loading="lazy" width="700" height="509">
         <div class="caso-overlay">
           <span class="caso-brand-name">Petalia</span>
           <span class="caso-brand-sub">Flower Bar</span>
         </div>
       </div>
       <div class="caso-card">
-        <img src="assets/clientes/jose-luis-vivas.webp" alt="Jose Luis Vivas" loading="lazy">
+        <img src="assets/clientes/jose-luis-vivas.webp" alt="Jose Luis Vivas" loading="lazy" width="700" height="509">
         <div class="caso-overlay">
           <span class="caso-brand-name">Jose Luis Vivas</span>
           <span class="caso-brand-sub">Cirujano Plástico</span>
         </div>
       </div>
       <div class="caso-card">
-        <img src="assets/clientes/vannia-maldonado.webp" alt="Vannia Maldonado" loading="lazy">
+        <img src="assets/clientes/vannia-maldonado.webp" alt="Vannia Maldonado" loading="lazy" width="700" height="509">
         <div class="caso-overlay">
           <span class="caso-brand-name">Vannia Maldonado</span>
           <span class="caso-brand-sub">Otorrinolaringóloga</span>
         </div>
       </div>
       <div class="caso-card">
-        <img src="assets/clientes/karen-a.webp" alt="Karen A." loading="lazy">
+        <img src="assets/clientes/karen-a.webp" alt="Karen A." loading="lazy" width="700" height="509">
         <div class="caso-overlay">
           <span class="caso-brand-name">Karen A.</span>
           <span class="caso-brand-sub">Otorrinolaringóloga</span>
@@ -3273,106 +3193,8 @@
 
     <!-- Card 3: Web que no convierte — browser completo animado -->
     <div class="problema-card reveal" style="transition-delay:0.2s" data-anim="web">
-      <div class="problema-visual" id="anim-web" style="padding:0;overflow:hidden;position:relative;background:#1e1e2e;">
-
-        <!-- Browser chrome -->
-        <div style="background:#2a2a3e;padding:5px 8px;display:flex;align-items:center;gap:5px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;">
-          <div style="display:flex;gap:3px;">
-            <div style="width:6px;height:6px;border-radius:50%;background:#ff5f57;"></div>
-            <div style="width:6px;height:6px;border-radius:50%;background:#febc2e;"></div>
-            <div style="width:6px;height:6px;border-radius:50%;background:#28c840;"></div>
-          </div>
-          <div style="flex:1;background:#1e1e2e;border-radius:3px;padding:2px 8px;margin:0 4px;">
-            <span style="font-size:0.28rem;color:rgba(255,255,255,0.25);font-family:'Poppins',sans-serif;">www.minegocio2008.com.mx</span>
-          </div>
-          <div style="font-size:0.28rem;color:rgba(255,255,255,0.15);">↻</div>
-        </div>
-
-        <!-- Página web fea — layout completo -->
-        <div style="flex:1;background:#efefef;position:relative;overflow:hidden;height:calc(100% - 22px);">
-
-          <!-- NAV azul corporativo -->
-          <div style="background:#1a4a7a;padding:5px 10px;display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:0.42rem;color:#fff;font-family:'Times New Roman',serif;font-weight:700;letter-spacing:0.5px;">🏢 MI EMPRESA S.A.</span>
-            <div style="display:flex;gap:0;">
-              <span style="font-size:0.26rem;color:rgba(255,255,255,0.8);font-family:Arial,sans-serif;padding:2px 5px;border-right:1px solid rgba(255,255,255,0.2);">INICIO</span>
-              <span style="font-size:0.26rem;color:rgba(255,255,255,0.8);font-family:Arial,sans-serif;padding:2px 5px;border-right:1px solid rgba(255,255,255,0.2);">SERVICIOS</span>
-              <span style="font-size:0.26rem;color:rgba(255,255,255,0.8);font-family:Arial,sans-serif;padding:2px 5px;border-right:1px solid rgba(255,255,255,0.2);">NOSOTROS</span>
-              <span style="font-size:0.26rem;color:rgba(255,255,255,0.8);font-family:Arial,sans-serif;padding:2px 5px;">CONTACTO</span>
-            </div>
-          </div>
-
-          <!-- MARQUEE horrible -->
-          <div style="background:#ff6600;padding:2px 0;overflow:hidden;">
-            <div id="web-marquee" style="white-space:nowrap;font-size:0.24rem;color:#fff;font-family:Arial,sans-serif;font-weight:700;display:inline-block;animation:marqueeScroll 8s linear infinite;">
-              ⭐ BIENVENIDOS A NUESTRO SITIO ⭐ LLAMANOS AL 81-XXXX-XXXX ⭐ 20 AÑOS DE EXPERIENCIA ⭐ SOMOS LOS MEJORES ⭐ VISÍTANOS HOY ⭐
-            </div>
-          </div>
-
-          <!-- Hero con imagen stock simulada -->
-          <div style="background:linear-gradient(135deg,#ddd 0%,#bbb 100%);padding:8px 10px;display:flex;gap:8px;align-items:center;border-bottom:3px solid #1a4a7a;">
-            <!-- Texto hero -->
-            <div style="flex:1;">
-              <div style="font-size:0.48rem;font-family:'Times New Roman',serif;color:#111;font-weight:700;line-height:1.2;margin-bottom:4px;">Bienvenidos a<br>Mi Empresa S.A.</div>
-              <div style="font-size:0.26rem;color:#555;font-family:Arial,sans-serif;line-height:1.4;margin-bottom:6px;">Somos líderes en el mercado con más de 20 años ofreciendo los mejores servicios de calidad en la región. ¡Contáctenos!</div>
-              <div style="display:flex;gap:4px;">
-                <div id="fake-cta" style="background:#ff6600;color:#fff;font-size:0.28rem;font-family:Arial,sans-serif;font-weight:700;padding:3px 7px;border:2px solid #cc4400;text-transform:uppercase;cursor:pointer;">VER SERVICIOS</div>
-                <div style="background:#1a4a7a;color:#fff;font-size:0.28rem;font-family:Arial,sans-serif;padding:3px 7px;border:2px solid #0f2d4a;text-transform:uppercase;cursor:pointer;">CONTACTAR</div>
-              </div>
-            </div>
-            <!-- Imagen stock horrible -->
-            <div style="width:60px;height:52px;background:linear-gradient(135deg,#aaa,#888);border:2px solid #999;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <span style="font-size:1.2rem;opacity:0.4;">🏢</span>
-            </div>
-          </div>
-
-          <!-- Sección de servicios con cards feas -->
-          <div style="padding:5px 8px;background:#fff;border-bottom:1px solid #ddd;">
-            <div style="font-size:0.3rem;font-family:Arial,sans-serif;font-weight:700;color:#1a4a7a;text-transform:uppercase;border-bottom:2px solid #1a4a7a;padding-bottom:2px;margin-bottom:4px;">NUESTROS SERVICIOS</div>
-            <div style="display:flex;gap:4px;">
-              <div style="flex:1;border:1px solid #ddd;padding:3px;background:#f9f9f9;text-align:center;">
-                <div style="font-size:0.8rem;">⚙️</div>
-                <div style="font-size:0.24rem;font-family:Arial,sans-serif;color:#333;font-weight:700;">SERVICIO 1</div>
-                <div style="font-size:0.2rem;color:#888;font-family:Arial,sans-serif;">Lorem ipsum dolor sit amet</div>
-              </div>
-              <div style="flex:1;border:1px solid #ddd;padding:3px;background:#f9f9f9;text-align:center;">
-                <div style="font-size:0.8rem;">📋</div>
-                <div style="font-size:0.24rem;font-family:Arial,sans-serif;color:#333;font-weight:700;">SERVICIO 2</div>
-                <div style="font-size:0.2rem;color:#888;font-family:Arial,sans-serif;">Lorem ipsum dolor sit amet</div>
-              </div>
-              <div style="flex:1;border:1px solid #ddd;padding:3px;background:#f9f9f9;text-align:center;">
-                <div style="font-size:0.8rem;">✅</div>
-                <div style="font-size:0.24rem;font-family:Arial,sans-serif;color:#333;font-weight:700;">SERVICIO 3</div>
-                <div style="font-size:0.2rem;color:#888;font-family:Arial,sans-serif;">Lorem ipsum dolor sit amet</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Footer horrible -->
-          <div style="background:#1a4a7a;padding:3px 8px;display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-size:0.22rem;color:rgba(255,255,255,0.6);font-family:Arial,sans-serif;">© 2008 Mi Empresa S.A. Todos los derechos reservados</span>
-            <span style="font-size:0.22rem;color:rgba(255,255,255,0.4);font-family:Arial,sans-serif;">Visitas: 001,247</span>
-          </div>
-
-          <!-- Cursor animado que recorre la página -->
-          <div id="web-cursor-new" style="position:absolute;top:15%;left:70%;z-index:10;pointer-events:none;transition:all 1s cubic-bezier(0.25,0.46,0.45,0.94);">
-            <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
-              <path d="M0 0L0 14L3.5 11L5.5 16L7 15.5L5 10.5L9 10.5Z" fill="white" stroke="rgba(0,0,0,0.6)" stroke-width="1"/>
-            </svg>
-          </div>
-
-          <!-- Ripple de click -->
-          <div id="web-ripple" style="position:absolute;width:0;height:0;border-radius:50%;background:rgba(255,102,0,0.35);transform:translate(-50%,-50%);opacity:0;pointer-events:none;z-index:5;transition:none;"></div>
-
-          <!-- Popup error 404 -->
-          <div id="web-popup" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border:2px solid #cc0000;border-radius:4px;padding:6px 10px;box-shadow:0 8px 20px rgba(0,0,0,0.2);opacity:0;pointer-events:none;z-index:20;white-space:nowrap;transition:opacity 0.3s ease;">
-            <div style="font-size:0.34rem;color:#cc0000;font-family:Arial,sans-serif;font-weight:700;margin-bottom:2px;">⚠ Error - Página no encontrada</div>
-            <div style="font-size:0.26rem;color:#666;font-family:Arial,sans-serif;">El botón no funciona correctamente</div>
-            <div style="font-size:0.24rem;color:#1a4a7a;font-family:Arial,sans-serif;text-decoration:underline;margin-top:2px;cursor:pointer;">[ Cerrar ]</div>
-          </div>
-
-        </div>
-
+      <div class="problema-visual" id="anim-web" style="overflow:hidden;position:relative;background:#0a0608;padding:0;">
+        <canvas id="canvas-web-clock" style="position:absolute;inset:0;width:100%;height:100%;display:block;"></canvas>
         <div class="problema-pill" style="z-index:3;">↓ Conversión baja</div>
       </div>
       <h3>Tu sitio web no vende</h3>
@@ -3381,8 +3203,8 @@
 
     <!-- Card 4: Leads atascados con dinero -->
     <div class="problema-card reveal" style="transition-delay:0.05s" data-anim="funnel">
-      <div class="problema-visual" id="anim-funnel" style="overflow:hidden;position:relative;background:#0a0a0f;">
-        <canvas id="canvas-funnel" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+      <div class="problema-visual" id="anim-funnel" style="overflow:hidden;position:relative;background:#0a0608;padding:0;">
+        <canvas id="canvas-funnel-detective" style="position:absolute;inset:0;width:100%;height:100%;display:block;"></canvas>
         <div class="problema-pill">⚠ Área crítica</div>
       </div>
       <h3>No sabes dónde está el cuello de botella</h3>
@@ -3490,6 +3312,14 @@
     </div>
 
   </div>
+
+  <div class="frenos-cta-wrap reveal" style="text-align:center;margin-top:48px;padding:0 24px;">
+    <a href="apply.html" class="frenos-cta-btn">
+      Quiero solucionar estos problemas
+      <span class="frenos-cta-arrow">→</span>
+    </a>
+  </div>
+
 </section>
 
 <!-- ============================================
@@ -3514,8 +3344,8 @@
 
     <!-- Card 1: Visibilidad -->
     <div class="problema-card reveal" style="transition-delay:0.1s;">
-      <div class="problema-visual" id="sol-vis" style="overflow:hidden;position:relative;background:#080808;padding:0;height:200px!important;">
-        <iframe src="vis-preview.html" style="position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:10px;background:#080808;" scrolling="no" frameborder="0"></iframe>
+      <div class="problema-visual" id="sol-vis" style="overflow:hidden;position:relative;background:#000;padding:0;height:200px!important;">
+        <canvas id="vita-canvas-vis" style="position:absolute;inset:0;width:100%;height:100%;border-radius:10px;background:#000;display:block;"></canvas>
         <div class="problema-pill" style="background:rgba(255,140,66,0.12);border-color:rgba(255,140,66,0.3);color:#FF8C42;">✦ Solución</div>
       </div>
       <h3>Visibilidad de marca</h3>
@@ -3524,93 +3354,8 @@
 
     <!-- Card 2: Sitio web -->
     <div class="problema-card reveal" style="transition-delay:0.2s;">
-      <div class="problema-visual" id="sol-web" style="overflow:hidden;position:relative;padding:0;height:200px!important;">
-        <svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="rgba(255,140,66,0.3)"/>
-            <stop offset="100%" stop-color="rgba(255,140,66,0)"/>
-          </linearGradient>
-          <linearGradient id="screenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#0f0d0a"/>
-            <stop offset="100%" stop-color="#0a0704"/>
-          </linearGradient>
-          <clipPath id="screenClip">
-            <rect x="30" y="22" width="200" height="148" rx="4"/>
-          </clipPath>
-        </defs>
-
-        <!-- Browser frame -->
-        <rect x="28" y="10" width="204" height="162" rx="8" fill="#141414" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-
-        <!-- Browser chrome -->
-        <rect x="28" y="10" width="204" height="20" rx="8" fill="#1c1c1c"/>
-        <rect x="28" y="22" width="204" height="8" fill="#1c1c1c"/>
-        <circle cx="42" cy="20" r="3" fill="rgba(255,95,87,0.6)"/>
-        <circle cx="52" cy="20" r="3" fill="rgba(254,188,46,0.6)"/>
-        <circle cx="62" cy="20" r="3" fill="rgba(40,200,64,0.5)"/>
-        <rect x="75" y="15" width="110" height="10" rx="5" fill="rgba(255,255,255,0.06)"/>
-        <text x="130" y="22" text-anchor="middle" font-family="Poppins,sans-serif" font-size="5" fill="rgba(255,255,255,0.2)">vitastudio.site</text>
-
-        <!-- Screen content -->
-        <g clip-path="url(#screenClip)">
-          <rect x="30" y="22" width="200" height="148" fill="url(#screenGrad)"/>
-
-          <!-- Axes -->
-          <line x1="45" y1="40" x2="45" y2="140" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <line x1="45" y1="140" x2="235" y2="140" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-
-          <!-- Grid lines -->
-          <line x1="45" y1="75" x2="235" y2="75" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="3,3"/>
-          <line x1="45" y1="107" x2="235" y2="107" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="3,3"/>
-
-          <!-- Chart fill -->
-          <polygon points="45,140 45,120 85,105 125,85 165,60 205,35 205,140" fill="url(#chartGrad)" opacity="0">
-            <animate attributeName="opacity" values="0;0;0.8;0.8;0" dur="3.5s" repeatCount="indefinite"/>
-          </polygon>
-
-          <!-- Chart line drawing in -->
-          <polyline points="45,120 85,105 125,85 165,60 205,35"
-            fill="none" stroke="rgba(255,140,66,0.9)" stroke-width="2.5"
-            stroke-dasharray="260" stroke-dashoffset="260" stroke-linecap="round" stroke-linejoin="round">
-            <animate attributeName="stroke-dashoffset" values="260;0;0;260" dur="3.5s" repeatCount="indefinite"/>
-          </polyline>
-
-          <!-- Dot at end of line -->
-          <circle cx="205" cy="35" r="4" fill="#FF8C42" opacity="0">
-            <animate attributeName="opacity" values="0;0;1;1;0" dur="3.5s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="205" cy="35" r="8" fill="rgba(255,140,66,0.2)" opacity="0">
-            <animate attributeName="opacity" values="0;0;1;0;0" dur="3.5s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="4;12;4" dur="1s" begin="2.2s" repeatCount="indefinite"/>
-          </circle>
-
-          <!-- Metric badges -->
-          <rect x="50" y="42" width="48" height="22" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1" opacity="0">
-            <animate attributeName="opacity" values="0;0;1;1;0" dur="3.5s" repeatCount="indefinite"/>
-          </rect>
-          <text x="74" y="51" text-anchor="middle" font-family="Poppins,sans-serif" font-size="6" font-weight="700" fill="rgba(74,222,128,0.9)" opacity="0">
-            +340%
-            <animate attributeName="opacity" values="0;0;1;1;0" dur="3.5s" repeatCount="indefinite"/>
-          </text>
-          <text x="74" y="60" text-anchor="middle" font-family="Poppins,sans-serif" font-size="5" fill="rgba(255,255,255,0.3)" opacity="0">
-            Conversión
-            <animate attributeName="opacity" values="0;0;1;1;0" dur="3.5s" repeatCount="indefinite"/>
-          </text>
-
-          <!-- Y axis labels -->
-          <text x="42" y="43" text-anchor="end" font-family="Poppins,sans-serif" font-size="5" fill="rgba(255,255,255,0.15)">100</text>
-          <text x="42" y="78" text-anchor="end" font-family="Poppins,sans-serif" font-size="5" fill="rgba(255,255,255,0.15)">50</text>
-          <text x="42" y="110" text-anchor="end" font-family="Poppins,sans-serif" font-size="5" fill="rgba(255,255,255,0.15)">25</text>
-
-          <!-- Bottom labels -->
-          <text x="75" y="150" text-anchor="middle" font-family="Poppins,sans-serif" font-size="5" fill="rgba(255,255,255,0.15)">Ene</text>
-          <text x="115" y="150" text-anchor="middle" font-family="Poppins,sans-serif" font-size="5" fill="rgba(255,255,255,0.15)">Mar</text>
-          <text x="155" y="150" text-anchor="middle" font-family="Poppins,sans-serif" font-size="5" fill="rgba(255,255,255,0.15)">May</text>
-          <text x="200" y="150" text-anchor="middle" font-family="Poppins,sans-serif" font-size="5" fill="rgba(255,255,255,0.15)">Jul</text>
-          <text x="130" y="163" text-anchor="middle" font-family="Poppins,sans-serif" font-size="6" font-weight="600" fill="rgba(255,140,66,0.5)">Clientes ganados</text>
-        </g>
-      </svg>
+      <div class="problema-visual" id="sol-web" style="overflow:hidden;position:relative;padding:0;height:200px!important;background:#000;">
+        <canvas id="vita-canvas-web" style="position:absolute;inset:0;width:100%;height:100%;border-radius:10px;background:#000;display:block;"></canvas>
         <div class="problema-pill" style="background:rgba(255,140,66,0.12);border-color:rgba(255,140,66,0.3);color:#FF8C42;">✦ Solución</div>
       </div>
       <h3>Sitio web profesional</h3>
@@ -3619,8 +3364,8 @@
 
     <!-- Card 3: Alcance -->
     <div class="problema-card reveal" style="transition-delay:0.3s;">
-      <div class="problema-visual" id="sol-reach" style="overflow:hidden;position:relative;background:#080808;padding:0;height:200px!important;">
-        <iframe src="radar-preview.html" style="position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:10px;" scrolling="no" frameborder="0"></iframe>
+      <div class="problema-visual" id="sol-reach" style="overflow:hidden;position:relative;background:#000;padding:0;height:200px!important;">
+        <canvas id="vita-canvas-reach" style="position:absolute;inset:0;width:100%;height:100%;border-radius:10px;background:#000;display:block;"></canvas>
         <div class="problema-pill" style="background:rgba(255,140,66,0.12);border-color:rgba(255,140,66,0.3);color:#FF8C42;">✦ Solución</div>
       </div>
       <h3>Estrategia de alcance</h3>
@@ -3635,232 +3380,215 @@
 ============================================ -->
 <section id="servicios">
   <div class="servicios-inner">
+
     <div class="servicios-header reveal">
       <span class="section-label">Cómo trabajamos</span>
-      <h2 class="section-title">Nuestra metodología</h2>
-      <p class="section-sub" style="margin: 16px auto 0">Así trabajamos para darte resultados medibles desde el primer mes.</p>
+      <h2 class="section-title">Tu trabajo ya vale mucho.<br><em class="section-title-em">Que se vea.</em></h2>
+      <p class="section-sub" style="margin: 16px auto 0">La mayoría de agencias entrega marca, web y estrategia como tres cosas separadas. Nosotros las hacemos hablar entre sí — para que tu negocio venda más, no solo se vea bonito.</p>
     </div>
-    <div class="servicios-layout">
-      <div class="servicios-tabs reveal">
-        <button class="servicio-tab active" data-tab="auditoria">
-          <span class="tab-icon">🔍</span> Auditoría y Diagnóstico
-        </button>
-        <button class="servicio-tab" data-tab="branding">
-          <span class="tab-icon">🎨</span> Branding y Marca Personal
-        </button>
-        <button class="servicio-tab" data-tab="web">
-          <span class="tab-icon">🌐</span> Sitio Web Profesional
-        </button>
-        <button class="servicio-tab" data-tab="estrategia">
-          <span class="tab-icon">📈</span> Estrategia de Crecimiento
-        </button>
+
+    <div class="diagnostico-card reveal" style="transition-delay:0.1s">
+      <div class="diagnostico-content">
+        <div class="diagnostico-header">
+          <span class="diagnostico-step">Paso 0</span>
+          <span class="diagnostico-divider"></span>
+          <span class="diagnostico-tag">Sin compromiso</span>
+        </div>
+        <h3 class="diagnostico-title">Diagnóstico estratégico</h3>
+        <p class="diagnostico-desc">45 minutos por videollamada. Saldrás sabiendo:</p>
+        <ul class="diagnostico-list">
+          <li><span class="diag-arrow">→</span><span>Las 3 áreas críticas que están frenando tu negocio</span></li>
+          <li><span class="diag-arrow">→</span><span>Si encajamos para trabajar juntos (somos selectivos)</span></li>
+          <li><span class="diag-arrow">→</span><span>Qué inversión y plazo tendría sentido para tu caso</span></li>
+        </ul>
       </div>
-      <div class="servicios-panel reveal" style="transition-delay:0.15s">
-
-        <div class="panel-content active" id="panel-auditoria">
-          <p class="panel-week">Semana 1 — 2</p>
-          <h3 class="panel-title">Auditoría y Diagnóstico</h3>
-          <p class="panel-desc">Analizamos tu negocio a fondo para identificar oportunidades reales de crecimiento. Sin suposiciones, solo datos y estrategia.</p>
-          <div class="panel-steps">
-            <div class="panel-step">
-              <div class="step-num">1</div>
-              <div class="step-content">
-                <h4>Sesiones de Discovery</h4>
-                <p>Entrevistas estratégicas para entender tu negocio, clientes y competencia a fondo.</p>
-              </div>
-            </div>
-            <div class="panel-step">
-              <div class="step-num">2</div>
-              <div class="step-content">
-                <h4>Análisis de Mercado</h4>
-                <p>Benchmarking contra competencia y tendencias de tu industria.</p>
-              </div>
-            </div>
-            <div class="panel-step">
-              <div class="step-num">3</div>
-              <div class="step-content">
-                <h4>Reporte Ejecutivo</h4>
-                <p>20+ insights accionables con prioridades claras y roadmap de acción.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel-content" id="panel-branding">
-          <p class="panel-week">Semana 2 — 5</p>
-          <h3 class="panel-title">Branding y Marca Personal</h3>
-          <p class="panel-desc">Creamos una identidad que posiciona, diferencia y convierte. Cada elemento visual tiene un propósito estratégico.</p>
-          <div class="panel-steps">
-            <div class="panel-step">
-              <div class="step-num">1</div>
-              <div class="step-content">
-                <h4>Identidad Visual</h4>
-                <p>Logo, paleta, tipografía y sistema de diseño que comunica tu valor único.</p>
-              </div>
-            </div>
-            <div class="panel-step">
-              <div class="step-num">2</div>
-              <div class="step-content">
-                <h4>Posicionamiento de Marca</h4>
-                <p>Definimos tu voz, tono y narrativa de marca para conectar con tu cliente ideal.</p>
-              </div>
-            </div>
-            <div class="panel-step">
-              <div class="step-num">3</div>
-              <div class="step-content">
-                <h4>Brand Guidelines</h4>
-                <p>Manual completo para que tu marca sea consistente en todos los puntos de contacto.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel-content" id="panel-web">
-          <p class="panel-week">Semana 3 — 8</p>
-          <h3 class="panel-title">Sitio Web Profesional</h3>
-          <p class="panel-desc">Diseñamos y desarrollamos sitios web orientados a conversión. No solo se ven bien — venden.</p>
-          <div class="panel-steps">
-            <div class="panel-step">
-              <div class="step-num">1</div>
-              <div class="step-content">
-                <h4>UX & Wireframes</h4>
-                <p>Arquitectura de información y flujos de usuario optimizados para convertir.</p>
-              </div>
-            </div>
-            <div class="panel-step">
-              <div class="step-num">2</div>
-              <div class="step-content">
-                <h4>Diseño & Desarrollo</h4>
-                <p>Diseño premium + código limpio, rápido y optimizado para SEO y móvil.</p>
-              </div>
-            </div>
-            <div class="panel-step">
-              <div class="step-num">3</div>
-              <div class="step-content">
-                <h4>Lanzamiento & Optimización</h4>
-                <p>Deploy, testing, y seguimiento en las primeras semanas post-lanzamiento.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel-content" id="panel-estrategia">
-          <p class="panel-week">Ongoing</p>
-          <h3 class="panel-title">Estrategia de Crecimiento</h3>
-          <p class="panel-desc">No es un plan que entregamos y nos vamos. Es un plan que acompañamos y ajustamos contigo mes a mes.</p>
-          <div class="panel-steps">
-            <div class="panel-step">
-              <div class="step-num">1</div>
-              <div class="step-content">
-                <h4>Plan de Acción</h4>
-                <p>Objetivos SMART con timeline claro y responsables definidos.</p>
-              </div>
-            </div>
-            <div class="panel-step">
-              <div class="step-num">2</div>
-              <div class="step-content">
-                <h4>KPI's Definidos</h4>
-                <p>Métricas claras para medir progreso real, no solo vanidad.</p>
-              </div>
-            </div>
-            <div class="panel-step">
-              <div class="step-num">3</div>
-              <div class="step-content">
-                <h4>Seguimiento Continuo</h4>
-                <p>Reuniones mensuales y ajustes basados en datos reales de tu negocio.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div class="diagnostico-cta">
+        <a href="apply.html" class="btn-diagnostico">
+          Agendar mi diagnóstico
+          <span class="btn-arrow">→</span>
+        </a>
       </div>
     </div>
+
+    <div class="paquetes-intro reveal" style="transition-delay:0.2s">
+      <p class="paquetes-intro-text">Si encajamos, trabajamos juntos por uno de estos dos caminos</p>
+    </div>
+
+    <div class="paquetes-grid">
+
+      <div class="paquete-card reveal" style="transition-delay:0.25s">
+        <div class="paquete-header">
+          <span class="paquete-num">Paquete 01</span>
+          <span class="paquete-time">3 — 4 semanas</span>
+        </div>
+        <h3 class="paquete-title">Express</h3>
+        <p class="paquete-for">Para profesionistas que ya tienen clientes pero su presencia digital no representa lo que valen.</p>
+
+        <div class="paquete-divider"></div>
+
+        <div class="paquete-includes">
+          <div class="includes-label">Lo que incluye</div>
+          <div class="includes-list">
+            <div class="include-item"><span class="include-bullet">●</span><span><strong>Branding base</strong> — Logo, paleta, tipografía y guía de uso</span></div>
+            <div class="include-item"><span class="include-bullet">●</span><span><strong>Sitio web esencial</strong> — Hasta 5 secciones, optimizado para móvil y SEO técnico</span></div>
+            <div class="include-item"><span class="include-bullet">●</span><span><strong>1 sesión estratégica</strong> — Cómo usar tu nueva marca para vender</span></div>
+          </div>
+        </div>
+
+        <div class="paquete-footer">
+          <span class="paquete-price">Inversión a medida</span>
+          <a href="apply.html" class="btn-paquete">Aplicar <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="paquete-card paquete-card--featured reveal" style="transition-delay:0.35s">
+        <div class="paquete-badge">★ Más elegido</div>
+
+        <div class="paquete-header">
+          <span class="paquete-num paquete-num--featured">Paquete 02</span>
+          <span class="paquete-time paquete-time--featured">8 — 12 semanas</span>
+        </div>
+        <h3 class="paquete-title">Integral</h3>
+        <p class="paquete-for paquete-for--featured">Para quien ya factura bien y quiere escalar con orden — no improvisando con cada decisión.</p>
+
+        <div class="paquete-divider paquete-divider--featured"></div>
+
+        <div class="paquete-includes">
+          <div class="includes-label includes-label--featured">Lo que incluye</div>
+          <div class="includes-list">
+            <div class="include-item"><span class="include-bullet">●</span><span><strong>Diagnóstico profundo</strong> — Análisis 360° de tu negocio, competencia y oportunidad</span></div>
+            <div class="include-item"><span class="include-bullet">●</span><span><strong>Branding completo</strong> — Identidad, manual de marca, sistema visual y verbal</span></div>
+            <div class="include-item"><span class="include-bullet">●</span><span><strong>Sitio web a medida</strong> — Diseño y desarrollo personalizado, sin plantillas</span></div>
+            <div class="include-item"><span class="include-bullet">●</span><span><strong>Estrategia de venta</strong> — Plan de acción con KPIs claros y prioridades</span></div>
+            <div class="include-item"><span class="include-bullet">●</span><span><strong>3 meses de seguimiento</strong> — Sesión mensual + ajustes basados en datos</span></div>
+          </div>
+        </div>
+
+        <div class="paquete-footer paquete-footer--featured">
+          <span class="paquete-price">Inversión a medida</span>
+          <a href="apply.html" class="btn-paquete btn-paquete--featured">Aplicar <span>→</span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="paquetes-note reveal" style="transition-delay:0.45s">
+      No mostramos precios fijos porque cada negocio tiene un punto de partida distinto. La inversión real la calculamos en el diagnóstico, basándonos en tu alcance.
+    </p>
+
   </div>
 </section>
 
 <!-- ============================================
-     CALCULADORA
+     PROYECTOS — Casos destacados
 ============================================ -->
-<section id="calculadora">
-  <div class="calc-header reveal">
-    <span class="section-label">Calculadora</span>
-    <h2 class="section-title">Calcula tu potencial</h2>
-    <p class="section-sub" style="margin: 16px auto 0">Descubre cuánto estás dejando de ganar por no tener una estrategia clara.</p>
+<section id="proyectos">
+
+  <div class="proyectos-header reveal">
+    <span class="section-label">Proyectos seleccionados</span>
+    <h2 class="section-title">Marcas que comunican<br><em class="section-title-em">lo que valen.</em></h2>
   </div>
-  <div class="calc-box reveal" style="transition-delay:0.15s">
-    <div class="calc-sliders">
 
-      <div class="slider-row">
-        <label>
-          <span class="slider-label-text">
-            <span class="slider-label-icon">👤</span>
-            Visitas al mes
-          </span>
-          <span class="slider-value" id="val-visitas">50,000</span>
-        </label>
-        <input type="range" id="slider-visitas" min="1000" max="500000" step="1000" value="50000">
-      </div>
-
-      <div class="slider-row">
-        <label>
-          <span class="slider-label-text">
-            <span class="slider-label-icon">🎯</span>
-            Leads generados
-          </span>
-          <span class="slider-value" id="val-leads">500</span>
-        </label>
-        <input type="range" id="slider-leads" min="10" max="5000" step="10" value="500">
-      </div>
-
-      <div class="slider-row">
-        <label>
-          <span class="slider-label-text">
-            <span class="slider-label-icon">%</span>
-            Tasa de cierre
-          </span>
-          <span class="slider-value" id="val-tasa">2.0%</span>
-        </label>
-        <input type="range" id="slider-tasa" min="0.5" max="20" step="0.5" value="2">
-      </div>
-
-      <div class="slider-row">
-        <label>
-          <span class="slider-label-text">
-            <span class="slider-label-icon">💰</span>
-            Ticket promedio
-          </span>
-          <span class="slider-value" id="val-ticket">$15,000 MXN</span>
-        </label>
-        <input type="range" id="slider-ticket" min="1000" max="100000" step="500" value="15000">
-      </div>
-
+  <div class="proyecto-card reveal">
+    <div class="proyecto-image-wrap">
+      <img src="assets/proyectos/vannia.webp" alt="Identidad y sitio web para Dra. Vannia Maldonado" loading="lazy" width="800" height="3407">
     </div>
-    <div class="calc-results">
-
-      <div class="result-card highlight" id="card-billing">
-        <div class="result-card-label">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          Facturación mensual potencial
+    <div class="proyecto-info">
+      <span class="proyecto-num">01 — Identidad &amp; Web</span>
+      <h3 class="proyecto-title">Dra. Vannia Maldonado</h3>
+      <p class="proyecto-subtitle">Otorrinolaringología · Mérida</p>
+      <p class="proyecto-desc">"Tu nariz, tu mejor perfil." Una identidad cálida y editorial para una práctica médica que mezcla precisión clínica con cuidado humano.</p>
+      <div class="proyecto-meta">
+        <div class="proyecto-meta-row">
+          <span class="proyecto-meta-label">Alcance</span>
+          <span class="proyecto-meta-value">Branding completo, sitio web y estrategia de SEO local</span>
         </div>
-        <span class="result-number" id="result-billing">$150,000</span>
-        <p class="result-desc" id="result-billing-sub">Con una tasa de cierre del 2% y tu ticket actual</p>
-      </div>
-
-      <div class="result-card" id="card-score">
-        <div class="result-card-label">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          Puntuación de oportunidad
+        <div class="proyecto-meta-row">
+          <span class="proyecto-meta-label">Año</span>
+          <span class="proyecto-meta-value">2025</span>
         </div>
-        <span class="result-number" id="result-score">156</span>
-        <p class="result-desc" id="result-label">Estás dejando dinero en la mesa</p>
       </div>
-
-      <a href="apply.html" class="btn-primary" style="justify-content:center; width:100%;">
-        Quiero una consultoría gratuita ↗
-      </a>
-
     </div>
   </div>
+
+  <div class="proyecto-card proyecto-card--reverse reveal">
+    <div class="proyecto-image-wrap">
+      <img src="assets/proyectos/jose-luis.webp" alt="Identidad y sistema visual para Dr. José Luis Vivas" loading="lazy" width="800" height="2972">
+    </div>
+    <div class="proyecto-info">
+      <span class="proyecto-num">02 — Identidad &amp; Web &amp; Estrategia</span>
+      <h3 class="proyecto-title">Dr. José Luis Vivas</h3>
+      <p class="proyecto-subtitle">Cirugía Plástica · CDMX</p>
+      <p class="proyecto-desc">Un sistema visual que se viera tan riguroso como su trabajo en quirófano. Marca, papelería, sitio web y estrategia comercial para subir el nivel de comunicación al de su práctica.</p>
+      <div class="proyecto-meta">
+        <div class="proyecto-meta-row">
+          <span class="proyecto-meta-label">Alcance</span>
+          <span class="proyecto-meta-value">Branding completo, sitio web y consultoría estratégica</span>
+        </div>
+        <div class="proyecto-meta-row">
+          <span class="proyecto-meta-label">Año</span>
+          <span class="proyecto-meta-value">2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proyecto-card reveal">
+    <div class="proyecto-image-wrap">
+      <img src="assets/proyectos/muven.webp" alt="Identidad de marca para Muven, dispositivo wearable de wellness" loading="lazy" width="800" height="4852">
+    </div>
+    <div class="proyecto-info">
+      <span class="proyecto-num">03 — Identidad de marca</span>
+      <h3 class="proyecto-title">Muven</h3>
+      <p class="proyecto-subtitle">Health tech · Monterrey</p>
+      <p class="proyecto-desc">"Back in motion." Una marca para un wearable de rehabilitación que necesitaba sentirse cercana sin perder rigor médico. Sistema completo aplicable a producto, app y comunicación.</p>
+      <div class="proyecto-meta">
+        <div class="proyecto-meta-row">
+          <span class="proyecto-meta-label">Alcance</span>
+          <span class="proyecto-meta-value">Branding completo: identidad, paleta, manual y aplicaciones</span>
+        </div>
+        <div class="proyecto-meta-row">
+          <span class="proyecto-meta-label">Año</span>
+          <span class="proyecto-meta-value">2025</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================
+     TESTIMONIOS
+============================================ -->
+<section id="testimonios">
+
+  <div class="testimonios-header reveal">
+    <span class="section-label">Lo que dicen</span>
+    <h2 class="section-title">Quienes ya pasaron<br><em class="section-title-em">por nuestro proceso.</em></h2>
+  </div>
+
+  <div class="testimonios-grid">
+
+    <div class="testimonio-card reveal">
+      <div class="testimonio-mark">"</div>
+      <p class="testimonio-quote">Siempre me guiaron en el proceso, fueron muy transparentes conmigo en todo momento.</p>
+      <div class="testimonio-author">
+        <span class="testimonio-name">Dra. Vannia Maldonado</span>
+        <span class="testimonio-role">Otorrinolaringóloga</span>
+      </div>
+    </div>
+
+    <div class="testimonio-card reveal" style="transition-delay:0.1s">
+      <div class="testimonio-mark">"</div>
+      <p class="testimonio-quote">Nos encantaron los colores y nos ayudaron a darle dirección a nuestro proyecto.</p>
+      <div class="testimonio-author">
+        <span class="testimonio-name">Equipo Muven</span>
+        <span class="testimonio-role">Health tech · Monterrey</span>
+      </div>
+    </div>
+
+  </div>
+
 </section>
 
 <!-- ============================================
@@ -3874,41 +3602,41 @@
 
   <div class="faq-item reveal">
     <div class="faq-question">
-      <span class="faq-q-text">¿Cuánto cuesta trabajar con VITA Studio?</span>
+      <span class="faq-q-text">¿Por qué no muestran precios fijos en el sitio?</span>
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
-      <p class="faq-answer-inner">Cada proyecto es único, por lo que trabajamos con presupuestos personalizados según el alcance y los objetivos de tu negocio. Agendar una consultoría inicial es completamente gratuito y sin compromiso — ahí entendemos tu situación y te damos una propuesta clara.</p>
+      <p class="faq-answer-inner">Porque cada negocio tiene un punto de partida distinto. Un médico que ya factura $150k al mes y necesita branding completo no parte del mismo lugar que una clínica nueva que está abriendo. Cobrar lo mismo a los dos sería injusto para ambos. En el diagnóstico de 45 minutos calculamos la inversión real basándonos en tu alcance — sin compromiso, sin sorpresas.</p>
     </div>
   </div>
 
   <div class="faq-item reveal" style="transition-delay:0.05s">
     <div class="faq-question">
-      <span class="faq-q-text">¿En cuánto tiempo veo resultados?</span>
+      <span class="faq-q-text">¿Cuánto tarda todo el proceso?</span>
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
-      <p class="faq-answer-inner">Depende del servicio. Una auditoría entrega insights accionables en 2–4 semanas. Un rebranding toma 4–8 semanas. Un sitio web nuevo, 6–12 semanas. Los resultados en facturación generalmente se ven entre 3–6 meses del lanzamiento. Trabajamos con métricas claras desde el día 1.</p>
+      <p class="faq-answer-inner">Depende del paquete que elijas. El Paquete Express toma 3-4 semanas (branding base + sitio web + sesión estratégica). El Paquete Integral toma 8-12 semanas e incluye 3 meses de seguimiento posterior. Los resultados en facturación suelen verse entre el mes 2 y el mes 6 del lanzamiento, dependiendo de tu ciclo de venta.</p>
     </div>
   </div>
 
   <div class="faq-item reveal" style="transition-delay:0.1s">
     <div class="faq-question">
-      <span class="faq-q-text">¿Trabajan con negocios de cualquier industria?</span>
+      <span class="faq-q-text">¿Qué tipo de negocios son sus clientes ideales?</span>
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
-      <p class="faq-answer-inner">Sí. Hemos trabajado con negocios de servicios profesionales, comercio, salud, educación, entretenimiento y más. Lo que importa no es la industria, sino el potencial de crecimiento y las ganas de construir algo sólido.</p>
+      <p class="faq-answer-inner">Profesionistas de servicio que ya facturan pero su presencia digital no representa lo que valen — médicos, dentistas, clínicas de estética, restaurantes locales — y creadores de contenido que están construyendo su marca personal. Trabajamos mejor con negocios establecidos en Monterrey y el resto de México que entienden que invertir en marca es invertir en escalar.</p>
     </div>
   </div>
 
   <div class="faq-item reveal" style="transition-delay:0.15s">
     <div class="faq-question">
-      <span class="faq-q-text">¿Qué incluye la consultoría personalizada?</span>
+      <span class="faq-q-text">¿Qué incluye el diagnóstico estratégico de 45 minutos?</span>
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
-      <p class="faq-answer-inner">La consultoría incluye un análisis completo de tu situación actual, identificación de áreas de oportunidad, benchmarking contra tu competencia, y un reporte ejecutivo con un plan de acción priorizado. No es genérico — es específico para tu negocio.</p>
+      <p class="faq-answer-inner">Es una videollamada estructurada donde escuchamos tu negocio, identificamos las 3 áreas críticas que están frenando tu crecimiento, y te damos una recomendación clara de qué paquete tendría sentido — o si no lo tiene. Es genuinamente útil incluso si decides no trabajar con nosotros. No hay venta agresiva ni presión.</p>
     </div>
   </div>
 
@@ -3918,150 +3646,9 @@
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
-      <p class="faq-answer-inner">Absolutamente. Aunque recomendamos un enfoque integral para mejores resultados, cada servicio funciona de forma independiente. Si ya tienes una marca sólida y solo necesitas un sitio web, lo hacemos. Si tienes un sitio pero necesitas rebranding, también.</p>
+      <p class="faq-answer-inner">Honestamente, no es lo que recomendamos. Nuestro diferencial es justo que diseñamos marca, sitio y estrategia trabajándose entre sí — cuando los entregamos por separado, pierden gran parte de su efecto. Si lo único que necesitas es un sitio aislado o solo un logo, conocemos buenos freelancers que cobran menos y lo hacen bien. Pero si lo que buscas es que tu negocio venda más y comunique lo que vale, ahí es donde sumamos.</p>
     </div>
   </div>
-
-</section>
-
-<!-- ============================================
-     OFERTA IRRESISTIBLE / PRECIOS
-============================================ -->
-<section id="oferta">
-  <div class="oferta-header reveal">
-    <div class="oferta-urgency">
-      <span class="oferta-urgency-dot"></span>
-      Solo 3 lugares disponibles este mes
-    </div>
-    <span class="section-label">Nuestra oferta</span>
-    <h2 class="section-title">Elige cómo empezar<br>a crecer hoy</h2>
-    <p class="oferta-subtitle">Cada nivel está diseñado para que el valor que recibes sea mucho mayor que lo que pagas. Sin letra chica.</p>
-  </div>
-
-  <div class="oferta-grid">
-
-    <!-- NIVEL 1 — Entrada -->
-    <div class="oferta-card reveal">
-      <div class="oferta-tier">Nivel 1 — Entrada</div>
-      <div class="oferta-name">Diagnóstico VITA</div>
-      <p class="oferta-desc">Para negocios que quieren saber exactamente dónde están parados antes de invertir en grande.</p>
-      <div class="oferta-price">
-        <span class="oferta-price-num">$3,500</span>
-        <span class="oferta-price-currency">MXN</span>
-      </div>
-      <p class="oferta-price-original">Valor real: $6,500 MXN</p>
-      <div class="oferta-divider"></div>
-      <ul class="oferta-features">
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          Auditoría de negocio en 72 horas
-        </li>
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          15+ oportunidades detectadas
-        </li>
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          Análisis de tu competencia directa
-        </li>
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          Reporte ejecutivo con prioridades
-        </li>
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          1 sesión de presentación de resultados
-        </li>
-      </ul>
-      <a href="https://wa.me/525543708757?text=Hola%2C%20quiero%20el%20Diagn%C3%B3stico%20VITA" target="_blank" class="btn-oferta-secondary">
-        Quiero el Diagnóstico
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-      </a>
-    </div>
-
-    <!-- NIVEL 2 — FEATURED: VITA Growth Sprint -->
-    <div class="oferta-card featured reveal" style="transition-delay:0.12s">
-      <div class="oferta-badge">⚡ Más popular</div>
-      <div class="oferta-tier">Nivel 2 — Transformación</div>
-      <div class="oferta-name">VITA Growth Sprint™</div>
-      <p class="oferta-desc">El paquete completo. En 60 días tienes una marca sólida, un sitio que convierte y una estrategia clara.</p>
-
-      <!-- Value stack -->
-      <div class="oferta-stack">
-        <div class="oferta-stack-label">Lo que incluye (valor real)</div>
-        <div class="oferta-stack-row"><span>Auditoría y Diagnóstico</span><span>$4,500</span></div>
-        <div class="oferta-stack-row"><span>Identidad de Marca Completa</span><span>$12,000</span></div>
-        <div class="oferta-stack-row"><span>Landing Page de Conversión</span><span>$18,000</span></div>
-        <div class="oferta-stack-row"><span>Estrategia de Posicionamiento</span><span>$6,000</span></div>
-        <div class="oferta-stack-row"><span>Plan de Crecimiento 90 días</span><span>$5,000</span></div>
-        <div class="oferta-stack-row" style="color:rgba(255,140,66,0.7)"><span>🎁 2 sesiones de seguimiento</span><span>$3,000</span></div>
-        <div class="oferta-stack-total"><span>Total si contrataras por separado</span><span>$48,500</span></div>
-      </div>
-
-      <div class="oferta-price">
-        <span class="oferta-price-num">$24,900</span>
-        <span class="oferta-price-currency">MXN</span>
-      </div>
-      <p class="oferta-price-original">Ahorras $23,600 MXN</p>
-
-      <!-- Guarantee -->
-      <div class="oferta-guarantee">
-        <span class="oferta-guarantee-icon">🛡️</span>
-        <p><strong>Garantía de satisfacción:</strong> Si al finalizar la primera semana la dirección creativa no te convence, la rehacemos sin costo adicional.</p>
-      </div>
-
-      <a href="https://wa.me/525543708757?text=Hola%2C%20quiero%20el%20VITA%20Growth%20Sprint" target="_blank" class="btn-oferta-primary">
-        Quiero el Growth Sprint
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-      </a>
-    </div>
-
-    <!-- NIVEL 3 — Partner -->
-    <div class="oferta-card reveal" style="transition-delay:0.24s">
-      <div class="oferta-tier">Nivel 3 — Retención</div>
-      <div class="oferta-name">VITA Partner</div>
-      <p class="oferta-desc">Para negocios que quieren crecer mes a mes con estrategia y ejecución continua a su lado.</p>
-      <div class="oferta-price">
-        <span class="oferta-price-num">$8,000</span>
-        <span class="oferta-price-currency">MXN/mes</span>
-      </div>
-      <p class="oferta-price-original">Desde. Personalizado según alcance.</p>
-      <div class="oferta-divider"></div>
-      <ul class="oferta-features">
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          Todo lo del Growth Sprint incluido
-        </li>
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          Estrategia mensual ajustada a datos
-        </li>
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          Ejecución de contenido y branding
-        </li>
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          Reportes de KPIs mensuales
-        </li>
-        <li>
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          Acceso directo por WhatsApp
-        </li>
-        <li class="bonus">
-          <span class="check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-          🎁 Primer mes con 20% de descuento
-        </li>
-      </ul>
-      <a href="https://wa.me/525543708757?text=Hola%2C%20quiero%20info%20sobre%20VITA%20Partner" target="_blank" class="btn-oferta-secondary">
-        Hablemos de esto
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-      </a>
-    </div>
-
-  </div>
-
-  <p class="oferta-note reveal">¿No estás seguro cuál elegir? <a href="https://wa.me/525543708757?text=Hola%2C%20necesito%20ayuda%20para%20elegir%20un%20plan" target="_blank">Escríbenos y te orientamos sin compromiso →</a></p>
 
 </section>
 
@@ -4072,7 +3659,7 @@
   <div class="cta-box reveal">
     <h2>Tu negocio tiene más<br>potencial del que crees.</h2>
     <p>Déjanos mostrarte exactamente dónde está y cómo desbloquearlo.</p>
-    <a href="https://wa.me/525543708757?text=Hola%20VITA%20Studio%2C%20quiero%20una%20consultor%C3%ADa%20gratuita" target="_blank" class="btn-primary">
+    <a href="https://wa.me/525543708757?text=Hola%20VITA%20Studio%2C%20quiero%20una%20consultor%C3%ADa%20gratuita" target="_blank" rel="noopener noreferrer" class="btn-primary">
       Quiero una consultoría gratuita
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
     </a>
@@ -4085,20 +3672,17 @@
 <footer>
   <p class="footer-copy">© 2026 VITA Studio — Todos los derechos reservados</p>
   <div>
-    <div class="footer-logo">VITA Studio</div>
+    <div class="footer-logo" aria-label="VITA Studio"><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="72 430 936 220"><defs><style> .cls-1 { fill: currentColor; } </style></defs><g><path class="cls-1" d="M76,434.71h14.58l49.52,210.55h-14.58l-49.52-210.55ZM191.76,434.71l-50.74,210.55h-4.25l50.74-210.55h4.25Z"/><path class="cls-1" d="M202.38,645.26h-14.28v-210.55h14.28v210.55Z"/><path class="cls-1" d="M301.44,438.66h-113.93v-3.95h113.93v3.95ZM237.33,645.26v-210.55h14.28v210.55h-14.28Z"/><path class="cls-1" d="M304.67,434.71h-14.58l1.64,7,29.61,126.67.92,3.95,17.04,72.92h14.58l-49.22-210.54ZM321.34,568.39l.92,3.95h2.76v-3.95h-3.68ZM259.4,568.39l-.91,3.95h1.57l.97-3.95h-1.63ZM289.18,434.71l-51.05,210.54h4.25l17.67-72.92.97-3.95,30.7-126.67,1.69-7h-4.24Z"/></g><g><path class="cls-1" d="M365.34,639.11c-9.78-4.74-17.33-11.01-22.67-18.82-5.33-7.8-8.5-16.25-9.48-25.33h5.93c.99,6.92,3.5,13.83,7.55,20.74,4.05,6.91,10.47,12.84,19.26,17.78,8.79,4.94,20.1,7.4,33.93,7.4,11.06,0,20.84-2.12,29.33-6.37,8.49-4.25,15.01-9.92,19.55-17.04,4.54-7.11,6.81-15.01,6.81-23.7,0-11.26-2.57-20.19-7.7-26.81-5.14-6.62-11.51-11.51-19.11-14.67-7.61-3.15-17.83-6.42-30.67-9.77-13.43-3.56-24.2-7.11-32.3-10.67-8.1-3.56-14.96-9.04-20.59-16.44-5.63-7.4-8.44-17.43-8.44-30.07,0-9.08,2.52-17.63,7.55-25.63,5.04-8,12.24-14.37,21.63-19.11,9.38-4.74,20.1-7.11,32.15-7.11s22.81,2.17,31.7,6.51c8.89,4.35,15.85,9.83,20.89,16.45,5.04,6.62,8.34,13.58,9.93,20.89h-5.92c-1.38-5.73-4.25-11.55-8.59-17.48-4.35-5.92-10.57-10.91-18.67-14.96-8.1-4.05-17.88-6.07-29.33-6.07-10.08,0-19.31,1.93-27.71,5.78-8.4,3.85-15.11,9.29-20.15,16.29-5.04,7.02-7.56,15.16-7.56,24.44,0,11.46,2.62,20.59,7.85,27.4,5.23,6.82,11.7,11.85,19.41,15.11,7.7,3.26,17.97,6.57,30.82,9.93,13.43,3.56,24.15,7.06,32.15,10.52,8,3.46,14.76,8.79,20.3,16,5.53,7.21,8.3,17.04,8.3,29.48,0,8.69-2.32,17.09-6.96,25.18-4.64,8.1-11.61,14.67-20.89,19.7-9.29,5.04-20.55,7.55-33.78,7.55s-24.74-2.37-34.52-7.11Z"/><path class="cls-1" d="M416.42,435.57v5.32h60.75v203.27h5.94v-203.27h38.78v-5.32h-105.47Z"/><path class="cls-1" d="M649.02,435.57v129.46c0,10.51-.87,19.88-2.68,28.12-2.68,12.5-7.4,22.4-14.18,29.64-11.26,12.04-26.6,18.07-45.94,18.07s-35.43-6.03-46.97-18.07c-11.54-12.04-17.36-31.29-17.36-57.76v-129.46h-5.88v129.46c0,27.47,6.31,47.84,18.94,61.19,12.66,13.31,29.71,20,51.26,20s38.38-6.59,50.48-19.85c3.8-4.14,7.03-8.99,9.64-14.53,2.55-5.44,4.54-11.54,5.94-18.32v-152.64h2.68v-5.32h-5.94Z"/><path class="cls-1" d="M811.27,533.71v-.06c-.03-1-.06-1.96-.16-2.92-.37-7.4-1.31-14.4-2.74-20.97-.87-4.04-1.93-7.93-3.2-11.66-4.67-13.87-11.98-25.63-21.93-35.27-18.76-18.17-46.13-27.28-82.06-27.28h-54.84v208.6h54.84c35.93,0,63.3-9.08,82.06-27.25,9.95-9.64,17.29-21.43,21.93-35.31,1.24-3.64,2.3-7.4,3.11-11.32,1.49-6.69,2.46-13.78,2.83-21.31.09-.87.12-1.77.16-2.68.09-2.12.12-4.26.12-6.44s-.03-4.11-.12-6.13ZM805.17,549.55c-1.65,26.6-10.36,47.65-26.07,63.21-17.57,17.36-43.55,26.07-77.92,26.07h-48.9v-197.93h48.9c34.37,0,60.35,8.68,77.92,26.07,15.71,15.55,24.42,36.61,26.07,63.21.03.19.03.34.03.53.19,2.99.28,6.03.28,9.15s-.09,6.41-.31,9.49v.22Z"/><path class="cls-1" d="M811.11,435.55v208.59h-5.93v-208.59h5.93Z"/><path class="cls-1" d="M853.04,633.03c-15.11-8.99-26.92-21.58-35.41-37.78-8.5-16.19-12.74-34.56-12.74-55.11s4.25-38.91,12.74-55.11c8.49-16.19,20.3-28.78,35.41-37.77,15.11-8.99,32.24-13.48,51.41-13.48s36.3,4.5,51.41,13.48c15.11,8.99,26.91,21.58,35.41,37.77,8.49,16.2,12.74,34.57,12.74,55.11s-4.25,38.92-12.74,55.11c-8.5,16.2-20.3,28.79-35.41,37.78-15.11,8.99-32.25,13.48-51.41,13.48s-36.3-4.49-51.41-13.48ZM951.85,628.89c14.22-8.2,25.43-19.95,33.63-35.26,8.19-15.3,12.3-33.13,12.3-53.48s-4.1-38.17-12.3-53.48c-8.2-15.3-19.41-27.06-33.63-35.26-14.22-8.2-30.03-12.3-47.41-12.3s-33.19,4.1-47.41,12.3c-14.22,8.2-25.43,19.95-33.63,35.26-8.2,15.31-12.3,33.14-12.3,53.48s4.1,38.18,12.3,53.48c8.2,15.31,19.41,27.06,33.63,35.26,14.22,8.2,30.02,12.3,47.41,12.3s33.19-4.1,47.41-12.3Z"/></g></svg></div>
     <span class="footer-location">Monterrey, México</span>
   </div>
   <div class="footer-social">
-    <a href="#" class="social-btn" aria-label="LinkedIn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-    </a>
-    <a href="#" class="social-btn" aria-label="Instagram">
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
     </a>
   </div>
 </footer>
 <div class="footer-bottom">
-  <a href="#">Política de privacidad</a>
+  <a href="privacidad.html">Política de privacidad</a>
   <a href="apply.html">Contacto</a>
 </div>
 
@@ -4120,17 +3704,13 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         <span>Servicios</span>
       </a>
-      <a href="#calculadora" class="bnav-tab" data-section="calculadora">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
-        <span>Calculadora</span>
+      <a href="#proyectos" class="bnav-tab" data-section="proyectos">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Proyectos</span>
       </a>
       <a href="#faqs" class="bnav-tab" data-section="faqs">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         <span>FAQ's</span>
-      </a>
-      <a href="#oferta" class="bnav-tab" data-section="oferta">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-        <span>Oferta</span>
       </a>
     </div>
     <a href="apply.html" class="bnav-cta">Hablemos</a>
@@ -4190,19 +3770,7 @@
     });
   });
 
-  // ---- METODOLOGÍA TABS ----
-  const tabBtns = document.querySelectorAll('.servicio-tab');
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.panel-content').forEach(p => p.classList.remove('active'));
-      const panelId = 'panel-' + btn.getAttribute('data-tab');
-      const panel = document.getElementById(panelId);
-      if (panel) panel.classList.add('active');
-    });
-  });
-
+  
   // ---- FAQ ACCORDION ----
   document.querySelectorAll('.faq-question').forEach(q => {
     q.addEventListener('click', () => {
@@ -4222,101 +3790,6 @@
     });
   });
 
-  // ---- CALCULATOR ----
-  const sliderVisitas = document.getElementById('slider-visitas');
-  const sliderLeads   = document.getElementById('slider-leads');
-  const sliderTasa    = document.getElementById('slider-tasa');
-  const sliderTicket  = document.getElementById('slider-ticket');
-
-  const displayVisitas = document.getElementById('val-visitas');
-  const displayLeads   = document.getElementById('val-leads');
-  const displayTasa    = document.getElementById('val-tasa');
-  const displayTicket  = document.getElementById('val-ticket');
-
-  const resultBilling  = document.getElementById('result-billing');
-  const resultBillingSub = document.getElementById('result-billing-sub');
-  const resultScore    = document.getElementById('result-score');
-  const resultLabel    = document.getElementById('result-label');
-
-  let prevBilling = 0, prevScore = 0;
-
-  function animateCount(el, from, to, duration, prefix, suffix) {
-    prefix = prefix || ''; suffix = suffix || '';
-    const t0 = performance.now();
-    (function tick(now) {
-      const p = Math.min((now - t0) / duration, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      const val = Math.round(from + (to - from) * ease);
-      el.textContent = prefix + val.toLocaleString('es-MX') + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-    })(performance.now());
-  }
-
-  function flashCard(cardId) {
-    const card = document.getElementById(cardId);
-    if (!card) return;
-    card.classList.remove('result-flash');
-    void card.offsetWidth;
-    card.classList.add('result-flash');
-  }
-
-  function updateSliderTrack(slider) {
-    const pct = (slider.value - slider.min) / (slider.max - slider.min) * 100;
-    slider.style.background = `linear-gradient(to right, var(--gold) ${pct}%, rgba(255,255,255,0.1) ${pct}%)`;
-  }
-
-  function calculate() {
-    const visitas = parseFloat(sliderVisitas.value) || 0;
-    const leads   = parseFloat(sliderLeads.value)   || 0;
-    const tasa    = parseFloat(sliderTasa.value)     || 0;
-    const ticket  = parseFloat(sliderTicket.value)  || 0;
-
-    displayVisitas.textContent = visitas.toLocaleString('es-MX');
-    displayLeads.textContent   = leads.toLocaleString('es-MX');
-    displayTasa.textContent    = tasa.toFixed(1) + '%';
-    displayTicket.textContent  = '$' + ticket.toLocaleString('es-MX') + ' MXN';
-
-    [sliderVisitas, sliderLeads, sliderTasa, sliderTicket].forEach(updateSliderTrack);
-
-    const billing = Math.round(leads * (tasa / 100) * ticket);
-    const maxTasa = parseFloat(sliderTasa.max) || 20;
-    const score   = Math.round(((maxTasa - tasa) / maxTasa) * 200);
-
-    animateCount(resultBilling, prevBilling, billing, 600, '$', '');
-    animateCount(resultScore,   prevScore,   score,   400, '',  '');
-
-    if (resultBillingSub) {
-      resultBillingSub.textContent = `Con una tasa de cierre del ${tasa.toFixed(1)}% y ticket de $${ticket.toLocaleString('es-MX')} MXN`;
-    }
-
-    if (resultLabel) {
-      if (score > 140) {
-        resultLabel.textContent = 'Estás dejando mucho dinero en la mesa';
-        resultLabel.style.color = '#f87171';
-      } else if (score > 80) {
-        resultLabel.textContent = 'Hay oportunidades claras de mejora';
-        resultLabel.style.color = 'var(--gold)';
-      } else {
-        resultLabel.textContent = 'Tu estrategia está bien enfocada';
-        resultLabel.style.color = '#4ade80';
-      }
-    }
-
-    flashCard('card-billing');
-    flashCard('card-score');
-
-    prevBilling = billing;
-    prevScore   = score;
-  }
-
-  [sliderVisitas, sliderLeads, sliderTasa, sliderTicket].forEach(slider => {
-    slider.addEventListener('input', calculate);
-    slider.addEventListener('change', calculate);
-  });
-
-  // Init on load
-  document.addEventListener('DOMContentLoaded', calculate);
-
   // ---- CLIENTS INFINITE SCROLL (JS) ----
   // --- CARRUSEL CLIENTES ---
   function initCarrusel() {
@@ -4325,78 +3798,164 @@
     if (!track || !wrapper) return;
 
     // Forzar tamaño uniforme en cards originales
-    const cards = Array.from(track.children);
-    cards.forEach(card => {
+    const originalCards = Array.from(track.children);
+    originalCards.forEach(card => {
       card.style.flexShrink = '0';
       card.style.width = '360px';
     });
 
-    // Clonar para loop infinito
-    cards.forEach(card => {
-      const clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      clone.style.flexShrink = '0';
-      clone.style.width = '360px';
-      track.appendChild(clone);
-    });
+    // Clonar para loop infinito (3 sets totales: 1 original + 2 clones)
+    // Tener 2 clones en vez de 1 da margen para que el reset nunca sea visible.
+    for (let n = 0; n < 2; n++) {
+      originalCards.forEach(card => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.style.flexShrink = '0';
+        clone.style.width = '360px';
+        track.appendChild(clone);
+      });
+    }
 
     let pos = 0;
-    let halfWidth = 0;
+    let cycleWidth = 0;
+    let isReady = false;
     let autoPlay = true;
     const speed = 0.6;
 
-    // Drag state
+    // Drag state — con muestreo de velocidad estilo iOS
     let isDragging = false;
     let dragStartX = 0;
     let dragStartPos = 0;
     let lastX = 0;
+    let lastT = 0;
     let velocity = 0;
+    let velocitySamples = [];  // muestras recientes para suavizar
     let momentumRAF = null;
+    let resumeAutoPlayTimeout = null;
 
-    function calcHalf() {
-      halfWidth = track.scrollWidth / 2;
+    function calcCycleWidth() {
+      // Medir el ancho de UN ciclo completo (las cards originales + gaps).
+      // Cuando pos llegue a cycleWidth, reseteamos a 0 y visualmente nadie nota el salto
+      // porque el clon ocupa exactamente el mismo lugar.
+      if (originalCards.length === 0) { cycleWidth = 0; return; }
+      const trackStyle = window.getComputedStyle(track);
+      const gap = parseFloat(trackStyle.gap) || parseFloat(trackStyle.columnGap) || 16;
+      let total = 0;
+      originalCards.forEach((c, i) => {
+        total += c.getBoundingClientRect().width;
+        // Gap entre cards (incluido el gap entre la última original y el primer clon)
+        total += gap;
+      });
+      cycleWidth = total;
+      isReady = cycleWidth > 0;
     }
-    setTimeout(calcHalf, 300);
-    window.addEventListener('resize', calcHalf);
 
-    function clamp(p) {
-      if (halfWidth <= 0) return p;
-      p = p % halfWidth;
-      if (p < 0) p += halfWidth;
-      return p;
+    // Esperar a que TODAS las imágenes carguen antes de calcular y arrancar.
+    function waitForImagesAndStart() {
+      const imgs = track.querySelectorAll('img');
+      let pendientes = imgs.length;
+      const finalize = () => {
+        calcCycleWidth();
+        // Resetear pos a 0 por si el autoLoop ya había avanzado.
+        pos = 0;
+        applyPos();
+      };
+      if (pendientes === 0) { finalize(); return; }
+      imgs.forEach(img => {
+        if (img.complete && img.naturalWidth > 0) {
+          if (--pendientes === 0) finalize();
+        } else {
+          const done = () => { if (--pendientes === 0) finalize(); };
+          img.addEventListener('load', done, { once: true });
+          img.addEventListener('error', done, { once: true });
+        }
+      });
+      // Fallback de seguridad: si por cualquier razón el evento load no dispara
+      // en 3 segundos, calculamos con lo que haya y arrancamos igual.
+      setTimeout(() => { if (!isReady) finalize(); }, 3000);
     }
 
     function applyPos() {
-      track.style.transform = 'translateX(-' + pos + 'px)';
+      track.style.transform = 'translateX(' + (-pos) + 'px)';
     }
 
     // ── Auto-scroll loop ──
     function autoLoop() {
-      if (autoPlay && !isDragging && halfWidth > 0) {
-        pos = clamp(pos + speed);
+      // Solo movemos cuando estamos listos (con cycleWidth válido).
+      // Antes de eso, el track no se mueve aunque RAF esté corriendo.
+      if (isReady && autoPlay && !isDragging) {
+        pos += speed;
+        // Reset suave: cuando cruzamos el ancho de un ciclo, restamos.
+        // El siguiente clon está exactamente donde estaba el original, así que es invisible.
+        if (pos >= cycleWidth) pos -= cycleWidth;
         applyPos();
       }
       requestAnimationFrame(autoLoop);
     }
     requestAnimationFrame(autoLoop);
 
-    // ── Momentum after drag ──
+    // ── Momentum tipo iOS ──
+    // Decay variable: rápido decae lento (se siente pesado),
+    // lento decae rápido (se asienta sin oscilar). Easing al final.
     function momentumScroll() {
-      if (Math.abs(velocity) < 0.3) { autoPlay = true; return; }
-      pos = clamp(pos + velocity);
-      velocity *= 0.93;
+      const absV = Math.abs(velocity);
+      // Stop suave: por debajo de 0.15 px/frame ya no se nota, y reanudamos auto-scroll después.
+      if (absV < 0.15) {
+        velocity = 0;
+        // Esperar 1.5s antes de retomar el auto-play para que el usuario respire
+        clearTimeout(resumeAutoPlayTimeout);
+        resumeAutoPlayTimeout = setTimeout(() => { autoPlay = true; }, 1500);
+        return;
+      }
+      pos += velocity;
+      if (isReady) {
+        if (pos >= cycleWidth) pos -= cycleWidth;
+        else if (pos < 0) pos += cycleWidth;
+      }
+      // Decay variable: factor entre 0.94 (lento) y 0.985 (rápido)
+      // Math: t = clamp(absV / 25, 0, 1); decay = lerp(0.94, 0.985, t)
+      const t = Math.min(absV / 25, 1);
+      const decay = 0.94 + (0.985 - 0.94) * t;
+      velocity *= decay;
       applyPos();
       momentumRAF = requestAnimationFrame(momentumScroll);
     }
 
+    // Helper: calcula velocidad promedio de las últimas muestras
+    // (evita que un microtemblor del dedo/mouse al soltar arruine la inercia)
+    function computeReleaseVelocity() {
+      if (velocitySamples.length === 0) return 0;
+      // Solo muestras de los últimos 80ms — descarta movimiento "viejo"
+      const now = performance.now();
+      const recent = velocitySamples.filter(s => now - s.t < 80);
+      if (recent.length === 0) return 0;
+      // Promedio ponderado: las más recientes pesan más
+      let totalWeight = 0;
+      let weighted = 0;
+      recent.forEach((s, i) => {
+        const w = i + 1;  // sample más reciente = mayor peso
+        weighted += s.v * w;
+        totalWeight += w;
+      });
+      const avgVPerMs = weighted / totalWeight;
+      // Convertir px/ms → px/frame (a 60fps, 1 frame ≈ 16.67ms)
+      // Y aplicar amplificador: el usuario percibe el drag final como "intent",
+      // amplificarlo 1.5x da la sensación de lanzar el carrusel.
+      return avgVPerMs * 16.67 * 1.5;
+    }
+
     // ── MOUSE events ──
     wrapper.addEventListener('mousedown', e => {
+      if (!isReady) return;
       isDragging = true;
       autoPlay = false;
+      clearTimeout(resumeAutoPlayTimeout);
       dragStartX = e.clientX;
       dragStartPos = pos;
       lastX = e.clientX;
+      lastT = performance.now();
       velocity = 0;
+      velocitySamples = [];
       cancelAnimationFrame(momentumRAF);
       wrapper.style.cursor = 'grabbing';
       e.preventDefault();
@@ -4404,10 +3963,20 @@
 
     window.addEventListener('mousemove', e => {
       if (!isDragging) return;
-      velocity = lastX - e.clientX;
+      const now = performance.now();
+      const dt = now - lastT;
+      if (dt > 0) {
+        // Muestra de velocidad en px/ms (positivo = arrastrando hacia la derecha del track)
+        const vPerMs = (lastX - e.clientX) / dt;
+        velocitySamples.push({ v: vPerMs, t: now });
+        if (velocitySamples.length > 8) velocitySamples.shift();
+      }
       lastX = e.clientX;
+      lastT = now;
       const delta = dragStartX - e.clientX;
-      pos = clamp(dragStartPos + delta);
+      pos = dragStartPos + delta;
+      if (pos >= cycleWidth) pos -= cycleWidth;
+      else if (pos < 0) pos += cycleWidth;
       applyPos();
     });
 
@@ -4415,38 +3984,68 @@
       if (!isDragging) return;
       isDragging = false;
       wrapper.style.cursor = 'grab';
+      velocity = computeReleaseVelocity();
       momentumScroll();
     });
 
     // ── TOUCH events ──
     wrapper.addEventListener('touchstart', e => {
+      if (!isReady) return;
       isDragging = true;
       autoPlay = false;
+      clearTimeout(resumeAutoPlayTimeout);
       dragStartX = e.touches[0].clientX;
       dragStartPos = pos;
       lastX = e.touches[0].clientX;
+      lastT = performance.now();
       velocity = 0;
+      velocitySamples = [];
       cancelAnimationFrame(momentumRAF);
     }, { passive: true });
 
     wrapper.addEventListener('touchmove', e => {
       if (!isDragging) return;
       const x = e.touches[0].clientX;
-      velocity = lastX - x;
+      const now = performance.now();
+      const dt = now - lastT;
+      if (dt > 0) {
+        const vPerMs = (lastX - x) / dt;
+        velocitySamples.push({ v: vPerMs, t: now });
+        if (velocitySamples.length > 8) velocitySamples.shift();
+      }
       lastX = x;
+      lastT = now;
       const delta = dragStartX - x;
-      pos = clamp(dragStartPos + delta);
+      pos = dragStartPos + delta;
+      if (pos >= cycleWidth) pos -= cycleWidth;
+      else if (pos < 0) pos += cycleWidth;
       applyPos();
     }, { passive: true });
 
     wrapper.addEventListener('touchend', () => {
+      if (!isDragging) return;
       isDragging = false;
+      velocity = computeReleaseVelocity();
       momentumScroll();
     });
 
     // Hover pausa auto-scroll pero no drag
     wrapper.addEventListener('mouseenter', () => { if (!isDragging) autoPlay = false; });
     wrapper.addEventListener('mouseleave', () => { if (!isDragging) autoPlay = true; });
+
+    // Re-calcular en resize
+    window.addEventListener('resize', () => {
+      const oldWidth = cycleWidth;
+      calcCycleWidth();
+      // Mantener proporción visual al cambiar el ancho
+      if (oldWidth > 0 && cycleWidth > 0) {
+        pos = (pos / oldWidth) * cycleWidth;
+        applyPos();
+      }
+    });
+
+    // Arrancar el flujo de carga de imágenes
+    waitForImagesAndStart();
   }
 
   // Esperar a que todas las imágenes carguen antes de iniciar
@@ -4456,32 +4055,7 @@
     window.addEventListener('load', initCarrusel);
   }
 
-  // Clientes particles
-  (function() {
-    var container = document.getElementById('clientesParticles');
-    if (!container) return;
-    var count = 18;
-    for (var i = 0; i < count; i++) {
-      var span = document.createElement('span');
-      var left = Math.random() * 100;
-      var size = 1.5 + Math.random() * 2.5;
-      var duration = 6 + Math.random() * 10;
-      var delay = Math.random() * 8;
-      var drift = (Math.random() - 0.5) * 60;
-      var topPos = Math.random() * 90; // distribuidas en todo el alto
-      span.style.cssText = [
-        'left:' + left + '%;',
-        'top:' + topPos + '%;',
-        'width:' + size + 'px;',
-        'height:' + size + 'px;',
-        'animation-duration:' + duration + 's;',
-        'animation-delay:-' + delay + 's;',
-        '--drift:' + drift + 'px;',
-        'opacity:' + (0.2 + Math.random() * 0.4) + ';'
-      ].join('');
-      container.appendChild(span);
-    }
-  })();
+  
 
   // ── Antes & Después Slider ──────────────────────────────
   (function() {
@@ -4553,93 +4127,6 @@
     set(95);
     setTimeout(function() { requestAnimationFrame(tick); }, 700);
   })();
-
-  // ── Browser web animation ───────────────────────────────────────────
-  (function() {
-    function animateBrowser() {
-      var cursor   = document.getElementById('web-cursor-new');
-      var ripple   = document.getElementById('web-ripple');
-      var popup    = document.getElementById('web-popup');
-      var cta      = document.getElementById('fake-cta');
-      if (!cursor || !ripple || !popup) return;
-
-      var step = 0;
-      function runStep() {
-        if (step === 0) {
-          // Move cursor toward CTA button
-          cursor.style.top  = '52%';
-          cursor.style.left = '22%';
-        } else if (step === 1) {
-          // Hover on button — highlight it
-          if (cta) cta.style.background = '#e55a00';
-        } else if (step === 2) {
-          // Click — ripple effect
-          ripple.style.width   = '0px';
-          ripple.style.height  = '0px';
-          ripple.style.opacity = '1';
-          ripple.style.transition = 'none';
-          setTimeout(function() {
-            ripple.style.transition = 'all 0.5s ease-out';
-            ripple.style.width   = '80px';
-            ripple.style.height  = '80px';
-            ripple.style.opacity = '0';
-          }, 50);
-        } else if (step === 3) {
-          // Error popup appears
-          popup.style.transition = 'opacity 0.3s ease';
-          popup.style.opacity = '1';
-          if (cta) cta.style.background = '#ff6600';
-        } else if (step === 4) {
-          // Cursor moves away frustrated
-          cursor.style.top  = '20%';
-          cursor.style.left = '80%';
-        } else if (step === 5) {
-          // Reset
-          popup.style.opacity = '0';
-          cursor.style.transition = 'none';
-          cursor.style.top  = '35%';
-          cursor.style.left = '60%';
-          setTimeout(function() {
-            cursor.style.transition = 'all 0.8s cubic-bezier(0.25,0.46,0.45,0.94)';
-          }, 50);
-          step = -1;
-        }
-        step++;
-      }
-
-      // Run steps sequentially
-      var delays = [0, 600, 1200, 1400, 2200, 3000];
-      var timers = [];
-      function startSequence() {
-        step = 0;
-        delays.forEach(function(d, i) {
-          timers.push(setTimeout(runStep, d));
-        });
-      }
-
-      // Observe card
-      var card = document.querySelector('[data-anim="web"]');
-      if (!card) return;
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            timers.forEach(clearTimeout);
-            startSequence();
-            // Loop every 4s
-            setTimeout(function loop() {
-              timers.forEach(clearTimeout);
-              startSequence();
-              setTimeout(loop, 4000);
-            }, 4000);
-            obs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.5 });
-      obs.observe(card);
-    }
-    animateBrowser();
-  })();
-
   // ── Problema cards animation trigger ────────────────────────────────
   (function() {
     var cards = document.querySelectorAll('.problema-card');
@@ -4665,274 +4152,6 @@
   })();
 
 
-  // ── Sticky CTA ──────────────────────────────────────────────────────
-  (function() {
-    var stickyCta = document.getElementById('sticky-cta');
-    if (!stickyCta) return;
-
-    var shown = false;
-    var threshold = 0.4; // aparece al 40% de scroll
-
-    function onScroll() {
-      var scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      
-      // Ocultar si estamos cerca del footer (contacto)
-      var contacto = document.getElementById('contacto');
-      var nearBottom = false;
-      if (contacto) {
-        var rect = contacto.getBoundingClientRect();
-        nearBottom = rect.top < window.innerHeight * 0.8;
-      }
-
-      if (scrollPct >= threshold && !nearBottom) {
-        if (!shown) {
-          stickyCta.classList.add('visible');
-          shown = true;
-        }
-      } else {
-        if (shown) {
-          stickyCta.classList.remove('visible');
-          shown = false;
-        }
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // check on load
-  })();
-
-  // ── Funnel Isométrico con Monedas ───────────────────────────────────────
-  (function(){
-    function initFunnel(){
-      var canvas=document.getElementById('canvas-funnel');
-      if(!canvas) return;
-      var p=canvas.parentElement;
-      var rect=p.getBoundingClientRect();
-      canvas.width=rect.width||300;
-      canvas.height=rect.height||140;
-      var ctx=canvas.getContext('2d');
-      var W=canvas.width, H=canvas.height;
-      var t=0, frame=0;
-      var coins=[], dropCoins=[], redFloaters=[];
-
-      var CX=W*0.5, CY=H*0.40;
-      var TW=W*0.72, TH=H*0.10;
-      var NW=W*0.13, NH=H*0.05;
-      var FH=H*0.44;
-
-      function spawnCoin(){
-        coins.push({
-          x:CX+(Math.random()-0.5)*TW*0.7,
-          y:CY-FH/2-5,
-          vy:0.55+Math.random()*0.4,
-          r:7+Math.random()*3,
-          alpha:0, fi:0,
-          color:[[255,200,50],[255,165,30],[220,185,40]][Math.floor(Math.random()*3)],
-        });
-      }
-
-      function drawIsoFunnel(){
-        // Floor shadow
-        var sg=ctx.createRadialGradient(CX,CY+FH/2+TH,0,CX,CY+FH/2+TH,NW*2);
-        sg.addColorStop(0,'rgba(239,68,68,0.08)');
-        sg.addColorStop(1,'rgba(0,0,0,0)');
-        ctx.fillStyle=sg; ctx.fillRect(0,0,W,H);
-
-        // Left face
-        var lx1=CX-TW/2, ly1=CY-FH/2;
-        var lx2=CX-NW/2, ly2=CY+FH/2;
-        var lg=ctx.createLinearGradient(lx1,ly1,lx2,ly2);
-        lg.addColorStop(0,'rgba(70,70,100,0.55)');
-        lg.addColorStop(1,'rgba(45,45,75,0.4)');
-        ctx.beginPath();
-        ctx.moveTo(lx1,ly1+TH/2); ctx.lineTo(lx2,ly2+NH/2);
-        ctx.lineTo(lx2,ly2-NH/2); ctx.lineTo(lx1,ly1-TH/2);
-        ctx.fillStyle=lg; ctx.fill();
-        ctx.strokeStyle='rgba(255,255,255,0.09)'; ctx.lineWidth=1; ctx.stroke();
-
-        // Right face
-        var rg=ctx.createLinearGradient(CX+TW/2,ly1,CX+NW/2,ly2);
-        rg.addColorStop(0,'rgba(90,90,120,0.45)');
-        rg.addColorStop(1,'rgba(55,55,85,0.35)');
-        ctx.beginPath();
-        ctx.moveTo(CX+TW/2,ly1+TH/2); ctx.lineTo(CX+NW/2,ly2+NH/2);
-        ctx.lineTo(CX+NW/2,ly2-NH/2); ctx.lineTo(CX+TW/2,ly1-TH/2);
-        ctx.fillStyle=rg; ctx.fill();
-        ctx.strokeStyle='rgba(255,255,255,0.07)'; ctx.lineWidth=1; ctx.stroke();
-
-        // Top ellipse
-        ctx.beginPath();
-        ctx.ellipse(CX,CY-FH/2,TW/2,TH/2,0,0,Math.PI*2);
-        ctx.fillStyle='rgba(120,120,160,0.25)'; ctx.fill();
-        ctx.strokeStyle='rgba(255,255,255,0.15)'; ctx.lineWidth=1.5; ctx.stroke();
-
-        // Inner funnel highlight
-        ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=2;
-        ctx.beginPath();
-        ctx.moveTo(lx1+4,ly1); ctx.lineTo(lx2+2,ly2-4);
-        ctx.stroke();
-
-        // Neck RED block
-        var na=0.65+Math.sin(t*3.5)*0.25;
-        ctx.shadowColor='rgba(239,68,68,0.9)';
-        ctx.shadowBlur=14;
-        ctx.beginPath();
-        ctx.ellipse(CX,CY+FH/2,NW/2+3,NH/2+3,0,0,Math.PI*2);
-        ctx.fillStyle=`rgba(239,68,68,${na})`; ctx.fill();
-        ctx.strokeStyle=`rgba(255,120,120,${na})`; ctx.lineWidth=2; ctx.stroke();
-        ctx.shadowBlur=0;
-
-        // Neck label
-        ctx.fillStyle=`rgba(255,255,255,${na*0.95})`;
-        ctx.font=`bold ${W*0.028}px Poppins,sans-serif`;
-        ctx.textAlign='center'; ctx.textBaseline='middle';
-        ctx.fillText('⛔ CUELLO',CX,CY+FH/2);
-        ctx.textBaseline='alphabetic';
-
-        // Tube below
-        var tg=ctx.createLinearGradient(CX-NW/2,0,CX+NW/2,0);
-        tg.addColorStop(0,'rgba(50,50,80,0.5)');
-        tg.addColorStop(0.5,'rgba(70,70,100,0.4)');
-        tg.addColorStop(1,'rgba(50,50,80,0.5)');
-        ctx.fillStyle=tg;
-        ctx.fillRect(CX-NW/2+2,CY+FH/2+NH/2,NW-4,H*0.14);
-
-        // Top label
-        ctx.fillStyle='rgba(255,255,255,0.22)';
-        ctx.font=`500 ${W*0.028}px Poppins,sans-serif`;
-        ctx.textAlign='center';
-        ctx.fillText('Leads entrando',CX,CY-FH/2-TH/2-6);
-
-        // Bottom label
-        ctx.fillStyle='rgba(74,222,128,0.5)';
-        ctx.font=`500 ${W*0.028}px Poppins,sans-serif`;
-        ctx.fillText('Pocos convierten',CX,H*0.96);
-      }
-
-      function drawCoin(x,y,r,col,alpha,green){
-        if(alpha<=0) return;
-        ctx.globalAlpha=alpha;
-        // Shadow
-        ctx.beginPath(); ctx.arc(x,y+2,r,0,Math.PI*2);
-        ctx.fillStyle='rgba(0,0,0,0.25)'; ctx.fill();
-        // Gradient body
-        var cg=ctx.createRadialGradient(x-r*0.3,y-r*0.3,0,x,y,r);
-        if(green){
-          cg.addColorStop(0,'rgba(120,255,160,1)');
-          cg.addColorStop(1,'rgba(74,222,128,0.9)');
-        } else {
-          cg.addColorStop(0,`rgba(${col[0]+50},${col[1]+50},${col[2]},1)`);
-          cg.addColorStop(1,`rgba(${col[0]},${col[1]},${col[2]},0.9)`);
-        }
-        ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);
-        ctx.fillStyle=cg; ctx.fill();
-        // Rim
-        ctx.strokeStyle=green?'rgba(150,255,180,0.6)':`rgba(${col[0]+70},${col[1]+70},20,0.5)`;
-        ctx.lineWidth=0.8; ctx.stroke();
-        // $ sign
-        ctx.fillStyle='rgba(0,0,0,0.55)';
-        ctx.font=`bold ${r*1.3}px Poppins,sans-serif`;
-        ctx.textAlign='center'; ctx.textBaseline='middle';
-        ctx.fillText('$',x,y);
-        ctx.textBaseline='alphabetic';
-        ctx.globalAlpha=1;
-      }
-
-      var stackedCoins=[];
-
-      function draw(){
-        ctx.clearRect(0,0,W,H);
-        t+=0.04; frame++;
-
-        if(frame%28===0) spawnCoin();
-        // Green coin passes every ~5s
-        if(frame%300===0){
-          dropCoins.push({x:CX,y:CY+FH/2+NH/2,vy:1.2,r:7,alpha:1});
-          redFloaters.push({x:CX-20+(Math.random()-0.5)*10,y:CY+FH/2-8,vy:-1.4,alpha:1,big:true});
-        }
-        // Random 💸 from blocked pile
-        if(frame%55===0 && stackedCoins.length>0){
-          var sc=stackedCoins[Math.floor(Math.random()*Math.min(3,stackedCoins.length))];
-          if(sc) redFloaters.push({x:sc.x+(Math.random()-0.5)*16,y:sc.y-4,vy:-1.1-Math.random()*0.5,alpha:1,big:false});
-        }
-
-        drawIsoFunnel();
-
-        // Active falling coins
-        for(var i=coins.length-1;i>=0;i--){
-          var cn=coins[i];
-          cn.fi=Math.min(1,cn.fi+0.07); cn.alpha=cn.fi;
-          cn.y+=cn.vy;
-          cn.x+=(CX-cn.x)*0.018;
-          // Funnel wall
-          var fy=(cn.y-(CY-FH/2))/FH;
-          var fw=TW/2+(NW/2-TW/2)*Math.min(1,Math.max(0,fy));
-          if(cn.x<CX-fw+cn.r) cn.x=CX-fw+cn.r;
-          if(cn.x>CX+fw-cn.r) cn.x=CX+fw-cn.r;
-          // Hit neck
-          if(cn.y+cn.r>=CY+FH/2-5){
-            cn.vy=0; cn.y=CY+FH/2-cn.r-5;
-            stackedCoins.push(coins.splice(i,1)[0]);
-            continue;
-          }
-          drawCoin(cn.x,cn.y,cn.r,cn.color,cn.alpha,false);
-        }
-
-        // Stacked coins at neck
-        for(var si=stackedCoins.length-1;si>=0;si--){
-          var sc=stackedCoins[si];
-          var ty=CY+FH/2-sc.r-5-si*(sc.r*1.55);
-          sc.y+=(ty-sc.y)*0.1;
-          sc.x+=(CX-sc.x)*0.06;
-          sc.x+=Math.sin(t*2.2+si*1.1)*0.5;
-          var sa=Math.max(0,1-Math.max(0,si-6)*0.22);
-          if(sa<=0) continue;
-          drawCoin(sc.x,sc.y,sc.r,sc.color,sa*0.82,false);
-        }
-        if(stackedCoins.length>10) stackedCoins.splice(0,1);
-
-        // Green passing coins
-        for(var j=dropCoins.length-1;j>=0;j--){
-          var dc=dropCoins[j];
-          dc.y+=dc.vy; dc.vy+=0.06; dc.alpha-=0.016;
-          if(dc.alpha<=0||dc.y>H){dropCoins.splice(j,1);continue;}
-          // Green glow
-          ctx.globalAlpha=dc.alpha*0.4;
-          var gg=ctx.createRadialGradient(dc.x,dc.y,0,dc.x,dc.y,18);
-          gg.addColorStop(0,'rgba(74,222,128,0.5)');
-          gg.addColorStop(1,'rgba(74,222,128,0)');
-          ctx.beginPath(); ctx.arc(dc.x,dc.y,18,0,Math.PI*2);
-          ctx.fillStyle=gg; ctx.fill();
-          ctx.globalAlpha=1;
-          drawCoin(dc.x,dc.y,dc.r,null,dc.alpha,true);
-        }
-
-        // 💸 red floaters
-        for(var k=redFloaters.length-1;k>=0;k--){
-          var rf=redFloaters[k];
-          rf.y+=rf.vy; rf.alpha-=0.02;
-          if(rf.alpha<=0){redFloaters.splice(k,1);continue;}
-          ctx.globalAlpha=rf.alpha;
-          ctx.font=`${rf.big?W*0.05:W*0.042}px sans-serif`;
-          ctx.textAlign='center'; ctx.textBaseline='middle';
-          ctx.fillText('💸',rf.x,rf.y);
-          ctx.textBaseline='alphabetic';
-          ctx.globalAlpha=1;
-        }
-
-        requestAnimationFrame(draw);
-      }
-      draw();
-    }
-
-    var card=document.querySelector('[data-anim="funnel"]');
-    if(!card) return;
-    var started=false;
-    var io=new IntersectionObserver(function(e){
-      if(e[0].isIntersecting&&!started){started=true;setTimeout(initFunnel,80);}
-    },{threshold:0.2});
-    io.observe(card);
-  })();
 
 
   // ── Google sin resultados — Card 5 ──────────────────────────────────
@@ -4988,126 +4207,1190 @@
     io.observe(card);
   })();
 
-  // ── Stardust background ─────────────────────────────────────────────
-  (function(){
-    var canvas = document.getElementById('bg-canvas');
-    var ctx    = canvas.getContext('2d');
-    var mouse  = { x: window.innerWidth/2, y: window.innerHeight/2 };
-    var W, H;
+  
 
-    function resize(){
-      W = canvas.width  = window.innerWidth;
-      H = canvas.height = window.innerHeight;
+</script>
+<!-- ============================================
+     STICKY CTA + FRENOS — 2 nuevos canvas
+============================================ -->
+<script>
+(function() {
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setupCanvas(canvas) {
+    var ctx = canvas.getContext('2d');
+    var dpr = window.devicePixelRatio || 1;
+    function resize() {
+      var rect = canvas.getBoundingClientRect();
+      var w = rect.width || canvas.parentElement.offsetWidth;
+      var h = rect.height || canvas.parentElement.offsetHeight;
+      if (w === 0 || h === 0) return false;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+      return { w: w, h: h };
     }
-    resize();
-    window.addEventListener('resize', resize);
+    return { ctx: ctx, resize: resize };
+  }
 
-    window.addEventListener('mousemove', function(e){
-      mouse.x = e.clientX; mouse.y = e.clientY;
+  function watchVisibility(canvas, onVisible, onHidden) {
+    if (!('IntersectionObserver' in window)) { onVisible(); return; }
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) onVisible(); else onHidden();
+      });
+    }, { threshold: 0.1 });
+    obs.observe(canvas);
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  // ============================================================
+  // FRENO 1 — TU SITIO WEB NO VENDE (Reloj que no avanza)
+  // ============================================================
+  function initWebClock() {
+    var canvas = document.getElementById('canvas-web-clock');
+    if (!canvas) return;
+    var s = setupCanvas(canvas);
+    var dims = s.resize();
+    if (!dims) { setTimeout(initWebClock, 100); return; }
+    var ctx = s.ctx;
+    var W = dims.w, H = dims.h;
+
+    var t = 0;
+    var loadProgress = 0;
+    var phase = 'loading';
+    var phaseT = 0;
+    var visitorAlpha = 1;
+    var visitorX = 0;
+    var running = false;
+    var rafId = null;
+
+    function draw() {
+      if (!running) return;
+      ctx.clearRect(0, 0, W, H);
+      t += 0.016;
+      phaseT++;
+
+      var pad = W * 0.04;
+      var bx = pad, by = pad, bw = W - pad * 2, bh = H - pad * 2;
+
+      // Browser frame
+      ctx.fillStyle = '#1a1a1f';
+      roundRect(ctx, bx, by, bw, bh, 6); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 0.5; ctx.stroke();
+
+      // Chrome bar
+      ctx.fillStyle = '#252530';
+      roundRect(ctx, bx, by, bw, 14, 6); ctx.fill();
+      ctx.fillRect(bx, by + 10, bw, 4);
+
+      // URL bar with progress
+      var urlW = bw * 0.7, urlX = bx + (bw - urlW) / 2;
+      ctx.fillStyle = 'rgba(255,255,255,0.06)';
+      roundRect(ctx, urlX, by + 4, urlW, 6, 3); ctx.fill();
+      ctx.fillStyle = 'rgba(220,107,58,0.5)';
+      roundRect(ctx, urlX, by + 4, urlW * loadProgress, 6, 3); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.font = '4.5px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('vitastudio.site (' + Math.round(loadProgress * 100) + '%)', urlX + urlW/2, by + 7);
+
+      // Big loading spinner in center
+      var cx = bx + bw / 2, cy = by + bh / 2 - 8;
+      var sweepAngle = t * 2;
+
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 18, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = '#dc6b3a';
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(cx, cy, 18, sweepAngle, sweepAngle + Math.PI * 1.4);
+      ctx.stroke();
+      ctx.lineCap = 'butt';
+
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.font = 'bold 6px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('Cargando...', cx, cy + 28);
+
+      // Phase logic
+      if (phase === 'loading') {
+        loadProgress = Math.min(0.42, loadProgress + 0.0025);
+        if (phaseT > 180) {
+          phase = 'leaving';
+          phaseT = 0;
+        }
+      }
+      if (phase === 'leaving') {
+        visitorAlpha = Math.max(0, visitorAlpha - 0.04);
+        visitorX += 1.5;
+        if (visitorAlpha <= 0) {
+          phase = 'reset';
+          phaseT = 0;
+        }
+      }
+      if (phase === 'reset') {
+        if (phaseT > 30) {
+          loadProgress = 0;
+          visitorX = 0;
+          visitorAlpha = 1;
+          phase = 'loading';
+          phaseT = 0;
+        }
+      }
+
+      // Visitor figure (bottom-left)
+      ctx.globalAlpha = visitorAlpha;
+      var vx = bx + 14 + visitorX, vy = by + bh - 18;
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      ctx.beginPath();
+      ctx.arc(vx, vy - 4, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillRect(vx - 3, vy - 1, 6, 5);
+
+      // Speech bubble "Ya me voy"
+      if (phase === 'leaving') {
+        ctx.fillStyle = 'rgba(220,107,58,' + (visitorAlpha * 0.2) + ')';
+        ctx.strokeStyle = 'rgba(220,107,58,' + visitorAlpha + ')';
+        ctx.lineWidth = 0.5;
+        roundRect(ctx, vx + 6, vy - 16, 36, 11, 3);
+        ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#dc6b3a';
+        ctx.font = 'bold 5px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('Ya me voy', vx + 24, vy - 10);
+      }
+      ctx.globalAlpha = 1;
+
+      // Stat
+      ctx.fillStyle = 'rgba(255,255,255,0.45)';
+      ctx.font = '4.5px sans-serif';
+      ctx.textAlign = 'right'; ctx.textBaseline = 'top';
+      ctx.fillText('47% SE VA SI TARDA > 3s', bx + bw - 8, by + 18);
+
+      rafId = requestAnimationFrame(draw);
+    }
+
+    if (prefersReducedMotion) {
+      running = true; draw(); running = false;
+      return;
+    }
+
+    watchVisibility(canvas,
+      function() { if (!running) { running = true; draw(); } },
+      function() { running = false; if (rafId) cancelAnimationFrame(rafId); }
+    );
+
+    window.addEventListener('resize', function() {
+      var d = s.resize();
+      if (d) { W = d.w; H = d.h; }
     });
-    window.addEventListener('touchmove', function(e){
-      mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY;
-    },{ passive:true });
+  }
 
-    var COUNT = 110;
-    var stars  = [];
+  // ============================================================
+  // FRENO 2 — CUELLO DE BOTELLA (Detective con lupa)
+  // ============================================================
+  function initFunnelDetective() {
+    var canvas = document.getElementById('canvas-funnel-detective');
+    if (!canvas) return;
+    var s = setupCanvas(canvas);
+    var dims = s.resize();
+    if (!dims) { setTimeout(initFunnelDetective, 100); return; }
+    var ctx = s.ctx;
+    var W = dims.w, H = dims.h;
 
-    for(var i=0; i<COUNT; i++){
-      stars.push({
-        x:     Math.random() * window.innerWidth,
-        y:     Math.random() * window.innerHeight,
-        r:     0.4 + Math.random() * 1.4,
-        // base velocity — always moving
-        bvx:   (Math.random()-0.5) * 0.5,
-        bvy:   (Math.random()-0.5) * 0.5,
-        vx:    0, vy: 0,
-        alpha: 0.1 + Math.random() * 0.45,
-        gold:  Math.random() > 0.7,
-        pulse: Math.random() * Math.PI * 2,
+    var t = 0;
+    var lupaPhase = 0;
+    var lupaT = 0;
+    var running = false;
+    var rafId = null;
+
+    var stages = [
+      { label: 'Anuncio', x: 0, y: 0 },
+      { label: 'Click', x: 0, y: 0 },
+      { label: 'Form', x: 0, y: 0, isBottleneck: true },
+      { label: 'Llamada', x: 0, y: 0 },
+      { label: 'Cierre', x: 0, y: 0 },
+    ];
+
+    function easeInOut(x) {
+      return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+    }
+
+    function draw() {
+      if (!running) return;
+      ctx.clearRect(0, 0, W, H);
+      t += 0.016;
+
+      // Header
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.font = 'bold 5.5px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      ctx.fillText('AUDITANDO TU PROCESO', W/2, H * 0.06);
+
+      var pad = W * 0.06;
+      var nodeY = H * 0.55;
+      var spacing = (W - pad * 2) / (stages.length - 1);
+
+      stages.forEach(function(st, i) {
+        st.x = pad + spacing * i;
+        st.y = nodeY;
+      });
+
+      // Connecting line
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(stages[0].x, nodeY);
+      ctx.lineTo(stages[stages.length - 1].x, nodeY);
+      ctx.stroke();
+
+      // Lupa phase machine
+      lupaT++;
+      if (lupaT > 90) {
+        lupaPhase = (lupaPhase + 1) % stages.length;
+        lupaT = 0;
+      }
+
+      var lupaProgress = Math.min(1, lupaT / 30);
+      var prevPhase = (lupaPhase - 1 + stages.length) % stages.length;
+      var lupaX = stages[prevPhase].x + (stages[lupaPhase].x - stages[prevPhase].x) * easeInOut(lupaProgress);
+      var lupaY = nodeY;
+
+      var current = stages[lupaPhase];
+      var hover = lupaT > 25;
+      var isBottleneck = current.isBottleneck && hover;
+
+      // Glow under lupa
+      var glowSize = isBottleneck ? 28 : 22;
+      var grd = ctx.createRadialGradient(lupaX, lupaY, 0, lupaX, lupaY, glowSize);
+      if (isBottleneck) {
+        grd.addColorStop(0, 'rgba(220,107,58,0.35)');
+        grd.addColorStop(1, 'rgba(220,107,58,0)');
+      } else {
+        grd.addColorStop(0, 'rgba(255,255,255,0.12)');
+        grd.addColorStop(1, 'rgba(255,255,255,0)');
+      }
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(lupaX, lupaY, glowSize, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw nodes
+      stages.forEach(function(st, i) {
+        var lit = (i === lupaPhase && hover);
+        var crit = lit && st.isBottleneck;
+
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, crit ? 7 : 5, 0, Math.PI * 2);
+        ctx.fillStyle = crit ? 'rgba(220,107,58,0.85)' : (lit ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.3)');
+        ctx.fill();
+        ctx.strokeStyle = crit ? 'rgba(220,107,58,1)' : 'rgba(255,255,255,0.4)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        if (crit) {
+          var p2 = (Math.sin(t * 4) + 1) / 2;
+          ctx.beginPath();
+          ctx.arc(st.x, st.y, 7 + p2 * 8, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(220,107,58,' + (0.4 - p2 * 0.3) + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        ctx.fillStyle = crit ? '#dc6b3a' : (lit ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.4)');
+        ctx.font = 'bold 5px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+        ctx.fillText(st.label.toUpperCase(), st.x, st.y + 12);
+      });
+
+      // Lupa (magnifying glass)
+      ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.lineWidth = 1.5;
+      var lupaR = 13;
+      ctx.beginPath();
+      ctx.arc(lupaX, lupaY, lupaR, 0, Math.PI * 2);
+      ctx.fill(); ctx.stroke();
+
+      ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.arc(lupaX, lupaY, lupaR - 2, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(lupaX - 4, lupaY - 4, 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      ctx.fill();
+
+      // Handle
+      ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(lupaX + lupaR * 0.7, lupaY + lupaR * 0.7);
+      ctx.lineTo(lupaX + lupaR + 8, lupaY + lupaR + 8);
+      ctx.stroke();
+      ctx.lineCap = 'butt';
+
+      // CUELLO DE BOTELLA tag when at bottleneck
+      if (isBottleneck) {
+        var tagY = nodeY - 28;
+        var pulse2 = 0.5 + Math.sin(t * 3) * 0.3;
+        ctx.fillStyle = 'rgba(220,107,58,' + (pulse2 * 0.18) + ')';
+        ctx.strokeStyle = 'rgba(220,107,58,' + pulse2 + ')';
+        ctx.lineWidth = 0.8;
+        var tagX = current.x - 25;
+        roundRect(ctx, tagX, tagY, 50, 12, 3);
+        ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#dc6b3a';
+        ctx.font = 'bold 5px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('CUELLO DE BOTELLA', current.x, tagY + 6);
+
+        ctx.strokeStyle = 'rgba(220,107,58,' + pulse2 + ')';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(current.x, tagY + 12);
+        ctx.lineTo(current.x, current.y - 8);
+        ctx.stroke();
+      }
+
+      rafId = requestAnimationFrame(draw);
+    }
+
+    if (prefersReducedMotion) {
+      running = true; draw(); running = false;
+      return;
+    }
+
+    watchVisibility(canvas,
+      function() { if (!running) { running = true; draw(); } },
+      function() { running = false; if (rafId) cancelAnimationFrame(rafId); }
+    );
+
+    window.addEventListener('resize', function() {
+      var d = s.resize();
+      if (d) { W = d.w; H = d.h; }
+    });
+  }
+
+    function initFrenosCanvas() {
+    initWebClock();
+    initFunnelDetective();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFrenosCanvas);
+  } else {
+    initFrenosCanvas();
+  }
+})();
+</script>
+
+<!-- ============================================
+     SOLUCIONES — 3 animaciones canvas
+============================================ -->
+<script>
+(function() {
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setupCanvas(canvas) {
+    var ctx = canvas.getContext('2d');
+    var dpr = window.devicePixelRatio || 1;
+    function resize() {
+      var rect = canvas.getBoundingClientRect();
+      var w = rect.width || canvas.parentElement.offsetWidth;
+      var h = rect.height || canvas.parentElement.offsetHeight;
+      if (w === 0 || h === 0) return false;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+      return { w: w, h: h };
+    }
+    return { ctx: ctx, resize: resize };
+  }
+
+  function watchVisibility(canvas, onVisible, onHidden) {
+    if (!('IntersectionObserver' in window)) { onVisible(); return; }
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) onVisible(); else onHidden();
+      });
+    }, { threshold: 0.1 });
+    obs.observe(canvas);
+  }
+
+  // ============================================================
+  // ANIMACIÓN 1 — VISIBILIDAD DE MARCA
+  // Cuadrícula de círculos, uno se enciende verde con billetes
+  // ============================================================
+  function initVisibility() {
+    var canvas = document.getElementById('vita-canvas-vis');
+    if (!canvas) return;
+    var s = setupCanvas(canvas);
+    var dims = s.resize();
+    if (!dims) { setTimeout(initVisibility, 100); return; }
+    var ctx = s.ctx;
+    var W = dims.w, H = dims.h;
+
+    var COLS = 8, ROWS = 6;
+    var SPACING_X = W / (COLS + 1);
+    var SPACING_Y = H / (ROWS + 1);
+    var R = Math.min(SPACING_X, SPACING_Y) * 0.28;
+
+    var circles = [];
+    for (var row = 0; row < ROWS; row++) {
+      for (var col = 0; col < COLS; col++) {
+        circles.push({
+          bx: SPACING_X * (col + 1),
+          by: SPACING_Y * (row + 1),
+          x: SPACING_X * (col + 1),
+          y: SPACING_Y * (row + 1),
+          offset: Math.random() * Math.PI * 2,
+          r: R,
+          alpha: 0.06 + Math.random() * 0.06,
+          heroT: 0,
+        });
+      }
+    }
+    var HERO_IDX = Math.floor(ROWS / 2) * COLS + Math.floor(COLS / 2);
+
+    var dollars = [];
+    var t = 0;
+    var phase = 0;
+    var phaseT = 0;
+    var PHASE_GREY = 180, PHASE_LIGHT = 40, PHASE_DOLLAR = 180, PHASE_FADE = 60;
+    var running = false;
+    var rafId = null;
+
+    function spawnDollar() {
+      var hero = circles[HERO_IDX];
+      dollars.push({
+        x: hero.x + (Math.random() - 0.5) * 10,
+        y: hero.y,
+        vx: (Math.random() - 0.5) * 1.8,
+        vy: -1.5 - Math.random() * 2,
+        alpha: 1,
+        size: 11 + Math.random() * 8,
+        text: Math.random() > 0.4 ? '$' : '\uD83D\uDCB0',
+        isEmoji: Math.random() > 0.5,
       });
     }
 
-    function draw(){
-      ctx.clearRect(0,0,W,H);
+    function draw() {
+      if (!running) return;
+      ctx.clearRect(0, 0, W, H);
+      t += 0.018;
+      phaseT++;
 
-      stars.forEach(function(s){
-        s.pulse += 0.012;
+      if (phase === 0 && phaseT > PHASE_GREY)  { phase = 1; phaseT = 0; }
+      if (phase === 1 && phaseT > PHASE_LIGHT) { phase = 2; phaseT = 0; }
+      if (phase === 2 && phaseT > PHASE_DOLLAR){ phase = 3; phaseT = 0; }
+      if (phase === 3 && phaseT > PHASE_FADE)  {
+        phase = 0; phaseT = 0;
+        dollars = [];
+        circles[HERO_IDX].heroT = 0;
+      }
 
-        // Mouse attraction
-        var dx = mouse.x - s.x;
-        var dy = mouse.y - s.y;
-        var dist = Math.sqrt(dx*dx + dy*dy);
-        var force = Math.min(60/(dist*dist), 0.5);
-        s.vx += dx * force * 0.00012;
-        s.vy += dy * force * 0.00012;
+      if (phase === 2 && phaseT % 10 === 0) spawnDollar();
 
-        // Damping on extra velocity only
-        s.vx *= 0.97;
-        s.vy *= 0.97;
+      circles.forEach(function(c, i) {
+        var isHero = (i === HERO_IDX);
+        c.x = c.bx + Math.sin(t * 0.6 + c.offset) * 6;
+        c.y = c.by + Math.cos(t * 0.5 + c.offset * 1.3) * 4;
 
-        // Always move with base velocity
-        s.x += s.bvx + s.vx;
-        s.y += s.bvy + s.vy;
+        if (isHero) {
+          if (phase === 1) c.heroT = Math.min(1, c.heroT + 0.05);
+          if (phase === 3) c.heroT = Math.max(0, c.heroT - 0.03);
+        }
 
-        // Slightly vary base velocity for organic feel
-        s.bvx += (Math.random()-0.5) * 0.008;
-        s.bvy += (Math.random()-0.5) * 0.008;
-        s.bvx = Math.max(-0.6, Math.min(0.6, s.bvx));
-        s.bvy = Math.max(-0.6, Math.min(0.6, s.bvy));
+        var heroProgress = isHero ? c.heroT : 0;
+        var fillR = 255, fillG = 255, fillB = 255;
+        var strokeR = 255, strokeG = 255, strokeB = 255;
+        var strokeAlpha = 0.1;
+        var fillAlpha = c.alpha;
+        var radius = c.r;
 
-        // Wrap edges
-        if(s.x < 0)  s.x = W;
-        if(s.x > W)  s.x = 0;
-        if(s.y < 0)  s.y = H;
-        if(s.y > H)  s.y = 0;
+        if (heroProgress > 0) {
+          fillR = Math.round(255 + (74 - 255) * heroProgress);
+          fillG = Math.round(255 + (222 - 255) * heroProgress);
+          fillB = Math.round(255 + (128 - 255) * heroProgress);
+          fillAlpha = c.alpha + (0.95 - c.alpha) * heroProgress;
+          strokeR = 74; strokeG = 222; strokeB = 128;
+          strokeAlpha = 0.1 + 0.9 * heroProgress;
+          var pulse = 1 + Math.sin(t * 4) * 0.06;
+          radius = c.r * (1 + 1.5 * heroProgress) * pulse;
+        }
+        if (!isHero && circles[HERO_IDX].heroT > 0) {
+          fillAlpha = c.alpha * (1 - circles[HERO_IDX].heroT * 0.6);
+        }
 
-        // Alpha pulse
-        var a = s.alpha * (0.65 + Math.sin(s.pulse) * 0.35);
-
-        // Proximity glow
-        var proximityBoost = Math.max(0, 1 - dist/180) * 0.5;
-        a = Math.min(1, a + proximityBoost);
-
-        // Glow for nearby or gold stars
-        if(dist < 180 || s.gold){
-          var glowSize = s.r * (s.gold ? 6 : 4);
-          var g = ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,glowSize);
-          g.addColorStop(0, s.gold
-            ? 'rgba(255,140,66,'+(a*0.35)+')'
-            : 'rgba(255,255,255,'+(a*0.15)+')');
-          g.addColorStop(1,'rgba(0,0,0,0)');
+        if (heroProgress > 0) {
+          var glowSize = radius * (3.5 + Math.sin(t * 3) * 0.5);
+          var grd = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, glowSize);
+          grd.addColorStop(0, 'rgba(74,222,128,' + (0.45 * heroProgress) + ')');
+          grd.addColorStop(0.4, 'rgba(74,222,128,' + (0.15 * heroProgress) + ')');
+          grd.addColorStop(1, 'rgba(74,222,128,0)');
           ctx.beginPath();
-          ctx.arc(s.x,s.y,glowSize,0,Math.PI*2);
-          ctx.fillStyle = g;
+          ctx.arc(c.x, c.y, glowSize, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+
+          var coreGlow = radius * 1.4;
+          var crd = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, coreGlow);
+          crd.addColorStop(0, 'rgba(200,255,220,' + (0.5 * heroProgress) + ')');
+          crd.addColorStop(1, 'rgba(74,222,128,0)');
+          ctx.beginPath();
+          ctx.arc(c.x, c.y, coreGlow, 0, Math.PI * 2);
+          ctx.fillStyle = crd;
           ctx.fill();
         }
 
-        // Star dot
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-        ctx.fillStyle = s.gold
-          ? 'rgba(255,140,66,'+a+')'
-          : 'rgba(255,255,255,'+a+')';
+        ctx.arc(c.x, c.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + fillR + ',' + fillG + ',' + fillB + ',' + fillAlpha + ')';
+        ctx.strokeStyle = 'rgba(' + strokeR + ',' + strokeG + ',' + strokeB + ',' + strokeAlpha + ')';
+        ctx.lineWidth = isHero && c.heroT > 0 ? 2 : 1;
+        ctx.fill();
+        ctx.stroke();
+
+        if (isHero && heroProgress > 0.5) {
+          ctx.globalAlpha = (heroProgress - 0.5) * 2;
+          ctx.fillStyle = 'rgba(74,222,128,0.9)';
+          ctx.font = 'bold ' + (W * 0.036) + 'px Poppins,sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('Tú', c.x, c.y - radius - 12);
+          ctx.beginPath();
+          ctx.moveTo(c.x, c.y - radius - 5);
+          ctx.lineTo(c.x, c.y - radius - 1);
+          ctx.strokeStyle = 'rgba(74,222,128,0.5)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+      });
+
+      for (var i = dollars.length - 1; i >= 0; i--) {
+        var d = dollars[i];
+        d.x += d.vx;
+        d.y += d.vy;
+        d.vy += 0.04;
+        d.alpha -= 0.016;
+        d.vx *= 0.99;
+        if (d.alpha <= 0) { dollars.splice(i, 1); continue; }
+        ctx.globalAlpha = d.alpha;
+        if (d.isEmoji) {
+          ctx.font = d.size + 'px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(d.text, d.x, d.y);
+        } else {
+          ctx.shadowColor = 'rgba(74,222,128,0.8)';
+          ctx.shadowBlur = 10;
+          ctx.fillStyle = 'rgba(74,222,128,' + d.alpha + ')';
+          ctx.font = 'bold ' + d.size + 'px Poppins,sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('$', d.x, d.y);
+          ctx.shadowBlur = 0;
+        }
+        ctx.globalAlpha = 1;
+        ctx.textBaseline = 'alphabetic';
+      }
+
+      rafId = requestAnimationFrame(draw);
+    }
+
+    if (prefersReducedMotion) {
+      running = true; draw(); running = false;
+      return;
+    }
+
+    watchVisibility(canvas,
+      function() { if (!running) { running = true; draw(); } },
+      function() { running = false; if (rafId) cancelAnimationFrame(rafId); }
+    );
+
+    window.addEventListener('resize', function() {
+      var d = s.resize();
+      if (d) { W = d.w; H = d.h;
+        SPACING_X = W / (COLS + 1);
+        SPACING_Y = H / (ROWS + 1);
+        R = Math.min(SPACING_X, SPACING_Y) * 0.28;
+        circles.forEach(function(c, i) {
+          var col = i % COLS, row = Math.floor(i / COLS);
+          c.bx = SPACING_X * (col + 1);
+          c.by = SPACING_Y * (row + 1);
+          c.r = R;
+        });
+      }
+    });
+  }
+
+  // ============================================================
+  // ANIMACIÓN 2 — SITIO WEB (dashboard de ventas)
+  // Browser mockup con notificaciones de venta entrando + billetes
+  // ============================================================
+  function initWeb() {
+    var canvas = document.getElementById('vita-canvas-web');
+    if (!canvas) return;
+    var s = setupCanvas(canvas);
+    var dims = s.resize();
+    if (!dims) { setTimeout(initWeb, 100); return; }
+    var ctx = s.ctx;
+    var W = dims.w, H = dims.h;
+
+    var t = 0;
+    var running = false;
+    var rafId = null;
+
+    // Estado del dashboard
+    var ventasHoy = 0;
+    var ventasTarget = 12340;
+    var conversion = 0;
+    var conversionTarget = 8.2;
+
+    // Notificaciones
+    var notifications = [];
+    var nextNotifAt = 60;
+    var notifId = 0;
+    var notifTypes = [
+      { type: 'venta', label: 'Nueva venta', detail: 'Plan Express · $24,900', color: '#4ade80' },
+      { type: 'venta', label: 'Nueva venta', detail: 'Diagnóstico · $3,500', color: '#4ade80' },
+      { type: 'visita', label: 'Visita desde Google', detail: 'Monterrey, MX', color: '#FF8C42' },
+      { type: 'venta', label: 'Nueva venta', detail: 'Branding · $48,500', color: '#4ade80' },
+      { type: 'visita', label: 'Visita orgánica', detail: 'CDMX, MX', color: '#FF8C42' },
+      { type: 'venta', label: 'Nueva venta', detail: 'Plan Integral · $89,000', color: '#4ade80' },
+      { type: 'visita', label: 'Visita desde IG', detail: 'Mérida, MX', color: '#FF8C42' },
+    ];
+
+    var dollars = [];
+
+    function spawnDollar() {
+      var browserCenterX = W * 0.5;
+      var browserTop = H * 0.3;
+      dollars.push({
+        x: browserCenterX + (Math.random() - 0.5) * W * 0.4,
+        y: browserTop,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: -1.2 - Math.random() * 1.5,
+        alpha: 1,
+        size: 11 + Math.random() * 6,
+        isEmoji: Math.random() > 0.5,
+      });
+    }
+
+    function spawnNotification() {
+      var data = notifTypes[Math.floor(Math.random() * notifTypes.length)];
+      notifications.push({
+        id: notifId++,
+        type: data.type,
+        label: data.label,
+        detail: data.detail,
+        color: data.color,
+        age: 0,
+        targetY: 0,
+        currentY: -40,
+        opacity: 0,
+        life: 240,
+      });
+      if (data.type === 'venta') {
+        spawnDollar();
+        spawnDollar();
+      }
+    }
+
+    function draw() {
+      if (!running) return;
+      ctx.clearRect(0, 0, W, H);
+      t += 0.016;
+
+      // Animar contadores hacia su target
+      ventasHoy += (ventasTarget - ventasHoy) * 0.04;
+      conversion += (conversionTarget - conversion) * 0.04;
+
+      // ===== Browser frame =====
+      var pad = W * 0.025;
+      var bx = pad, by = pad;
+      var bw = W - pad * 2;
+      var bh = H - pad * 2;
+      var radius = 8;
+
+      // Frame
+      ctx.fillStyle = '#141414';
+      roundRect(ctx, bx, by, bw, bh, radius);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Chrome bar
+      var chromeH = 18;
+      ctx.fillStyle = '#1c1c1c';
+      roundRect(ctx, bx, by, bw, chromeH, radius);
+      ctx.fill();
+      ctx.fillRect(bx, by + chromeH - 4, bw, 4);
+
+      // Tres puntitos (semaforo)
+      var dotY = by + chromeH/2;
+      ['rgba(255,95,87,0.7)', 'rgba(254,188,46,0.7)', 'rgba(40,200,64,0.6)'].forEach(function(color, i) {
+        ctx.beginPath();
+        ctx.arc(bx + 8 + i * 8, dotY, 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = color;
         ctx.fill();
       });
 
-      requestAnimationFrame(draw);
+      // URL bar
+      ctx.fillStyle = 'rgba(255,255,255,0.06)';
+      var urlW = bw * 0.5;
+      var urlX = bx + (bw - urlW) / 2;
+      roundRect(ctx, urlX, by + 5, urlW, 8, 4);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.font = '6px Poppins, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('vitastudio.site', urlX + urlW / 2, by + 9);
+
+      // ===== Contenido del dashboard =====
+      var contentTop = by + chromeH + 8;
+      var contentLeft = bx + 10;
+      var contentRight = bx + bw - 10;
+      var contentW = contentRight - contentLeft;
+
+      // Background del contenido
+      ctx.fillStyle = 'rgba(15,13,10,0.4)';
+      ctx.fillRect(bx + 1, by + chromeH, bw - 2, bh - chromeH - 1);
+
+      // ===== Métricas top (2 cards) =====
+      var metricH = 28;
+      var metricGap = 4;
+      var metricW = (contentW - metricGap) / 2;
+
+      // Card 1 - Ventas hoy (verde)
+      ctx.fillStyle = 'rgba(74,222,128,0.06)';
+      roundRect(ctx, contentLeft, contentTop, metricW, metricH, 4);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(74,222,128,0.15)';
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.font = '5px Poppins, sans-serif';
+      ctx.fillText('VENTAS HOY', contentLeft + 5, contentTop + 4);
+
+      ctx.fillStyle = '#4ade80';
+      ctx.font = 'bold 11px Poppins, sans-serif';
+      ctx.fillText('$' + Math.round(ventasHoy).toLocaleString(), contentLeft + 5, contentTop + 13);
+
+      // Card 2 - Conversión (naranja)
+      var c2x = contentLeft + metricW + metricGap;
+      ctx.fillStyle = 'rgba(255,140,66,0.06)';
+      roundRect(ctx, c2x, contentTop, metricW, metricH, 4);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,140,66,0.15)';
+      ctx.stroke();
+
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.font = '5px Poppins, sans-serif';
+      ctx.fillText('CONVERSIÓN', c2x + 5, contentTop + 4);
+
+      ctx.fillStyle = '#FF8C42';
+      ctx.font = 'bold 11px Poppins, sans-serif';
+      ctx.fillText(conversion.toFixed(1) + '%', c2x + 5, contentTop + 13);
+
+      // ===== Notificaciones =====
+      var notifTop = contentTop + metricH + 6;
+      var notifH = 20;
+      var notifGap = 3;
+
+      // Update y dibujar
+      for (var i = notifications.length - 1; i >= 0; i--) {
+        var n = notifications[i];
+        n.age++;
+        n.targetY = notifTop + (notifications.length - 1 - i) * (notifH + notifGap);
+        n.currentY += (n.targetY - n.currentY) * 0.18;
+        n.opacity = Math.min(1, n.opacity + 0.08);
+
+        if (n.age > n.life) n.opacity = Math.max(0, n.opacity - 0.04);
+        if (n.opacity <= 0) { notifications.splice(i, 1); continue; }
+
+        var nLeft = contentLeft;
+        var nW = contentW;
+        var nY = n.currentY;
+
+        // Solo dibujar si cabe en el área
+        if (nY + notifH > contentTop + metricH + 6 + (notifH + notifGap) * 2.2) continue;
+
+        ctx.globalAlpha = n.opacity;
+
+        var bgAlpha = n.type === 'venta' ? 0.1 : 0.03;
+        var bgColor = n.type === 'venta' ? '74,222,128' : '255,255,255';
+        var borderColor = n.type === 'venta' ? '74,222,128' : '255,255,255';
+        var borderAlpha = n.type === 'venta' ? 0.3 : 0.06;
+
+        ctx.fillStyle = 'rgba(' + bgColor + ',' + bgAlpha + ')';
+        roundRect(ctx, nLeft, nY, nW, notifH, 4);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(' + borderColor + ',' + borderAlpha + ')';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+
+        // Icono circular
+        var iconX = nLeft + 9;
+        var iconY = nY + notifH/2;
+        var iconBgColor = n.type === 'venta' ? 'rgba(74,222,128,0.2)' : 'rgba(255,140,66,0.15)';
+        ctx.beginPath();
+        ctx.arc(iconX, iconY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = iconBgColor;
+        ctx.fill();
+
+        ctx.fillStyle = n.color;
+        ctx.font = 'bold 7px Poppins, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(n.type === 'venta' ? '$' : '\u2192', iconX, iconY);
+
+        // Label
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'top';
+        ctx.fillStyle = n.color;
+        ctx.font = 'bold 6px Poppins, sans-serif';
+        ctx.fillText(n.label, nLeft + 19, nY + 4);
+
+        // Detail
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.font = '5px Poppins, sans-serif';
+        ctx.fillText(n.detail, nLeft + 19, nY + 11);
+
+        // Time
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.font = '5px Poppins, sans-serif';
+        ctx.textAlign = 'right';
+        var ageSec = Math.floor(n.age / 60);
+        var timeStr = ageSec < 1 ? 'ahora' : ageSec + 's';
+        ctx.fillText(timeStr, nLeft + nW - 5, nY + 7);
+
+        ctx.globalAlpha = 1;
+      }
+
+      // Spawn nuevas notificaciones
+      nextNotifAt--;
+      if (nextNotifAt <= 0) {
+        spawnNotification();
+        nextNotifAt = 90 + Math.floor(Math.random() * 60);
+      }
+
+      // Limit notifications visible (eliminar las más viejas si hay más de 3)
+      if (notifications.length > 3) {
+        notifications[0].opacity = Math.max(0, notifications[0].opacity - 0.05);
+      }
+
+      // ===== Billetes flotantes =====
+      for (var j = dollars.length - 1; j >= 0; j--) {
+        var d = dollars[j];
+        d.x += d.vx;
+        d.y += d.vy;
+        d.vy += 0.02;
+        d.alpha -= 0.012;
+        d.vx *= 0.99;
+        if (d.alpha <= 0 || d.y < 0) { dollars.splice(j, 1); continue; }
+        ctx.globalAlpha = d.alpha;
+        if (d.isEmoji) {
+          ctx.font = d.size + 'px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('\uD83D\uDCB0', d.x, d.y);
+        } else {
+          ctx.shadowColor = 'rgba(74,222,128,0.8)';
+          ctx.shadowBlur = 10;
+          ctx.fillStyle = 'rgba(74,222,128,' + d.alpha + ')';
+          ctx.font = 'bold ' + d.size + 'px Poppins,sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('$', d.x, d.y);
+          ctx.shadowBlur = 0;
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      rafId = requestAnimationFrame(draw);
     }
 
-    draw();
-  })();
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
 
+    if (prefersReducedMotion) {
+      ventasHoy = ventasTarget;
+      conversion = conversionTarget;
+      running = true; draw(); running = false;
+      return;
+    }
+
+    watchVisibility(canvas,
+      function() { if (!running) { running = true; draw(); } },
+      function() { running = false; if (rafId) cancelAnimationFrame(rafId); }
+    );
+
+    window.addEventListener('resize', function() {
+      var d = s.resize();
+      if (d) { W = d.w; H = d.h; }
+    });
+  }
+
+  // ============================================================
+  // ANIMACIÓN 3 — ESTRATEGIA DE ALCANCE (radar)
+  // Radar con sweep, dots que se iluminan en verde, billetes
+  // ============================================================
+  function initReach() {
+    var canvas = document.getElementById('vita-canvas-reach');
+    if (!canvas) return;
+    var s = setupCanvas(canvas);
+    var dims = s.resize();
+    if (!dims) { setTimeout(initReach, 100); return; }
+    var ctx = s.ctx;
+    var W = dims.w, H = dims.h;
+
+    var CX = W * 0.5, CY = H * 0.5;
+    var minDim = Math.min(W, H);
+    var rings = [minDim * 0.18, minDim * 0.32, minDim * 0.46];
+    var t = 0, sweep = 0;
+
+    var dots = [];
+    var ringCounts = [5, 8, 11];
+    rings.forEach(function(r, ri) {
+      for (var i = 0; i < ringCounts[ri]; i++) {
+        var angle = (i / ringCounts[ri]) * Math.PI * 2;
+        dots.push({
+          x: CX + Math.cos(angle) * r,
+          y: CY + Math.sin(angle) * r,
+          angle: angle, ring: ri,
+          lit: false, litT: 0, litAlpha: 0.08,
+        });
+      }
+    });
+
+    var dollars = [];
+    var running = false;
+    var rafId = null;
+
+    function spawnDollar(x, y) {
+      dollars.push({
+        x: x, y: y,
+        vx: (Math.random() - 0.5) * 1.4,
+        vy: -0.6 - Math.random() * 0.6,
+        alpha: 1,
+        size: 9 + Math.random() * 6,
+        isEmoji: Math.random() > 0.55,
+      });
+    }
+
+    function draw() {
+      if (!running) return;
+      ctx.clearRect(0, 0, W, H);
+      t += 0.012;
+      sweep = t % (Math.PI * 2);
+
+      var bg = ctx.createRadialGradient(CX, CY, 0, CX, CY, minDim * 0.55);
+      bg.addColorStop(0, 'rgba(255,140,66,0.06)');
+      bg.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
+
+      rings.forEach(function(r) {
+        ctx.beginPath();
+        ctx.arc(CX, CY, r, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,140,66,0.1)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+
+      ctx.strokeStyle = 'rgba(255,140,66,0.05)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(CX, CY - minDim * 0.5);
+      ctx.lineTo(CX, CY + minDim * 0.5);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(CX - minDim * 0.5, CY);
+      ctx.lineTo(CX + minDim * 0.5, CY);
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(CX, CY);
+      ctx.rotate(sweep);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.arc(0, 0, minDim * 0.52, -0.55, 0);
+      ctx.closePath();
+      var swg = ctx.createLinearGradient(0, -minDim*0.52, minDim*0.52, 0);
+      swg.addColorStop(0, 'rgba(255,140,66,0)');
+      swg.addColorStop(1, 'rgba(255,140,66,0.2)');
+      ctx.fillStyle = swg;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(minDim * 0.52, 0);
+      ctx.strokeStyle = 'rgba(255,140,66,0.7)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.restore();
+
+      dots.forEach(function(d) {
+        var diff = ((sweep - d.angle) % (Math.PI*2) + Math.PI*2) % (Math.PI*2);
+        if (diff < 0.04 && !d.lit && Math.random() < 0.08) {
+          d.lit = true; d.litT = 0;
+          spawnDollar(d.x, d.y - 10);
+        }
+        if (d.lit) { d.litT++; d.litAlpha = Math.min(0.85, d.litAlpha + 0.025); }
+        else { d.litAlpha = Math.max(0.08, d.litAlpha - 0.005); }
+        if (d.litT > 180) { d.lit = false; d.litT = 0; }
+
+        if (d.litAlpha > 0.15) {
+          var gr = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, 12);
+          gr.addColorStop(0, 'rgba(74,222,128,' + (d.litAlpha * 0.5) + ')');
+          gr.addColorStop(1, 'rgba(74,222,128,0)');
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, 12, 0, Math.PI * 2);
+          ctx.fillStyle = gr;
+          ctx.fill();
+        }
+
+        var r = d.ring === 0 ? 4.5 : d.ring === 1 ? 3.5 : 3;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = d.lit ? 'rgba(74,222,128,' + d.litAlpha + ')' : 'rgba(255,255,255,' + (d.litAlpha * 0.8) + ')';
+        ctx.strokeStyle = d.lit ? 'rgba(74,222,128,' + (d.litAlpha * 0.8) + ')' : 'rgba(255,255,255,0.12)';
+        ctx.lineWidth = 1;
+        ctx.fill();
+        ctx.stroke();
+      });
+
+      var pulse = (Math.sin(t * 3) + 1) / 2;
+      var cg = ctx.createRadialGradient(CX, CY, 0, CX, CY, 14 + pulse * 4);
+      cg.addColorStop(0, 'rgba(255,140,66,0.5)');
+      cg.addColorStop(1, 'rgba(255,140,66,0)');
+      ctx.beginPath();
+      ctx.arc(CX, CY, 14 + pulse * 4, 0, Math.PI * 2);
+      ctx.fillStyle = cg;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(CX, CY, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,140,66,0.95)';
+      ctx.fill();
+      ctx.textBaseline = 'alphabetic';
+
+      for (var i = dollars.length - 1; i >= 0; i--) {
+        var d = dollars[i];
+        d.x += d.vx;
+        d.y += d.vy;
+        d.vy += 0.03;
+        d.vx *= 0.98;
+        d.alpha -= 0.01;
+        if (d.alpha <= 0) { dollars.splice(i, 1); continue; }
+        ctx.globalAlpha = d.alpha;
+        if (d.isEmoji) {
+          ctx.font = d.size + 'px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('\uD83D\uDCB0', d.x, d.y);
+        } else {
+          ctx.shadowColor = 'rgba(74,222,128,0.9)';
+          ctx.shadowBlur = 8;
+          ctx.fillStyle = 'rgba(74,222,128,' + d.alpha + ')';
+          ctx.font = 'bold ' + d.size + 'px Poppins,sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('$', d.x, d.y);
+          ctx.shadowBlur = 0;
+        }
+        ctx.globalAlpha = 1;
+        ctx.textBaseline = 'alphabetic';
+      }
+
+      rafId = requestAnimationFrame(draw);
+    }
+
+    if (prefersReducedMotion) {
+      running = true; draw(); running = false;
+      return;
+    }
+
+    watchVisibility(canvas,
+      function() { if (!running) { running = true; draw(); } },
+      function() { running = false; if (rafId) cancelAnimationFrame(rafId); }
+    );
+
+    window.addEventListener('resize', function() {
+      var d = s.resize();
+      if (d) { W = d.w; H = d.h;
+        CX = W * 0.5; CY = H * 0.5;
+        minDim = Math.min(W, H);
+        rings = [minDim * 0.18, minDim * 0.32, minDim * 0.46];
+        // Recalcular posición de dots
+        var idx = 0;
+        rings.forEach(function(r, ri) {
+          for (var i = 0; i < ringCounts[ri]; i++) {
+            var angle = (i / ringCounts[ri]) * Math.PI * 2;
+            dots[idx].x = CX + Math.cos(angle) * r;
+            dots[idx].y = CY + Math.sin(angle) * r;
+            idx++;
+          }
+        });
+      }
+    });
+  }
+
+  // Inicializar las 3 animaciones cuando el DOM esté listo
+  function initAll() {
+    initVisibility();
+    initWeb();
+    initReach();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+})();
 </script>
-
-  <!-- Sticky CTA -->
-  <div id="sticky-cta">
-    <a href="apply.html">
-      <svg class="sticky-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-      Hablemos →
-    </a>
-  </div>
 
 </body>
 </html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aviso de Privacidad — VITA Studio</title>
+  <meta name="description" content="Aviso de privacidad de VITA Studio. Cómo tratamos tus datos personales conforme a la LFPDPPP de México.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jairmaldonador8.github.io/VITASTUDIO/privacidad.html">
+  <meta name="theme-color" content="#FF8C42">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #FF8C42;
+      --bg: #080808;
+      --text: #f0ece4;
+      --muted: rgba(240,236,228,0.55);
+      --dim: rgba(240,236,228,0.35);
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    .nav {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    .nav-logo:hover { opacity: 0.75; }
+    .nav-logo svg {
+      height: 24px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-back {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-back:hover { color: var(--text); }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 32px 96px;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .updated {
+      font-size: 0.78rem;
+      color: var(--dim);
+      margin-bottom: 56px;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    p strong, li strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    li {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,140,66,0.3);
+      transition: border-color 0.2s ease;
+    }
+
+    a:hover { border-bottom-color: var(--gold); }
+
+    .contact-box {
+      background: rgba(255,140,66,0.04);
+      border: 1px solid rgba(255,140,66,0.2);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-top: 56px;
+    }
+
+    .contact-box p { margin-bottom: 8px; font-size: 0.9rem; }
+    .contact-box p:last-child { margin-bottom: 0; }
+
+    .footer {
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--dim);
+    }
+
+    .footer a {
+      color: var(--muted);
+      border-bottom: none;
+      margin: 0 12px;
+    }
+    .footer a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      .nav { padding: 20px 24px; }
+      .container { padding: 48px 24px 72px; }
+      h2 { font-size: 1.2rem; margin-top: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo" aria-label="VITA Studio - Inicio"><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="72 430 936 220"><defs><style> .cls-1 { fill: currentColor; } </style></defs><g><path class="cls-1" d="M76,434.71h14.58l49.52,210.55h-14.58l-49.52-210.55ZM191.76,434.71l-50.74,210.55h-4.25l50.74-210.55h4.25Z"/><path class="cls-1" d="M202.38,645.26h-14.28v-210.55h14.28v210.55Z"/><path class="cls-1" d="M301.44,438.66h-113.93v-3.95h113.93v3.95ZM237.33,645.26v-210.55h14.28v210.55h-14.28Z"/><path class="cls-1" d="M304.67,434.71h-14.58l1.64,7,29.61,126.67.92,3.95,17.04,72.92h14.58l-49.22-210.54ZM321.34,568.39l.92,3.95h2.76v-3.95h-3.68ZM259.4,568.39l-.91,3.95h1.57l.97-3.95h-1.63ZM289.18,434.71l-51.05,210.54h4.25l17.67-72.92.97-3.95,30.7-126.67,1.69-7h-4.24Z"/></g><g><path class="cls-1" d="M365.34,639.11c-9.78-4.74-17.33-11.01-22.67-18.82-5.33-7.8-8.5-16.25-9.48-25.33h5.93c.99,6.92,3.5,13.83,7.55,20.74,4.05,6.91,10.47,12.84,19.26,17.78,8.79,4.94,20.1,7.4,33.93,7.4,11.06,0,20.84-2.12,29.33-6.37,8.49-4.25,15.01-9.92,19.55-17.04,4.54-7.11,6.81-15.01,6.81-23.7,0-11.26-2.57-20.19-7.7-26.81-5.14-6.62-11.51-11.51-19.11-14.67-7.61-3.15-17.83-6.42-30.67-9.77-13.43-3.56-24.2-7.11-32.3-10.67-8.1-3.56-14.96-9.04-20.59-16.44-5.63-7.4-8.44-17.43-8.44-30.07,0-9.08,2.52-17.63,7.55-25.63,5.04-8,12.24-14.37,21.63-19.11,9.38-4.74,20.1-7.11,32.15-7.11s22.81,2.17,31.7,6.51c8.89,4.35,15.85,9.83,20.89,16.45,5.04,6.62,8.34,13.58,9.93,20.89h-5.92c-1.38-5.73-4.25-11.55-8.59-17.48-4.35-5.92-10.57-10.91-18.67-14.96-8.1-4.05-17.88-6.07-29.33-6.07-10.08,0-19.31,1.93-27.71,5.78-8.4,3.85-15.11,9.29-20.15,16.29-5.04,7.02-7.56,15.16-7.56,24.44,0,11.46,2.62,20.59,7.85,27.4,5.23,6.82,11.7,11.85,19.41,15.11,7.7,3.26,17.97,6.57,30.82,9.93,13.43,3.56,24.15,7.06,32.15,10.52,8,3.46,14.76,8.79,20.3,16,5.53,7.21,8.3,17.04,8.3,29.48,0,8.69-2.32,17.09-6.96,25.18-4.64,8.1-11.61,14.67-20.89,19.7-9.29,5.04-20.55,7.55-33.78,7.55s-24.74-2.37-34.52-7.11Z"/><path class="cls-1" d="M416.42,435.57v5.32h60.75v203.27h5.94v-203.27h38.78v-5.32h-105.47Z"/><path class="cls-1" d="M649.02,435.57v129.46c0,10.51-.87,19.88-2.68,28.12-2.68,12.5-7.4,22.4-14.18,29.64-11.26,12.04-26.6,18.07-45.94,18.07s-35.43-6.03-46.97-18.07c-11.54-12.04-17.36-31.29-17.36-57.76v-129.46h-5.88v129.46c0,27.47,6.31,47.84,18.94,61.19,12.66,13.31,29.71,20,51.26,20s38.38-6.59,50.48-19.85c3.8-4.14,7.03-8.99,9.64-14.53,2.55-5.44,4.54-11.54,5.94-18.32v-152.64h2.68v-5.32h-5.94Z"/><path class="cls-1" d="M811.27,533.71v-.06c-.03-1-.06-1.96-.16-2.92-.37-7.4-1.31-14.4-2.74-20.97-.87-4.04-1.93-7.93-3.2-11.66-4.67-13.87-11.98-25.63-21.93-35.27-18.76-18.17-46.13-27.28-82.06-27.28h-54.84v208.6h54.84c35.93,0,63.3-9.08,82.06-27.25,9.95-9.64,17.29-21.43,21.93-35.31,1.24-3.64,2.3-7.4,3.11-11.32,1.49-6.69,2.46-13.78,2.83-21.31.09-.87.12-1.77.16-2.68.09-2.12.12-4.26.12-6.44s-.03-4.11-.12-6.13ZM805.17,549.55c-1.65,26.6-10.36,47.65-26.07,63.21-17.57,17.36-43.55,26.07-77.92,26.07h-48.9v-197.93h48.9c34.37,0,60.35,8.68,77.92,26.07,15.71,15.55,24.42,36.61,26.07,63.21.03.19.03.34.03.53.19,2.99.28,6.03.28,9.15s-.09,6.41-.31,9.49v.22Z"/><path class="cls-1" d="M811.11,435.55v208.59h-5.93v-208.59h5.93Z"/><path class="cls-1" d="M853.04,633.03c-15.11-8.99-26.92-21.58-35.41-37.78-8.5-16.19-12.74-34.56-12.74-55.11s4.25-38.91,12.74-55.11c8.49-16.19,20.3-28.78,35.41-37.77,15.11-8.99,32.24-13.48,51.41-13.48s36.3,4.5,51.41,13.48c15.11,8.99,26.91,21.58,35.41,37.77,8.49,16.2,12.74,34.57,12.74,55.11s-4.25,38.92-12.74,55.11c-8.5,16.2-20.3,28.79-35.41,37.78-15.11,8.99-32.25,13.48-51.41,13.48s-36.3-4.49-51.41-13.48ZM951.85,628.89c14.22-8.2,25.43-19.95,33.63-35.26,8.19-15.3,12.3-33.13,12.3-53.48s-4.1-38.17-12.3-53.48c-8.2-15.3-19.41-27.06-33.63-35.26-14.22-8.2-30.03-12.3-47.41-12.3s-33.19,4.1-47.41,12.3c-14.22,8.2-25.43,19.95-33.63,35.26-8.2,15.31-12.3,33.14-12.3,53.48s4.1,38.18,12.3,53.48c8.2,15.31,19.41,27.06,33.63,35.26,14.22,8.2,30.02,12.3,47.41,12.3s33.19-4.1,47.41-12.3Z"/></g></svg></a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </nav>
+
+  <main class="container">
+
+    <div class="eyebrow">Aviso legal</div>
+    <h1>Aviso de Privacidad</h1>
+    <p class="updated">Última actualización: 26 de abril de 2026</p>
+
+    <p>
+      <strong>VITA Studio</strong> (en adelante "VITA Studio", "nosotros") con domicilio en Monterrey, Nuevo León, México, es responsable del tratamiento de tus datos personales conforme a la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares</strong> (LFPDPPP) y, cuando aplique, al <strong>Reglamento General de Protección de Datos</strong> (GDPR) para visitantes ubicados en la Unión Europea.
+    </p>
+
+    <h2>1. Datos personales que recabamos</h2>
+    <p>
+      Cuando nos contactas a través de nuestro sitio web (<a href="apply.html">formulario de aplicación</a>) o por WhatsApp, podemos recabar los siguientes datos:
+    </p>
+    <ul>
+      <li><strong>Datos de identificación:</strong> nombre, nombre del negocio, nombre del fundador.</li>
+      <li><strong>Datos de contacto:</strong> correo electrónico, número de WhatsApp, sitio web.</li>
+      <li><strong>Datos comerciales:</strong> rango de inversión, retos del negocio, sector.</li>
+    </ul>
+    <p>
+      <strong>No recabamos datos sensibles</strong> (financieros, médicos, biométricos, ideológicos, religiosos, ni de orientación sexual).
+    </p>
+
+    <h2>2. Para qué usamos tus datos</h2>
+    <p>Tratamos tus datos personales para las siguientes finalidades:</p>
+    <ul>
+      <li>Responder a tu solicitud de contacto y agendar sesiones de diagnóstico.</li>
+      <li>Prepararte propuestas comerciales personalizadas.</li>
+      <li>Mantener comunicación durante la prestación de nuestros servicios.</li>
+      <li>Cumplir con obligaciones fiscales y legales aplicables.</li>
+    </ul>
+    <p>
+      <strong>No usamos tus datos</strong> para publicidad de terceros, no los vendemos, y no los compartimos con socios comerciales sin tu consentimiento expreso.
+    </p>
+
+    <h2>3. Con quién compartimos tus datos</h2>
+    <p>
+      Tus datos pueden ser procesados por proveedores de servicios técnicos que nos ayudan a operar el sitio:
+    </p>
+    <ul>
+      <li><strong>Formspree</strong> (recepción de formularios) — sus datos pasan por sus servidores antes de llegar a nuestro correo.</li>
+      <li><strong>GitHub Pages</strong> (hosting del sitio web).</li>
+      <li><strong>Google Workspace / proveedores de correo</strong> (almacenamiento del correo recibido).</li>
+    </ul>
+    <p>
+      Estos terceros tienen sus propias políticas de privacidad y operan bajo estándares internacionales de protección de datos.
+    </p>
+
+    <h2>4. Cookies y tecnologías similares</h2>
+    <p>
+      Actualmente el sitio web de VITA Studio <strong>no utiliza cookies de seguimiento ni herramientas de analítica</strong>. Si en el futuro las implementamos, actualizaremos este aviso y solicitaremos tu consentimiento previo cuando la ley lo requiera.
+    </p>
+    <p>
+      Las fuentes tipográficas se cargan desde Google Fonts, lo cual implica que tu navegador hace una solicitud a los servidores de Google. Esa solicitud puede registrar tu dirección IP de forma temporal, conforme a la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidad de Google</a>.
+    </p>
+
+    <h2>5. Tus derechos ARCO</h2>
+    <p>
+      Conforme a la LFPDPPP, tienes derecho a:
+    </p>
+    <ul>
+      <li><strong>Acceder</strong> a los datos personales que tenemos sobre ti.</li>
+      <li><strong>Rectificar</strong> tus datos si son inexactos o están incompletos.</li>
+      <li><strong>Cancelar</strong> tus datos cuando consideres que no se requieren para alguna finalidad.</li>
+      <li><strong>Oponerte</strong> al tratamiento de tus datos para fines específicos.</li>
+    </ul>
+    <p>
+      Si estás en la Unión Europea, también tienes derecho a la <strong>portabilidad de tus datos</strong> y a <strong>retirar tu consentimiento</strong> en cualquier momento, conforme al GDPR.
+    </p>
+    <p>
+      Para ejercer cualquiera de estos derechos, escríbenos al correo indicado al final de este aviso.
+    </p>
+
+    <h2>6. Cuánto tiempo guardamos tus datos</h2>
+    <p>
+      Conservamos tus datos durante el tiempo necesario para cumplir con las finalidades descritas. Si después de un primer contacto decides no continuar con nosotros, eliminamos tus datos en un plazo máximo de <strong>12 meses</strong>, salvo que la ley exija conservarlos por más tiempo (por ejemplo, obligaciones fiscales).
+    </p>
+
+    <h2>7. Cambios a este aviso</h2>
+    <p>
+      Podemos actualizar este aviso de privacidad en cualquier momento. La versión vigente es la publicada en esta página, con la fecha de última actualización en la parte superior. Te recomendamos revisarlo periódicamente.
+    </p>
+
+    <h2>8. Cómo contactarnos</h2>
+    <div class="contact-box">
+      <p><strong>VITA Studio</strong></p>
+      <p>Monterrey, Nuevo León, México</p>
+      <p>WhatsApp: <a href="https://wa.me/525543708757" target="_blank" rel="noopener noreferrer">+52 55 4370 8757</a></p>
+      <p>Para ejercer tus derechos ARCO, escríbenos especificando "Solicitud ARCO" en el asunto.</p>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <a href="index.html">Inicio</a>
+    <a href="apply.html">Contacto</a>
+    <p style="margin-top: 16px;">© 2026 VITA Studio. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
