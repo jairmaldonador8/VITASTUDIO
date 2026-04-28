@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VITA Studio · Para médicos especialistas</title>
-<meta name="description" content="Estrategia de marca, sitio web premium y marca personal para médicos especialistas. Solo 4 consultorios este trimestre.">
+<meta name="description" content="Estrategia de marca, sitio web premium y marca personal para médicos especialistas. Hecho a la medida, sin distracciones.">
 <meta name="author" content="VITA Studio">
 
 <meta property="og:title" content="VITA Studio · Para médicos especialistas">
@@ -199,14 +199,14 @@
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 18px;
-    border: 1px solid rgba(201,169,116,0.3);
+    gap: 7px;
+    padding: 5px 12px;
+    border: 1px solid rgba(201,169,116,0.25);
     border-radius: 999px;
-    font-size: 0.7rem;
+    font-size: 0.58rem;
     color: var(--gold);
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     margin-bottom: 56px;
     opacity: 0;
@@ -214,7 +214,7 @@
   }
 
   .hero-badge-dot {
-    width: 6px; height: 6px;
+    width: 5px; height: 5px;
     border-radius: 50%;
     background: var(--gold);
     animation: pulseDot 2.5s ease-in-out infinite;
@@ -232,13 +232,23 @@
 
   .hero-h1 {
     font-family: var(--font);
-    font-size: clamp(3rem, 8vw, 6.4rem);
+    font-size: clamp(2.4rem, 7vw, 6.4rem);
     font-weight: 700;
-    line-height: 0.95;
-    letter-spacing: -0.045em;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
     color: var(--text);
     margin: 0 auto 32px;
     max-width: 1000px;
+    /* Prevenir overflow de palabras largas */
+    overflow-wrap: break-word;
+    word-break: keep-all;
+    hyphens: none;
+  }
+
+  /* Wrapper de palabra · garantiza que la palabra no se rompa entre letras */
+  .hero-h1 .word {
+    display: inline-block;
+    white-space: nowrap;
   }
 
   .hero-h1-light {
@@ -1060,6 +1070,20 @@
     #top-nav { padding: 16px 20px; }
     #top-nav.scrolled { padding: 12px 20px; }
     .nav-back { font-size: 0.65rem; }
+    .hero-h1 {
+      font-size: clamp(2rem, 9vw, 3rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      padding: 0 8px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .hero-h1 {
+      font-size: 1.85rem;
+      letter-spacing: -0.025em;
+      padding: 0 4px;
+    }
   }
 
   /* Reveal generic */
@@ -1100,11 +1124,6 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-badge">
-    <span class="hero-badge-dot"></span>
-    Solo 4 consultorios este trimestre
-  </div>
-
   <h1 class="hero-h1" id="hero-h1">
     <span class="hero-h1-line">Construimos el</span><br>
     <span class="hero-h1-line hero-h1-light">activo digital</span><br>
@@ -1384,22 +1403,46 @@
 
   // ===========================================
   // 1. SPLIT LETTERS en hero H1
+  // FIX: agrupar letras por palabra para que el browser
+  // nunca rompa una palabra a la mitad en mobile.
   // ===========================================
   (function() {
     var lines = document.querySelectorAll('.hero-h1-line');
     var totalDelay = 0;
+    var letterIdx = 0;
 
     lines.forEach(function(line, lineIdx) {
       var text = line.textContent;
       line.innerHTML = '';
 
-      for (var i = 0; i < text.length; i++) {
-        var span = document.createElement('span');
-        span.className = 'letter';
-        span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
-        span.style.animationDelay = (totalDelay + (i * 0.025)) + 's';
-        line.appendChild(span);
-      }
+      // Dividir el texto en palabras (manteniendo espacios)
+      var words = text.split(' ');
+
+      words.forEach(function(word, wordIdx) {
+        // Wrapper de palabra · NO se puede romper entre letras
+        var wordSpan = document.createElement('span');
+        wordSpan.className = 'word';
+        wordSpan.style.display = 'inline-block';
+        wordSpan.style.whiteSpace = 'nowrap';
+
+        // Cada letra dentro del wrapper
+        for (var i = 0; i < word.length; i++) {
+          var span = document.createElement('span');
+          span.className = 'letter';
+          span.textContent = word[i];
+          span.style.animationDelay = (totalDelay + (letterIdx * 0.025)) + 's';
+          wordSpan.appendChild(span);
+          letterIdx++;
+        }
+
+        line.appendChild(wordSpan);
+
+        // Espacio entre palabras (excepto después de la última)
+        if (wordIdx < words.length - 1) {
+          line.appendChild(document.createTextNode(' '));
+        }
+      });
+
       totalDelay += text.length * 0.025 + 0.15;
     });
   })();
