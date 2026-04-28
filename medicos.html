@@ -82,6 +82,18 @@
 
   body > * { position: relative; z-index: 1; }
 
+  /* Noise texture · sensación analógica/lujosa sobre fondos negros */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.025;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1, 0 0 0 0 1, 0 0 0 0 1, 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   /* Scroll progress bar */
   #scroll-progress {
     position: fixed;
@@ -312,8 +324,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 56px;
+    gap: 40px;
     flex-wrap: wrap;
+    row-gap: 14px;
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   .cliente-item {
@@ -321,7 +336,23 @@
     color: var(--text-muted);
     font-weight: 300;
     letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.7s cubic-bezier(0.215, 0.61, 0.355, 1),
+                transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
+
+  .cliente-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cliente-item:nth-child(1) { transition-delay: 0ms; }
+  .cliente-item:nth-child(2) { transition-delay: 100ms; }
+  .cliente-item:nth-child(3) { transition-delay: 200ms; }
+  .cliente-item:nth-child(4) { transition-delay: 300ms; }
+  .cliente-item:nth-child(5) { transition-delay: 400ms; }
+  .cliente-item:nth-child(6) { transition-delay: 500ms; }
 
   .cliente-item.dim {
     font-size: 0.78rem;
@@ -668,38 +699,74 @@
     text-align: left;
   }
 
+  /* Device frame · estilo browser/laptop para casos de éxito */
   .caso-img-wrapper {
-    overflow: hidden;
-    border-radius: var(--radius);
-    opacity: 0;
-    transform: translateX(-40px);
-    transition: opacity 1s ease, transform 1s ease;
+    overflow: visible;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 0;
+    border: 1px solid rgba(245, 240, 232, 0.08);
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.6),
+      0 10px 30px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    position: relative;
+    transform: translateY(0);
+    transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1),
+                box-shadow 0.6s ease;
   }
 
-  .caso-img-wrapper.visible {
-    opacity: 1;
-    transform: translateX(0);
+  .caso-img-wrapper:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 40px 80px rgba(0, 0, 0, 0.7),
+      0 15px 40px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(201, 169, 116, 0.15) inset;
+  }
+
+  /* Browser chrome bar (top) */
+  .caso-img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: linear-gradient(180deg, #1f1f1f 0%, #181818 100%);
+    border-radius: 14px 14px 0 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    z-index: 2;
+  }
+
+  /* Tres dots del browser (rojo, amarillo, verde) */
+  .caso-img-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: 14px;
+    width: 50px;
+    height: 6px;
+    background:
+      radial-gradient(circle at 3px 3px, #ff5f57 3px, transparent 3.5px),
+      radial-gradient(circle at 22px 3px, #febc2e 3px, transparent 3.5px),
+      radial-gradient(circle at 41px 3px, #28c840 3px, transparent 3.5px);
+    z-index: 3;
   }
 
   .caso-img {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 16 / 11;
     background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
     background-size: cover;
-    background-position: center;
-    will-change: transform;
-    transition: transform 0.1s linear;
+    background-position: top center;
+    border-radius: 0 0 13px 13px;
+    margin-top: 28px;
+    overflow: hidden;
+    position: relative;
   }
 
   .caso-meta {
-    opacity: 0;
-    transform: translateX(40px);
-    transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
-  }
-
-  .caso-meta.visible {
-    opacity: 1;
-    transform: translateX(0);
+    /* Visibilidad controlada por .caso-slide.active */
   }
 
   .caso-num {
@@ -754,6 +821,130 @@
   .caso-link:hover {
     border-color: var(--gold);
     gap: 14px;
+  }
+
+  /* Mini-carrusel de casos */
+  .casos-carousel {
+    position: relative;
+    margin-top: 64px;
+    min-height: 480px;
+  }
+
+  .caso-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.215, 0.61, 0.355, 1),
+                transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1),
+                visibility 0s linear 0.7s;
+  }
+
+  .caso-slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.7s cubic-bezier(0.215, 0.61, 0.355, 1),
+                transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1),
+                visibility 0s linear 0s;
+  }
+
+  /* Imágenes de Cristian y Wilber con backgrounds elegantes */
+  .caso-img-pinon {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    position: relative;
+  }
+  .caso-img-pinon::before {
+    content: 'CP';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 6rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 0.05em;
+  }
+  .caso-img-pinon::after {
+    content: 'FACIAL PLASTIC SURGERY';
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font);
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.32em;
+    white-space: nowrap;
+  }
+
+  .caso-img-wilber {
+    background: linear-gradient(135deg, #1a2654 0%, #0f1838 100%);
+    position: relative;
+  }
+  .caso-img-wilber::before {
+    content: 'WC';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font);
+    font-size: 5.5rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 0.06em;
+  }
+  .caso-img-wilber::after {
+    content: 'CIRUGÍA CARDIOVASCULAR';
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font);
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.28em;
+    white-space: nowrap;
+  }
+
+  .caso-link-disabled {
+    color: var(--text-dim);
+    border-color: rgba(245,240,232,0.15);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* Dots navigation */
+  .casos-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 56px;
+  }
+
+  .caso-dot {
+    width: 32px;
+    height: 4px;
+    border-radius: 100px;
+    border: none;
+    background: rgba(245,240,232,0.15);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    padding: 0;
+  }
+
+  .caso-dot:hover {
+    background: rgba(201,169,116,0.4);
+  }
+
+  .caso-dot.active {
+    background: var(--gold);
+    width: 48px;
   }
 
   /* CTA FINAL */
@@ -854,8 +1045,15 @@
     .proceso-recurring-list { grid-template-columns: 1fr; gap: 12px; }
     .tiempo-bullets { grid-template-columns: 1fr; gap: 16px; }
     .caso-card { grid-template-columns: 1fr; gap: 40px; }
-    .caso-img { aspect-ratio: 4/3; }
+    .caso-img { aspect-ratio: 16/11; }
+    .caso-img-wrapper::before { height: 24px; }
+    .caso-img-wrapper::after { top: 9px; left: 12px; width: 42px; height: 5px; }
+    .caso-img { margin-top: 24px; }
     .hero-clientes-list { gap: 28px; }
+    .casos-carousel { min-height: 720px; }
+    .caso-img-pinon::before, .caso-img-wilber::before { font-size: 3.5rem; }
+    .caso-img-pinon::after, .caso-img-wilber::after { font-size: 0.55rem; bottom: 18px; letter-spacing: 0.18em; }
+    .casos-dots { margin-top: 40px; }
   }
 
   @media (max-width: 600px) {
@@ -927,6 +1125,9 @@
     <p class="hero-clientes-label">Médicos que han confiado en VITA</p>
     <div class="hero-clientes-list">
       <span class="cliente-item">Dra. Vannia Maldonado</span>
+      <span class="cliente-item">Dra. Karen Astuñague</span>
+      <span class="cliente-item">Dr. Cristian Piñón</span>
+      <span class="cliente-item">Dr. Wilber Coasaca</span>
       <span class="cliente-item">Dr. José Luis</span>
       <span class="cliente-item dim">+ próximamente</span>
     </div>
@@ -940,7 +1141,7 @@
     Cuatro fases. <span class="section-title-light">Un proceso.</span>
   </h2>
   <p class="section-subtitle reveal">
-    Tres fases iniciales que entregamos como setup. Después, te acompañamos cada mes para que tu marca siga creciendo.
+    Tres fases iniciales que entregamos como setup. Después, te acompañamos para que tu marca siga creciendo sin que tengas que pensarlo.
   </p>
 
   <div class="proceso-timeline">
@@ -997,24 +1198,24 @@
       <div class="proceso-recurring-grid">
         <div class="proceso-recurring-left">
           <div class="proceso-recurring-badge">
-            Recurrente · Mensual
+            Acompañamiento continuo
           </div>
           <div class="proceso-recurring-num">— Fase 04</div>
           <h3 class="proceso-recurring-title">
-            Y después, te <span class="proceso-recurring-title-light">acompañamos.</span>
+            Después del lanzamiento, <span class="proceso-recurring-title-light">no te dejamos solo.</span>
           </h3>
           <p class="proceso-recurring-desc">
-            La diferencia entre lanzar y crecer. Cuidamos tu plataforma cada mes para que tú sigas enfocado en lo que sabes hacer mejor — atender pacientes.
+            La diferencia entre lanzar y crecer. Cuidamos tu plataforma para que tú sigas enfocado en lo que sabes hacer mejor — atender pacientes.
           </p>
         </div>
 
         <ul class="proceso-recurring-list">
-          <li>Hosting</li>
-          <li>Dominio</li>
-          <li>Mantenimiento</li>
-          <li>Posicionamiento SEO</li>
-          <li>Soporte continuo</li>
-          <li>Reportes mensuales</li>
+          <li>Tu sitio siempre online</li>
+          <li>Tu dominio profesional</li>
+          <li>Cualquier cambio, lo hago yo</li>
+          <li>Apareces en Google</li>
+          <li>Reportes claros del avance</li>
+          <li>Mejoras continuas</li>
         </ul>
       </div>
     </div>
@@ -1052,28 +1253,76 @@
   </div>
 </section>
 
-<!-- CASO VANNIA -->
+<!-- CASOS DESTACADOS -->
 <section id="caso">
-  <span class="section-label reveal">Caso destacado</span>
+  <span class="section-label reveal">Casos destacados</span>
   <h2 class="section-title reveal">
     Lo que <span class="section-title-light">construimos</span><br>
-    con la Dra. Vannia.
+    con doctores reales.
   </h2>
 
-  <div class="caso-card">
-    <div class="caso-img-wrapper">
-      <div class="caso-img" id="caso-img" style="background-image:url('assets/proyectos/vannia.webp');"></div>
+  <div class="casos-carousel" id="casos-carousel">
+    <!-- Caso 1: Vannia -->
+    <div class="caso-slide active" data-caso="1">
+      <div class="caso-card">
+        <div class="caso-img-wrapper">
+          <div class="caso-img" style="background-image:url('assets/proyectos/vannia.webp');"></div>
+        </div>
+        <div class="caso-meta">
+          <div class="caso-num">— Otorrinolaringología</div>
+          <h3 class="caso-title">Dra. Vannia Maldonado</h3>
+          <p class="caso-subtitle">Mérida, Yucatán · Cliente desde 2024</p>
+          <p class="caso-quote">"Siempre me guiaron en el proceso, fueron muy transparentes. Tener mi propia plataforma cambió cómo se siente recibir pacientes."</p>
+          <a href="https://drvanniamaldonado.com" target="_blank" rel="noopener" class="caso-link">
+            Ver el sitio
+            <span>→</span>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="caso-meta">
-      <div class="caso-num">— Otorrinolaringología</div>
-      <h3 class="caso-title">Dra. Vannia Maldonado</h3>
-      <p class="caso-subtitle">Mérida, Yucatán · Cliente desde 2024</p>
-      <p class="caso-quote">"Siempre me guiaron en el proceso, fueron muy transparentes. Tener mi propia plataforma cambió cómo se siente recibir pacientes."</p>
-      <a href="https://drvanniamaldonado.com" target="_blank" rel="noopener" class="caso-link">
-        Ver el sitio
-        <span>→</span>
-      </a>
+
+    <!-- Caso 2: Dr. Cristian Piñón -->
+    <div class="caso-slide" data-caso="2">
+      <div class="caso-card">
+        <div class="caso-img-wrapper">
+          <div class="caso-img caso-img-pinon"></div>
+        </div>
+        <div class="caso-meta">
+          <div class="caso-num">— Cirugía Plástica Facial</div>
+          <h3 class="caso-title">Dr. Cristian Piñón</h3>
+          <p class="caso-subtitle">Cliente VITA Studio</p>
+          <p class="caso-quote">"Construimos una marca premium que comunica precisión y elegancia — la combinación que su práctica representa."</p>
+          <span class="caso-link caso-link-disabled">
+            Brand Book completo
+          </span>
+        </div>
+      </div>
     </div>
+
+    <!-- Caso 3: Dr. Wilber Coasaca -->
+    <div class="caso-slide" data-caso="3">
+      <div class="caso-card">
+        <div class="caso-img-wrapper">
+          <div class="caso-img caso-img-wilber"></div>
+        </div>
+        <div class="caso-meta">
+          <div class="caso-num">— Cirugía Cardiovascular y Torácica</div>
+          <h3 class="caso-title">Dr. Wilber Coasaca</h3>
+          <p class="caso-subtitle">Cliente VITA Studio</p>
+          <p class="caso-quote">"Un sistema de identidad completo: papelería profesional, recetas, tarjetas y aplicaciones — coherente y serio como su especialidad."</p>
+          <span class="caso-link caso-link-disabled">
+            Identidad completa
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dots navigation -->
+  <div class="casos-dots">
+    <button class="caso-dot active" data-target="1" aria-label="Ver caso Dra. Vannia"></button>
+    <button class="caso-dot" data-target="2" aria-label="Ver caso Dr. Cristian Piñón"></button>
+    <button class="caso-dot" data-target="3" aria-label="Ver caso Dr. Wilber Coasaca"></button>
   </div>
 </section>
 
@@ -1106,6 +1355,33 @@
 </footer>
 
 <script>
+  // ===========================================
+  // 0b. MAGNETIC BUTTONS · sutil atracción al cursor
+  // ===========================================
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if ('ontouchstart' in window) return; // Solo desktop
+
+    var magnets = document.querySelectorAll('.hero-cta, .cta-final-btn');
+    magnets.forEach(function(btn) {
+      btn.style.transition = 'transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), background 0.3s ease, box-shadow 0.3s ease';
+
+      btn.addEventListener('mousemove', function(e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        // Sutil: máximo 8px de "atracción"
+        var moveX = x * 0.15;
+        var moveY = y * 0.15;
+        btn.style.transform = 'translate(' + moveX + 'px, ' + moveY + 'px)';
+      });
+
+      btn.addEventListener('mouseleave', function() {
+        btn.style.transform = '';
+      });
+    });
+  })();
+
   // ===========================================
   // 1. SPLIT LETTERS en hero H1
   // ===========================================
@@ -1172,6 +1448,28 @@
   })();
 
   // ===========================================
+  // 4b. CLIENTES STAGGER · animar nombres uno por uno
+  // ===========================================
+  (function() {
+    var list = document.querySelector('.hero-clientes-list');
+    if (!list) return;
+    var items = list.querySelectorAll('.cliente-item');
+    if (items.length === 0) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          items.forEach(function(item) {
+            item.classList.add('revealed');
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    observer.observe(list);
+  })();
+
+  // ===========================================
   // 5. TIEMPO BULLETS · stagger reveal
   // ===========================================
   (function() {
@@ -1191,41 +1489,72 @@
   })();
 
   // ===========================================
-  // 6. CASO REVEAL LATERAL
+  // 6. CASOS MINI-CARRUSEL · auto-play + dots + pause-on-hover
   // ===========================================
   (function() {
-    var img = document.querySelector('.caso-img-wrapper');
-    var meta = document.querySelector('.caso-meta');
-    if (!img || !meta) return;
+    var carousel = document.getElementById('casos-carousel');
+    if (!carousel) return;
+    var slides = carousel.querySelectorAll('.caso-slide');
+    var dots = document.querySelectorAll('.caso-dot');
+    if (slides.length === 0 || dots.length === 0) return;
 
+    var current = 0;
+    var autoPlay = true;
+    var autoTimer = null;
+    var SLIDE_DURATION = 5500; // 5.5 segundos por slide
+
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next() {
+      var nextIdx = (current + 1) % slides.length;
+      goTo(nextIdx);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      if (autoPlay) {
+        autoTimer = setInterval(next, SLIDE_DURATION);
+      }
+    }
+
+    function stopAutoPlay() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    // Click en dots
+    dots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() {
+        goTo(i);
+        stopAutoPlay();
+        // Reanudar autoplay después de 8s si no hay otra interacción
+        setTimeout(startAutoPlay, 8000);
+      });
+    });
+
+    // Pause on hover
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    // Iniciar solo cuando entra en viewport
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          startAutoPlay();
+        } else {
+          stopAutoPlay();
         }
       });
-    }, { threshold: 0.2 });
-    observer.observe(img);
-    observer.observe(meta);
-  })();
-
-  // ===========================================
-  // 7. PARALLAX en imagen Vannia
-  // ===========================================
-  (function() {
-    var caseImg = document.getElementById('caso-img');
-    if (!caseImg) return;
-    function update() {
-      var rect = caseImg.getBoundingClientRect();
-      var winH = window.innerHeight;
-      if (rect.bottom < 0 || rect.top > winH) return;
-      var scrollPos = (winH / 2) - (rect.top + rect.height / 2);
-      var parallaxOffset = scrollPos * 0.06;
-      caseImg.style.transform = 'translateY(' + parallaxOffset + 'px)';
-    }
-    window.addEventListener('scroll', update, { passive: true });
-    update();
+    }, { threshold: 0.3 });
+    observer.observe(carousel);
   })();
 
   // ===========================================
@@ -1302,7 +1631,128 @@
     // Por simplicidad: el efecto del gradient ya está activo de manera estática (radial gradients fixed)
     // No necesita JS para "moverse" porque el efecto fixed ya da la sensación ambient
   })();
+
+  // ===========================================
+  // CURSOR PERSONALIZADO · sutil tipo Apple
+  // ===========================================
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if ('ontouchstart' in window) return; // Solo desktop
+    if (window.innerWidth <= 800) return;
+
+    var dot = document.getElementById('custom-cursor-dot');
+    var ring = document.getElementById('custom-cursor-ring');
+    if (!dot || !ring) return;
+
+    document.body.classList.add('cursor-active');
+
+    var mouseX = window.innerWidth / 2;
+    var mouseY = window.innerHeight / 2;
+    var ringX = mouseX;
+    var ringY = mouseY;
+
+    // El dot sigue al mouse instantáneamente, el ring con delay (lerp)
+    function animate() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      dot.style.transform = 'translate(' + (mouseX - 3) + 'px, ' + (mouseY - 3) + 'px)';
+      ring.style.transform = 'translate(' + (ringX - 18) + 'px, ' + (ringY - 18) + 'px)';
+      requestAnimationFrame(animate);
+    }
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      // Mostrar cursor la primera vez que el mouse se mueve
+      if (dot.style.opacity !== '1') {
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+      }
+    });
+
+    // Ocultar al salir de la ventana
+    document.addEventListener('mouseleave', function() {
+      dot.style.opacity = '0';
+      ring.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', function() {
+      dot.style.opacity = '1';
+      ring.style.opacity = '1';
+    });
+
+    // Hover en clickeables: ring crece
+    var hoverables = document.querySelectorAll('a, button, [role="button"], .caso-dot, .hero-cta, .cta-final-btn, .caso-link');
+    hoverables.forEach(function(el) {
+      el.addEventListener('mouseenter', function() {
+        ring.classList.add('is-hovering');
+      });
+      el.addEventListener('mouseleave', function() {
+        ring.classList.remove('is-hovering');
+      });
+    });
+
+    requestAnimationFrame(animate);
+  })();
 </script>
+
+<!-- CURSOR PERSONALIZADO · Sutil estilo Apple -->
+<div id="custom-cursor-dot" aria-hidden="true"></div>
+<div id="custom-cursor-ring" aria-hidden="true"></div>
+
+<style>
+  #custom-cursor-dot,
+  #custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  #custom-cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    transition: opacity 0.3s ease, transform 0.15s ease;
+  }
+
+  #custom-cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(201, 169, 116, 0.4);
+    border-radius: 50%;
+    transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease,
+                background 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Cuando el cursor está sobre un elemento clickeable */
+  #custom-cursor-ring.is-hovering {
+    width: 56px;
+    height: 56px;
+    background: rgba(201, 169, 116, 0.08);
+    border-color: rgba(201, 169, 116, 0.7);
+  }
+
+  /* Solo desktop · ocultar todo en mobile */
+  @media (hover: none), (max-width: 800px) {
+    #custom-cursor-dot,
+    #custom-cursor-ring {
+      display: none !important;
+    }
+  }
+
+  /* Mantener cursor del browser oculto solo cuando el custom está activo */
+  body.cursor-active,
+  body.cursor-active a,
+  body.cursor-active button {
+    cursor: none;
+  }
+</style>
 
 </body>
 </html>
