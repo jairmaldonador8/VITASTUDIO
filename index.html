@@ -4292,7 +4292,7 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         <span>Servicios</span>
       </a>
-      <a href="/medicos" class="bnav-tab bnav-tab-medicos">
+      <a href="medicos.html" class="bnav-tab bnav-tab-medicos">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
         <span>Médicos</span>
       </a>
@@ -4488,11 +4488,15 @@
   }, { threshold: 0.35 });
   sections.forEach(s => sectionObserver.observe(s));
 
-  // Bottom nav smooth scroll
+  // Bottom nav smooth scroll · solo intercepta anchors internos (#)
+  // Los links externos como medicos.html navegan normalmente.
   bnavTabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
+      const href = tab.getAttribute('href');
+      // Solo interceptar si es un anchor interno (empieza con #)
+      if (!href || !href.startsWith('#')) return;
       e.preventDefault();
-      const target = document.querySelector(tab.getAttribute('href'));
+      const target = document.querySelector(href);
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
