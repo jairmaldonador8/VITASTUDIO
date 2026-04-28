@@ -1968,19 +1968,96 @@
 
     .bnav-tab.active svg { stroke: var(--gold); }
 
-    /* Tab Médicos · estilo distintivo dorado */
+    /* Tab Médicos · estilo distintivo dorado con efecto grow on hover */
     .bnav-tab-medicos {
       color: var(--gold) !important;
+      position: relative;
+      transition: transform 0.35s cubic-bezier(0.215, 0.61, 0.355, 1),
+                  background 0.3s ease,
+                  box-shadow 0.4s ease,
+                  padding 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform-origin: center;
+      cursor: pointer;
     }
+
     .bnav-tab-medicos svg {
       stroke: var(--gold);
+      transition: transform 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
     }
-    .bnav-tab-medicos:hover {
-      background: rgba(201,169,116,0.08);
-      color: var(--gold) !important;
-    }
+
     .bnav-tab-medicos span {
       color: var(--gold);
+      transition: font-size 0.35s cubic-bezier(0.215, 0.61, 0.355, 1),
+                  font-weight 0.35s ease;
+    }
+
+    /* Hover: crecer significativamente para fácil click */
+    .bnav-tab-medicos:hover {
+      background: rgba(201, 169, 116, 0.12);
+      color: var(--gold) !important;
+      transform: scale(1.15) translateY(-2px);
+      box-shadow:
+        0 8px 24px rgba(201, 169, 116, 0.25),
+        0 0 0 1px rgba(201, 169, 116, 0.3);
+      z-index: 10;
+    }
+
+    .bnav-tab-medicos:hover svg {
+      transform: scale(1.2);
+    }
+
+    .bnav-tab-medicos:hover span {
+      font-weight: 600;
+    }
+
+    /* Active state: feedback al hacer click */
+    .bnav-tab-medicos:active {
+      transform: scale(1.05) translateY(0);
+      transition-duration: 0.1s;
+    }
+
+    /* Pulse dorado sutil para llamar atención (opcional, muy sutil) */
+    .bnav-tab-medicos::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 0 0 0 rgba(201, 169, 116, 0.4);
+      pointer-events: none;
+      animation: medicosPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes medicosPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(201, 169, 116, 0);
+      }
+      50% {
+        box-shadow: 0 0 0 4px rgba(201, 169, 116, 0.08);
+      }
+    }
+
+    /* Pausar el pulse cuando hace hover (evita conflicto visual) */
+    .bnav-tab-medicos:hover::before {
+      animation-play-state: paused;
+    }
+
+    /* Mobile: efectos más sutiles para no saltar la UI */
+    @media (max-width: 600px) {
+      .bnav-tab-medicos:hover,
+      .bnav-tab-medicos:active {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .bnav-tab-medicos,
+      .bnav-tab-medicos svg,
+      .bnav-tab-medicos span,
+      .bnav-tab-medicos::before {
+        transition: none !important;
+        animation: none !important;
+      }
     }
 
     .bnav-cta {
