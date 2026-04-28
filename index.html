@@ -320,6 +320,276 @@
     }
 
     /* ====================================================
+       HERO MEDICOS CARD · Invitación grande imposible de ignorar
+    ==================================================== */
+    .hero-medicos-card {
+      display: block;
+      max-width: 620px;
+      margin: 36px auto 0;
+      padding: 24px 28px;
+      border: 1.5px solid rgba(201, 169, 116, 0.4);
+      border-radius: 18px;
+      background: linear-gradient(
+        135deg,
+        rgba(201, 169, 116, 0.1) 0%,
+        rgba(201, 169, 116, 0.04) 50%,
+        rgba(201, 169, 116, 0.08) 100%
+      );
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      cursor: pointer;
+      box-shadow:
+        0 8px 32px rgba(201, 169, 116, 0.15),
+        0 0 0 0 rgba(201, 169, 116, 0);
+      transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1),
+                  box-shadow 0.4s ease,
+                  border-color 0.3s ease;
+      animation: heroMedicosBreathe 4s ease-in-out infinite;
+    }
+
+    @keyframes heroMedicosBreathe {
+      0%, 100% {
+        box-shadow:
+          0 8px 32px rgba(201, 169, 116, 0.15),
+          0 0 0 0 rgba(201, 169, 116, 0);
+        border-color: rgba(201, 169, 116, 0.4);
+      }
+      50% {
+        box-shadow:
+          0 12px 48px rgba(201, 169, 116, 0.3),
+          0 0 32px 6px rgba(201, 169, 116, 0.15);
+        border-color: rgba(201, 169, 116, 0.7);
+      }
+    }
+
+    /* Shimmer dorado cruzando */
+    .hero-medicos-card-shimmer {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 240, 200, 0.18) 50%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 0;
+      animation: heroMedicosShimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes heroMedicosShimmer {
+      0%, 70% { left: -100%; }
+      90%, 100% { left: 100%; }
+    }
+
+    .hero-medicos-card-inner {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Icon con pulso */
+    .hero-medicos-card-icon {
+      flex-shrink: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(201, 169, 116, 0.15);
+      border: 1.5px solid rgba(201, 169, 116, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold, #c9a974);
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1),
+                  background 0.3s ease,
+                  border-color 0.3s ease;
+    }
+
+    .hero-medicos-card-icon svg {
+      transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    .hero-medicos-card-pulse {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(201, 169, 116, 0.4);
+      animation: heroMedicosPulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes heroMedicosPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.4;
+      }
+      50% {
+        transform: scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    .hero-medicos-card-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      text-align: left;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .hero-medicos-card-eyebrow {
+      font-family: var(--font);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: rgba(201, 169, 116, 0.85);
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .hero-medicos-card-title {
+      font-family: var(--font);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold, #c9a974);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .hero-medicos-card-cta {
+      font-family: var(--font);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(201, 169, 116, 0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      padding-bottom: 2px;
+      border-bottom: 1px solid rgba(201, 169, 116, 0.3);
+      transition: gap 0.4s cubic-bezier(0.215, 0.61, 0.355, 1),
+                  border-color 0.3s ease,
+                  color 0.3s ease;
+    }
+
+    /* Hover · Card crece + icono rota + cta avanza */
+    .hero-medicos-card:hover {
+      transform: translateY(-4px) scale(1.015);
+      border-color: var(--gold, #c9a974);
+      box-shadow:
+        0 20px 60px rgba(201, 169, 116, 0.4),
+        0 0 0 1px rgba(201, 169, 116, 0.5);
+      animation-play-state: paused;
+    }
+
+    .hero-medicos-card:hover .hero-medicos-card-icon {
+      transform: scale(1.1) rotate(-6deg);
+      background: rgba(201, 169, 116, 0.25);
+      border-color: var(--gold, #c9a974);
+    }
+
+    .hero-medicos-card:hover .hero-medicos-card-icon svg {
+      transform: scale(1.05);
+    }
+
+    .hero-medicos-card:hover .hero-medicos-card-cta {
+      gap: 14px;
+      color: var(--gold, #c9a974);
+      border-color: var(--gold, #c9a974);
+    }
+
+    .hero-medicos-card:hover .hero-medicos-card-shimmer {
+      animation-duration: 1.4s;
+    }
+
+    .hero-medicos-card:active {
+      transform: translateY(-2px) scale(1);
+      transition-duration: 0.1s;
+    }
+
+    /* Responsive · Tablet */
+    @media (max-width: 768px) {
+      .hero-medicos-card {
+        max-width: 100%;
+        margin: 28px 16px 0;
+        padding: 20px 22px;
+      }
+      .hero-medicos-card-inner {
+        gap: 16px;
+      }
+      .hero-medicos-card-icon {
+        width: 52px;
+        height: 52px;
+      }
+      .hero-medicos-card-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+      .hero-medicos-card-eyebrow {
+        font-size: 0.7rem;
+      }
+      .hero-medicos-card-title {
+        font-size: 1.1rem;
+      }
+      .hero-medicos-card-cta {
+        font-size: 0.78rem;
+      }
+    }
+
+    /* Responsive · Mobile chico */
+    @media (max-width: 480px) {
+      .hero-medicos-card {
+        margin: 24px 12px 0;
+        padding: 18px 16px;
+      }
+      .hero-medicos-card-inner {
+        gap: 14px;
+      }
+      .hero-medicos-card-icon {
+        width: 44px;
+        height: 44px;
+      }
+      .hero-medicos-card-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+      .hero-medicos-card-eyebrow {
+        font-size: 0.65rem;
+      }
+      .hero-medicos-card-title {
+        font-size: 0.95rem;
+        line-height: 1.25;
+      }
+      .hero-medicos-card-cta {
+        font-size: 0.7rem;
+        margin-top: 4px;
+      }
+      .hero-medicos-card-cta svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-medicos-card,
+      .hero-medicos-card-shimmer,
+      .hero-medicos-card-icon,
+      .hero-medicos-card-pulse {
+        animation: none !important;
+      }
+    }
+
+
+    /* ====================================================
        HERO IMPACT · Animación de alto impacto inmediato
        Typing rotativo + Línea de proceso + Counter stats
     ==================================================== */
@@ -978,6 +1248,452 @@
     }
 
     .caso-card:hover .caso-underline { width: 72px; }
+
+/* ============================================
+     MANIFIESTO · VITA Studio + Director
+  ============================================ */
+  #manifiesto {
+    padding: 100px 32px 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .manifiesto-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .manifiesto-author {
+    position: sticky;
+    top: 120px;
+    text-align: center;
+    padding: 36px 24px 32px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0) 100%);
+  }
+
+  /* Marca VITA · circular con V */
+  .manifiesto-mark {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 18px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .manifiesto-mark-letter {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, #cc6e30 100%);
+    color: #0a0a0a;
+    font-family: var(--font);
+    font-size: 1.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: -0.03em;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 6px 20px rgba(255, 140, 66, 0.25);
+  }
+
+  .manifiesto-mark-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 140, 66, 0.3);
+    animation: manifiestoRing 3s ease-in-out infinite;
+  }
+
+  @keyframes manifiestoRing {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 0.7;
+    }
+  }
+
+  .manifiesto-brand {
+    font-family: var(--font);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin-bottom: 3px;
+  }
+
+  .manifiesto-tagline {
+    font-family: var(--font);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .manifiesto-divider {
+    width: 32px;
+    height: 1px;
+    background: rgba(255, 140, 66, 0.25);
+    margin: 0 auto 18px;
+  }
+
+  .manifiesto-director {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 16px;
+  }
+
+  .manifiesto-director-label {
+    font-family: var(--font);
+    font-size: 0.62rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .manifiesto-director-name {
+    font-family: var(--font);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .manifiesto-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font);
+    font-size: 0.66rem;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    padding: 5px 11px;
+    border: 1px solid rgba(255, 140, 66, 0.25);
+    border-radius: 100px;
+    background: rgba(255, 140, 66, 0.05);
+  }
+
+  .manifiesto-content {
+    text-align: left;
+  }
+
+  .manifiesto-eyebrow {
+    display: block;
+    font-family: var(--font);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .manifiesto-paragraph {
+    font-family: var(--font);
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--text);
+    letter-spacing: -0.012em;
+    margin-bottom: 32px;
+  }
+
+  .manifiesto-paragraph:last-of-type {
+    margin-bottom: 48px;
+  }
+
+  .manifiesto-highlight {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .manifiesto-signature {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .manifiesto-signature-line {
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+    flex-shrink: 0;
+  }
+
+  .manifiesto-signature-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .manifiesto-signature-name {
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .manifiesto-signature-role {
+    font-family: var(--font);
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+
+  /* Responsive · manifiesto */
+  @media (max-width: 900px) {
+    .manifiesto-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .manifiesto-author {
+      position: static;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .manifiesto-paragraph {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #manifiesto { padding: 72px 20px 72px; }
+    .manifiesto-grid { gap: 36px; }
+    .manifiesto-author { padding: 28px 20px 24px; }
+    .manifiesto-mark { width: 60px; height: 60px; margin-bottom: 14px; }
+    .manifiesto-mark-letter { width: 46px; height: 46px; font-size: 1.4rem; }
+    .manifiesto-paragraph {
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+    .manifiesto-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      margin-bottom: 24px;
+    }
+  }
+
+  /* ============================================
+     ENFOQUE · Growth Partner vs Agencia
+  ============================================ */
+  #enfoque {
+    padding: 100px 32px 100px;
+    max-width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .enfoque-comparison {
+    margin-top: 64px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0) 100%);
+  }
+
+  .enfoque-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .enfoque-header-col {
+    padding: 22px 28px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .enfoque-header-traditional {
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  .enfoque-header-vita {
+    background: linear-gradient(135deg, rgba(255, 140, 66, 0.1) 0%, rgba(255, 140, 66, 0.05) 100%);
+    border-left: 1px solid var(--border);
+    position: relative;
+  }
+
+  .enfoque-header-vita::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .enfoque-header-label {
+    font-family: var(--font);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .enfoque-header-vita .enfoque-header-label {
+    color: var(--gold);
+  }
+
+  .enfoque-header-tag {
+    font-family: var(--font);
+    font-size: 0.62rem;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    background: rgba(255, 140, 66, 0.15);
+    border: 1px solid rgba(255, 140, 66, 0.3);
+    border-radius: 100px;
+    align-self: flex-start;
+  }
+
+  .enfoque-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s ease;
+  }
+
+  .enfoque-row:last-child {
+    border-bottom: none;
+  }
+
+  .enfoque-row:hover {
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  .enfoque-cell {
+    padding: 26px 28px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+  }
+
+  .enfoque-cell-traditional {
+    color: var(--text-muted);
+  }
+
+  .enfoque-cell-traditional::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .enfoque-cell-traditional::after {
+    content: '';
+    position: absolute;
+    left: 32px;
+    width: 8px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .enfoque-cell-vita {
+    color: var(--text);
+    border-left: 1px solid var(--border);
+    background: linear-gradient(90deg, rgba(255, 140, 66, 0.04) 0%, transparent 100%);
+  }
+
+  .enfoque-cell-vita::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px rgba(255, 140, 66, 0.15);
+    position: relative;
+  }
+
+  .enfoque-cell-text {
+    font-family: var(--font);
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+    flex: 1;
+  }
+
+  .enfoque-cell-traditional .enfoque-cell-text {
+    text-decoration: line-through;
+    text-decoration-color: rgba(255, 255, 255, 0.2);
+    text-decoration-thickness: 1px;
+    opacity: 0.7;
+  }
+
+  .enfoque-cell-vita .enfoque-cell-text {
+    font-weight: 500;
+  }
+
+  /* Responsive · enfoque */
+  @media (max-width: 768px) {
+    #enfoque { padding: 72px 20px 72px; }
+    .enfoque-comparison { margin-top: 48px; }
+
+    .enfoque-header {
+      grid-template-columns: 1fr;
+    }
+    .enfoque-header-col {
+      padding: 18px 20px;
+    }
+    .enfoque-header-vita {
+      border-left: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .enfoque-row {
+      grid-template-columns: 1fr;
+    }
+    .enfoque-cell {
+      padding: 18px 20px;
+      gap: 12px;
+    }
+    .enfoque-cell-traditional {
+      border-bottom: 1px solid var(--border);
+    }
+    .enfoque-cell-vita {
+      border-left: none;
+    }
+    .enfoque-cell-text {
+      font-size: 0.85rem;
+    }
+    .enfoque-cell-traditional::after {
+      display: none;
+    }
+  }
+
+  
 
     /* ============================================
        PROBLEMAS
@@ -3558,6 +4274,25 @@
     <a href="#servicios" class="btn-secondary">Ver servicios</a>
   </div>
 
+  <!-- INVITACIÓN PARA MÉDICOS · Card grande con presencia -->
+  <a href="medicos.html" class="hero-medicos-card" aria-label="Conoce el servicio especializado para médicos">
+    <span class="hero-medicos-card-shimmer" aria-hidden="true"></span>
+    <div class="hero-medicos-card-inner">
+      <div class="hero-medicos-card-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+        <span class="hero-medicos-card-pulse" aria-hidden="true"></span>
+      </div>
+      <div class="hero-medicos-card-content">
+        <span class="hero-medicos-card-eyebrow">¿Eres médico especialista?</span>
+        <span class="hero-medicos-card-title">Tenemos un sitio dedicado para ti.</span>
+        <span class="hero-medicos-card-cta">
+          Conoce el servicio especializado
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </div>
+  </a>
+
   <!-- HERO IMPACT · animación de alto impacto -->
   <div class="hero-impact">
     <!-- Typing rotativo grande -->
@@ -3693,6 +4428,57 @@
         <div class="caso-overlay">
           <span class="caso-brand-name">Dr. Wilber Coasaca</span>
           <span class="caso-brand-sub">Cirugía Cardiovascular y Torácica</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     MANIFIESTO · Filosofía VITA Studio
+============================================ -->
+<!-- MANIFIESTO · VITA Studio + Jair como Director -->
+<section id="manifiesto">
+  <div class="manifiesto-grid">
+    <div class="manifiesto-author">
+      <div class="manifiesto-mark">
+        <span class="manifiesto-mark-letter">V</span>
+        <span class="manifiesto-mark-ring" aria-hidden="true"></span>
+      </div>
+      <div class="manifiesto-brand">VITA Studio</div>
+      <div class="manifiesto-tagline">Growth Partner</div>
+      <div class="manifiesto-divider"></div>
+      <div class="manifiesto-director">
+        <span class="manifiesto-director-label">Director</span>
+        <span class="manifiesto-director-name">Jair Maldonado</span>
+      </div>
+      <div class="manifiesto-location">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Monterrey, MX
+      </div>
+    </div>
+
+    <div class="manifiesto-content">
+      <span class="manifiesto-eyebrow reveal">— Nuestra filosofía</span>
+
+      <p class="manifiesto-paragraph reveal">
+        En VITA Studio no construimos sitios web. Construimos <span class="manifiesto-highlight">activos digitales</span> que crecen contigo. Cada proyecto que tomamos es una relación de largo plazo, no una transacción.
+      </p>
+
+      <p class="manifiesto-paragraph reveal">
+        Trabajamos con un <span class="manifiesto-highlight">número limitado de marcas</span> porque creemos que el crecimiento real requiere atención real. No somos una agencia que entrega y desaparece — somos tu socio de crecimiento.
+      </p>
+
+      <p class="manifiesto-paragraph reveal">
+        Desde el branding hasta el lanzamiento, desde el diseño hasta la estrategia mensual: <span class="manifiesto-highlight">nuestro equipo se involucra en cada etapa</span>. Tu marca crece. Tu negocio escala. Y nosotros estamos ahí cada mes.
+      </p>
+
+      <div class="manifiesto-signature reveal">
+        <div class="manifiesto-signature-line"></div>
+        <div class="manifiesto-signature-content">
+          <span class="manifiesto-signature-name">Jair Maldonado</span>
+          <span class="manifiesto-signature-role">Director · VITA Studio</span>
         </div>
       </div>
     </div>
@@ -4062,6 +4848,90 @@
       No mostramos precios fijos porque cada negocio tiene un punto de partida distinto. La inversión real la calculamos en el diagnóstico, basándonos en tu alcance.
     </p>
 
+  </div>
+</section>
+
+
+<!-- ============================================
+     ENFOQUE · Growth Partner vs Agencia
+============================================ -->
+<!-- ENFOQUE · Growth Partner vs Agencia Tradicional -->
+<section id="enfoque">
+  <span class="section-label reveal">— Nuestro enfoque</span>
+  <h2 class="section-title reveal">
+    Growth Partner.<br>
+    <span class="section-title-light">No agencia.</span>
+  </h2>
+  <p class="section-subtitle reveal">
+    La diferencia entre quien te entrega un sitio y quien te ayuda a crecer.
+  </p>
+
+  <div class="enfoque-comparison">
+    <!-- Header -->
+    <div class="enfoque-header">
+      <div class="enfoque-header-col enfoque-header-traditional">
+        <span class="enfoque-header-label">Agencia tradicional</span>
+      </div>
+      <div class="enfoque-header-col enfoque-header-vita">
+        <span class="enfoque-header-label">VITA Studio</span>
+        <span class="enfoque-header-tag">Growth Partner</span>
+      </div>
+    </div>
+
+    <!-- Filas de comparación -->
+    <div class="enfoque-row reveal">
+      <div class="enfoque-cell enfoque-cell-traditional">
+        <span class="enfoque-cell-text">Te entregan un sitio web</span>
+      </div>
+      <div class="enfoque-cell enfoque-cell-vita">
+        <span class="enfoque-cell-text">Construimos un activo digital que crece contigo</span>
+      </div>
+    </div>
+
+    <div class="enfoque-row reveal">
+      <div class="enfoque-cell enfoque-cell-traditional">
+        <span class="enfoque-cell-text">Cobran por proyecto cerrado</span>
+      </div>
+      <div class="enfoque-cell enfoque-cell-vita">
+        <span class="enfoque-cell-text">Trabajamos contigo cada mes, evolucionando tu presencia</span>
+      </div>
+    </div>
+
+    <div class="enfoque-row reveal">
+      <div class="enfoque-cell enfoque-cell-traditional">
+        <span class="enfoque-cell-text">Desaparecen al lanzar</span>
+      </div>
+      <div class="enfoque-cell enfoque-cell-vita">
+        <span class="enfoque-cell-text">El lanzamiento es el inicio de la relación, no el final</span>
+      </div>
+    </div>
+
+    <div class="enfoque-row reveal">
+      <div class="enfoque-cell enfoque-cell-traditional">
+        <span class="enfoque-cell-text">Hacen lo que pides</span>
+      </div>
+      <div class="enfoque-cell enfoque-cell-vita">
+        <span class="enfoque-cell-text">Diagnosticamos qué necesitas y te lo proponemos</span>
+      </div>
+    </div>
+
+    <div class="enfoque-row reveal">
+      <div class="enfoque-cell enfoque-cell-traditional">
+        <span class="enfoque-cell-text">Atienden 20+ clientes a la vez</span>
+      </div>
+      <div class="enfoque-cell enfoque-cell-vita">
+        <span class="enfoque-cell-text">Cupo limitado para asegurar atención real</span>
+      </div>
+    </div>
+
+    <div class="enfoque-row reveal">
+      <div class="enfoque-cell enfoque-cell-traditional">
+        <span class="enfoque-cell-text">Reportan métricas vanidosas</span>
+      </div>
+      <div class="enfoque-cell enfoque-cell-vita">
+        <span class="enfoque-cell-text">Reportamos lo que mueve tu consultorio</span>
+      </div>
+    </div>
   </div>
 </section>
 
