@@ -520,62 +520,76 @@
     @media (max-width: 768px) {
       .hero-medicos-card {
         max-width: 100%;
-        margin: 28px 16px 0;
-        padding: 20px 22px;
+        margin: 24px 20px 0;
+        padding: 14px 16px;
+        border-radius: 14px;
       }
       .hero-medicos-card-inner {
-        gap: 16px;
+        gap: 12px;
       }
       .hero-medicos-card-icon {
-        width: 52px;
-        height: 52px;
+        width: 40px;
+        height: 40px;
       }
       .hero-medicos-card-icon svg {
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
+      }
+      .hero-medicos-card-pulse {
+        inset: -3px;
       }
       .hero-medicos-card-eyebrow {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
+        letter-spacing: 0;
       }
       .hero-medicos-card-title {
-        font-size: 1.1rem;
-      }
-      .hero-medicos-card-cta {
-        font-size: 0.78rem;
-      }
-    }
-
-    /* Responsive · Mobile chico */
-    @media (max-width: 480px) {
-      .hero-medicos-card {
-        margin: 24px 12px 0;
-        padding: 18px 16px;
-      }
-      .hero-medicos-card-inner {
-        gap: 14px;
-      }
-      .hero-medicos-card-icon {
-        width: 44px;
-        height: 44px;
-      }
-      .hero-medicos-card-icon svg {
-        width: 20px;
-        height: 20px;
-      }
-      .hero-medicos-card-eyebrow {
-        font-size: 0.65rem;
-      }
-      .hero-medicos-card-title {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         line-height: 1.25;
       }
       .hero-medicos-card-cta {
-        font-size: 0.7rem;
-        margin-top: 4px;
+        font-size: 0.65rem;
+        margin-top: 3px;
+        gap: 6px;
+        padding-bottom: 1px;
       }
       .hero-medicos-card-cta svg {
-        width: 12px;
-        height: 12px;
+        width: 11px;
+        height: 11px;
+      }
+    }
+
+    /* Responsive · Mobile chico · más compacto aún */
+    @media (max-width: 480px) {
+      .hero-medicos-card {
+        margin: 20px 16px 0;
+        padding: 12px 14px;
+        border-radius: 12px;
+      }
+      .hero-medicos-card-inner {
+        gap: 10px;
+      }
+      .hero-medicos-card-icon {
+        width: 34px;
+        height: 34px;
+      }
+      .hero-medicos-card-icon svg {
+        width: 15px;
+        height: 15px;
+      }
+      .hero-medicos-card-eyebrow {
+        font-size: 0.55rem;
+      }
+      .hero-medicos-card-title {
+        font-size: 0.78rem;
+        line-height: 1.2;
+      }
+      .hero-medicos-card-cta {
+        font-size: 0.6rem;
+        margin-top: 2px;
+      }
+      .hero-medicos-card-cta svg {
+        width: 10px;
+        height: 10px;
       }
     }
 
@@ -585,6 +599,160 @@
       .hero-medicos-card-icon,
       .hero-medicos-card-pulse {
         animation: none !important;
+      }
+    }
+
+    /* ====================================================
+       SIDE TAB MÉDICOS · Pestaña lateral derecha
+       Solo desktop · Hover expande el botón completo
+    ==================================================== */
+    #side-tab-medicos {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      z-index: 998;
+      display: flex;
+      align-items: stretch;
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0;
+      animation: sideTabFadeIn 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 2.5s forwards;
+    }
+
+    @keyframes sideTabFadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Contenido expandido (oculto por default) */
+    .side-tab-content {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, #c9a974 0%, #a88955 100%);
+      color: #0a0a0a;
+      padding: 16px 22px;
+      border-radius: 14px 0 0 14px;
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+      box-shadow: -8px 0 32px rgba(0, 0, 0, 0.4),
+                  -2px 0 8px rgba(201, 169, 116, 0.3);
+      transition: max-width 0.5s cubic-bezier(0.215, 0.61, 0.355, 1),
+                  opacity 0.4s ease,
+                  padding 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    .side-tab-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .side-tab-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      white-space: nowrap;
+    }
+
+    .side-tab-eyebrow {
+      font-family: var(--font);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+
+    .side-tab-label {
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    /* Pestañita pequeña (siempre visible) */
+    .side-tab-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 32px;
+      height: 88px;
+      background: linear-gradient(135deg, #c9a974 0%, #a88955 100%);
+      color: #0a0a0a;
+      border-radius: 14px 0 0 14px;
+      box-shadow: -6px 0 20px rgba(0, 0, 0, 0.5);
+      transition: width 0.5s cubic-bezier(0.215, 0.61, 0.355, 1),
+                  opacity 0.4s ease,
+                  padding 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation: sideTabPulse 3s ease-in-out infinite;
+    }
+
+    .side-tab-pill-icon {
+      flex-shrink: 0;
+      transition: transform 0.4s ease;
+    }
+
+    .side-tab-pill-arrow {
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    @keyframes sideTabPulse {
+      0%, 100% {
+        box-shadow: -6px 0 20px rgba(0, 0, 0, 0.5),
+                    -2px 0 0 0 rgba(201, 169, 116, 0);
+      }
+      50% {
+        box-shadow: -6px 0 24px rgba(0, 0, 0, 0.5),
+                    -2px 0 16px 2px rgba(201, 169, 116, 0.4);
+      }
+    }
+
+    /* Hover · expandir contenido */
+    #side-tab-medicos:hover .side-tab-content {
+      max-width: 360px;
+      opacity: 1;
+    }
+
+    #side-tab-medicos:hover .side-tab-pill {
+      width: 0;
+      opacity: 0;
+      animation-play-state: paused;
+    }
+
+    /* Active · feedback al click */
+    #side-tab-medicos:active .side-tab-content {
+      transform: scale(0.98);
+    }
+
+    /* Mobile · ocultar completamente */
+    @media (max-width: 1024px) {
+      #side-tab-medicos {
+        display: none;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      #side-tab-medicos {
+        opacity: 1 !important;
+        animation: none !important;
+      }
+      .side-tab-pill {
+        animation: none !important;
+      }
+      .side-tab-content,
+      .side-tab-pill {
+        transition: none !important;
       }
     }
 
@@ -1276,61 +1444,21 @@
     background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0) 100%);
   }
 
-  /* Marca VITA · circular con V */
-  .manifiesto-mark {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 18px;
-    position: relative;
+  /* Logo VITA · SVG real del wordmark */
+  .manifiesto-logo {
+    width: 100%;
+    max-width: 180px;
+    margin: 0 auto 16px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .manifiesto-mark-letter {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold) 0%, #cc6e30 100%);
-    color: #0a0a0a;
-    font-family: var(--font);
-    font-size: 1.7rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: -0.03em;
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 6px 20px rgba(255, 140, 66, 0.25);
-  }
-
-  .manifiesto-mark-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 1.5px solid rgba(255, 140, 66, 0.3);
-    animation: manifiestoRing 3s ease-in-out infinite;
-  }
-
-  @keyframes manifiestoRing {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 0.4;
-    }
-    50% {
-      transform: scale(1.08);
-      opacity: 0.7;
-    }
-  }
-
-  .manifiesto-brand {
-    font-family: var(--font);
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.01em;
-    margin-bottom: 3px;
+  .manifiesto-logo svg {
+    width: 100%;
+    height: auto;
+    fill: var(--text);
+    transition: opacity 0.4s ease;
   }
 
   .manifiesto-tagline {
@@ -1341,6 +1469,7 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     margin-bottom: 18px;
+    text-align: center;
   }
 
   .manifiesto-divider {
@@ -1480,8 +1609,7 @@
     #manifiesto { padding: 72px 20px 72px; }
     .manifiesto-grid { gap: 36px; }
     .manifiesto-author { padding: 28px 20px 24px; }
-    .manifiesto-mark { width: 60px; height: 60px; margin-bottom: 14px; }
-    .manifiesto-mark-letter { width: 46px; height: 46px; font-size: 1.4rem; }
+    .manifiesto-logo { max-width: 140px; margin-bottom: 12px; }
     .manifiesto-paragraph {
       font-size: 1.05rem;
       margin-bottom: 24px;
@@ -4253,6 +4381,31 @@
 </nav>
 
 <!-- ============================================
+     SIDE TAB · Pestaña lateral para médicos (desktop)
+============================================ -->
+<a href="medicos.html" id="side-tab-medicos" aria-label="Ir al sitio especializado para médicos">
+  <span class="side-tab-content">
+    <span class="side-tab-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>
+      </svg>
+    </span>
+    <span class="side-tab-text">
+      <span class="side-tab-eyebrow">¿Eres médico?</span>
+      <span class="side-tab-label">Ir al sitio especializado →</span>
+    </span>
+  </span>
+  <span class="side-tab-pill" aria-hidden="true">
+    <svg class="side-tab-pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>
+    </svg>
+    <svg class="side-tab-pill-arrow" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </span>
+</a>
+
+<!-- ============================================
      HERO
 ============================================ -->
 <section id="inicio">
@@ -4442,11 +4595,20 @@
 <section id="manifiesto">
   <div class="manifiesto-grid">
     <div class="manifiesto-author">
-      <div class="manifiesto-mark">
-        <span class="manifiesto-mark-letter">V</span>
-        <span class="manifiesto-mark-ring" aria-hidden="true"></span>
+      <div class="manifiesto-logo">
+        <svg viewBox="72 430 936 220" xmlns="http://www.w3.org/2000/svg">
+          <g><path d="M76,434.71h14.58l49.52,210.55h-14.58l-49.52-210.55ZM191.76,434.71l-50.74,210.55h-4.25l50.74-210.55h4.25Z"/>
+          <path d="M202.38,645.26h-14.28v-210.55h14.28v210.55Z"/>
+          <path d="M301.44,438.66h-113.93v-3.95h113.93v3.95ZM237.33,645.26v-210.55h14.28v210.55h-14.28Z"/>
+          <path d="M304.67,434.71h-14.58l1.64,7,29.61,126.67.92,3.95,17.04,72.92h14.58l-49.22-210.54ZM321.34,568.39l.92,3.95h2.76v-3.95h-3.68ZM259.4,568.39l-.91,3.95h1.57l.97-3.95h-1.63ZM289.18,434.71l-51.05,210.54h4.25l17.67-72.92.97-3.95,30.7-126.67,1.69-7h-4.24Z"/></g>
+          <g><path d="M365.34,639.11c-9.78-4.74-17.33-11.01-22.67-18.82-5.33-7.8-8.5-16.25-9.48-25.33h5.93c.99,6.92,3.5,13.83,7.55,20.74,4.05,6.91,10.47,12.84,19.26,17.78,8.79,4.94,20.1,7.4,33.93,7.4,11.06,0,20.84-2.12,29.33-6.37,8.49-4.25,15.01-9.92,19.55-17.04,4.54-7.11,6.81-15.01,6.81-23.7,0-11.26-2.57-20.19-7.7-26.81-5.14-6.62-11.51-11.51-19.11-14.67-7.61-3.15-17.83-6.42-30.67-9.77-13.43-3.56-24.2-7.11-32.3-10.67-8.1-3.56-14.96-9.04-20.59-16.44-5.63-7.4-8.44-17.43-8.44-30.07,0-9.08,2.52-17.63,7.55-25.63,5.04-8,12.24-14.37,21.63-19.11,9.38-4.74,20.1-7.11,32.15-7.11s22.81,2.17,31.7,6.51c8.89,4.35,15.85,9.83,20.89,16.45,5.04,6.62,8.34,13.58,9.93,20.89h-5.92c-1.38-5.73-4.25-11.55-8.59-17.48-4.35-5.92-10.57-10.91-18.67-14.96-8.1-4.05-17.88-6.07-29.33-6.07-10.08,0-19.31,1.93-27.71,5.78-8.4,3.85-15.11,9.29-20.15,16.29-5.04,7.02-7.56,15.16-7.56,24.44,0,11.46,2.62,20.59,7.85,27.4,5.23,6.82,11.7,11.85,19.41,15.11,7.7,3.26,17.97,6.57,30.82,9.93,13.43,3.56,24.15,7.06,32.15,10.52,8,3.46,14.76,8.79,20.3,16,5.53,7.21,8.3,17.04,8.3,29.48,0,8.69-2.32,17.09-6.96,25.18-4.64,8.1-11.61,14.67-20.89,19.7-9.29,5.04-20.55,7.55-33.78,7.55s-24.74-2.37-34.52-7.11Z"/>
+          <path d="M416.42,435.57v5.32h60.75v203.27h5.94v-203.27h38.78v-5.32h-105.47Z"/>
+          <path d="M649.02,435.57v129.46c0,10.51-.87,19.88-2.68,28.12-2.68,12.5-7.4,22.4-14.18,29.64-11.26,12.04-26.6,18.07-45.94,18.07s-35.43-6.03-46.97-18.07c-11.54-12.04-17.36-31.29-17.36-57.76v-129.46h-5.88v129.46c0,27.47,6.31,47.84,18.94,61.19,12.66,13.31,29.71,20,51.26,20s38.38-6.59,50.48-19.85c3.8-4.14,7.03-8.99,9.64-14.53,2.55-5.44,4.54-11.54,5.94-18.32v-152.64h2.68v-5.32h-5.94Z"/>
+          <path d="M811.27,533.71v-.06c-.03-1-.06-1.96-.16-2.92-.37-7.4-1.31-14.4-2.74-20.97-.87-4.04-1.93-7.93-3.2-11.66-4.67-13.87-11.98-25.63-21.93-35.27-18.76-18.17-46.13-27.28-82.06-27.28h-54.84v208.6h54.84c35.93,0,63.3-9.08,82.06-27.25,9.95-9.64,17.29-21.43,21.93-35.31,1.24-3.64,2.3-7.4,3.11-11.32,1.49-6.69,2.46-13.78,2.83-21.31.09-.87.12-1.77.16-2.68.09-2.12.12-4.26.12-6.44s-.03-4.11-.12-6.13ZM805.17,549.55c-1.65,26.6-10.36,47.65-26.07,63.21-17.57,17.36-43.55,26.07-77.92,26.07h-48.9v-197.93h48.9c34.37,0,60.35,8.68,77.92,26.07,15.71,15.55,24.42,36.61,26.07,63.21.03.19.03.34.03.53.19,2.99.28,6.03.28,9.15s-.09,6.41-.31,9.49v.22Z"/>
+          <path d="M811.11,435.55v208.59h-5.93v-208.59h5.93Z"/>
+          <path d="M853.04,633.03c-15.11-8.99-26.92-21.58-35.41-37.78-8.5-16.19-12.74-34.56-12.74-55.11s4.25-38.91,12.74-55.11c8.49-16.19,20.3-28.78,35.41-37.77,15.11-8.99,32.24-13.48,51.41-13.48s36.3,4.5,51.41,13.48c15.11,8.99,26.91,21.58,35.41,37.77,8.49,16.2,12.74,34.57,12.74,55.11s-4.25,38.92-12.74,55.11c-8.5,16.2-20.3,28.79-35.41,37.78-15.11,8.99-32.25,13.48-51.41,13.48s-36.3-4.49-51.41-13.48ZM951.85,628.89c14.22-8.2,25.43-19.95,33.63-35.26,8.19-15.3,12.3-33.13,12.3-53.48s-4.1-38.17-12.3-53.48c-8.2-15.3-19.41-27.06-33.63-35.26-14.22-8.2-30.03-12.3-47.41-12.3s-33.19,4.1-47.41,12.3c-14.22,8.2-25.43,19.95-33.63,35.26-8.2,15.31-12.3,33.14-12.3,53.48s4.1,38.18,12.3,53.48c8.2,15.31,19.41,27.06,33.63,35.26,14.22,8.2,30.02,12.3,47.41,12.3s33.19-4.1,47.41-12.3Z"/></g>
+        </svg>
       </div>
-      <div class="manifiesto-brand">VITA Studio</div>
       <div class="manifiesto-tagline">Growth Partner</div>
       <div class="manifiesto-divider"></div>
       <div class="manifiesto-director">
