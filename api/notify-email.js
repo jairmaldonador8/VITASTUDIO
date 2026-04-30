@@ -97,15 +97,15 @@ export default async function handler(req, res) {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
         'Authorization': `Bearer ${RESEND_API_KEY}`
       },
-      body: JSON.stringify({
+      body: Buffer.from(JSON.stringify({
         from: 'VITA Studio <onboarding@resend.dev>',
         to: FOUNDER_EMAIL,
         subject: `🔔 Nuevo Lead: ${nombre}`,
         html: emailContent
-      })
+      }), 'utf8')
     });
 
     if (!response.ok) {
