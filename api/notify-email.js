@@ -22,7 +22,14 @@ export default async function handler(req, res) {
     const whatsappMessage = encodeURIComponent(`Hola ${nombre}. Vi tu solicitud de ${negocio}. ¿Cuándo podemos hablar?`);
 
     const emailContent = `
-      <table style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%; max-width: 600px; margin: 0 auto;">
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      </head>
+      <body>
+      <table style="font-family: Arial, sans-serif; width: 100%; max-width: 600px; margin: 0 auto;">
         <tr>
           <td style="padding: 40px 20px;">
             <h1 style="color: #000; font-size: 24px; font-weight: 600; margin: 0 0 30px 0;">Nuevo Lead</h1>
@@ -83,6 +90,8 @@ export default async function handler(req, res) {
           </td>
         </tr>
       </table>
+      </body>
+      </html>
     `;
 
     const response = await fetch('https://api.resend.com/emails', {
