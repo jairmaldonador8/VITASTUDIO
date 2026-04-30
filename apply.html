@@ -912,7 +912,6 @@
   // 3. Copia tu endpoint (https://formspree.io/f/XXXXXXXX)
   // 4. Reemplaza la línea de abajo
   // ============================================
-  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/REEMPLAZA_CON_TU_ENDPOINT';
 
   function submitForm(e) {
     e.preventDefault();
@@ -949,20 +948,20 @@
       web:       document.getElementById('web').value.trim(),
       inversion: document.getElementById('inversion').value.trim(),
       fundador:  document.getElementById('fundador').value.trim(),
-      reto:      document.getElementById('reto').value.trim(),
-      _subject:  'Nuevo lead VITA Studio: ' + document.getElementById('negocio').value.trim()
+      reto:      document.getElementById('reto').value.trim()
     };
 
-    // ── 1. Enviar a Formspree (red principal — siempre te llega el lead) ──
-    if (FORMSPREE_ENDPOINT && FORMSPREE_ENDPOINT.indexOf('REEMPLAZA') === -1) {
-      fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      }).catch(function(err) {
-        console.warn('Formspree fallback:', err);
-      });
-    }
+    // ── 1. Guardar en Supabase (via API endpoint seguro en Vercel) ──
+    fetch('/api/submit-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function(res) {
+      if (!res.ok) throw new Error('Error al guardar');
+      return res.json();
+    }).catch(function(err) {
+      console.warn('Error guardando lead:', err);
+    });
 
     // ── 2. Abrir WhatsApp (red secundaria — el usuario decide enviarlo) ──
     var msg = encodeURIComponent(
