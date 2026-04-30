@@ -39,7 +39,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${RESEND_API_KEY}`
       },
       body: JSON.stringify({
-        from: 'VITA Studio <noreply@vitastudio.site>',
+        from: 'VITA Studio <onboarding@resend.dev>',
         to: FOUNDER_EMAIL,
         subject: `🔔 Nuevo Lead: ${nombre}`,
         html: emailContent
