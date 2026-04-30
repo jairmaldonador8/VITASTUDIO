@@ -19,33 +19,70 @@ export default async function handler(req, res) {
     }
 
     const whatsappNumber = whatsapp.replace(/\D/g, '');
-    const whatsappMessage = encodeURIComponent(`¡Hola ${nombre}! Vi tu solicitud de ${negocio}. ¿Cuándo podemos hablar?`);
+    const whatsappMessage = encodeURIComponent(`Hola ${nombre}. Vi tu solicitud de ${negocio}. ¿Cuándo podemos hablar?`);
 
     const emailContent = `
-      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #c9a974; margin-bottom: 20px;">🔔 Nuevo Lead en VITA Studio</h2>
+      <table style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%; max-width: 600px; margin: 0 auto;">
+        <tr>
+          <td style="padding: 40px 20px;">
+            <h1 style="color: #000; font-size: 24px; font-weight: 600; margin: 0 0 30px 0;">Nuevo Lead</h1>
 
-        <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-          <p style="margin: 8px 0;"><strong>👤 Nombre:</strong> ${nombre}</p>
-          <p style="margin: 8px 0;"><strong>📧 Email:</strong> ${email}</p>
-          <p style="margin: 8px 0;"><strong>💬 WhatsApp:</strong> ${whatsapp}</p>
-          <p style="margin: 8px 0;"><strong>🏢 Negocio:</strong> ${negocio}</p>
-          <p style="margin: 8px 0;"><strong>🌐 Sitio web:</strong> ${web || 'N/A'}</p>
-          <p style="margin: 8px 0;"><strong>🎯 Mayor reto:</strong> ${reto || 'N/A'}</p>
-          <p style="margin: 8px 0;"><strong>💰 Inversión:</strong> ${inversion || 'N/A'}</p>
-          <p style="margin: 8px 0;"><strong>👨 ¿Es fundador?:</strong> ${fundador || 'N/A'}</p>
-        </div>
+            <table style="width: 100%; margin-bottom: 30px;">
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                  <p style="color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 4px 0;">Nombre</p>
+                  <p style="color: #000; font-size: 16px; font-weight: 500; margin: 0;">${nombre}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                  <p style="color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 4px 0;">Email</p>
+                  <p style="color: #000; font-size: 16px; font-weight: 500; margin: 0;"><a href="mailto:${email}" style="color: #c9a974; text-decoration: none;">${email}</a></p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                  <p style="color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 4px 0;">WhatsApp</p>
+                  <p style="color: #000; font-size: 16px; font-weight: 500; margin: 0;"><a href="https://wa.me/${whatsappNumber}" style="color: #c9a974; text-decoration: none;">${whatsapp}</a></p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                  <p style="color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 4px 0;">Negocio</p>
+                  <p style="color: #000; font-size: 16px; font-weight: 500; margin: 0;">${negocio}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                  <p style="color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 4px 0;">Mayor reto</p>
+                  <p style="color: #000; font-size: 16px; font-weight: 500; margin: 0;">${reto || '—'}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0;">
+                  <p style="color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 4px 0;">Inversión mensual</p>
+                  <p style="color: #000; font-size: 16px; font-weight: 500; margin: 0;">${inversion || '—'}</p>
+                </td>
+              </tr>
+            </table>
 
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="https://wa.me/${whatsappNumber}?text=${whatsappMessage}" style="display: inline-block; background: #25d366; color: white; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; margin-right: 10px;">💬 Contactar por WhatsApp</a>
-          <a href="https://www.vitastudio.site/admin" style="display: inline-block; background: #c9a974; color: #000; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600;">📊 Ver en Dashboard</a>
-        </div>
+            <table style="width: 100%; margin-bottom: 30px;">
+              <tr>
+                <td style="padding-right: 10px;">
+                  <a href="https://wa.me/${whatsappNumber}?text=${whatsappMessage}" style="display: block; background: #25d366; color: white; padding: 14px 20px; border-radius: 4px; text-decoration: none; font-weight: 600; text-align: center; font-size: 14px;">Contactar por WhatsApp</a>
+                </td>
+                <td style="padding-left: 10px;">
+                  <a href="https://www.vitastudio.site/admin" style="display: block; background: #c9a974; color: #000; padding: 14px 20px; border-radius: 4px; text-decoration: none; font-weight: 600; text-align: center; font-size: 14px;">Ver en Dashboard</a>
+                </td>
+              </tr>
+            </table>
 
-        <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
-        <p style="color: #666; font-size: 0.9rem; text-align: center;">
-          VITA Studio • Dashboard: <a href="https://www.vitastudio.site/admin" style="color: #c9a974;">vitastudio.site/admin</a>
-        </p>
-      </div>
+            <p style="color: #999; font-size: 12px; text-align: center; margin: 40px 0 0 0; padding-top: 20px; border-top: 1px solid #eee;">
+              VITA Studio Admin • <a href="https://www.vitastudio.site/admin" style="color: #c9a974; text-decoration: none;">vitastudio.site/admin</a>
+            </p>
+          </td>
+        </tr>
+      </table>
     `;
 
     const response = await fetch('https://api.resend.com/emails', {

@@ -264,6 +264,17 @@
       color: var(--bg);
     }
 
+    .btn-delete {
+      background: rgba(239,68,68,0.1);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .btn-delete:hover {
+      background: var(--danger);
+      color: white;
+    }
+
     .time-ago {
       color: var(--muted);
       font-size: 0.85rem;
@@ -432,7 +443,7 @@
 
     const tbody = document.getElementById('leadsBody');
     if (filtered.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" class="loading">No hay leads</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="8" class="loading">No hay leads</td></tr>';
       return;
     }
 
@@ -453,8 +464,9 @@
         <td><span class="time-ago">${timeAgo(lead.created_at)}</span></td>
         <td>
           <div class="actions">
-            <button class="btn-small" onclick="openWhatsApp('${lead.whatsapp}', '${lead.nombre}', '${lead.negocio}')">💬 WA</button>
-            <button class="btn-small" onclick="openEmail('${lead.email}')">✉️ Email</button>
+            <button class="btn-small" onclick="openWhatsApp('${lead.whatsapp}', '${lead.nombre}', '${lead.negocio}')">WA</button>
+            <button class="btn-small" onclick="openEmail('${lead.email}')">Email</button>
+            <button class="btn-small btn-delete" onclick="deleteLead('${lead.id}')">Eliminar</button>
           </div>
         </td>
       </tr>
@@ -483,6 +495,28 @@
     .then(res => res.json())
     .then(data => {
       if (data.success) loadLeads();
+    })
+    .catch(err => console.error(err));
+  }
+
+  function deleteLead(leadId) {
+    if (!confirm('¿Eliminar este lead? No se puede deshacer.')) return;
+
+    const token = sessionStorage.getItem('adminToken');
+    fetch('/api/delete-lead', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ id: leadId })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        loadLeads();
+        alert('Lead eliminado');
+      }
     })
     .catch(err => console.error(err));
   }
