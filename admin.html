@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VITA Studio • Admin Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0a;
+      --fg: #ffffff;
+      --gold: #c9a974;
+      --muted: #888888;
+      --border: #222222;
+      --success: #4ade80;
+      --danger: #ef4444;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+    }
+
+    .login-screen, .dashboard-screen { display: none; }
+    .login-screen.active, .dashboard-screen.active { display: flex; }
+
+    /* LOGIN */
+    .login-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: var(--bg);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .login-box {
+      text-align: center;
+      padding: 40px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .login-box h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: var(--gold);
+    }
+
+    .login-box p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.05);
+      color: var(--fg);
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,169,116,0.1);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(201,169,116,0.3);
+    }
+
+    /* DASHBOARD */
+    .dashboard-screen {
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+
+    .dashboard-header h1 {
+      font-size: 1.8rem;
+      color: var(--gold);
+    }
+
+    .header-stats {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .stat {
+      text-align: right;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .stat-number {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--fg);
+    }
+
+    .logout-btn {
+      padding: 8px 16px;
+      background: var(--danger);
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    /* FILTROS */
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      background: rgba(201,169,116,0.1);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn.active {
+      background: var(--gold);
+      color: var(--bg);
+      border-color: var(--gold);
+    }
+
+    /* TABLA */
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    thead {
+      background: rgba(201,169,116,0.05);
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    td {
+      padding: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr:hover {
+      background: rgba(201,169,116,0.03);
+    }
+
+    /* PULSING DOT */
+    .dot-new {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      margin-right: 8px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* STATUS SELECTOR */
+    .status-select {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .status-select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .status-nuevo { color: var(--success); font-weight: 600; }
+    .status-contactado { color: var(--gold); }
+    .status-en_proceso { color: #3b82f6; }
+    .status-cerrado { color: var(--muted); }
+
+    /* BUTTONS */
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-small {
+      padding: 6px 12px;
+      background: rgba(201,169,116,0.1);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--fg);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-small:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .time-ago {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+
+    .error {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 10px; }
+      .actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen active" id="loginScreen">
+  <div class="login-box">
+    <h1>🔒 VITA Studio</h1>
+    <p>Admin Dashboard</p>
+    <input type="password" id="passwordInput" placeholder="Contraseña" />
+    <button class="login-btn" onclick="handleLogin()">Entrar</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard-screen" id="dashboardScreen">
+  <div class="dashboard-header">
+    <div>
+      <h1>📊 Leads</h1>
+    </div>
+    <div class="header-stats">
+      <div class="stat">
+        <div class="stat-number" id="newLeadsCount">0</div>
+        <div>Nuevos hoy</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="totalLeadsCount">0</div>
+        <div>Total</div>
+      </div>
+      <button class="logout-btn" onclick="handleLogout()">Salir</button>
+    </div>
+  </div>
+
+  <div id="errorMsg"></div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-status="todos" onclick="filterLeads('todos')">Todos</button>
+    <button class="filter-btn" data-status="nuevo" onclick="filterLeads('nuevo')">🟢 Nuevos</button>
+    <button class="filter-btn" data-status="contactado" onclick="filterLeads('contactado')">Contactados</button>
+    <button class="filter-btn" data-status="en_proceso" onclick="filterLeads('en_proceso')">En proceso</button>
+    <button class="filter-btn" data-status="cerrado" onclick="filterLeads('cerrado')">Cerrados</button>
+  </div>
+
+  <div class="table-container">
+    <table id="leadsTable">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Negocio</th>
+          <th>Email</th>
+          <th>WhatsApp</th>
+          <th>Status</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="leadsBody">
+        <tr><td colspan="7" class="loading">Cargando leads...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://uqsrfwluorehqfyefnxk.supabase.co';
+  const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxc3Jmd2x1b3JlaHFmeWVmbnhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMzkxMzEsImV4cCI6MjA5MjgxNTEzMX0.GStFG9Z0Rdfn5ggzOFWKH0u35i8FDbYZQdVc_mvi6sM';
+
+  let currentFilter = 'todos';
+  let allLeads = [];
+  let authToken = null;
+
+  // AUTH
+  function handleLogin() {
+    const password = document.getElementById('passwordInput').value;
+    if (!password) return;
+
+    fetch('/api/auth-admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        authToken = data.token;
+        sessionStorage.setItem('adminToken', authToken);
+        showDashboard();
+        loadLeads();
+        setInterval(loadLeads, 30000);
+      } else {
+        alert('Contraseña incorrecta');
+      }
+    })
+    .catch(err => console.error(err));
+  }
+
+  function handleLogout() {
+    sessionStorage.removeItem('adminToken');
+    authToken = null;
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('loginScreen').classList.add('active');
+    document.getElementById('dashboardScreen').classList.remove('active');
+  }
+
+  function showDashboard() {
+    document.getElementById('loginScreen').classList.remove('active');
+    document.getElementById('dashboardScreen').classList.add('active');
+  }
+
+  // LOAD LEADS
+  function loadLeads() {
+    const token = sessionStorage.getItem('adminToken');
+    if (!token) return;
+
+    fetch('/api/get-leads', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.leads) {
+        allLeads = data.leads;
+        updateStats();
+        renderLeads();
+      }
+    })
+    .catch(err => console.error(err));
+  }
+
+  function updateStats() {
+    const totalLeads = allLeads.length;
+    const newLeads = allLeads.filter(l => l.status === 'nuevo').length;
+    document.getElementById('totalLeadsCount').textContent = totalLeads;
+    document.getElementById('newLeadsCount').textContent = newLeads;
+  }
+
+  function renderLeads() {
+    const filtered = currentFilter === 'todos'
+      ? allLeads
+      : allLeads.filter(l => l.status === currentFilter);
+
+    const tbody = document.getElementById('leadsBody');
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="loading">No hay leads</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(lead => `
+      <tr>
+        <td>${lead.status === 'nuevo' ? '<span class="dot-new"></span>' : ''}${lead.nombre}</td>
+        <td>${lead.negocio}</td>
+        <td>${lead.email}</td>
+        <td><a href="tel:${lead.whatsapp}" style="color: var(--gold);">${lead.whatsapp}</a></td>
+        <td>
+          <select class="status-select status-${lead.status}" onchange="updateStatus('${lead.id}', this.value)">
+            <option value="nuevo" ${lead.status === 'nuevo' ? 'selected' : ''}>Nuevo</option>
+            <option value="contactado" ${lead.status === 'contactado' ? 'selected' : ''}>Contactado</option>
+            <option value="en_proceso" ${lead.status === 'en_proceso' ? 'selected' : ''}>En proceso</option>
+            <option value="cerrado" ${lead.status === 'cerrado' ? 'selected' : ''}>Cerrado</option>
+          </select>
+        </td>
+        <td><span class="time-ago">${timeAgo(lead.created_at)}</span></td>
+        <td>
+          <div class="actions">
+            <button class="btn-small" onclick="openWhatsApp('${lead.whatsapp}', '${lead.nombre}', '${lead.negocio}')">💬 WA</button>
+            <button class="btn-small" onclick="openEmail('${lead.email}')">✉️ Email</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function filterLeads(status) {
+    currentFilter = status;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.dataset.status === status) btn.classList.add('active');
+    });
+    renderLeads();
+  }
+
+  function updateStatus(leadId, newStatus) {
+    const token = sessionStorage.getItem('adminToken');
+    fetch('/api/update-lead-status', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ id: leadId, status: newStatus })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) loadLeads();
+    })
+    .catch(err => console.error(err));
+  }
+
+  function openWhatsApp(whatsapp, nombre, negocio) {
+    const msg = encodeURIComponent(`¡Hola ${nombre}! Vi tu solicitud de ${negocio}. ¿Cuándo podemos agendar?`);
+    window.open(`https://wa.me/${whatsapp.replace(/\D/g, '')}?text=${msg}`, '_blank');
+  }
+
+  function openEmail(email) {
+    window.open(`mailto:${email}?subject=VITA Studio - Seguimiento&body=Hola,%0A%0AVi tu solicitud de VITA Studio. ¿Cuándo podemos hablar?`, '_blank');
+  }
+
+  function timeAgo(date) {
+    const now = new Date();
+    const then = new Date(date);
+    const seconds = Math.floor((now - then) / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (seconds < 60) return 'Hace poco';
+    if (minutes < 60) return `Hace ${minutes}m`;
+    if (hours < 24) return `Hace ${hours}h`;
+    return `Hace ${days}d`;
+  }
+
+  // INIT
+  const token = sessionStorage.getItem('adminToken');
+  if (token) {
+    authToken = token;
+    showDashboard();
+    loadLeads();
+    setInterval(loadLeads, 30000);
+  }
+</script>
+
+</body>
+</html>
