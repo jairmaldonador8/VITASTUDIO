@@ -976,13 +976,13 @@
       '¿Cuándo podemos agendar mi sesión?'
     );
 
-    var waUrl = 'https://wa.me/525543708757?text=' + msg;
+    var waUrl = 'https://wa.me/5215543708757?text=' + msg;
 
     // Show success
     document.getElementById('mainForm').style.display = 'none';
     var s = document.getElementById('successBlock');
     s.style.display = 'block';
-    document.getElementById('successName').textContent = nombre.split(' ')[0];
+    document.getElementById('successName').textContent = data.nombre.split(' ')[0];
     document.getElementById('waLink').href = waUrl;
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
