@@ -74,6 +74,23 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Error al guardar lead' });
     }
 
+    // Enviar notificación email al founder
+    if (data[0]) {
+      try {
+        await fetch(req.headers.host?.includes('localhost')
+          ? 'http://localhost:3000/api/notify-email'
+          : 'https://www.vitastudio.site/api/notify-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nombre, email, whatsapp, negocio, web, inversion, fundador, reto
+          })
+        }).catch(err => console.warn('Email notification failed:', err.message));
+      } catch (err) {
+        console.warn('Email notification error:', err.message);
+      }
+    }
+
     // Éxito
     return res.status(201).json({
       success: true,
