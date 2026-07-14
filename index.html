@@ -117,7 +117,7 @@
     }
 
     /* Keep cards and inner elements with their own bg */
-    .caso-card, .servicio-card, .faq-item,
+    .caso-card, .servicio-card, .fchat,
     .problema-card,
     .nav-card, form, .form-card {
       position: relative;
@@ -1939,66 +1939,212 @@
       margin-bottom: 48px;
     }
 
-    .faq-item {
-      border-bottom: 1px solid var(--border);
+    /* ------ FAQ ESTILO CHAT ------ */
+    .fchat {
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
       overflow: hidden;
+      background: linear-gradient(180deg, #0b0b0b, #060606);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
     }
 
-    .faq-question {
+    .fchat-head {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 22px 0;
-      cursor: pointer;
-      gap: 20px;
-      transition: color 0.2s;
+      gap: 14px;
+      padding: 18px 22px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
     }
 
-    .faq-question:hover { color: rgba(255,255,255,0.85); }
-    .faq-question.open { color: #fff; }
-
-    .faq-q-text {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.75);
-      transition: color 0.2s;
-    }
-
-    .faq-question.open .faq-q-text { color: #fff; }
-
-    .faq-arrow {
-      width: 28px; height: 28px;
+    .fchat-avatar {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
+      background: var(--gold);
+      color: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      transition: transform 0.3s ease, background 0.2s ease;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: -0.02em;
+      box-shadow: 0 0 22px rgba(255,140,66,0.35);
     }
 
-    .faq-question.open .faq-arrow {
-      transform: rotate(180deg);
-      background: var(--gold-dim);
-      border-color: rgba(255,140,66,0.25);
-    }
+    .fchat-nombre { font-size: 0.92rem; font-weight: 600; }
 
-    .faq-arrow svg { stroke: rgba(255,255,255,0.5); transition: stroke 0.2s; }
-    .faq-question.open .faq-arrow svg { stroke: var(--gold); }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    .faq-answer-inner {
-      padding: 0 0 22px;
-      font-size: 0.875rem;
+    .fchat-estado {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
       font-weight: 300;
-      color: var(--text-muted);
-      line-height: 1.75;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    .fchat-online {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px rgba(74,222,128,0.7);
+    }
+
+    .fchat-cuerpo {
+      padding: 26px 22px;
+      min-height: 300px;
+      max-height: 430px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-behavior: smooth;
+    }
+
+    .fchat-cuerpo::-webkit-scrollbar { width: 5px; }
+    .fchat-cuerpo::-webkit-scrollbar-thumb { background: rgba(255,140,66,0.3); border-radius: 99px; }
+
+    .fchat-msg {
+      max-width: 82%;
+      padding: 13px 17px;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+      animation: fchat-entra 0.45s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    @keyframes fchat-entra { to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    .fchat-msg--vita {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-bottom-left-radius: 5px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .fchat-msg--user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--gold), #e8762e);
+      color: #140a03;
+      font-weight: 500;
+      border-bottom-right-radius: 5px;
+      box-shadow: 0 6px 24px rgba(255,140,66,0.25);
+    }
+
+    .fchat-hora {
+      display: block;
+      font-size: 0.6rem;
+      margin-top: 6px;
+      opacity: 0.5;
+      letter-spacing: 0.04em;
+    }
+
+    .fchat-typing {
+      align-self: flex-start;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      border-bottom-left-radius: 5px;
+      padding: 15px 18px;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fchat-entra 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .fchat-typing i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,140,66,0.75);
+      animation: fchat-bota 1.1s infinite ease-in-out;
+      font-style: normal;
+    }
+
+    .fchat-typing i:nth-child(2) { animation-delay: 0.15s; }
+    .fchat-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes fchat-bota {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    .fchat-pie {
+      padding: 18px 22px 22px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.015);
+    }
+
+    .fchat-pie-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .fchat-chips { display: flex; flex-wrap: wrap; gap: 9px; }
+
+    .fchat-chip {
+      font-family: var(--font);
+      font-size: 0.76rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.8);
+      background: transparent;
+      border: 1px solid rgba(255,140,66,0.4);
+      border-radius: 999px;
+      padding: 10px 17px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .fchat-chip:hover {
+      background: rgba(255,140,66,0.12);
+      border-color: var(--gold);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .fchat-chip.usada {
+      opacity: 0.32;
+      border-color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.5);
+      cursor: default;
+      transform: none;
+    }
+
+    .fchat-chip.usada:hover { background: transparent; }
+    .fchat-chip:disabled { pointer-events: none; }
+
+    .fchat-cta {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(255,140,66,0.5);
+      padding-bottom: 2px;
+    }
+
+    .fchat-cta:hover { border-bottom-color: var(--gold); }
+
+    @media (max-width: 560px) {
+      .fchat-cuerpo { max-height: 380px; }
+      .fchat-msg { max-width: 90%; }
     }
 
         /* ============================================
@@ -3250,16 +3396,8 @@
       box-shadow: 0 24px 60px rgba(0,0,0,0.4) !important;
     }
 
-    .faq-item {
-      transition: background 0.2s ease, border-color 0.2s ease !important;
-    }
-    .faq-item:hover {
-      background: rgba(255,255,255,0.04) !important;
-      border-color: rgba(255,140,66,0.15) !important;
-    }
-
     /* Cursor pointer en elementos clickeables */
-    .caso-card, .servicio-card, .faq-item, .bnav-tab {
+    .caso-card, .servicio-card, .fchat-chip, .bnav-tab {
       cursor: pointer;
     }
 
@@ -3581,7 +3719,7 @@
     /* ── Contenido siempre encima ── */
     #navbar, section > *, .hero-content,
     .problema-card, .servicio-card, .caso-card,
-    .faq-item,
+    .fchat,
     .clientes-header, .problemas-header,
     .clientes-track-wrapper, .bnav,
     #logos-strip > *,
@@ -4694,57 +4832,118 @@
     <h2 class="section-title">Todo lo que necesitas saber</h2>
   </div>
 
-  <div class="faq-item reveal">
-    <div class="faq-question">
-      <span class="faq-q-text">¿Por qué no muestran precios fijos en el sitio?</span>
-      <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="fchat reveal" style="transition-delay:0.1s">
+    <div class="fchat-head">
+      <div class="fchat-avatar">JM</div>
+      <div>
+        <div class="fchat-nombre">Jair Maldonado</div>
+        <div class="fchat-estado"><span class="fchat-online"></span> En línea · responde al instante</div>
+      </div>
     </div>
-    <div class="faq-answer">
-      <p class="faq-answer-inner">Porque cada negocio tiene un punto de partida distinto. Un médico que ya factura $150k al mes y necesita branding completo no parte del mismo lugar que una clínica nueva que está abriendo. Cobrar lo mismo a los dos sería injusto para ambos. En el diagnóstico de 45 minutos calculamos la inversión real basándonos en tu alcance. Sin compromiso, sin sorpresas.</p>
-    </div>
-  </div>
 
-  <div class="faq-item reveal" style="transition-delay:0.05s">
-    <div class="faq-question">
-      <span class="faq-q-text">¿Cuánto tarda todo el proceso?</span>
-      <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="fchat-cuerpo" id="fchatCuerpo">
+      <div class="fchat-msg fchat-msg--vita">Hola 👋 Soy Jair Maldonado, fundador de VITA Studio. Responderé tus dudas como si ya estuviéramos en el diagnóstico.</div>
     </div>
-    <div class="faq-answer">
-      <p class="faq-answer-inner">El Método VITA toma 8-12 semanas e incluye 3 meses de seguimiento posterior. Los resultados en facturación suelen verse entre el mes 2 y el mes 6 del lanzamiento, dependiendo de tu ciclo de venta.</p>
-    </div>
-  </div>
 
-  <div class="faq-item reveal" style="transition-delay:0.1s">
-    <div class="faq-question">
-      <span class="faq-q-text">¿Qué tipo de negocios son sus clientes ideales?</span>
-      <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
-    </div>
-    <div class="faq-answer">
-      <p class="faq-answer-inner">Profesionistas de servicio que ya facturan pero su presencia digital no representa lo que valen: médicos, dentistas, clínicas de estética y restaurantes locales, además de creadores de contenido que están construyendo su marca personal. Trabajamos mejor con negocios establecidos en Monterrey y el resto de México que entienden que invertir en marca es invertir en escalar.</p>
-    </div>
-  </div>
-
-  <div class="faq-item reveal" style="transition-delay:0.15s">
-    <div class="faq-question">
-      <span class="faq-q-text">¿Qué incluye el diagnóstico estratégico de 45 minutos?</span>
-      <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
-    </div>
-    <div class="faq-answer">
-      <p class="faq-answer-inner">Es una videollamada estructurada donde escuchamos tu negocio, identificamos las 3 áreas críticas que están frenando tu crecimiento, y te damos una recomendación clara de si el Método VITA tiene sentido para tu caso, o si no lo tiene. Es genuinamente útil incluso si decides no trabajar con nosotros. No hay venta agresiva ni presión.</p>
-    </div>
-  </div>
-
-  <div class="faq-item reveal" style="transition-delay:0.2s">
-    <div class="faq-question">
-      <span class="faq-q-text">¿Puedo contratar solo el sitio web o solo el branding?</span>
-      <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
-    </div>
-    <div class="faq-answer">
-      <p class="faq-answer-inner">Sí, dependiendo de las necesidades de tu negocio. En el diagnóstico vemos en qué punto estás: si tu marca ya es sólida y lo que te falta es un sitio que venda, o si tu web funciona pero tu identidad no comunica lo que vales, podemos trabajar esa pieza por separado. Y cuando tu negocio necesita el sistema completo, el Método VITA une marca, web y estrategia para que cada pieza impulse a la otra. Lo importante es que inviertas en lo que hoy mueve la aguja de tu negocio.</p>
+    <div class="fchat-pie">
+      <span class="fchat-pie-label">Toca una pregunta para enviarla</span>
+      <div class="fchat-chips" id="fchatChips"></div>
     </div>
   </div>
 
 </section>
+
+<script>
+(function() {
+  var cuerpo = document.getElementById('fchatCuerpo');
+  var chips = document.getElementById('fchatChips');
+  if (!cuerpo || !chips) return;
+
+  var FAQS = [
+    {
+      q: '¿Por qué no muestran precios fijos en el sitio?',
+      a: 'Porque cada negocio tiene un punto de partida distinto. Un médico que ya factura $150k al mes y necesita branding completo no parte del mismo lugar que una clínica nueva que está abriendo. Cobrar lo mismo a los dos sería injusto para ambos. En el diagnóstico de 45 minutos calculamos la inversión real basándonos en tu alcance. Sin compromiso, sin sorpresas.'
+    },
+    {
+      q: '¿Cuánto tarda todo el proceso?',
+      a: 'El Método VITA toma 8-12 semanas e incluye 3 meses de seguimiento posterior. Los resultados en facturación suelen verse entre el mes 2 y el mes 6 del lanzamiento, dependiendo de tu ciclo de venta.'
+    },
+    {
+      q: '¿Qué tipo de negocios son sus clientes ideales?',
+      a: 'Profesionistas de servicio que ya facturan pero su presencia digital no representa lo que valen: médicos, dentistas, clínicas de estética y restaurantes locales, además de creadores de contenido que están construyendo su marca personal. Trabajamos mejor con negocios establecidos en Monterrey y el resto de México que entienden que invertir en marca es invertir en escalar.'
+    },
+    {
+      q: '¿Qué incluye el diagnóstico estratégico de 45 minutos?',
+      a: 'Es una videollamada estructurada donde escuchamos tu negocio, identificamos las 3 áreas críticas que están frenando tu crecimiento, y te damos una recomendación clara de si el Método VITA tiene sentido para tu caso, o si no lo tiene. Es genuinamente útil incluso si decides no trabajar con nosotros. No hay venta agresiva ni presión.'
+    },
+    {
+      q: '¿Puedo contratar solo el sitio web o solo el branding?',
+      a: 'Sí, dependiendo de las necesidades de tu negocio. En el diagnóstico vemos en qué punto estás: si tu marca ya es sólida y lo que te falta es un sitio que venda, o si tu web funciona pero tu identidad no comunica lo que vales, podemos trabajar esa pieza por separado. Y cuando tu negocio necesita el sistema completo, el Método VITA une marca, web y estrategia para que cada pieza impulse a la otra. Lo importante es que inviertas en lo que hoy mueve la aguja de tu negocio.'
+    }
+  ];
+
+  var ocupado = false;
+  var respondidas = 0;
+
+  function hora() {
+    var d = new Date();
+    var h = d.getHours() % 12 || 12;
+    var m = ('0' + d.getMinutes()).slice(-2);
+    return h + ':' + m + (d.getHours() >= 12 ? ' pm' : ' am');
+  }
+
+  function scrollAbajo() { cuerpo.scrollTop = cuerpo.scrollHeight; }
+
+  FAQS.forEach(function(faq) {
+    var b = document.createElement('button');
+    b.className = 'fchat-chip';
+    b.type = 'button';
+    b.textContent = faq.q;
+    b.addEventListener('click', function() {
+      if (ocupado || b.classList.contains('usada')) return;
+      ocupado = true;
+      b.classList.add('usada');
+      b.disabled = true;
+
+      var user = document.createElement('div');
+      user.className = 'fchat-msg fchat-msg--user';
+      user.innerHTML = faq.q + '<span class="fchat-hora">' + hora() + ' ✓✓</span>';
+      cuerpo.appendChild(user);
+      scrollAbajo();
+
+      setTimeout(function() {
+        var t = document.createElement('div');
+        t.className = 'fchat-typing';
+        t.innerHTML = '<i></i><i></i><i></i>';
+        cuerpo.appendChild(t);
+        scrollAbajo();
+
+        setTimeout(function() {
+          t.remove();
+          var vita = document.createElement('div');
+          vita.className = 'fchat-msg fchat-msg--vita';
+          vita.innerHTML = faq.a + '<span class="fchat-hora">' + hora() + '</span>';
+          cuerpo.appendChild(vita);
+          scrollAbajo();
+          ocupado = false;
+          respondidas++;
+
+          if (respondidas === FAQS.length) {
+            setTimeout(function() {
+              var cierre = document.createElement('div');
+              cierre.className = 'fchat-msg fchat-msg--vita';
+              cierre.innerHTML = '¿Te quedó alguna duda de tu caso en específico? Eso lo vemos mejor en vivo 😉<br><a class="fchat-cta" href="apply.html">Agendar mi diagnóstico →</a><span class="fchat-hora">' + hora() + '</span>';
+              cuerpo.appendChild(cierre);
+              scrollAbajo();
+            }, 700);
+          }
+        }, 900 + Math.min(faq.a.length * 2.2, 1400));
+      }, 420);
+    });
+    chips.appendChild(b);
+  });
+})();
+</script>
 
 <!-- ============================================
      CTA FINAL
@@ -5020,25 +5219,6 @@
   });
 
   
-  // ---- FAQ ACCORDION ----
-  document.querySelectorAll('.faq-question').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const answer = item.querySelector('.faq-answer');
-      const isOpen = q.classList.contains('open');
-      // Close all
-      document.querySelectorAll('.faq-question').forEach(oq => {
-        oq.classList.remove('open');
-        oq.parentElement.querySelector('.faq-answer').style.maxHeight = '0';
-      });
-      // Open clicked if was closed
-      if (!isOpen) {
-        q.classList.add('open');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      }
-    });
-  });
-
   // ---- CLIENTS INFINITE SCROLL (JS) ----
   // --- CARRUSEL CLIENTES ---
   function initCarrusel() {
@@ -6835,7 +7015,7 @@
       ring.style.opacity = '1';
     });
 
-    var hoverables = document.querySelectorAll('a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .cta-final-btn, .caso-card, .sol-card, .servicio-card, .faq-item, .bnav-tab');
+    var hoverables = document.querySelectorAll('a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .cta-final-btn, .caso-card, .sol-card, .servicio-card, .fchat-chip, .bnav-tab');
     hoverables.forEach(function(el) {
       el.addEventListener('mouseenter', function() {
         ring.classList.add('is-hovering');
