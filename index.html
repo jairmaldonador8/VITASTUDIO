@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VITA Studio — Hacemos crecer tu negocio. Sin adivinar.</title>
+  <title>VITA Studio | Hacemos crecer tu negocio. Sin adivinar.</title>
   <meta name="description" content="Consultoría personalizada, branding profesional y sitios web que convierten. Monterrey, México.">
 
   <!-- ============================================
@@ -22,7 +22,7 @@
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jairmaldonador8.github.io/VITASTUDIO/">
-  <meta property="og:title" content="VITA Studio — Hacemos crecer tu negocio. Sin adivinar.">
+  <meta property="og:title" content="VITA Studio | Hacemos crecer tu negocio. Sin adivinar.">
   <meta property="og:description" content="Consultoría personalizada, branding profesional y sitios web que convierten. Monterrey, México.">
   <meta property="og:image" content="https://jairmaldonador8.github.io/VITASTUDIO/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -31,7 +31,7 @@
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="VITA Studio — Hacemos crecer tu negocio. Sin adivinar.">
+  <meta name="twitter:title" content="VITA Studio | Hacemos crecer tu negocio. Sin adivinar.">
   <meta name="twitter:description" content="Consultoría personalizada, branding profesional y sitios web que convierten. Monterrey, México.">
   <meta name="twitter:image" content="https://jairmaldonador8.github.io/VITASTUDIO/assets/og-image.jpg">
 
@@ -1889,353 +1889,217 @@
       font-weight: 700;
     }
 
-    /* ------ DIAGNÓSTICO CARD (Paso 0) ------ */
-    .diagnostico-card {
-      background: rgba(255,140,66,0.04);
-      border: 1px solid rgba(255,140,66,0.25);
-      border-radius: 14px;
-      padding: 32px;
-      margin-bottom: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .diagnostico-content {
-      flex: 1;
-      min-width: 280px;
-    }
-
-    .diagnostico-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .diagnostico-step {
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .diagnostico-divider {
-      width: 30px;
-      height: 1px;
-      background: rgba(255,140,66,0.5);
-    }
-
-    .diagnostico-tag {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      font-weight: 500;
-    }
-
-    .diagnostico-title {
-      font-family: var(--font);
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.02em;
-      margin: 0 0 12px;
-    }
-
-    .diagnostico-desc {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.6);
-      font-weight: 300;
-      line-height: 1.55;
-      margin: 0 0 16px;
-    }
-
-    .diagnostico-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .diagnostico-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.7);
-      font-weight: 300;
-      line-height: 1.5;
-    }
-
-    .diag-arrow {
-      color: var(--gold);
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-
-    .diagnostico-cta {
-      flex-shrink: 0;
-    }
-
-    .btn-diagnostico {
-      background: var(--gold);
-      color: #0a0a0a;
-      border: none;
-      padding: 15px 28px;
-      font-family: var(--font);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border-radius: 6px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .btn-diagnostico:hover {
-      transform: translateY(-1px);
-      opacity: 0.92;
-    }
-
-    .btn-arrow {
-      font-size: 0.95rem;
-      transition: transform 0.2s ease;
-    }
-
-    .btn-diagnostico:hover .btn-arrow {
-      transform: translateX(3px);
-    }
-
-    /* ------ INTRO PAQUETES ------ */
-    .paquetes-intro {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .paquetes-intro-text {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      font-weight: 500;
-      margin: 0;
-    }
-
-    /* ------ GRID DE PAQUETES ------ */
-    .paquetes-grid {
+    /* ------ BENTO DE SERVICIOS ------ */
+    .bento {
       display: grid;
-      grid-template-columns: min(680px, 100%);
-      justify-content: center;
-      gap: 24px;
-      align-items: stretch;
+      gap: 16px;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: minmax(150px, auto);
     }
 
-    .paquete-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 36px 32px;
-      display: flex;
-      flex-direction: column;
+    .bento-celda {
       position: relative;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.02);
+      padding: 30px 28px;
+      overflow: hidden;
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease;
     }
 
-    .paquete-card--featured {
-      background: rgba(255,140,66,0.04);
-      border: 1.5px solid rgba(255,140,66,0.5);
-    }
-
-    .paquete-badge {
+    .bento-celda::before {
+      content: '';
       position: absolute;
-      top: -12px;
-      left: 32px;
-      background: var(--gold);
-      color: #0a0a0a;
-      padding: 5px 12px;
-      border-radius: 4px;
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-weight: 700;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255,140,66,0.1), transparent 65%);
+      pointer-events: none;
     }
 
-    .paquete-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
+    .bento-celda:hover::before { opacity: 1; }
+    .bento-celda:hover { border-color: rgba(255,140,66,0.35); }
 
-    .paquete-num {
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      font-weight: 500;
-    }
-
-    .paquete-num--featured { color: rgba(255,140,66,0.85); }
-
-    .paquete-time {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      font-weight: 500;
-    }
-
-    .paquete-time--featured { color: rgba(255,140,66,0.65); }
-
-    .paquete-title {
-      font-family: var(--font);
-      font-size: 1.9rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.02em;
-      margin: 0 0 14px;
-    }
-
-    .paquete-for {
-      font-family: var(--font);
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.7);
-      font-weight: 300;
-      line-height: 1.55;
-      margin: 0 0 24px;
-    }
-
-    .paquete-for--featured { color: rgba(255,255,255,0.78); }
-
-    .paquete-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.08);
-      margin: 0 0 22px;
-    }
-
-    .paquete-divider--featured {
-      background: rgba(255,140,66,0.18);
-    }
-
-    .paquete-includes {
-      flex: 1;
-    }
-
-    .includes-label {
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    .includes-label--featured { color: rgba(255,140,66,0.65); }
-
-    .includes-list {
+    .bento-celda--hero {
+      grid-column: span 4;
+      grid-row: span 2;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-    }
-
-    .include-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.86rem;
-      color: rgba(255,255,255,0.85);
-      font-weight: 300;
-      line-height: 1.5;
-    }
-
-    .include-item strong {
-      font-weight: 500;
-      color: #fff;
-    }
-
-    .include-bullet {
-      color: var(--gold);
-      font-size: 0.7rem;
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-
-    .paquete-footer {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 22px;
-      margin-top: 24px;
-      display: flex;
       justify-content: space-between;
-      align-items: center;
+      padding: 40px 38px;
+      background: linear-gradient(135deg, rgba(255,140,66,0.08), rgba(255,255,255,0.02) 55%);
+      border-color: rgba(255,140,66,0.45);
     }
 
-    .paquete-footer--featured {
-      border-top-color: rgba(255,140,66,0.18);
-    }
-
-    .paquete-price {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.5);
-      font-weight: 300;
-    }
-
-    .btn-paquete {
-      background: transparent;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 11px 22px;
-      font-family: var(--font);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+    .bento-hero-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      border-radius: 6px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .btn-paquete:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.4);
-    }
-
-    .btn-paquete--featured {
-      background: var(--gold);
-      color: #0a0a0a;
-      border-color: var(--gold);
+      color: rgba(255,140,66,0.85);
       font-weight: 600;
     }
 
-    .btn-paquete--featured:hover {
+    .bento-hero-nombre {
+      font-family: var(--font);
+      font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      margin: 16px 0 12px;
+    }
+
+    .bento-hero-for {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.7;
+      max-width: 430px;
+    }
+
+    .bento-hero-pie {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-bento {
+      font-family: var(--font);
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #000;
       background: var(--gold);
-      opacity: 0.92;
-      transform: translateY(-1px);
+      text-decoration: none;
+      padding: 16px 36px;
+      border-radius: 999px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .btn-paquete span {
-      transition: transform 0.2s ease;
+    .btn-bento:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(255,140,66,0.45);
     }
 
-    .btn-paquete:hover span {
-      transform: translateX(3px);
+    .bento-hero-precio {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
     }
+
+    .bento-celda--stat {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .bento-stat-num {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .bento-stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-top: 10px;
+    }
+
+    .bento-celda--diag {
+      grid-column: span 2;
+      background: rgba(255,140,66,0.07);
+      border-color: rgba(255,140,66,0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .bento-diag-step {
+      font-size: 0.6rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .bento-diag-titulo {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .bento-diag-sub {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .bento-diag-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--gold);
+      text-decoration: none;
+      margin-top: 6px;
+    }
+
+    .bento-diag-link:hover { text-decoration: underline; }
+
+    .bento-celda--item {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 8px;
+      min-height: 190px;
+    }
+
+    .bento-item-num {
+      position: absolute;
+      top: 22px;
+      right: 24px;
+      font-size: 2.2rem;
+      font-weight: 200;
+      color: rgba(255,255,255,0.14);
+      letter-spacing: -0.03em;
+      transition: color 0.35s ease;
+    }
+
+    .bento-celda--item:hover .bento-item-num { color: rgba(255,140,66,0.65); }
+
+    .bento-item-titulo {
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    .bento-item-desc {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .bento-celda--wide { grid-column: span 4; }
 
     .paquetes-note {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 52px;
       font-size: 0.78rem;
       color: rgba(255,255,255,0.35);
       font-weight: 300;
@@ -2243,6 +2107,16 @@
       max-width: 580px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    @media (max-width: 880px) {
+      .bento { grid-template-columns: 1fr 1fr; }
+      .bento-celda--hero,
+      .bento-celda--stat,
+      .bento-celda--diag,
+      .bento-celda--item,
+      .bento-celda--wide { grid-column: span 2; }
+      .bento-celda--item { min-height: 150px; }
     }
 
         /* ============================================
@@ -2806,26 +2680,8 @@
         grid-template-columns: 1fr;
       }
 
-      .paquetes-grid {
-        grid-template-columns: 1fr;
-        gap: 36px;
-      }
-
-      .diagnostico-card {
-        padding: 28px 24px;
-      }
-
-      .diagnostico-cta {
-        width: 100%;
-      }
-
-      .btn-diagnostico {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .paquete-card {
-        padding: 28px 24px;
+      .bento-celda--hero {
+        padding: 30px 26px;
       }
 
 
@@ -4329,7 +4185,7 @@
     <span class="accent">cobre lo que vale.</span>
   </h1>
   <p class="hero-sub">
-    Marca, web y estrategia que hablan entre sí — para que tu negocio venda más, no solo se vea bonito.
+    Marca, web y estrategia que hablan entre sí para que tu negocio venda más, no solo se vea bonito.
   </p>
   <div class="hero-btns">
     <a href="apply.html" class="btn-primary">
@@ -4767,14 +4623,14 @@
     </div>
 
     <div class="manifiesto-content">
-      <span class="manifiesto-eyebrow reveal">— Nuestra filosofía</span>
+      <span class="manifiesto-eyebrow reveal">Nuestra filosofía</span>
 
       <p class="manifiesto-paragraph reveal">
         En VITA Studio no construimos sitios web. Construimos <span class="manifiesto-highlight">activos digitales</span> que crecen contigo. Cada proyecto que tomamos es una relación de largo plazo, no una transacción.
       </p>
 
       <p class="manifiesto-paragraph reveal">
-        Trabajamos con un <span class="manifiesto-highlight">número limitado de marcas</span> porque creemos que el crecimiento real requiere atención real. No somos una agencia que entrega y desaparece — somos tu socio de crecimiento.
+        Trabajamos con un <span class="manifiesto-highlight">número limitado de marcas</span> porque creemos que el crecimiento real requiere atención real. No somos una agencia que entrega y desaparece. Somos tu socio de crecimiento.
       </p>
 
       <p class="manifiesto-paragraph reveal">
@@ -4801,63 +4657,59 @@
     <div class="servicios-header reveal">
       <span class="section-label">Cómo trabajamos</span>
       <h2 class="section-title">Tu trabajo ya vale mucho.<br><em class="section-title-em">Que se vea.</em></h2>
-      <p class="section-sub" style="margin: 16px auto 0">La mayoría de agencias entrega marca, web y estrategia como tres cosas separadas. Nosotros las hacemos hablar entre sí — para que tu negocio venda más, no solo se vea bonito.</p>
+      <p class="section-sub" style="margin: 16px auto 0">La mayoría de agencias entrega marca, web y estrategia como tres cosas separadas. Nosotros las hacemos hablar entre sí para que tu negocio venda más, no solo se vea bonito.</p>
     </div>
 
-    <div class="diagnostico-card reveal" style="transition-delay:0.1s">
-      <div class="diagnostico-content">
-        <div class="diagnostico-header">
-          <span class="diagnostico-step">Paso 0</span>
-          <span class="diagnostico-divider"></span>
-          <span class="diagnostico-tag">Sin compromiso</span>
+    <div class="bento" id="bentoServicios">
+
+      <div class="bento-celda bento-celda--hero reveal" style="transition-delay:0.1s">
+        <div>
+          <span class="bento-hero-eyebrow">Paquete único</span>
+          <h3 class="bento-hero-nombre">Integral</h3>
+          <p class="bento-hero-for">Para quien ya factura bien y quiere escalar con orden, sin improvisar con cada decisión.</p>
         </div>
-        <h3 class="diagnostico-title">Diagnóstico estratégico</h3>
-        <p class="diagnostico-desc">45 minutos por videollamada. Saldrás sabiendo:</p>
-        <ul class="diagnostico-list">
-          <li><span class="diag-arrow">→</span><span>Las 3 áreas críticas que están frenando tu negocio</span></li>
-          <li><span class="diag-arrow">→</span><span>Si encajamos para trabajar juntos (somos selectivos)</span></li>
-          <li><span class="diag-arrow">→</span><span>Qué inversión y plazo tendría sentido para tu caso</span></li>
-        </ul>
+        <div class="bento-hero-pie">
+          <a href="apply.html" class="btn-bento">Aplicar →</a>
+          <span class="bento-hero-precio">Inversión a medida, se calcula en el diagnóstico</span>
+        </div>
       </div>
-      <div class="diagnostico-cta">
-        <a href="apply.html" class="btn-diagnostico">
-          Agendar mi diagnóstico
-          <span class="btn-arrow">→</span>
-        </a>
+
+      <div class="bento-celda bento-celda--stat reveal" style="transition-delay:0.17s">
+        <div class="bento-stat-num">8-12</div>
+        <div class="bento-stat-label">Semanas de proceso</div>
       </div>
-    </div>
 
-    <div class="paquetes-intro reveal" style="transition-delay:0.2s">
-      <p class="paquetes-intro-text">Si encajamos, trabajamos juntos por este camino</p>
-    </div>
+      <div class="bento-celda bento-celda--diag reveal" style="transition-delay:0.24s">
+        <span class="bento-diag-step">Paso 0 · Sin compromiso</span>
+        <p class="bento-diag-titulo">Diagnóstico estratégico</p>
+        <p class="bento-diag-sub">45 min por videollamada. Las 3 áreas críticas que frenan tu negocio.</p>
+        <a href="apply.html" class="bento-diag-link">Agendar diagnóstico →</a>
+      </div>
 
-    <div class="paquetes-grid">
-
-      <div class="paquete-card paquete-card--featured reveal" style="transition-delay:0.25s">
-        <div class="paquete-header">
-          <span class="paquete-num paquete-num--featured">Paquete único</span>
-          <span class="paquete-time paquete-time--featured">8 — 12 semanas</span>
-        </div>
-        <h3 class="paquete-title">Integral</h3>
-        <p class="paquete-for paquete-for--featured">Para quien ya factura bien y quiere escalar con orden — no improvisando con cada decisión.</p>
-
-        <div class="paquete-divider paquete-divider--featured"></div>
-
-        <div class="paquete-includes">
-          <div class="includes-label includes-label--featured">Lo que incluye</div>
-          <div class="includes-list">
-            <div class="include-item"><span class="include-bullet">●</span><span><strong>Diagnóstico profundo</strong> — Análisis 360° de tu negocio, competencia y oportunidad</span></div>
-            <div class="include-item"><span class="include-bullet">●</span><span><strong>Branding completo</strong> — Identidad, manual de marca, sistema visual y verbal</span></div>
-            <div class="include-item"><span class="include-bullet">●</span><span><strong>Sitio web a medida</strong> — Diseño y desarrollo personalizado, sin plantillas</span></div>
-            <div class="include-item"><span class="include-bullet">●</span><span><strong>Estrategia de venta</strong> — Plan de acción con KPIs claros y prioridades</span></div>
-            <div class="include-item"><span class="include-bullet">●</span><span><strong>3 meses de seguimiento</strong> — Sesión mensual + ajustes basados en datos</span></div>
-          </div>
-        </div>
-
-        <div class="paquete-footer paquete-footer--featured">
-          <span class="paquete-price">Inversión a medida</span>
-          <a href="apply.html" class="btn-paquete btn-paquete--featured">Aplicar <span>→</span></a>
-        </div>
+      <div class="bento-celda bento-celda--item reveal" style="transition-delay:0.31s">
+        <span class="bento-item-num">01</span>
+        <h4 class="bento-item-titulo">Diagnóstico profundo</h4>
+        <p class="bento-item-desc">Análisis 360° de tu negocio, competencia y oportunidad.</p>
+      </div>
+      <div class="bento-celda bento-celda--item reveal" style="transition-delay:0.38s">
+        <span class="bento-item-num">02</span>
+        <h4 class="bento-item-titulo">Branding completo</h4>
+        <p class="bento-item-desc">Identidad, manual de marca, sistema visual y verbal.</p>
+      </div>
+      <div class="bento-celda bento-celda--item reveal" style="transition-delay:0.45s">
+        <span class="bento-item-num">03</span>
+        <h4 class="bento-item-titulo">Sitio web a medida</h4>
+        <p class="bento-item-desc">Diseño y desarrollo personalizado, sin plantillas.</p>
+      </div>
+      <div class="bento-celda bento-celda--item reveal" style="transition-delay:0.52s">
+        <span class="bento-item-num">04</span>
+        <h4 class="bento-item-titulo">Estrategia de venta</h4>
+        <p class="bento-item-desc">Plan de acción con KPIs claros y prioridades.</p>
+      </div>
+      <div class="bento-celda bento-celda--item bento-celda--wide reveal" style="transition-delay:0.59s">
+        <span class="bento-item-num">05</span>
+        <h4 class="bento-item-titulo">3 meses de seguimiento</h4>
+        <p class="bento-item-desc">Sesión mensual + ajustes basados en datos. No te soltamos la mano al entregar: acompañamos los primeros resultados.</p>
       </div>
 
     </div>
@@ -4869,13 +4721,27 @@
   </div>
 </section>
 
+<script>
+(function() {
+  var bento = document.getElementById('bentoServicios');
+  if (!bento || window.matchMedia('(hover: none)').matches) return;
+  bento.querySelectorAll('.bento-celda').forEach(function(el) {
+    el.addEventListener('mousemove', function(e) {
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+})();
+</script>
+
 
 <!-- ============================================
      ENFOQUE · Growth Partner vs Agencia
 ============================================ -->
 <!-- ENFOQUE · Growth Partner vs Agencia Tradicional -->
 <section id="enfoque">
-  <span class="section-label reveal">— Nuestro enfoque</span>
+  <span class="section-label reveal">Nuestro enfoque</span>
   <h2 class="section-title reveal">
     Growth Partner.<br>
     <span class="section-title-light">No agencia.</span>
@@ -5118,7 +4984,7 @@
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
-      <p class="faq-answer-inner">Porque cada negocio tiene un punto de partida distinto. Un médico que ya factura $150k al mes y necesita branding completo no parte del mismo lugar que una clínica nueva que está abriendo. Cobrar lo mismo a los dos sería injusto para ambos. En el diagnóstico de 45 minutos calculamos la inversión real basándonos en tu alcance — sin compromiso, sin sorpresas.</p>
+      <p class="faq-answer-inner">Porque cada negocio tiene un punto de partida distinto. Un médico que ya factura $150k al mes y necesita branding completo no parte del mismo lugar que una clínica nueva que está abriendo. Cobrar lo mismo a los dos sería injusto para ambos. En el diagnóstico de 45 minutos calculamos la inversión real basándonos en tu alcance. Sin compromiso, sin sorpresas.</p>
     </div>
   </div>
 
@@ -5138,7 +5004,7 @@
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
-      <p class="faq-answer-inner">Profesionistas de servicio que ya facturan pero su presencia digital no representa lo que valen — médicos, dentistas, clínicas de estética, restaurantes locales — y creadores de contenido que están construyendo su marca personal. Trabajamos mejor con negocios establecidos en Monterrey y el resto de México que entienden que invertir en marca es invertir en escalar.</p>
+      <p class="faq-answer-inner">Profesionistas de servicio que ya facturan pero su presencia digital no representa lo que valen: médicos, dentistas, clínicas de estética y restaurantes locales, además de creadores de contenido que están construyendo su marca personal. Trabajamos mejor con negocios establecidos en Monterrey y el resto de México que entienden que invertir en marca es invertir en escalar.</p>
     </div>
   </div>
 
@@ -5148,7 +5014,7 @@
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
-      <p class="faq-answer-inner">Es una videollamada estructurada donde escuchamos tu negocio, identificamos las 3 áreas críticas que están frenando tu crecimiento, y te damos una recomendación clara de qué paquete tendría sentido — o si no lo tiene. Es genuinamente útil incluso si decides no trabajar con nosotros. No hay venta agresiva ni presión.</p>
+      <p class="faq-answer-inner">Es una videollamada estructurada donde escuchamos tu negocio, identificamos las 3 áreas críticas que están frenando tu crecimiento, y te damos una recomendación clara de si el Paquete Integral tiene sentido para tu caso, o si no lo tiene. Es genuinamente útil incluso si decides no trabajar con nosotros. No hay venta agresiva ni presión.</p>
     </div>
   </div>
 
@@ -5158,7 +5024,7 @@
       <div class="faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
     <div class="faq-answer">
-      <p class="faq-answer-inner">Honestamente, no es lo que recomendamos. Nuestro diferencial es justo que diseñamos marca, sitio y estrategia trabajándose entre sí — cuando los entregamos por separado, pierden gran parte de su efecto. Si lo único que necesitas es un sitio aislado o solo un logo, conocemos buenos freelancers que cobran menos y lo hacen bien. Pero si lo que buscas es que tu negocio venda más y comunique lo que vale, ahí es donde sumamos.</p>
+      <p class="faq-answer-inner">Honestamente, no es lo que recomendamos. Nuestro diferencial es justo que diseñamos marca, sitio y estrategia trabajándose entre sí. Cuando los entregamos por separado, pierden gran parte de su efecto. Si lo único que necesitas es un sitio aislado o solo un logo, conocemos buenos freelancers que cobran menos y lo hacen bien. Pero si lo que buscas es que tu negocio venda más y comunique lo que vale, ahí es donde sumamos.</p>
     </div>
   </div>
 
@@ -5184,7 +5050,7 @@
      FOOTER
 ============================================ -->
 <footer>
-  <p class="footer-copy">© 2026 VITA Studio — Todos los derechos reservados</p>
+  <p class="footer-copy">© 2026 VITA Studio · Todos los derechos reservados</p>
   <div>
     <div class="footer-logo" aria-label="VITA Studio"><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="72 430 936 220"><defs><style> .cls-1 { fill: currentColor; } </style></defs><g><path class="cls-1" d="M76,434.71h14.58l49.52,210.55h-14.58l-49.52-210.55ZM191.76,434.71l-50.74,210.55h-4.25l50.74-210.55h4.25Z"/><path class="cls-1" d="M202.38,645.26h-14.28v-210.55h14.28v210.55Z"/><path class="cls-1" d="M301.44,438.66h-113.93v-3.95h113.93v3.95ZM237.33,645.26v-210.55h14.28v210.55h-14.28Z"/><path class="cls-1" d="M304.67,434.71h-14.58l1.64,7,29.61,126.67.92,3.95,17.04,72.92h14.58l-49.22-210.54ZM321.34,568.39l.92,3.95h2.76v-3.95h-3.68ZM259.4,568.39l-.91,3.95h1.57l.97-3.95h-1.63ZM289.18,434.71l-51.05,210.54h4.25l17.67-72.92.97-3.95,30.7-126.67,1.69-7h-4.24Z"/></g><g><path class="cls-1" d="M365.34,639.11c-9.78-4.74-17.33-11.01-22.67-18.82-5.33-7.8-8.5-16.25-9.48-25.33h5.93c.99,6.92,3.5,13.83,7.55,20.74,4.05,6.91,10.47,12.84,19.26,17.78,8.79,4.94,20.1,7.4,33.93,7.4,11.06,0,20.84-2.12,29.33-6.37,8.49-4.25,15.01-9.92,19.55-17.04,4.54-7.11,6.81-15.01,6.81-23.7,0-11.26-2.57-20.19-7.7-26.81-5.14-6.62-11.51-11.51-19.11-14.67-7.61-3.15-17.83-6.42-30.67-9.77-13.43-3.56-24.2-7.11-32.3-10.67-8.1-3.56-14.96-9.04-20.59-16.44-5.63-7.4-8.44-17.43-8.44-30.07,0-9.08,2.52-17.63,7.55-25.63,5.04-8,12.24-14.37,21.63-19.11,9.38-4.74,20.1-7.11,32.15-7.11s22.81,2.17,31.7,6.51c8.89,4.35,15.85,9.83,20.89,16.45,5.04,6.62,8.34,13.58,9.93,20.89h-5.92c-1.38-5.73-4.25-11.55-8.59-17.48-4.35-5.92-10.57-10.91-18.67-14.96-8.1-4.05-17.88-6.07-29.33-6.07-10.08,0-19.31,1.93-27.71,5.78-8.4,3.85-15.11,9.29-20.15,16.29-5.04,7.02-7.56,15.16-7.56,24.44,0,11.46,2.62,20.59,7.85,27.4,5.23,6.82,11.7,11.85,19.41,15.11,7.7,3.26,17.97,6.57,30.82,9.93,13.43,3.56,24.15,7.06,32.15,10.52,8,3.46,14.76,8.79,20.3,16,5.53,7.21,8.3,17.04,8.3,29.48,0,8.69-2.32,17.09-6.96,25.18-4.64,8.1-11.61,14.67-20.89,19.7-9.29,5.04-20.55,7.55-33.78,7.55s-24.74-2.37-34.52-7.11Z"/><path class="cls-1" d="M416.42,435.57v5.32h60.75v203.27h5.94v-203.27h38.78v-5.32h-105.47Z"/><path class="cls-1" d="M649.02,435.57v129.46c0,10.51-.87,19.88-2.68,28.12-2.68,12.5-7.4,22.4-14.18,29.64-11.26,12.04-26.6,18.07-45.94,18.07s-35.43-6.03-46.97-18.07c-11.54-12.04-17.36-31.29-17.36-57.76v-129.46h-5.88v129.46c0,27.47,6.31,47.84,18.94,61.19,12.66,13.31,29.71,20,51.26,20s38.38-6.59,50.48-19.85c3.8-4.14,7.03-8.99,9.64-14.53,2.55-5.44,4.54-11.54,5.94-18.32v-152.64h2.68v-5.32h-5.94Z"/><path class="cls-1" d="M811.27,533.71v-.06c-.03-1-.06-1.96-.16-2.92-.37-7.4-1.31-14.4-2.74-20.97-.87-4.04-1.93-7.93-3.2-11.66-4.67-13.87-11.98-25.63-21.93-35.27-18.76-18.17-46.13-27.28-82.06-27.28h-54.84v208.6h54.84c35.93,0,63.3-9.08,82.06-27.25,9.95-9.64,17.29-21.43,21.93-35.31,1.24-3.64,2.3-7.4,3.11-11.32,1.49-6.69,2.46-13.78,2.83-21.31.09-.87.12-1.77.16-2.68.09-2.12.12-4.26.12-6.44s-.03-4.11-.12-6.13ZM805.17,549.55c-1.65,26.6-10.36,47.65-26.07,63.21-17.57,17.36-43.55,26.07-77.92,26.07h-48.9v-197.93h48.9c34.37,0,60.35,8.68,77.92,26.07,15.71,15.55,24.42,36.61,26.07,63.21.03.19.03.34.03.53.19,2.99.28,6.03.28,9.15s-.09,6.41-.31,9.49v.22Z"/><path class="cls-1" d="M811.11,435.55v208.59h-5.93v-208.59h5.93Z"/><path class="cls-1" d="M853.04,633.03c-15.11-8.99-26.92-21.58-35.41-37.78-8.5-16.19-12.74-34.56-12.74-55.11s4.25-38.91,12.74-55.11c8.49-16.19,20.3-28.78,35.41-37.77,15.11-8.99,32.24-13.48,51.41-13.48s36.3,4.5,51.41,13.48c15.11,8.99,26.91,21.58,35.41,37.77,8.49,16.2,12.74,34.57,12.74,55.11s-4.25,38.92-12.74,55.11c-8.5,16.2-20.3,28.79-35.41,37.78-15.11,8.99-32.25,13.48-51.41,13.48s-36.3-4.49-51.41-13.48ZM951.85,628.89c14.22-8.2,25.43-19.95,33.63-35.26,8.19-15.3,12.3-33.13,12.3-53.48s-4.1-38.17-12.3-53.48c-8.2-15.3-19.41-27.06-33.63-35.26-14.22-8.2-30.03-12.3-47.41-12.3s-33.19,4.1-47.41,12.3c-14.22,8.2-25.43,19.95-33.63,35.26-8.2,15.31-12.3,33.14-12.3,53.48s4.1,38.18,12.3,53.48c8.2,15.31,19.41,27.06,33.63,35.26,14.22,8.2,30.02,12.3,47.41,12.3s33.19-4.1,47.41-12.3Z"/></g></svg></div>
     <span class="footer-location">Monterrey, México</span>
@@ -5364,7 +5230,7 @@
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if ('ontouchstart' in window) return;
 
-    var magnets = document.querySelectorAll('.btn-primary, .nav-cta, .cta-final-btn, .btn-diagnostico');
+    var magnets = document.querySelectorAll('.btn-primary, .nav-cta, .cta-final-btn, .btn-bento');
     magnets.forEach(function(btn) {
       var originalTransition = btn.style.transition || '';
       btn.style.transition = (originalTransition + ' transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)').trim();
