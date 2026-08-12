@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio · VITA Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#FF8C42;
+  --gold-dim:rgba(255,140,66,.15);
+  --gold-glow:rgba(255,140,66,.06);
+  --bg:#000;
+  --border:rgba(255,255,255,.07);
+  --border-lit:rgba(255,255,255,.16);
+  --text:#FFF;
+  --muted:rgba(255,255,255,.45);
+  --dim:rgba(255,255,255,.25);
+  --font:'Poppins',sans-serif;
+  --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;
+  line-height:1.45;-webkit-font-smoothing:antialiased;
+  font-feature-settings:"kern" 1,"liga" 1;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;height:72px;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;padding:0 5vw;
+  backdrop-filter:blur(20px);background:rgba(0,0,0,.72);border-bottom:1px solid var(--border);
+}
+.nav-logo{font-weight:700;letter-spacing:.14em;font-size:14px;text-transform:uppercase}
+
+/* ---------- hero ---------- */
+.hero{padding:190px 5vw 96px;border-bottom:1px solid var(--border)}
+.label{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:28px}
+.hero h1{font-size:clamp(46px,8vw,116px);font-weight:700;line-height:.96;letter-spacing:-.035em;hyphens:none;max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{margin-top:36px;max-width:60ch;font-size:clamp(15px,1.6vw,19px);color:var(--muted);line-height:1.6}
+
+/* fila de instrucciones (reemplaza las estadísticas) */
+.howto{margin-top:60px;display:flex;flex-wrap:wrap;gap:14px}
+.howto div{
+  display:flex;align-items:center;gap:13px;padding:15px 22px 15px 17px;
+  border:1px solid var(--border);border-radius:100px;color:var(--muted);font-size:13px;
+}
+.howto b{
+  width:26px;height:26px;border-radius:50%;background:var(--gold-dim);color:var(--gold);
+  display:grid;place-items:center;font-size:12px;font-weight:600;flex-shrink:0;
+}
+
+/* ---------- chapter ---------- */
+.chapter{padding:110px 5vw 0}
+.chapter-head{display:flex;align-items:baseline;gap:28px;padding-bottom:34px;border-bottom:1px solid var(--border-lit);flex-wrap:wrap}
+.chapter-num{font-size:13px;font-weight:600;color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.chapter-title{font-size:clamp(26px,3.4vw,44px);font-weight:600;letter-spacing:-.025em;line-height:1.1;hyphens:none}
+.chapter-note{margin-left:auto;font-size:12px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase}
+.chapter-lead{margin-top:26px;color:var(--muted);max-width:64ch;line-height:1.65;font-size:15px}
+
+/* capítulo destacado: sitios inmobiliarios */
+.chapter.destacado{
+  border:1px solid var(--gold-dim);border-radius:24px;margin:0 5vw;padding:52px 4vw 0;
+  background:linear-gradient(170deg,var(--gold-glow),transparent 42%);
+}
+.chapter.destacado .chapter-head{border-bottom-color:var(--gold-dim)}
+.especialidad{
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:26px;
+  border:1px solid var(--gold);border-radius:100px;padding:9px 20px;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500;
+}
+.especialidad::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+/* ---------- marco de navegador ---------- */
+.frame{
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+  background:#0a0a0a;transition:border-color .4s;position:relative;
+}
+.proj:hover .frame,.frame:hover{border-color:var(--gold-dim)}
+.frame-bar{
+  display:flex;align-items:center;gap:8px;padding:11px 14px;
+  background:#0e0e0e;border-bottom:1px solid var(--border);
+}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14);flex-shrink:0}
+.frame-url{
+  flex:1;margin-left:8px;font-size:11px;color:var(--dim);letter-spacing:.03em;
+  background:rgba(255,255,255,.04);border-radius:100px;padding:5px 14px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+/* botón que solo existe en pantallas táctiles */
+.btn-recorrer{
+  display:none;font-family:var(--font);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;color:var(--muted);border:1px solid var(--border-lit);border-radius:100px;
+  padding:7px 13px;cursor:pointer;flex-shrink:0;
+}
+.btn-recorrer[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+
+.scroller{
+  height:440px;overflow-y:auto;overscroll-behavior:contain;position:relative;
+  cursor:grab;scrollbar-width:none;-ms-overflow-style:none;background:#000;
+}
+.scroller::-webkit-scrollbar{display:none}
+.scroller.grabbing{cursor:grabbing}
+.scroller img{width:100%;display:block;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.scroller.static{cursor:default}
+.frame-prog{height:2px;background:rgba(255,255,255,.06);position:relative}
+.frame-prog i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gold);transition:width .12s linear}
+.frame-hint{
+  position:absolute;right:14px;bottom:16px;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);background:rgba(0,0,0,.72);
+  border:1px solid var(--border-lit);border-radius:100px;padding:7px 14px;
+  backdrop-filter:blur(8px);pointer-events:none;opacity:0;transition:opacity .4s;
+}
+.frame:hover .frame-hint{opacity:1}
+
+/* ---------- caso insignia ---------- */
+.flagship-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin:56px 0 48px}
+.flagship-intro h3{font-size:clamp(34px,5.2vw,68px);font-weight:700;letter-spacing:-.035em;line-height:.98;hyphens:none}
+.flagship-intro p{color:var(--muted);max-width:52ch;line-height:1.65;font-size:15px}
+.flagship-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tag{font-size:11px;letter-spacing:.09em;text-transform:uppercase;border:1px solid var(--border-lit);border-radius:100px;padding:7px 15px;color:var(--muted)}
+.tag-gold{border-color:var(--gold);color:var(--gold)}
+
+/* ---------- proyecto ---------- */
+.proj{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;
+  padding:52px 0;border-bottom:1px solid var(--border);
+}
+.proj.flip .proj-media{order:2}
+.proj-num{font-size:12px;color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.proj-body h3{font-size:clamp(24px,3.2vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin-top:14px;hyphens:none}
+.proj-cat{margin-top:14px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.proj-desc{margin-top:20px;color:var(--muted);max-width:50ch;line-height:1.65;font-size:15px}
+.proj-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;align-items:center}
+.btn-detail{
+  font-family:var(--font);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;color:var(--text);border:1px solid var(--border-lit);
+  border-radius:100px;padding:12px 22px;cursor:pointer;transition:all .3s;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.btn-detail:hover{border-color:var(--gold);color:var(--gold)}
+.btn-detail i{font-style:normal;transition:transform .4s;display:inline-block}
+.btn-detail[aria-expanded="true"] i{transform:rotate(45deg)}
+.proj-link{
+  display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold-dim);
+  padding-bottom:5px;transition:border-color .3s;
+}
+.proj-link:hover{border-color:var(--gold)}
+
+/* ---------- panel de detalle ---------- */
+.detail{overflow:hidden;max-height:0;transition:max-height .65s cubic-bezier(.2,.8,.2,1);border-bottom:1px solid var(--border)}
+.detail-in{padding:8px 0 52px;display:grid;grid-template-columns:1fr 1fr;gap:52px}
+.detail h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:18px}
+.detail ul{list-style:none;display:grid;gap:13px}
+.detail li{position:relative;padding-left:22px;color:var(--muted);font-size:14.5px;line-height:1.6}
+.detail li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;border:1px solid var(--gold)}
+.detail li b{color:var(--text);font-weight:500}
+.detail code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:rgba(255,255,255,.06);padding:2px 7px;border-radius:5px;color:var(--text)}
+.spec{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:6px}
+.spec div{background:#000;padding:17px 18px}
+.spec dt{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+.spec dd{font-size:15px;font-weight:500;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
+.stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.stack span{font-size:11px;letter-spacing:.06em;border:1px solid var(--border-lit);border-radius:100px;padding:7px 14px;color:var(--muted)}
+
+/* ---------- cta ---------- */
+.cta{padding:130px 5vw 140px;text-align:center}
+.cta h2{font-size:clamp(32px,5.4vw,68px);font-weight:700;letter-spacing:-.035em;line-height:1.02;max-width:18ch;margin:0 auto;hyphens:none}
+.cta h2 em{font-style:normal;color:var(--gold)}
+.cta p{margin:28px auto 0;color:var(--muted);max-width:48ch;line-height:1.65}
+.cta-btn{display:inline-block;margin-top:44px;background:var(--gold);color:#000;font-weight:600;font-size:15px;padding:18px 44px;border-radius:100px;transition:transform .3s}
+.cta-btn:hover{transform:translateY(-3px)}
+.foot{padding:32px 5vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--dim)}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ============================================================
+   TÁCTIL: el marco NO captura el desplazamiento del dedo.
+   Queda bloqueado y solo se libera con el botón «Recorrer».
+   ============================================================ */
+@media (hover:none){
+  .scroller{overflow:hidden!important;cursor:default;touch-action:auto}
+  .scroller.libre{overflow-y:auto!important;touch-action:pan-y;overscroll-behavior:contain}
+  .btn-recorrer{display:inline-flex}
+  .frame-hint{display:none}
+}
+
+@media (max-width:1000px){
+  .flagship-intro{grid-template-columns:1fr;gap:26px}
+  .proj{grid-template-columns:1fr;gap:28px;padding:42px 0}
+  .proj.flip .proj-media{order:0}
+  .detail-in{grid-template-columns:1fr;gap:34px}
+  .scroller{height:360px}
+  .chapter.destacado{padding:44px 5vw 0}
+}
+@media (max-width:620px){
+  .hero{padding:150px 6vw 70px}
+  .chapter{padding:80px 6vw 0}
+  .chapter.destacado{margin:0 4vw;padding:38px 5vw 0;border-radius:18px}
+  .chapter-note{display:none}
+  .scroller{height:300px}
+  .spec{grid-template-columns:1fr}
+  .howto{gap:10px}
+  .howto div{padding:13px 18px 13px 14px;font-size:12px;width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Vitastudio</a>
+</nav>
+
+<header class="hero">
+  <span class="label rv">Portfolio · VITA Studio</span>
+  <h1 class="rv">Todo lo que ves aquí <em>está funcionando.</em></h1>
+  <p class="hero-sub rv">
+    No son maquetas ni propuestas. Son marcas, sitios y sistemas publicados,
+    operando hoy para negocios reales. Puedes recorrer cualquiera completo
+    sin salir de esta página.
+  </p>
+  <div class="howto rv">
+    <div><b>1</b>Pasa el cursor y el sitio avanza solo</div>
+    <div><b>2</b>Arrástralo para recorrerlo tú</div>
+    <div><b>3</b>Abre «Ver detalle» para saber qué hicimos</div>
+  </div>
+</header>
+
+<!-- ============ 01 · SITIOS INMOBILIARIOS (destacado) ============ -->
+<section class="chapter destacado">
+  <span class="especialidad rv">Nuestra especialidad</span>
+  <div class="chapter-head rv">
+    <span class="chapter-num">01</span>
+    <h2 class="chapter-title">Sitios inmobiliarios</h2>
+    <span class="chapter-note">Seis piezas</span>
+  </div>
+  <p class="chapter-lead rv">
+    Es la vertical donde más profundo hemos entrado: una inmobiliaria completa,
+    cuatro propiedades con landing propia y una restauración contada como pieza
+    editorial. Vender una casa de ocho cifras no se parece en nada a vender
+    cualquier otra cosa, y el sitio tiene que saberlo.
+  </p>
+
+  <div class="flagship-intro rv">
+    <div>
+      <h3>Montana<br>Realty&nbsp;Co.</h3>
+      <div class="flagship-tags">
+        <span class="tag tag-gold">Caso de largo plazo</span>
+        <span class="tag">Identidad</span>
+        <span class="tag">Sitio web</span>
+        <span class="tag">4 landings de propiedad</span>
+      </div>
+    </div>
+    <p>
+      Empezó como un sitio. Hoy cada propiedad de alto valor tiene su propia
+      landing dedicada, con su ficha, su galería y su recorrido, en lugar de
+      ser una tarjeta más dentro de un catálogo. El sitio principal capta;
+      cada landing cierra.
+    </p>
+  </div>
+
+  <div id="grupo-inmobiliario"></div>
+</section>
+
+<!-- ============ 02 · SISTEMAS COMPLETOS ============ -->
+<section class="chapter">
+  <div class="chapter-head rv">
+    <span class="chapter-num">02</span>
+    <h2 class="chapter-title">Sistemas completos</h2>
+    <span class="chapter-note">Producto y software</span>
+  </div>
+  <p class="chapter-lead rv">
+    Aquí no entregamos páginas: entregamos la herramienta con la que el negocio
+    opera todos los días. Bases de datos, autenticación por roles, sincronizaciones
+    con sistemas externos y tableros que el equipo usa desde el teléfono.
+  </p>
+
+  <div id="grupo-sistemas"></div>
+</section>
+
+<!-- ============ 03 · MARCA Y ESTRATEGIA ============ -->
+<section class="chapter">
+  <div class="chapter-head rv">
+    <span class="chapter-num">03</span>
+    <h2 class="chapter-title">Marca y estrategia</h2>
+    <span class="chapter-note">Cinco proyectos</span>
+  </div>
+
+  <div id="grupo-marca"></div>
+</section>
+
+<section class="cta" id="contacto">
+  <h2 class="rv">¿Tu negocio ya vale mucho? <em>Que se vea.</em></h2>
+  <p class="rv">Empezamos con un diagnóstico: una videollamada donde identificamos las tres áreas que están frenando tu crecimiento. Útil incluso si decides no trabajar con nosotros.</p>
+  <a href="apply.html" class="cta-btn rv">Agendar diagnóstico&nbsp;&rarr;</a>
+</section>
+
+<footer class="foot">
+  <span>&copy;&nbsp;2026 VITA Studio</span>
+  <span>vitastudio.site/portfolio</span>
+</footer>
+
+<script>
+/* ============================================================
+   Datos. Editar aquí para cambiar copy, agregar o quitar proyectos.
+   img: captura de página completa · url: enlace vivo (null = sin deploy)
+   ============================================================ */
+var PROYECTOS = {
+
+  inmobiliario: [
+    {
+      nom:'Montana Realty Co.', cat:'Identidad y Web · SPGG · 2026',
+      img:'assets/portfolio/montana.jpg', url:'https://www.montana-realty-co.com/', host:'montana-realty-co.com',
+      desc:'El sitio principal de la inmobiliaria y la puerta de entrada de todo el sistema. Presenta la casa, filtra al visitante y lo manda a la landing de la propiedad que le interesa.',
+      hizo:[
+        '<b>Identidad y sistema visual.</b> Tipografía, paleta y el sello MR que después baja a cada landing de propiedad.',
+        '<b>Arquitectura del catálogo.</b> El sitio no intenta cerrar la venta: califica y deriva.',
+        '<b>Base para sublandings.</b> Cada propiedad de alto valor se desprende de aquí con su propio dominio.'
+      ],
+      stack:['Sitio estático','Diseño a medida']
+    },
+    {
+      nom:'Casa Carrizalejo', cat:'Landing de propiedad · Carrizalejo, SPGG',
+      img:'assets/portfolio/carrizalejo.jpg', url:null, host:'casa-carrizalejo.vercel.app',
+      desc:'La propiedad más cara del portafolio. Una residencia de una sola planta en cerrada de dos vecinos, con arroyo privado al fondo, que no cabía en una tarjeta de catálogo.',
+      specs:[['Precio','$75,000,000 MXN'],['Construcción','1,317 m²'],['Terreno','2,128 m²'],['Frente','110 m']],
+      hizo:[
+        '<b>Recorrido editorial.</b> Pieza, propiedad, galería, ficha, espacios y ubicación como capítulos.',
+        '<b>Ficha técnica completa.</b> Tres recámaras, nueve estacionamientos, paneles solares y arroyo privado al fondo.',
+        '<b>Doble llamada a la acción.</b> Agendar visita privada y contacto directo por WhatsApp con el asesor.',
+        '<b>Clave EB-TZ4590</b> enlazada al inventario de EasyBroker.'
+      ],
+      stack:['HTML, CSS y JS','Sin build','Vercel']
+    },
+    {
+      nom:'Casa Colorines', cat:'Landing de propiedad · Los Colorines, SPGG',
+      img:'assets/portfolio/colorines.jpg', url:null, host:'casa colorines · vista local',
+      desc:'Cuatro propuestas de diseño para la misma propiedad, para que el cliente eligiera dirección antes de comprometer el desarrollo completo.',
+      specs:[['Precio','$26,900,000 MXN'],['Clave','EB-WM6420'],['Propuestas','4 versiones'],['Zona','Los Colorines']],
+      hizo:[
+        '<b>Cuatro rutas visuales.</b> <code>index</code>, <code>casa</code>, <code>fable</code> y <code>pro</code>, cada una con un tono distinto.',
+        '<b>Derivada del template de Carrizalejo.</b> El sistema se reutiliza, el diseño no se repite.',
+        '<b>Video de portada</b> en versión de escritorio y versión vertical para móvil.'
+      ],
+      stack:['HTML, CSS y JS','Video de portada','Sin deploy público']
+    },
+    {
+      nom:'Hacienda del Rosario', cat:'Landing de propiedad · Torreón, Coahuila',
+      img:'assets/portfolio/torreon.jpg', url:null, host:'casa-torreon.vercel.app',
+      desc:'La prueba de que el sistema viaja: misma estructura, otra ciudad, otro mercado. Residencia nueva de doble altura con terraza y asador.',
+      specs:[['Precio','$13,900,000 MXN'],['Construcción','587 m²'],['Terreno','480 m²'],['Recámaras','5 rec · 5 baños']],
+      hizo:[
+        '<b>El template probado fuera de Monterrey</b>, con contenido y fotografía locales.',
+        '<b>Ficha adaptada.</b> Doble altura, terraza con asador y dos estacionamientos.',
+        '<b>Clave EB-VY4560</b> sincronizada con el inventario.'
+      ],
+      stack:['HTML, CSS y JS','Sin build','Vercel']
+    },
+    {
+      nom:'Casa Alfonso Reyes', cat:'Landing de propiedad · Palo Blanco, SPGG',
+      img:'assets/portfolio/alfonso-reyes.jpg', url:null, host:'casa-alfonso-reyes.vercel.app',
+      desc:'Una casa con departamento independiente sobre Av. Alfonso Reyes. El reto era vender dos historias, vivienda familiar y renta, sin partir la página en dos.',
+      specs:[['Precio','$13,500,000 MXN'],['Construcción','350 m²'],['Terreno','158 m²'],['Recámaras','4 rec + depto.']],
+      hizo:[
+        '<b>Narrativa de dos usos.</b> Casa principal y departamento independiente en un solo recorrido.',
+        '<b>Ficha de sustentabilidad.</b> Paneles solares y cisterna de 5,000 L como argumento de venta.',
+        '<b>Acceso a parque privado</b> tratado como amenidad destacada, no como pie de página.'
+      ],
+      stack:['HTML, CSS y JS','Sin build','Vercel']
+    },
+    {
+      nom:'Quinta Los Nogales', cat:'Pieza editorial · Antes y después · 2026',
+      img:'assets/portfolio/nogales.jpg', url:null, host:'quinta los nogales · vista local',
+      desc:'La restauración integral de una quinta, contada como pieza editorial de antes y después. Una demostración de lo que cambia cuando una propiedad se cuenta bien.',
+      hizo:[
+        '<b>Narrativa de antes y después.</b> La transformación como argumento de valor.',
+        '<b>Sin framework y sin build.</b> Un solo archivo HTML con CSS y JS en línea.',
+        '<b>Imágenes locales.</b> Carga instantánea y cero dependencias externas.'
+      ],
+      stack:['Un solo archivo','Cero dependencias','Sin deploy público']
+    }
+  ],
+
+  sistemas: [
+    {
+      nom:'Klo&#8209;Ser', cat:'CRM inmobiliario · Producto a medida · 2026',
+      img:'assets/portfolio/kloser.jpg', url:'https://inmobiliaria-crm-inky.vercel.app', host:'inmobiliaria-crm-inky.vercel.app',
+      desc:'El sistema operativo de una inmobiliaria. Reúne los leads de todos los canales, el trabajo diario del equipo y las métricas que la dirección necesita. Un sistema en vez de tres herramientas y un grupo de WhatsApp.',
+      hizo:[
+        '<b>Bandeja y asignación de leads.</b> Entran de todos los canales y se reparten entre asesores.',
+        '<b>Kanban por asesor.</b> Cada quien ve su embudo; la dirección ve el total.',
+        '<b>Seguimientos inmutables.</b> El historial no se puede editar ni borrar: es la fuente de verdad.',
+        '<b>Plantillas de WhatsApp.</b> El asesor responde en segundos sin salir del sistema.',
+        '<b>Sincronización con EasyBroker.</b> El inventario de propiedades entra solo.',
+        '<b>Móvil primero.</b> Los asesores lo usan desde el teléfono, no desde un escritorio.'
+      ],
+      stack:['Next.js 16','App Router','Tailwind 4','shadcn/ui','Supabase','Postgres','Auth con roles en JWT','RLS']
+    },
+    {
+      nom:'Top Digital', cat:'Plataforma para agencias · 2026',
+      img:'assets/portfolio/topdigital.jpg', url:'https://topdigital.company', host:'topdigital.company',
+      desc:'Leads, campañas y ventas en un solo lugar. La plataforma donde un cliente de agencia sigue cada lead desde el primer contacto hasta la venta, y habla con su agencia sin salir del sistema.',
+      hizo:[
+        '<b>CRM de leads.</b> Embudo de Nuevo a Interesado a Ganado, con el origen de cada contacto.',
+        '<b>Campañas en vivo.</b> Resultados de Meta Ads y otros canales sin exportar reportes.',
+        '<b>Chat directo con la agencia.</b> La conversación vive junto a los datos, no en otro lado.',
+        '<b>Tablero de dirección.</b> Leads del mes, ventas y campañas activas de un vistazo.',
+        '<b>Dominio propio en producción.</b> No es un demo: está desplegado y operando.'
+      ],
+      stack:['Next.js','TypeScript','Vercel','Dominio propio']
+    }
+  ],
+
+  marca: [
+    {
+      nom:'Café Limón', cat:'Marca y Web · Monterrey · 2026',
+      img:'assets/portfolio/cafe-limon.jpg', url:null, host:'cafe-limon.vercel.app',
+      desc:'Tostadores de café mexicano. Un sitio editorial que cuenta el origen de cada grano y vende sin sonar a tienda en línea genérica.',
+      hizo:[
+        '<b>Relato de origen.</b> El café mexicano como argumento central, no como etiqueta.',
+        '<b>Secciones de proceso y filosofía</b>, exploradas en varias propuestas antes de cerrar la definitiva.',
+        '<b>Ruta a la tienda en línea.</b> Catálogo y pasarela de pago diseñados como continuación del relato.',
+        '<b>Exportación.</b> Apartado dedicado al comprador internacional.'
+      ],
+      stack:['HTML, CSS y JS','Tienda en línea','Vercel']
+    },
+    {
+      nom:'Distrito Centro Valle', cat:'Web y Estrategia · SPGG · 2026',
+      img:'assets/portfolio/centrito.jpg', url:null, host:'centrito-valle.vercel.app',
+      desc:'El corazón comercial de San Pedro, con más de 100 negocios. No es el sitio de una marca: es la plataforma de un distrito completo.',
+      specs:[['Fundación','1596'],['Revitalización','$700M'],['Árboles','400+'],['Negocios','100+']],
+      hizo:[
+        '<b>Plataforma de distrito.</b> Explorar, eventos, noticias y ruta del café en un solo lugar.',
+        '<b>Eje Mundial 2026.</b> Sección dedicada al evento como imán de tráfico.',
+        '<b>Sistema de certificación.</b> Propuesta de sellos «Centrito Verified» para distinguir negocios de calidad.',
+        '<b>Identidad de lugar.</b> «Donde todo converge» como posicionamiento del distrito.'
+      ],
+      stack:['HTML, CSS y JS','Vercel']
+    },
+    {
+      nom:'Mondomío', cat:'Web y Estrategia · SPGG · 2026',
+      img:'assets/portfolio/mondomio.jpg', url:'https://www.mondomio.com.mx/', host:'mondomio.com.mx',
+      desc:'Kínder constructivista. El sitio tenía que transmitir método pedagógico a padres que comparan cinco escuelas el mismo día.',
+      hizo:[
+        '<b>El método como producto.</b> La propuesta educativa explicada, no solo enunciada.',
+        '<b>Recorrido para padres.</b> Instalaciones, áreas y equipo en el orden en que se preguntan.',
+        '<b>Conversión a visita.</b> El objetivo del sitio es agendar un recorrido presencial.'
+      ],
+      stack:['Sitio a medida','Dominio propio']
+    },
+    {
+      nom:'Muven', cat:'Identidad y Web · Monterrey · 2025',
+      img:'assets/portfolio/muven.jpg', url:'https://www.muven.shop/', host:'muven.shop',
+      desc:'Un wearable de recuperación deportiva que llegaba al mercado sin marca. Le construimos una que se sostiene junto a las importadas.',
+      hizo:[
+        '<b>Identidad de producto.</b> Marca capaz de competir en el mismo anaquel que las importadas.',
+        '<b>«Back in motion».</b> La recuperación contada como regreso al movimiento, no como terapia.',
+        '<b>Sitio de venta.</b> Explicación del dispositivo y compra en el mismo recorrido.'
+      ],
+      stack:['Identidad','Tienda en línea']
+    },
+    {
+      nom:'Dra.&nbsp;Vannia Maldonado', cat:'Identidad y Web · Mérida · 2025',
+      img:'assets/proyectos/vannia.webp', url:null, host:'Proyecto privado', estatico:true,
+      desc:'Una práctica médica que necesitaba verse tan seria como su trabajo. Identidad completa y sitio que convierte consultas en pacientes.',
+      hizo:[
+        '<b>Identidad médica.</b> Sobria y personal, lejos del cliché clínico.',
+        '<b>Sitio de captación.</b> La consulta como siguiente paso natural.'
+      ],
+      stack:['Identidad','Sitio web']
+    }
+  ]
+};
+
+/* ============================================================
+   Render
+   ============================================================ */
+function limpio(s){ return s.replace(/&#8209;/g,'-').replace(/&nbsp;/g,' '); }
+
+function marco(p){
+  var alt = limpio(p.nom);
+  if(p.estatico){
+    return '<div class="frame">'
+      + '<div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>'
+      + '<span class="frame-url">'+p.host+'</span></div>'
+      + '<div class="scroller static"><img src="'+p.img+'" alt="'+alt+'"></div>'
+      + '<div class="frame-prog"><i></i></div></div>';
+  }
+  return '<div class="frame">'
+    + '<div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>'
+    + '<span class="frame-url">'+p.host+'</span>'
+    + '<button class="btn-recorrer" aria-pressed="false">Recorrer</button></div>'
+    + '<div class="scroller" role="group" aria-label="Recorrido del sitio '+alt+'">'
+    + '<img src="'+p.img+'" alt="Sitio completo de '+alt+'" loading="lazy"></div>'
+    + '<div class="frame-prog"><i></i></div>'
+    + '<span class="frame-hint">Arrastra para recorrer&nbsp;&#8597;</span></div>';
+}
+
+function detalle(p,id){
+  var h = '<div class="detail" id="'+id+'"><div class="detail-in">';
+  h += '<div><h4>Lo que hicimos</h4><ul>';
+  p.hizo.forEach(function(x){ h += '<li>'+x+'</li>'; });
+  h += '</ul></div><div>';
+  if(p.specs){
+    h += '<h4>Ficha</h4><dl class="spec">';
+    p.specs.forEach(function(s){ h += '<div><dt>'+s[0]+'</dt><dd>'+s[1]+'</dd></div>'; });
+    h += '</dl>';
+  }
+  if(p.stack){
+    h += '<h4 style="margin-top:'+(p.specs?'30px':'0')+'">Cómo está construido</h4><div class="stack">';
+    p.stack.forEach(function(s){ h += '<span>'+s+'</span>'; });
+    h += '</div>';
+  }
+  h += '</div></div></div>';
+  return h;
+}
+
+function render(destino, lista, desde){
+  var cont = document.getElementById(destino), html = '';
+  lista.forEach(function(p,i){
+    var n = desde + i, id = destino+'-d'+i;
+    var num = (n<10?'0':'')+n;
+    html += '<article class="proj rv'+(i%2?' flip':'')+'">'
+      + '<div class="proj-media">'+marco(p)+'</div>'
+      + '<div class="proj-body">'
+      +   '<span class="proj-num">'+num+'</span>'
+      +   '<h3>'+p.nom+'</h3>'
+      +   '<p class="proj-cat">'+p.cat+'</p>'
+      +   '<p class="proj-desc">'+p.desc+'</p>'
+      +   '<div class="proj-actions">'
+      +     '<button class="btn-detail" aria-expanded="false" aria-controls="'+id+'">Ver detalle <i>+</i></button>'
+      +     (p.url
+              ? '<a class="proj-link" href="'+p.url+'" target="_blank" rel="noopener">Abrir sitio&nbsp;&nearr;</a>'
+              : '')
+      +   '</div>'
+      + '</div></article>'
+      + detalle(p,id);
+  });
+  cont.innerHTML = html;
+}
+
+render('grupo-inmobiliario', PROYECTOS.inmobiliario, 1);
+render('grupo-sistemas', PROYECTOS.sistemas, 7);
+render('grupo-marca', PROYECTOS.marca, 9);
+
+/* ============================================================
+   Interacción
+   ============================================================ */
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var tactil  = window.matchMedia('(hover:none)').matches;
+
+  /* --- paneles de detalle --- */
+  document.querySelectorAll('.btn-detail').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      var abierto = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!abierto));
+      panel.style.maxHeight = abierto ? '0px' : (panel.scrollHeight + 40) + 'px';
+      btn.firstChild.nodeValue = abierto ? 'Ver detalle ' : 'Cerrar ';
+    });
+  });
+  window.addEventListener('resize', function(){
+    document.querySelectorAll('.btn-detail[aria-expanded="true"]').forEach(function(b){
+      var p = document.getElementById(b.getAttribute('aria-controls'));
+      p.style.maxHeight = (p.scrollHeight + 40) + 'px';
+    });
+  });
+
+  /* --- marcos --- */
+  document.querySelectorAll('.scroller:not(.static)').forEach(function(sc){
+    var frame = sc.closest('.frame');
+    var barra = frame.querySelector('.frame-prog i');
+    var btn   = frame.querySelector('.btn-recorrer');
+    var raf = null, arrastrando = false, y0 = 0, top0 = 0, visible = false;
+
+    function progreso(){
+      var max = sc.scrollHeight - sc.clientHeight;
+      barra.style.width = (max > 0 ? (sc.scrollTop / max) * 100 : 0) + '%';
+    }
+    sc.addEventListener('scroll', progreso, {passive:true});
+
+    /* El recorrido automático mueve scrollTop por código, así que funciona
+       igual con overflow:hidden. En táctil el dedo nunca queda atrapado. */
+    function auto(){
+      var max = sc.scrollHeight - sc.clientHeight;
+      if(max <= 0 || sc.scrollTop >= max - 1){ raf = null; return; }
+      sc.scrollTop += Math.max(1.1, max / 2600);
+      raf = requestAnimationFrame(auto);
+    }
+    function arranca(){ if(!reduced && !raf && !arrastrando) raf = requestAnimationFrame(auto); }
+    function frena(){ if(raf){ cancelAnimationFrame(raf); raf = null; } }
+
+    if(tactil){
+      /* En móvil el recorrido corre solo cuando el marco está a la vista. */
+      new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          visible = e.isIntersecting;
+          if(visible && !sc.classList.contains('libre')) arranca(); else frena();
+        });
+      }, {threshold:.55}).observe(frame);
+
+      btn.addEventListener('click', function(){
+        var libre = sc.classList.toggle('libre');
+        btn.setAttribute('aria-pressed', String(libre));
+        btn.textContent = libre ? 'Listo' : 'Recorrer';
+        if(libre) frena(); else if(visible) arranca();
+      });
+    } else {
+      sc.addEventListener('mouseenter', arranca);
+      sc.addEventListener('mouseleave', frena);
+
+      sc.addEventListener('pointerdown', function(e){
+        frena(); arrastrando = true;
+        y0 = e.clientY; top0 = sc.scrollTop;
+        sc.classList.add('grabbing');
+        sc.setPointerCapture(e.pointerId);
+      });
+      sc.addEventListener('pointermove', function(e){
+        if(!arrastrando) return;
+        sc.scrollTop = top0 - (e.clientY - y0);
+      });
+      ['pointerup','pointercancel'].forEach(function(ev){
+        sc.addEventListener(ev, function(e){
+          if(!arrastrando) return;
+          arrastrando = false; sc.classList.remove('grabbing');
+          try{ sc.releasePointerCapture(e.pointerId); }catch(_){}
+        });
+      });
+
+      /* La rueda recorre el sitio; en los extremos devuelve el scroll a la página. */
+      sc.addEventListener('wheel', function(e){
+        var max = sc.scrollHeight - sc.clientHeight;
+        if((sc.scrollTop <= 0 && e.deltaY < 0) || (sc.scrollTop >= max - 1 && e.deltaY > 0)) return;
+        e.preventDefault(); frena();
+        sc.scrollTop += e.deltaY;
+      }, {passive:false});
+    }
+
+    progreso();
+  });
+
+  /* --- reveals --- */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.08, rootMargin:'0px 0px -50px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
