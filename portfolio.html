@@ -22,14 +22,24 @@
   --radius:16px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;   /* iOS no reescala la tipografia al girar */
+}
+/* Barrera contra el desplazamiento lateral: se corta en la raiz, no solo en body. */
+html,body{max-width:100%;overflow-x:hidden}
 body{
   background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;
   line-height:1.45;-webkit-font-smoothing:antialiased;
   font-feature-settings:"kern" 1,"liga" 1;text-rendering:optimizeLegibility;
-  overflow-x:hidden;
 }
 a{color:inherit;text-decoration:none}
+img{max-width:100%}
+/* Ninguna palabra larga puede empujar el ancho de la pagina. */
+h1,h2,h3,h4,h5,p,li,span,a,dd,dt,button{overflow-wrap:anywhere}
+/* Los hijos de grid y flex no heredan el minimo por contenido. */
+.proj,.proj>*,.detail-in,.detail-in>*,.flagship-intro,.flagship-intro>*,
+.frame,.frame-bar,.frame-bar>*,.spec,.spec>*,.howto>*{min-width:0}
 
 /* ---------- nav ---------- */
 .nav{
@@ -42,9 +52,9 @@ a{color:inherit;text-decoration:none}
 /* ---------- hero ---------- */
 .hero{padding:190px 5vw 96px;border-bottom:1px solid var(--border)}
 .label{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:28px}
-.hero h1{font-size:clamp(46px,8vw,116px);font-weight:700;line-height:.96;letter-spacing:-.035em;hyphens:none;max-width:15ch}
+.hero h1{font-size:clamp(32px,8.6vw,116px);font-weight:700;line-height:.96;letter-spacing:-.035em;hyphens:none;max-width:15ch}
 .hero h1 em{font-style:normal;color:var(--gold)}
-.hero-sub{margin-top:36px;max-width:60ch;font-size:clamp(15px,1.6vw,19px);color:var(--muted);line-height:1.6}
+.hero-sub{margin-top:36px;max-width:60ch;font-size:clamp(14.5px,4vw,19px);color:var(--muted);line-height:1.6}
 
 /* fila de instrucciones (reemplaza las estadísticas) */
 .howto{margin-top:60px;display:flex;flex-wrap:wrap;gap:14px}
@@ -61,7 +71,7 @@ a{color:inherit;text-decoration:none}
 .chapter{padding:110px 5vw 0}
 .chapter-head{display:flex;align-items:baseline;gap:28px;padding-bottom:34px;border-bottom:1px solid var(--border-lit);flex-wrap:wrap}
 .chapter-num{font-size:13px;font-weight:600;color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:.06em}
-.chapter-title{font-size:clamp(26px,3.4vw,44px);font-weight:600;letter-spacing:-.025em;line-height:1.1;hyphens:none}
+.chapter-title{font-size:clamp(23px,6vw,44px);font-weight:600;letter-spacing:-.025em;line-height:1.1;hyphens:none}
 .chapter-note{margin-left:auto;font-size:12px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase}
 .chapter-lead{margin-top:26px;color:var(--muted);max-width:64ch;line-height:1.65;font-size:15px}
 
@@ -122,7 +132,7 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- caso insignia ---------- */
 .flagship-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin:56px 0 48px}
-.flagship-intro h3{font-size:clamp(34px,5.2vw,68px);font-weight:700;letter-spacing:-.035em;line-height:.98;hyphens:none}
+.flagship-intro h3{font-size:clamp(29px,8vw,68px);font-weight:700;letter-spacing:-.035em;line-height:.98;hyphens:none}
 .flagship-intro p{color:var(--muted);max-width:52ch;line-height:1.65;font-size:15px}
 .flagship-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .tag{font-size:11px;letter-spacing:.09em;text-transform:uppercase;border:1px solid var(--border-lit);border-radius:100px;padding:7px 15px;color:var(--muted)}
@@ -135,7 +145,7 @@ a{color:inherit;text-decoration:none}
 }
 .proj.flip .proj-media{order:2}
 .proj-num{font-size:12px;color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.06em}
-.proj-body h3{font-size:clamp(24px,3.2vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin-top:14px;hyphens:none}
+.proj-body h3{font-size:clamp(21px,5.6vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin-top:14px;hyphens:none}
 .proj-cat{margin-top:14px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .proj-desc{margin-top:20px;color:var(--muted);max-width:50ch;line-height:1.65;font-size:15px}
 .proj-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;align-items:center}
@@ -172,12 +182,6 @@ a{color:inherit;text-decoration:none}
 .stack span{font-size:11px;letter-spacing:.06em;border:1px solid var(--border-lit);border-radius:100px;padding:7px 14px;color:var(--muted)}
 
 /* ---------- cta ---------- */
-.cta{padding:130px 5vw 140px;text-align:center}
-.cta h2{font-size:clamp(32px,5.4vw,68px);font-weight:700;letter-spacing:-.035em;line-height:1.02;max-width:18ch;margin:0 auto;hyphens:none}
-.cta h2 em{font-style:normal;color:var(--gold)}
-.cta p{margin:28px auto 0;color:var(--muted);max-width:48ch;line-height:1.65}
-.cta-btn{display:inline-block;margin-top:44px;background:var(--gold);color:#000;font-weight:600;font-size:15px;padding:18px 44px;border-radius:100px;transition:transform .3s}
-.cta-btn:hover{transform:translateY(-3px)}
 .foot{padding:32px 5vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--dim)}
 
 .rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
@@ -207,15 +211,60 @@ a{color:inherit;text-decoration:none}
   .scroller{height:360px}
   .chapter.destacado{padding:44px 5vw 0}
 }
+
+/* ---------- telefono ---------- */
 @media (max-width:620px){
-  .hero{padding:150px 6vw 70px}
-  .chapter{padding:80px 6vw 0}
-  .chapter.destacado{margin:0 4vw;padding:38px 5vw 0;border-radius:18px}
+  .hero{padding:126px 5vw 58px}
+  .label{margin-bottom:20px}
+  .hero-sub{margin-top:26px}
+
+  .howto{margin-top:38px;gap:9px}
+  .howto div{padding:13px 18px 13px 14px;font-size:12.5px;width:100%;gap:11px}
+
+  .chapter{padding:66px 5vw 0}
+  .chapter.destacado{margin:0 3vw;padding:32px 4vw 0;border-radius:18px}
+  .chapter-head{gap:16px;padding-bottom:22px}
   .chapter-note{display:none}
-  .scroller{height:300px}
+  .chapter-lead{margin-top:20px;font-size:14.5px}
+  .especialidad{margin-bottom:20px;padding:8px 16px;font-size:10px;letter-spacing:.12em}
+
+  .flagship-intro{margin:34px 0 30px;gap:20px}
+  .flagship-intro p,.proj-desc{font-size:14.5px}
+  .flagship-tags{gap:6px;margin-top:16px}
+  .tag{padding:6px 12px;font-size:10px}
+
+  .proj{gap:22px;padding:34px 0}
+  .proj-body h3{margin-top:11px}
+  .proj-cat{margin-top:11px;font-size:11px;letter-spacing:.08em}
+  .proj-desc{margin-top:15px}
+  .proj-actions{margin-top:22px;gap:10px}
+  /* area de toque comoda: 44px de alto */
+  .btn-detail{padding:14px 22px}
+
+  /* la captura ocupa una porcion estable de la pantalla, no un alto fijo */
+  .scroller{height:clamp(240px,52vh,330px)}
+  .frame-bar{padding:9px 11px;gap:6px}
+  .frame-url{font-size:10px;padding:5px 11px;margin-left:5px}
+  .btn-recorrer{padding:8px 12px;font-size:9.5px}
+  .dot{width:7px;height:7px}
+
+  .detail-in{padding:4px 0 34px;gap:26px}
+  .detail li{font-size:14px;padding-left:19px}
   .spec{grid-template-columns:1fr}
-  .howto{gap:10px}
-  .howto div{padding:13px 18px 13px 14px;font-size:12px;width:100%}
+  .spec div{padding:14px 15px}
+
+  .foot{padding:26px 5vw;font-size:11px}
+}
+
+/* ---------- telefono angosto ---------- */
+@media (max-width:400px){
+  .hero{padding:116px 5vw 48px}
+  .chapter{padding:56px 5vw 0}
+  .chapter.destacado{margin:0 2vw;padding:26px 4vw 0}
+  .scroller{height:clamp(215px,46vh,285px)}
+  .howto div{padding:12px 15px 12px 12px;font-size:12px}
+  .frame-url{font-size:9.5px}
+  .foot{flex-direction:column;gap:6px}
 }
 </style>
 </head>
@@ -301,12 +350,6 @@ a{color:inherit;text-decoration:none}
   </div>
 
   <div id="grupo-marca"></div>
-</section>
-
-<section class="cta" id="contacto">
-  <h2 class="rv">¿Tu negocio ya vale mucho? <em>Que se vea.</em></h2>
-  <p class="rv">Empezamos con un diagnóstico: una videollamada donde identificamos las tres áreas que están frenando tu crecimiento. Útil incluso si decides no trabajar con nosotros.</p>
-  <a href="apply.html" class="cta-btn rv">Agendar diagnóstico&nbsp;&rarr;</a>
 </section>
 
 <footer class="foot">
