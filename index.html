@@ -56,7 +56,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* ============================================
        RESET & BASE
@@ -75,6 +75,18 @@
       --text-muted: rgba(255,255,255,0.45);
       --text-dim: rgba(255,255,255,0.25);
       --font: 'Poppins', sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+      /* alias cortos usados por el hero y el carrusel */
+      --muted: var(--text-muted);
+      --dim: var(--text-dim);
+      --line: var(--border);
+      /* marca de Top Digital, solo dentro del panel del hero */
+      --td-violeta: #7c3aed;
+      --td-magenta: #f0338d;
+      --td-naranja: #fca044;
+      --td-grad: linear-gradient(100deg,#7c3aed 0%,#f0338d 52%,#fca044 100%);
+      --wa: #25D366;
+      --amber: #fbbf24;
       --nav-h: 72px;
       --radius: 16px;
     }
@@ -283,192 +295,276 @@
     }
 
     /* ============================================
-       HERO
+       BOTONES
     ============================================ */
-    #inicio {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    .btn-primary {
+      background: var(--gold);
+      color: #3D1A00;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 16px 32px;
+      border-radius: 100px;
+      text-decoration: none;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: calc(var(--nav-h) + 40px) 24px 100px;
+      gap: 8px;
+      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      letter-spacing: 0.01em;
       position: relative;
       overflow: hidden;
-      background: #000;
-      isolation: isolate;
     }
-
-    @keyframes heroGlow {
-      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
       border-radius: 100px;
-      padding: 4px 11px;
-      font-size: 0.6rem;
+      transition: background 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: #FFB07A;
+      transform: scale(1.06) translateY(-3px);
+      box-shadow: 0 12px 40px rgba(255,140,66,0.5), 0 4px 12px rgba(255,140,66,0.3);
+    }
+    .btn-primary:hover::after {
+      background: rgba(255,255,255,0.08);
+    }
+    .btn-primary:active {
+      transform: scale(0.98) translateY(0px);
+      box-shadow: 0 4px 16px rgba(255,140,66,0.3);
+      transition: all 0.1s ease;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
       font-weight: 400;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 32px;
+      font-size: 0.95rem;
+      padding: 16px 32px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
       position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
     }
-
-    .hero-badge-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: #4ade80;
-      box-shadow: 0 0 5px #4ade80;
-      animation: pulse 2s ease infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .hero-h1 {
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      font-weight: 700;
-      line-height: 1.0;
-      letter-spacing: -0.04em;
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.35);
       color: #fff;
-      max-width: 900px;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.05);
+    }
+    .btn-secondary:active {
+      transform: translateY(0px);
+      transition: all 0.1s ease;
     }
 
-    .hero-h1 .accent { color: var(--gold); }
+    /* ============================================
+       HERO · panel de sistema + CARRUSEL "CONSTRUIDO POR VITA"
+    ============================================ */
+/* ================= HERO A2 · TOP DIGITAL EN PANTALLA ================= */
+#inicio{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:clamp(32px,5vw,72px);padding:calc(var(--nav-h) + 48px) clamp(24px,5vw,72px) 80px;position:relative;overflow:hidden;isolation:isolate}
+#inicio::before{content:"";position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(900px 560px at 76% 48%, rgba(255,140,66,.12), transparent 60%),
+  radial-gradient(520px 420px at 92% 20%, rgba(124,58,237,.10), transparent 60%),#000}
+#inicio::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(ellipse 70% 60% at 65% 50%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 65% 50%,#000 20%,transparent 75%)}
 
-    .hero-sub {
-      font-size: clamp(1rem, 1.8vw, 1.15rem);
-      font-weight: 300;
-      color: var(--text-muted);
-      margin-top: 20px;
-      max-width: 520px;
-      line-height: 1.7;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s forwards;
-    }
+.copy{position:relative;z-index:1;max-width:600px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:28px;opacity:0;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .1s forwards}
+.eyebrow b{color:var(--gold);font-weight:500}
+.eyebrow .sep{width:1px;height:12px;background:var(--line)}
+.h1{font-size:clamp(2.6rem,5.4vw,4.7rem);font-weight:700;line-height:1.02;letter-spacing:-.045em;opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .2s forwards}
+.h1 .accent{color:var(--gold)}
+.sub{margin-top:24px;max-width:50ch;font-size:clamp(1rem,1.5vw,1.12rem);font-weight:300;line-height:1.65;color:var(--muted);opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .35s forwards}
+.sub strong{color:#fff;font-weight:500}
+.btns{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:40px;opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .5s forwards}
+.pillars{display:flex;flex-wrap:wrap;margin-top:56px;border-top:1px solid var(--line);opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .65s forwards}
+.pillar{flex:1 1 120px;min-width:0;padding:18px 20px 0 0;border-right:1px solid var(--line);margin-right:20px}
+.pillar:last-child{border-right:0;margin-right:0}
+.pillar .n{font-family:var(--mono);font-size:.68rem;color:var(--gold);letter-spacing:.06em}
+.pillar .t{font-size:.95rem;font-weight:600;margin-top:6px}
+.pillar .d{font-size:.78rem;color:var(--dim);margin-top:4px;line-height:1.45}
 
-    .hero-btns {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
-    }
+/* ---------- panel: Top Digital recreado ---------- */
+.stage{position:relative;z-index:1;perspective:1600px;opacity:0;animation:fadeIn 1.2s ease .5s forwards}
+.panel{position:relative;border-radius:18px;background:linear-gradient(180deg,#0e0e10,#070708);border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(240,51,141,.05),inset 0 1px 0 rgba(255,255,255,.08);transform:rotateY(-7deg) rotateX(3deg);transform-origin:left center;overflow:hidden;font-size:12px}
+.panel::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.03) 50%,transparent 60%)}
+.p-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+.brand{display:flex;align-items:center;gap:8px;font-weight:600;font-size:12.5px;letter-spacing:-.01em;white-space:nowrap}
+.brand .mark{width:22px;height:22px;border-radius:7px;background:var(--td-grad);display:grid;place-items:center;color:#fff;font-weight:800;font-size:10px;letter-spacing:-.02em}
+.brand small{font-weight:400;color:var(--dim);margin-left:2px;font-family:var(--mono);font-size:10px}
+.p-top .tabs{display:flex;gap:2px;font-size:10px;color:var(--dim)}
+.p-top .tabs span{padding:3px 8px;border-radius:99px;white-space:nowrap}
+.p-top .tabs span.on{color:#fff;background:var(--td-grad)}
+.sync{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:var(--muted);white-space:nowrap}
+.sync i{width:6px;height:6px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:ping 2s infinite}
+.p-body{display:grid;grid-template-columns:1fr 1.1fr}
+.col{padding:14px 16px;min-width:0}
+.col+.col{border-left:1px solid var(--line)}
+.col-h{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.col-h b{color:var(--td-naranja);font-weight:500}
 
-    /* ====================================================
-       HERO SCARCITY · frase de autoridad
-    ==================================================== */
-    .hero-scarcity {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 56px;
-      padding: 9px 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.78);
-      letter-spacing: 0.02em;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s forwards;
-    }
+/* tarjeta protagonista (aura de degradado, como el portal real) */
+.hero-card{position:relative;overflow:hidden;border-radius:12px;border:1px solid rgba(255,255,255,.09);padding:13px 14px 12px;background:#0b0b0d;margin-bottom:12px}
+.hero-card .aura{position:absolute;border-radius:50%;filter:blur(28px);pointer-events:none}
+.hero-card .a1{width:120px;height:120px;left:-40px;top:-50px;background:rgba(124,58,237,.45)}
+.hero-card .a2{width:140px;height:140px;right:-40px;bottom:-70px;background:rgba(252,160,68,.35)}
+.hero-card .a3{width:90px;height:90px;left:45%;top:-30px;background:rgba(240,51,141,.3)}
+.hero-card .who{position:relative;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.hero-card .who .av{width:26px;height:26px;border-radius:8px;background:var(--td-grad);display:grid;place-items:center;font-size:9.5px;font-weight:800;color:#fff}
+.hero-card .who b{font-size:11.5px;font-weight:600;display:block}
+.hero-card .who small{font-size:9.5px;color:var(--dim)}
+.hero-card .who .since{margin-left:auto;font-family:var(--mono);font-size:8.5px;color:var(--dim);white-space:nowrap}
+.hero-card .k{position:relative;font-size:10px;color:var(--muted)}
+.hero-card .v{position:relative;font-size:26px;font-weight:700;letter-spacing:-.04em;line-height:1.1;margin-top:2px;font-variant-numeric:tabular-nums}
+.hero-card .v.bump{animation:bump .6s cubic-bezier(.34,1.56,.64,1)}
+.chips{position:relative;display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip{font-size:9.5px;font-weight:500;padding:4px 9px;border-radius:99px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.35);backdrop-filter:blur(6px);font-variant-numeric:tabular-nums}
+.chip.trend{color:#3ddc84;border-color:rgba(61,220,132,.3)}
 
-    .hero-scarcity-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #4ade80;
-      box-shadow: 0 0 8px rgba(74,222,128,0.6);
-      animation: pulse 2s ease infinite;
-    }
+/* meta del mes + conversión (donas) */
+.donas{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.dona{border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.025);padding:9px 8px;display:flex;align-items:center;gap:9px}
+.ring{--p:0;width:38px;height:38px;border-radius:50%;flex:none;background:conic-gradient(var(--td-magenta) calc(var(--p)*1%),rgba(255,255,255,.08) 0);display:grid;place-items:center;transition:--p 1s;position:relative}
+.ring::before{content:"";width:28px;height:28px;border-radius:50%;background:#0c0c0e;position:absolute}
+.ring span{position:relative;font-family:var(--mono);font-size:8.5px;font-weight:500}
+.dona .t{font-size:10px;font-weight:600;line-height:1.2}
+.dona .s{font-size:8.5px;color:var(--dim);margin-top:2px;font-family:var(--mono)}
 
-    /* ====================================================
-       HERO TRUST BAR · stats minimalistas
-    ==================================================== */
-    .hero-trustbar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      margin-top: 64px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.85s forwards;
-    }
+/* embudo */
+.embudo{display:flex;flex-direction:column;gap:6px}
+.et{display:grid;grid-template-columns:62px 1fr 18px;align-items:center;gap:8px;font-size:10px}
+.et .l{color:var(--muted)}
+.et .bar{height:12px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.et .bar i{display:block;height:100%;border-radius:99px;background:var(--td-grad);opacity:.45;width:0;transition:width .9s cubic-bezier(.16,1,.3,1)}
+.et.ganado .bar i{opacity:1}
+.et .c{text-align:right;font-weight:600;font-variant-numeric:tabular-nums;font-size:10.5px}
 
-    .hero-trust-item {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
+/* leads recientes (tabla del sistema) */
+.tbl{display:flex;flex-direction:column;gap:4px;min-height:212px}
+.row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.02);transform:translateY(-8px);opacity:0;animation:slideIn .5s cubic-bezier(.16,1,.3,1) forwards;transition:border-color .4s,background .4s}
+.row.focus{border-color:rgba(240,51,141,.45);background:rgba(240,51,141,.06)}
+.row .n{font-size:11px;font-weight:500;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .m{font-family:var(--mono);font-size:8.5px;color:var(--dim);margin-top:2px;white-space:nowrap}
+.row .m em{font-style:normal;color:var(--wa)}
+.row .monto{font-family:var(--mono);font-size:9.5px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+.badge{display:inline-flex;align-items:center;height:18px;padding:0 8px;border-radius:99px;font-size:9px;font-weight:500;white-space:nowrap;transition:all .35s;min-width:74px;justify-content:center}
+.badge.nuevo{background:rgba(124,58,237,.22);color:#b08cff}
+.badge.contactado{background:rgba(251,191,36,.15);color:var(--amber)}
+.badge.interesado{background:rgba(240,51,141,.15);color:var(--td-magenta)}
+.badge.cotizado{background:rgba(252,160,68,.15);color:var(--td-naranja)}
+.badge.ganado{background:var(--td-grad);color:#fff}
+.badge.flip{animation:flip .45s cubic-bezier(.34,1.56,.64,1)}
 
-    .hero-trust-num {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: -0.02em;
-    }
+/* campañas (semáforo) */
+.camps{margin-top:12px;border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:5px}
+.camp{display:grid;grid-template-columns:8px 1fr auto auto;align-items:center;gap:8px;font-size:10px}
+.camp i{width:8px;height:8px;border-radius:50%}
+.camp i.v{background:#3ddc84}.camp i.a{background:var(--amber)}
+.camp .nm{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.camp .nm small{color:var(--dim);font-weight:400;font-family:var(--mono);font-size:8.5px;margin-left:5px}
+.camp .cpl{font-family:var(--mono);font-size:9px;color:var(--muted)}
+.camp .sp{display:flex;align-items:flex-end;gap:2px;height:14px}
+.camp .sp b{width:3px;background:rgba(255,255,255,.18);border-radius:1px}
+.camp .sp b:last-child{background:var(--td-magenta)}
 
-    .hero-trust-label {
-      font-size: 0.72rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.45);
-      letter-spacing: 0.04em;
-      text-transform: lowercase;
-    }
+/* toasts flotantes */
+.toast{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:rgba(18,18,20,.94);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);box-shadow:0 20px 50px rgba(0,0,0,.6);font-size:11.5px;opacity:0;transform:translateY(10px) scale(.96);z-index:3;white-space:nowrap;pointer-events:none}
+.toast.show{animation:toastIn .5s cubic-bezier(.16,1,.3,1) forwards}
+.toast.hide{animation:toastOut .4s ease forwards}
+.toast .ico{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:700}
+.toast .ico.meta{background:rgba(124,58,237,.2);color:#b08cff}
+.toast .ico.wa{background:rgba(37,211,102,.15);color:var(--wa)}
+.toast .ico.chat{background:rgba(240,51,141,.18);color:var(--td-magenta)}
+.toast .ico.money{background:var(--td-grad);color:#fff}
+.toast .l{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.05em;text-transform:uppercase}
+.toast .m{font-weight:500;margin-top:1px}
+#t-meta{right:-18px;top:5%}
+#t-wa{right:-10px;top:44%}
+#t-chat{left:-26px;bottom:30%}
+#t-venta{right:8%;bottom:26px}
 
-    .hero-trust-divider {
-      width: 1px;
-      height: 16px;
-      background: rgba(255,255,255,0.1);
-    }
+.caption{margin-top:18px;font-family:var(--mono);font-size:.68rem;color:var(--dim);letter-spacing:.04em;display:flex;gap:14px;align-items:center}
+.caption i{width:22px;height:1px;background:var(--gold);display:inline-block}
 
-    @media (max-width: 640px) {
-      .hero-trustbar { gap: 20px; }
-      .hero-trust-num { font-size: 1.3rem; }
-      .hero-trust-label { font-size: 0.68rem; }
-      .hero-trust-divider { display: none; }
-      .hero-scarcity {
-        margin-top: 40px;
-        font-size: 0.72rem;
-        padding: 8px 14px;
-      }
-    }
+/* ================= CONSTRUIDO POR VITA · carrusel ================= */
+#construido{position:relative;padding:72px 0 64px;border-top:1px solid var(--line);background:#000;overflow:hidden}
+.cb-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:0 clamp(24px,5vw,72px);margin-bottom:36px;flex-wrap:wrap}
+.cb-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.cb-label i{width:28px;height:1px;background:var(--gold);display:inline-block}
+.cb-title{font-size:clamp(1.5rem,2.6vw,2.2rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;max-width:22ch}
+.cb-title span{color:var(--gold)}
+.cb-link{font-size:.9rem;font-weight:500;color:rgba(255,255,255,.75);text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding-bottom:6px;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s;white-space:nowrap}
+.cb-link:hover{color:#fff;border-color:var(--gold)}
+.cb-link .arrow{transition:transform .25s}
+.cb-link:hover .arrow{transform:translateX(4px)}
+.marq-wrap{position:relative;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-wrap{cursor:grab;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.marq-wrap.grabbing{cursor:grabbing}
+.marq{display:flex;gap:20px;width:max-content;padding:6px 0 10px;will-change:transform}
+.marq-wrap.grabbing .pcard{pointer-events:none}
+.pcard{width:360px;flex:none;border-radius:14px;border:1px solid var(--line);background:#0a0a0a;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color .3s,transform .3s,box-shadow .3s}
+.pcard:hover{border-color:rgba(255,140,66,.45);transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.pcard .shot{position:relative;aspect-ratio:700/509;overflow:hidden;background:#111;border-bottom:1px solid var(--line)}
+.pcard .shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1);-webkit-user-drag:none}
+.pcard:hover .shot img{transform:scale(1.04)}
+.pcard .shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.35))}
+.pcard .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px}
+.pcard .foot>div{min-width:0}
+.pcard .nm{font-size:.92rem;font-weight:500;line-height:1.2}
+.pcard .cat{font-family:var(--mono);font-size:.63rem;color:var(--dim);letter-spacing:.05em;text-transform:uppercase;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcard .chip{flex:none;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.pcard .chip.sis{color:var(--gold);border-color:rgba(255,140,66,.4);background:rgba(255,140,66,.06)}
+.pcard .chip.int{color:#fff;border-color:rgba(255,255,255,.25)}
+.pcard .shot.collage{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:3px;background:#000}
+.pcard .shot.collage::after{background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45))}
+.pcard .shot.collage .count{position:static;display:grid;place-items:center;background:rgba(255,140,66,.08);border:0;border-radius:0;color:var(--gold)}
+.pcard .shot .count{position:absolute;right:10px;bottom:10px;z-index:1;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:99px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(6px)}
+.pcard .shot.brand img{object-position:center}
+.pcard .shot.brand::after{background:linear-gradient(180deg,transparent 65%,rgba(0,0,0,.4))}
+.pcard .shot.ph{display:grid;place-items:center;background:linear-gradient(135deg,#1a2654 0%,#0f1838 100%)}
+.pcard .shot.ph b{font-size:2rem;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.85)}
+@media (max-width:640px){
+  #construido{padding:56px 0 48px}
+  .cb-head{margin-bottom:24px}
+  .pcard{width:268px}
+}
+
+.btn-ghost{color:rgba(255,255,255,.75);font-weight:500;font-size:.95rem;padding:16px 8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .2s}
+.btn-ghost:hover{color:#fff}
+.btn-ghost .arrow{transition:transform .25s;display:inline-block}
+.btn-ghost:hover .arrow{transform:translateX(4px)}
+
+@keyframes fadeIn{to{opacity:1}}
+@keyframes slideIn{to{opacity:1;transform:none}}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(61,220,132,.6)}70%{box-shadow:0 0 0 7px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+@keyframes toastIn{to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateY(-6px) scale(.97)}}
+@keyframes flip{0%{transform:scale(.7);filter:brightness(1.6)}100%{transform:none;filter:none}}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.06);color:#fff}100%{transform:scale(1)}}
+
+@media (max-width:1280px){
+  .brand small,.p-top .tabs span:last-child{display:none}
+}
+@media (max-width:980px){
+  #inicio{grid-template-columns:1fr;padding-top:calc(var(--nav-h) + 32px);gap:40px}
+  .stage{perspective:none}
+  .panel{transform:none;font-size:11px}
+  .p-top .tabs{display:none}
+  .toast{display:none}
+  .pillars{margin-top:40px}
+}
+@media (max-width:560px){
+  .pillars{flex-direction:column;gap:18px;padding-top:20px}
+  .pillar{flex:none;border-right:0;margin-right:0;padding:0}
+  .eyebrow .sep,.eyebrow .city{display:none}
+  .eyebrow{gap:8px}
+  .p-body{grid-template-columns:1fr}
+  .col+.col{border-left:0;border-top:1px solid var(--line)}
+  .tbl{min-height:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}}
 
     /* ====================================================
        SIDE TAB MÉDICOS · Pestaña lateral derecha
@@ -624,434 +720,6 @@
       }
     }
 
-
-    /* ====================================================
-       HERO IMPACT · Animación de alto impacto inmediato
-       Typing rotativo + Línea de proceso + Counter stats
-    ==================================================== */
-    .hero-impact {
-      width: 100%;
-      max-width: 100%;
-      margin: 48px 0 0;
-      padding: 0 20px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 56px;
-      animation: heroImpactFadeIn 0.6s ease-out 0.3s both;
-    }
-
-    @keyframes heroImpactFadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ============ TYPING ROTATIVO ============ */
-    .hero-typing-wrap {
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      max-width: 100%;
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.4rem, 3.2vw, 2.4rem);
-      font-weight: 400;
-      line-height: 1.2;
-      text-align: center;
-    }
-
-    .hero-typing-prefix {
-      color: rgba(245, 240, 232, 0.55);
-      font-weight: 300;
-      letter-spacing: -0.01em;
-    }
-
-    .hero-typing-rotator {
-      display: inline-flex;
-      align-items: baseline;
-      min-height: 1.2em;
-      position: relative;
-    }
-
-    .hero-typing-text {
-      color: var(--gold, #c9a974);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .hero-typing-cursor {
-      display: inline-block;
-      color: var(--gold, #c9a974);
-      font-weight: 300;
-      margin-left: 2px;
-      animation: heroBlink 0.7s steps(2) infinite;
-    }
-
-    @keyframes heroBlink {
-      0%, 50%   { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-
-    /* ============ LÍNEA DE PROCESO 4 PASOS ============ */
-    .hero-process {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      width: 100%;
-      max-width: 720px;
-      padding: 0 8px;
-    }
-
-    .hero-process-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-process-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: rgba(245, 240, 232, 0.08);
-      border: 1.5px solid rgba(245, 240, 232, 0.2);
-      position: relative;
-      transition: background 0.3s ease, border-color 0.3s ease;
-    }
-
-    .hero-process-dot::before {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: 1.5px solid var(--gold, #c9a974);
-      opacity: 0;
-      animation: heroDotPulse 4s ease-in-out infinite;
-    }
-
-    .hero-process-dot[data-step="1"]::before { animation-delay: 0s; }
-    .hero-process-dot[data-step="2"]::before { animation-delay: 1s; }
-    .hero-process-dot[data-step="3"]::before { animation-delay: 2s; }
-    .hero-process-dot[data-step="4"]::before { animation-delay: 3s; }
-
-    .hero-process-dot[data-step="1"] { animation: heroDotActive 4s ease-in-out infinite 0s; }
-    .hero-process-dot[data-step="2"] { animation: heroDotActive 4s ease-in-out infinite 1s; }
-    .hero-process-dot[data-step="3"] { animation: heroDotActive 4s ease-in-out infinite 2s; }
-    .hero-process-dot[data-step="4"] { animation: heroDotActive 4s ease-in-out infinite 3s; }
-
-    @keyframes heroDotActive {
-      0%, 75%, 100% {
-        background: rgba(245, 240, 232, 0.08);
-        border-color: rgba(245, 240, 232, 0.2);
-      }
-      25%, 50% {
-        background: var(--gold, #c9a974);
-        border-color: var(--gold, #c9a974);
-        box-shadow: 0 0 16px rgba(201, 169, 116, 0.5);
-      }
-    }
-
-    @keyframes heroDotPulse {
-      0%, 75%, 100% {
-        transform: scale(1);
-        opacity: 0;
-      }
-      25% {
-        transform: scale(1.4);
-        opacity: 0.6;
-      }
-      50% {
-        transform: scale(1.8);
-        opacity: 0;
-      }
-    }
-
-    .hero-process-line {
-      flex: 1;
-      height: 1px;
-      background: rgba(245, 240, 232, 0.1);
-      position: relative;
-      max-width: 120px;
-      min-width: 24px;
-    }
-
-    .hero-process-line-fill {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 0;
-      background: var(--gold, #c9a974);
-      animation: heroLineFill 4s ease-in-out infinite;
-      box-shadow: 0 0 8px rgba(201, 169, 116, 0.4);
-    }
-
-    .hero-process-line:nth-of-type(2) .hero-process-line-fill { animation-delay: 0.5s; }
-    .hero-process-line:nth-of-type(4) .hero-process-line-fill { animation-delay: 1.5s; }
-    .hero-process-line:nth-of-type(6) .hero-process-line-fill { animation-delay: 2.5s; }
-
-    @keyframes heroLineFill {
-      0%, 12% { width: 0; }
-      18%, 100% { width: 100%; }
-    }
-
-    .hero-process-label {
-      font-family: var(--font, 'Poppins', sans-serif);
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(245, 240, 232, 0.45);
-      white-space: nowrap;
-    }
-
-    /* ============ COUNTER STATS ============ */
-    .hero-stats {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      padding: 24px 0 0;
-      border-top: 1px solid rgba(245, 240, 232, 0.06);
-      width: 100%;
-      max-width: 720px;
-    }
-
-    .hero-stat {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 4px;
-    }
-
-    .hero-stat-num {
-      font-family: var(--font, 'Poppins', sans-serif);
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 700;
-      color: var(--gold, #c9a974);
-      letter-spacing: -0.03em;
-      line-height: 1;
-    }
-
-    .hero-stat-plus {
-      font-family: var(--font, 'Poppins', sans-serif);
-      font-size: clamp(1rem, 2vw, 1.4rem);
-      font-weight: 400;
-      color: var(--gold, #c9a974);
-      margin-right: 8px;
-    }
-
-    .hero-stat-label {
-      font-family: var(--font, 'Poppins', sans-serif);
-      font-size: 0.72rem;
-      font-weight: 400;
-      color: rgba(245, 240, 232, 0.5);
-      letter-spacing: 0.06em;
-    }
-
-    .hero-stat-divider {
-      width: 1px;
-      height: 28px;
-      background: rgba(245, 240, 232, 0.1);
-    }
-
-    /* ============ RESPONSIVE ============ */
-    @media (max-width: 768px) {
-      .hero-impact { gap: 24px; margin-top: 32px; }
-      .hero-typing-wrap { font-size: 1.2rem; gap: 8px; }
-
-      /* Ocultar proceso y counters en mobile · hero más limpio */
-      .hero-process,
-      .hero-stats {
-        display: none;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-impact { gap: 20px; margin-top: 24px; }
-      .hero-typing-wrap { font-size: 1.05rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-typing-cursor,
-      .hero-process-dot,
-      .hero-process-dot::before,
-      .hero-process-line-fill {
-        animation: none !important;
-      }
-    }
-
-    /* Pill sutil hacia /medicos · Colores del sitio médico */
-    .hero-pill-medicos {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 24px;
-      padding: 10px 18px;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(201, 169, 116, 0.35);
-      border-radius: 100px;
-      color: #c9a974;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.8s forwards;
-      box-shadow: 0 2px 12px rgba(201, 169, 116, 0.08);
-    }
-    .hero-pill-medicos:hover {
-      background: rgba(201, 169, 116, 0.08);
-      border-color: rgba(201, 169, 116, 0.6);
-      color: #e8c989;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(201, 169, 116, 0.18);
-    }
-    .hero-pill-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      background: rgba(201, 169, 116, 0.15);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .hero-pill-arrow {
-      transition: transform 0.3s ease;
-      display: inline-block;
-      font-size: 1em;
-    }
-    .hero-pill-medicos:hover .hero-pill-arrow {
-      transform: translateX(4px);
-    }
-
-    @media (max-width: 600px) {
-      .hero-pill-medicos {
-        font-size: 0.7rem;
-        padding: 9px 14px;
-        gap: 8px;
-        max-width: 92vw;
-        text-align: left;
-      }
-      .hero-pill-medicos span:nth-child(2) {
-        line-height: 1.3;
-      }
-    }
-
-    .btn-primary {
-      background: var(--gold);
-      color: #3D1A00;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 16px 32px;
-      border-radius: 100px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-      letter-spacing: 0.01em;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0);
-      border-radius: 100px;
-      transition: background 0.2s ease;
-    }
-
-    .btn-primary:hover {
-      background: #FFB07A;
-      transform: scale(1.06) translateY(-3px);
-      box-shadow: 0 12px 40px rgba(255,140,66,0.5), 0 4px 12px rgba(255,140,66,0.3);
-    }
-
-    .btn-primary:hover::after {
-      background: rgba(255,255,255,0.08);
-    }
-
-    .btn-primary:active {
-      transform: scale(0.98) translateY(0px);
-      box-shadow: 0 4px 16px rgba(255,140,66,0.3);
-      transition: all 0.1s ease;
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: rgba(255,255,255,0.7);
-      font-weight: 400;
-      font-size: 0.95rem;
-      padding: 16px 32px;
-      border-radius: 100px;
-      border: 1px solid rgba(255,255,255,0.12);
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-      position: relative;
-    }
-
-    .btn-secondary:hover {
-      border-color: rgba(255,255,255,0.35);
-      color: #fff;
-      background: rgba(255,255,255,0.06);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(255,255,255,0.05);
-    }
-
-    .btn-secondary:active {
-      transform: translateY(0px);
-      transition: all 0.1s ease;
-    }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 4px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      z-index: 1;
-      opacity: 0;
-      animation: fadeUp 1s ease 1.2s forwards;
-    }
-
-    .hero-scroll-line {
-      width: 2px;
-      height: 52px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      box-shadow: 0 0 10px rgba(255,140,66,0.5);
-      border-radius: 2px;
-      animation: scrollLine 2.2s ease-in-out infinite;
-    }
-
-    @keyframes scrollLine {
-      0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
-      50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
-      100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
-    }
 
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
@@ -2648,7 +2316,6 @@
     }
 
     @media (max-width: 600px) {
-      .hero-h1 { font-size: 2.8rem; }
       .bnav-tab span { display: none; }
       .bnav-tab { padding: 12px 0; }
     }
@@ -4118,46 +3785,99 @@
      HERO
 ============================================ -->
 <section id="inicio">
-  <h1 class="hero-h1">
-    Hacemos que tu marca<br>
-    <span class="accent">cobre lo que vale.</span>
-  </h1>
-  <p class="hero-sub">
-    Marca, web y estrategia que hablan entre sí para que tu negocio venda más, no solo se vea bonito.
-  </p>
-  <div class="hero-btns">
-    <a href="apply.html" class="btn-primary">
-      Hablemos →
-    </a>
-  </div>
-
-  <!-- Frase de escasez / autoridad -->
-  <div class="hero-scarcity">
-    <span class="hero-scarcity-dot"></span>
-    Solo trabajamos con 4 marcas al mes
-  </div>
-
-  <!-- Trust bar minimalista -->
-  <div class="hero-trustbar">
-    <div class="hero-trust-item">
-      <span class="hero-trust-num">12</span>
-      <span class="hero-trust-label">marcas construidas</span>
+  <div class="copy">
+    <div class="eyebrow"><b>VITA Studio</b><span class="sep"></span>Marca &middot; Web &middot; Sistemas <span class="sep"></span><span class="city">Monterrey</span></div>
+    <h1 class="h1">Construimos la infraestructura que hace <span class="accent">crecer</span> tu negocio.</h1>
+    <p class="sub">Marca, sitio web y <strong>sistemas propios</strong> que convierten cada lead en una venta que puedes medir: de la campaña al cierre, sin que nada se pierda en el camino.</p>
+    <div class="btns">
+      <a href="#" class="btn-primary">Hablemos &rarr;</a>
+      <a href="#" class="btn-ghost">Ver un sistema en acción <span class="arrow">&rarr;</span></a>
     </div>
-    <div class="hero-trust-divider"></div>
-    <div class="hero-trust-item">
-      <span class="hero-trust-num">200</span>
-      <span class="hero-trust-label">piezas creadas</span>
-    </div>
-    <div class="hero-trust-divider"></div>
-    <div class="hero-trust-item">
-      <span class="hero-trust-num">4</span>
-      <span class="hero-trust-label">años construyendo</span>
+    <div class="pillars">
+      <div class="pillar"><div class="n">01</div><div class="t">Marca</div><div class="d">Identidad que cobra lo que vale.</div></div>
+      <div class="pillar"><div class="n">02</div><div class="t">Web</div><div class="d">Sitios que convierten y agendan.</div></div>
+      <div class="pillar"><div class="n">03</div><div class="t">Sistema</div><div class="d">Leads, campañas y ventas en un solo lugar.</div></div>
     </div>
   </div>
 
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
+  <div class="stage" aria-hidden="true">
+    <div class="panel">
+      <div class="p-top">
+        <div class="brand"><span class="mark">TD</span>Top Digital <small>/ mi panel</small></div>
+        <div class="tabs"><span class="on">Panel</span><span>Leads</span><span>Campañas</span><span>Chat</span><span>Reportes</span></div>
+        <div class="sync"><i></i>sync hace 2 min</div>
+      </div>
+      <div class="p-body">
+        <div class="col">
+          <div class="hero-card">
+            <span class="aura a1"></span><span class="aura a2"></span><span class="aura a3"></span>
+            <div class="who"><span class="av">CS</span><div><b>Clínica Sonríe</b><small>Dra. Valeria Cantú</small></div><span class="since">cliente desde 2025</span></div>
+            <div class="k">Ventas de agosto</div>
+            <div class="v" id="ventas">$0</div>
+            <div class="chips"><span class="chip"><b id="n-leads">0</b> leads este mes</span><span class="chip">3 campañas activas</span><span class="chip trend">+38 % vs mes pasado</span></div>
+          </div>
+          <div class="donas">
+            <div class="dona"><div class="ring" id="ring-meta" style="--p:0"><span id="ring-meta-t">0 %</span></div><div><div class="t">Meta del mes</div><div class="s" id="meta-s">$0 de $120,000</div></div></div>
+            <div class="dona"><div class="ring" id="ring-conv" style="--p:0"><span id="ring-conv-t">0 %</span></div><div><div class="t">Conversión</div><div class="s" id="conv-s">0 de 0 leads</div></div></div>
+          </div>
+          <div class="col-h"><span>Embudo del mes</span><b>agosto</b></div>
+          <div class="embudo" id="embudo">
+            <div class="et" data-e="nuevo"><span class="l">Nuevo</span><span class="bar"><i></i></span><span class="c">0</span></div>
+            <div class="et" data-e="contactado"><span class="l">Contactado</span><span class="bar"><i></i></span><span class="c">0</span></div>
+            <div class="et" data-e="interesado"><span class="l">Interesado</span><span class="bar"><i></i></span><span class="c">0</span></div>
+            <div class="et" data-e="cotizado"><span class="l">Cotizado</span><span class="bar"><i></i></span><span class="c">0</span></div>
+            <div class="et ganado" data-e="ganado"><span class="l">Ganado</span><span class="bar"><i></i></span><span class="c">0</span></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="col-h"><span>Leads recientes</span><b id="lead-live">en vivo</b></div>
+          <div class="tbl" id="tbl"></div>
+          <div class="col-h" style="margin-top:12px"><span>Campañas &middot; Meta Ads</span><b>semáforo</b></div>
+          <div class="camps" style="margin-top:0;border-top:0;padding-top:0">
+            <div class="camp"><i class="v"></i><span class="nm">Blanqueamiento agosto<small>activa</small></span><span class="cpl">CPL $142</span><span class="sp"><b style="height:30%"></b><b style="height:45%"></b><b style="height:40%"></b><b style="height:70%"></b><b style="height:60%"></b><b style="height:85%"></b><b style="height:100%"></b></span></div>
+            <div class="camp"><i class="v"></i><span class="nm">Ortodoncia invisible<small>activa</small></span><span class="cpl">CPL $118</span><span class="sp"><b style="height:50%"></b><b style="height:40%"></b><b style="height:65%"></b><b style="height:55%"></b><b style="height:80%"></b><b style="height:75%"></b><b style="height:95%"></b></span></div>
+            <div class="camp"><i class="a"></i><span class="nm">Valoración gratis<small>revisar</small></span><span class="cpl">CPL $236</span><span class="sp"><b style="height:70%"></b><b style="height:55%"></b><b style="height:45%"></b><b style="height:40%"></b><b style="height:30%"></b><b style="height:35%"></b><b style="height:25%"></b></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="t-meta"><div class="ico meta">M</div><div><div class="l">Meta Ads &middot; nuevo lead</div><div class="m" id="t-meta-m">Mariana Treviño &middot; Blanqueamiento agosto</div></div></div>
+    <div class="toast" id="t-wa"><div class="ico wa">&#10003;</div><div><div class="l">WhatsApp &middot; contactado</div><div class="m" id="t-wa-m">Hola Mariana, soy Valeria de Clínica Sonríe&hellip;</div></div></div>
+    <div class="toast" id="t-chat"><div class="ico chat">TD</div><div><div class="l">Chat con la agencia</div><div class="m">Ya subimos los anuncios nuevos, revisa el CPL.</div></div></div>
+    <div class="toast" id="t-venta"><div class="ico money">$</div><div><div class="l">Lead ganado &middot; venta registrada</div><div class="m" id="t-venta-m">Mariana Treviño &middot; $12,500</div></div></div>
+
+    <div class="caption"><i></i>Top Digital &middot; sistema construido por VITA &middot; datos ilustrativos</div>
   </div>
+</section>
+
+<section id="construido">
+  <div class="cb-head">
+    <div>
+      <div class="cb-label"><i></i>Construido por VITA</div>
+      <h2 class="cb-title">Sistemas, sitios y marcas <span>en producción.</span></h2>
+    </div>
+    <a class="cb-link" href="portfolio.html">Ver portfolio completo <span class="arrow">&rarr;</span></a>
+  </div>
+  <div class="marq-wrap" id="marqWrap"><div class="marq" id="marq">
+    <a class="pcard" href="https://www.topdigital.company" target="_blank" rel="noopener"><div class="shot"><img src="assets/portfolio/thumbs/topdigital.webp" alt="Top Digital" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Top Digital</div><div class="cat">Plataforma para agencias · 2026</div></div><span class="chip sis">Sistema</span></div></a>
+    <a class="pcard" href="https://www.klo-ser.com" target="_blank" rel="noopener"><div class="shot"><img src="assets/portfolio/thumbs/kloser-app.webp" alt="Klo-Ser, vista de dirección del CRM" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Klo&#8209;Ser</div><div class="cat">CRM inmobiliario · Montana Realty · 2026</div></div><span class="chip sis">Sistema</span></div></a>
+    <a class="pcard" href="https://www.montana-realty-co.com/" target="_blank" rel="noopener"><div class="shot"><img src="assets/portfolio/thumbs/montana.webp" alt="Montana Realty Co." loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Montana Realty Co.</div><div class="cat">Identidad · Web · CRM · 2026</div></div><span class="chip int">Integral</span></div></a>
+    <a class="pcard" href="https://www.mondomio.com.mx/" target="_blank" rel="noopener"><div class="shot"><img src="assets/portfolio/thumbs/mondomio.webp" alt="Mondomío" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Mondomío</div><div class="cat">Web y estrategia · 2026</div></div><span class="chip ">Web</span></div></a>
+    <a class="pcard" href="https://www.muven.shop/" target="_blank" rel="noopener"><div class="shot"><img src="assets/portfolio/thumbs/muven.webp" alt="Muven" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Muven</div><div class="cat">Identidad y web · 2025</div></div><span class="chip ">Marca + Web</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot"><img src="assets/portfolio/thumbs/cafe-limon.webp" alt="Café Limón" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Café Limón</div><div class="cat">Marca y web · 2026</div></div><span class="chip ">Marca + Web</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot"><img src="assets/portfolio/thumbs/centrito.webp" alt="Distrito Centro Valle" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Distrito Centro Valle</div><div class="cat">Web y estrategia · 2026</div></div><span class="chip ">Web</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-inmobiliario"><div class="shot collage"><img src="assets/portfolio/thumbs/carrizalejo.webp" alt="" loading="lazy" width="700" height="509" draggable="false"><img src="assets/portfolio/thumbs/torreon.webp" alt="" loading="lazy" width="700" height="509" draggable="false"><img src="assets/portfolio/thumbs/colorines.webp" alt="" loading="lazy" width="700" height="509" draggable="false"><img src="assets/portfolio/thumbs/alfonso-reyes.webp" alt="" loading="lazy" width="700" height="509" draggable="false"><img src="assets/portfolio/thumbs/nogales.webp" alt="" loading="lazy" width="700" height="509" draggable="false"><span class="count">5 sitios</span></div><div class="foot"><div><div class="nm">Sitios inmobiliarios</div><div class="cat">Landings y pieza editorial · SPGG y Torreón</div></div><span class="chip ">Landing</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot"><img src="assets/portfolio/thumbs/vannia.webp" alt="Dra. Vannia Maldonado" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Dra. Vannia Maldonado</div><div class="cat">Identidad y web · 2025</div></div><span class="chip ">Marca + Web</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot brand"><img src="assets/clientes/rosa-de-oro.webp" alt="Rosa de Oro" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Rosa de Oro</div><div class="cat">Flower Bar</div></div><span class="chip ">Marca</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot brand"><img src="assets/clientes/hinaiti.webp" alt="Hinaiti" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Hinaiti</div><div class="cat">Escuela de danza</div></div><span class="chip ">Marca</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot brand"><img src="assets/clientes/dr-pinon.webp" alt="Dr. Piñón" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Dr. Piñón</div><div class="cat">Facial Plastic Surgery</div></div><span class="chip ">Marca</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot brand"><img src="assets/clientes/gella.webp" alt="Gella" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Gella</div><div class="cat">Gelatos &amp; Ice Creams</div></div><span class="chip ">Marca</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot brand"><img src="assets/clientes/petalia.webp" alt="Petalia" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Petalia</div><div class="cat">Flower Bar</div></div><span class="chip ">Marca</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot brand"><img src="assets/clientes/jose-luis-vivas.webp" alt="Jose Luis Vivas" loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Jose Luis Vivas</div><div class="cat">Cirujano plástico</div></div><span class="chip ">Marca</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot brand"><img src="assets/clientes/karen-a.webp" alt="Karen A." loading="lazy" width="700" height="509" draggable="false"></div><div class="foot"><div><div class="nm">Karen A.</div><div class="cat">Otorrinolaringóloga</div></div><span class="chip ">Marca</span></div></a>
+    <a class="pcard" href="portfolio.html#grupo-marca"><div class="shot ph"><b>WC</b></div><div class="foot"><div><div class="nm">Dr. Wilber Coasaca</div><div class="cat">Cirugía cardiovascular y torácica</div></div><span class="chip ">Marca</span></div></a>
+  </div></div>
 </section>
 
 
@@ -4986,159 +4706,6 @@
      JAVASCRIPT
 ============================================ -->
 <script>
-  // ===========================================
-  // HERO TYPING · texto rotativo letra por letra
-  // ===========================================
-  (function() {
-    var el = document.getElementById('hero-typing');
-    if (!el) return;
-
-    var phrases = [
-      'identidades visuales.',
-      'sitios web premium.',
-      'marcas que importan.',
-      'contenido que vende.',
-      'estrategias reales.'
-    ];
-
-    var phraseIdx = 0;
-    var charIdx = 0;
-    var deleting = false;
-    var TYPE_SPEED = 55;
-    var DELETE_SPEED = 30;
-    var PAUSE_AFTER_TYPE = 1800;
-    var PAUSE_AFTER_DELETE = 250;
-
-    function tick() {
-      var current = phrases[phraseIdx];
-
-      if (!deleting) {
-        // Escribiendo
-        charIdx++;
-        el.textContent = current.substring(0, charIdx);
-        if (charIdx >= current.length) {
-          deleting = true;
-          setTimeout(tick, PAUSE_AFTER_TYPE);
-          return;
-        }
-        setTimeout(tick, TYPE_SPEED);
-      } else {
-        // Borrando
-        charIdx--;
-        el.textContent = current.substring(0, charIdx);
-        if (charIdx <= 0) {
-          deleting = false;
-          phraseIdx = (phraseIdx + 1) % phrases.length;
-          setTimeout(tick, PAUSE_AFTER_DELETE);
-          return;
-        }
-        setTimeout(tick, DELETE_SPEED);
-      }
-    }
-
-    // Arrancar inmediato (sin delay grande)
-    setTimeout(tick, 400);
-  })();
-
-  // ===========================================
-  // HERO COUNTER · números que cuentan desde 0 (robusto)
-  // ===========================================
-  (function() {
-    var nums = document.querySelectorAll('.hero-stat-num');
-    if (!nums.length) return;
-
-    function animateNum(el) {
-      // Evitar duplicados
-      if (el.dataset.animated === 'true') return;
-      el.dataset.animated = 'true';
-
-      var target = parseInt(el.getAttribute('data-target'), 10);
-      if (isNaN(target)) return;
-
-      // Empezar visualmente desde 0
-      el.textContent = '0';
-
-      var duration = 1400;
-      var startTime = null;
-
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        var elapsed = timestamp - startTime;
-        var progress = Math.min(elapsed / duration, 1);
-        // Easing out cubic
-        var eased = 1 - Math.pow(1 - progress, 3);
-        var value = Math.floor(eased * target);
-        el.textContent = value;
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          el.textContent = target;
-        }
-      }
-      requestAnimationFrame(step);
-    }
-
-    function tryAnimateAll() {
-      nums.forEach(function(n) {
-        if (n.dataset.animated === 'true') return;
-        var rect = n.getBoundingClientRect();
-        // Si está visible o cerca de serlo, animar
-        if (rect.top < window.innerHeight + 100 && rect.bottom > 0) {
-          animateNum(n);
-        }
-      });
-    }
-
-    // Intento 1 · inmediato al cargar
-    tryAnimateAll();
-
-    // Intento 2 · al terminar de cargar la página
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', tryAnimateAll);
-    }
-
-    // Intento 3 · pequeño retraso (cuando el hero ya está renderizado)
-    setTimeout(tryAnimateAll, 300);
-    setTimeout(tryAnimateAll, 800);
-
-    // Intento 4 · IntersectionObserver con threshold bajo (para sections más abajo)
-    if ('IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            animateNum(entry.target);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      nums.forEach(function(n) { observer.observe(n); });
-    }
-
-    // Intento 5 · al hacer scroll (failsafe)
-    var scrollHandler = function() {
-      tryAnimateAll();
-      // Si todos están animados, quitar el listener
-      var allDone = true;
-      nums.forEach(function(n) {
-        if (n.dataset.animated !== 'true') allDone = false;
-      });
-      if (allDone) {
-        window.removeEventListener('scroll', scrollHandler);
-      }
-    };
-    window.addEventListener('scroll', scrollHandler, { passive: true });
-
-    // Intento 6 · failsafe absoluto · si después de 3s siguen en 0, forzar
-    setTimeout(function() {
-      nums.forEach(function(n) {
-        if (n.dataset.animated !== 'true') {
-          animateNum(n);
-        }
-      });
-    }, 3000);
-  })();
-
   // ===========================================
   // MAGNETIC BUTTONS · sutil atracción al cursor
   // ===========================================
@@ -7016,7 +6583,7 @@
       ring.style.opacity = '1';
     });
 
-    var hoverables = document.querySelectorAll('a, button, [role="button"], .btn-primary, .btn-secondary, .nav-cta, .cta-final-btn, .caso-card, .sol-card, .servicio-card, .fchat-chip, .bnav-tab');
+    var hoverables = document.querySelectorAll('a, button, [role="button"], .btn-primary, .btn-secondary, .btn-ghost, .nav-cta, .cta-final-btn, .caso-card, .sol-card, .servicio-card, .fchat-chip, .bnav-tab');
     hoverables.forEach(function(el) {
       el.addEventListener('mouseenter', function() {
         ring.classList.add('is-hovering');
@@ -7030,5 +6597,114 @@
   })();
 </script>
 
+<script>
+/* Carrusel "Construido por VITA" */
+/* Carrusel "Construido por VITA": auto-scroll + arrastre con inercia tipo iOS
+   (mismo enfoque que el carrusel de casos de éxito actual). */
+(function(){
+  var wrap=document.getElementById('marqWrap'),track=document.getElementById('marq');
+  if(!wrap||!track)return;
+  var originals=Array.prototype.slice.call(track.children);
+  originals.forEach(function(c){var k=c.cloneNode(true);k.setAttribute('aria-hidden','true');k.setAttribute('tabindex','-1');track.appendChild(k)});
+  var pos=0,cycle=0,ready=false,auto=true,speed=0.5;
+  var dragging=false,moved=0,startX=0,startPos=0,lastX=0,lastT=0,vel=0,samples=[],raf=null,resumeT=null;
+  function calc(){var gap=parseFloat(getComputedStyle(track).gap)||18;cycle=0;originals.forEach(function(c){cycle+=c.getBoundingClientRect().width+gap});ready=cycle>0}
+  function apply(){track.style.transform='translate3d('+(-pos)+'px,0,0)'}
+  function wrapPos(){if(!ready)return;if(pos>=cycle)pos-=cycle;else if(pos<0)pos+=cycle}
+  calc();setTimeout(calc,600);window.addEventListener('load',calc);window.addEventListener('resize',calc);
+  (function loop(){if(ready&&auto&&!dragging){pos+=speed;wrapPos();apply()}requestAnimationFrame(loop)})();
+  // velocidad de salida: promedio ponderado de las muestras de los últimos 80 ms
+  function release(){if(!samples.length)return 0;var now=performance.now(),rec=samples.filter(function(x){return now-x.t<80});if(!rec.length)return 0;var w=0,sum=0;rec.forEach(function(x,i){sum+=x.v*(i+1);w+=i+1});return (sum/w)*16.67*1.5}
+  // inercia: decaimiento variable (rápido decae lento, lento se asienta)
+  function momentum(){var a=Math.abs(vel);if(a<0.15){vel=0;clearTimeout(resumeT);resumeT=setTimeout(function(){auto=true},1500);return}pos+=vel;wrapPos();var t=Math.min(a/25,1);vel*=0.94+(0.985-0.94)*t;apply();raf=requestAnimationFrame(momentum)}
+  function down(x){if(!ready)return;dragging=true;auto=false;moved=0;clearTimeout(resumeT);startX=x;startPos=pos;lastX=x;lastT=performance.now();vel=0;samples=[];cancelAnimationFrame(raf)}
+  function move(x){if(!dragging)return;var now=performance.now(),dt=now-lastT;if(dt>0){samples.push({v:(lastX-x)/dt,t:now});if(samples.length>8)samples.shift()}lastX=x;lastT=now;moved=Math.max(moved,Math.abs(x-startX));if(moved>6)wrap.classList.add('grabbing');pos=startPos+(startX-x);wrapPos();apply()}
+  function up(){if(!dragging)return;dragging=false;wrap.classList.remove('grabbing');vel=release();momentum()}
+  wrap.addEventListener('mousedown',function(e){down(e.clientX);e.preventDefault()});
+  window.addEventListener('mousemove',function(e){move(e.clientX)});
+  window.addEventListener('mouseup',up);
+  wrap.addEventListener('touchstart',function(e){down(e.touches[0].clientX)},{passive:true});
+  wrap.addEventListener('touchmove',function(e){move(e.touches[0].clientX)},{passive:true});
+  wrap.addEventListener('touchend',up);
+  // si hubo arrastre, el click al soltar no debe abrir el enlace
+  wrap.addEventListener('click',function(e){if(moved>6){e.preventDefault();e.stopPropagation()}},true);
+  wrap.addEventListener('mouseenter',function(){if(!dragging)auto=false});
+  wrap.addEventListener('mouseleave',function(){if(!dragging){clearTimeout(resumeT);auto=true}});
+})();
+
+</script>
+<script>
+/* Panel del hero: historia de un lead en Top Digital */
+(function(){
+  var F={meta_ads:'Meta Ads',whatsapp:'<em>WhatsApp</em>',referido:'Referido',organico:'Orgánico'};
+  var E={nuevo:'Nuevo',contactado:'Contactado',interesado:'Interesado',cotizado:'Cotizado',ganado:'Ganado'};
+  var ORDEN=['nuevo','contactado','interesado','cotizado','ganado'];
+  var fmt=function(n){return '$'+Math.round(n).toLocaleString('es-MX')};
+  var META=120000;
+
+  // estado inicial (ya hay actividad en el mes)
+  var ventas=74000, leadsMes=44, ganados=7;
+  var emb={nuevo:9,contactado:11,interesado:8,cotizado:6,ganado:7};
+  var rows=[
+    {n:'Roberto Garza',f:'meta_ads',e:'cotizado',m:9800,t:'hace 4 min'},
+    {n:'Lucía Fernández',f:'whatsapp',e:'interesado',m:null,t:'hace 11 min'},
+    {n:'Carlos Medina',f:'referido',e:'contactado',m:null,t:'hace 26 min'},
+    {n:'Ana Sofía Ruiz',f:'organico',e:'ganado',m:15200,t:'hace 1 h'},
+    {n:'Diego Salinas',f:'meta_ads',e:'nuevo',m:null,t:'hace 2 h'}
+  ];
+  var tbl=document.getElementById('tbl');
+
+  function pintar(){
+    tbl.innerHTML='';
+    rows.slice(0,5).forEach(function(r,i){
+      var d=document.createElement('div');d.className='row'+(r.focus?' focus':'');d.style.animationDelay=(r.fresh?0:0.9+i*0.1)+'s';
+      d.innerHTML='<div><div class="n">'+r.n+'</div><div class="m">'+F[r.f]+' &middot; '+r.t+'</div></div><span class="monto">'+(r.m?fmt(r.m):'&mdash;')+'</span><span class="badge '+r.e+'">'+E[r.e]+'</span>';
+      r.el=d;tbl.appendChild(d)});
+    rows.forEach(function(r){r.fresh=false});
+  }
+  function numeros(anim){
+    var v=document.getElementById('ventas');v.textContent=fmt(ventas);if(anim){v.classList.remove('bump');void v.offsetWidth;v.classList.add('bump')}
+    document.getElementById('n-leads').textContent=leadsMes;
+    var pm=Math.min(100,Math.round(ventas/META*100));
+    document.getElementById('ring-meta').style.setProperty('--p',pm);document.getElementById('ring-meta-t').textContent=pm+' %';
+    document.getElementById('meta-s').textContent=fmt(ventas)+' de '+fmt(META);
+    var pc=Math.round(ganados/leadsMes*100);
+    document.getElementById('ring-conv').style.setProperty('--p',pc);document.getElementById('ring-conv-t').textContent=pc+' %';
+    document.getElementById('conv-s').textContent=ganados+' de '+leadsMes+' leads';
+    var max=Math.max.apply(null,ORDEN.map(function(k){return emb[k]}));
+    document.querySelectorAll('#embudo .et').forEach(function(et){var k=et.dataset.e;et.querySelector('.bar i').style.width=Math.max(8,emb[k]/max*100)+'%';et.querySelector('.c').textContent=emb[k]});
+  }
+  // arranque: contadores desde cero
+  pintar();
+  var V0=ventas,L0=leadsMes,E0=JSON.parse(JSON.stringify(emb));
+  ventas=0;leadsMes=0;ORDEN.forEach(function(k){emb[k]=0});numeros(false);
+  var frame=0,FR=24;
+  setTimeout(function(){var iv=setInterval(function(){frame++;var p=Math.min(frame/FR,1),e=1-Math.pow(1-p,3);ventas=V0*e;leadsMes=Math.round(L0*e);ORDEN.forEach(function(k){emb[k]=Math.round(E0[k]*e)});numeros(false);if(p>=1){clearInterval(iv);ventas=V0;leadsMes=L0;emb=JSON.parse(JSON.stringify(E0));numeros(false)}},60)},900);
+
+  // toasts
+  function toast(id,ms){var el=document.getElementById(id);el.classList.remove('hide');el.classList.add('show');setTimeout(function(){el.classList.remove('show');el.classList.add('hide')},ms||2600)}
+
+  // historia en loop: llega un lead por Meta Ads → contactado por WhatsApp → cotizado → ganado
+  var NUEVOS=[{n:'Mariana Treviño',m:12500},{n:'Paola Cantú',m:9800},{n:'Jorge Elizondo',m:16400},{n:'Fernanda Lozano',m:11200}];
+  var k=0;
+  function historia(){
+    var p=NUEVOS[k%NUEVOS.length];k++;
+    var r={n:p.n,f:'meta_ads',e:'nuevo',m:null,t:'ahora',fresh:true,focus:true};
+    rows.forEach(function(x){x.focus=false});rows.unshift(r);rows=rows.slice(0,5);
+    leadsMes++;emb.nuevo++;pintar();numeros(false);
+    document.getElementById('t-meta-m').textContent=p.n+' · Blanqueamiento agosto';toast('t-meta',2400);
+    var pasos=[
+      [2600,function(){avanzar(r,'contactado');document.getElementById('t-wa-m').textContent='Hola '+p.n.split(' ')[0]+', soy Valeria de Clínica Sonríe…';toast('t-wa',2400)}],
+      [5200,function(){avanzar(r,'interesado')}],
+      [7200,function(){avanzar(r,'cotizado');r.m=p.m;r.el.querySelector('.monto').textContent=fmt(p.m)}],
+      [9400,function(){avanzar(r,'ganado');ganados++;ventas+=p.m;numeros(true);document.getElementById('t-venta-m').textContent=p.n+' · '+fmt(p.m);toast('t-venta',3000)}],
+      [11800,function(){toast('t-chat',2600)}]
+    ];
+    pasos.forEach(function(s){setTimeout(s[1],s[0])});
+  }
+  function avanzar(r,e){var prev=r.e;r.e=e;emb[prev]=Math.max(0,emb[prev]-1);emb[e]++;var b=r.el.querySelector('.badge');b.className='badge '+e+' flip';b.textContent=E[e];r.el.querySelector('.m').innerHTML=(e==='contactado'?F.whatsapp:F.meta_ads)+' &middot; '+(e==='ganado'?'cerrado hoy':'hace un momento');numeros(false)}
+  setTimeout(function(){historia();setInterval(historia,15000)},3200);
+})();
+</script>
 </body>
 </html>
